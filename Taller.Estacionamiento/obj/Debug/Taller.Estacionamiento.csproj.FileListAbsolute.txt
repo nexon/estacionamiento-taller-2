@@ -1,7 +1,0 @@
-C:\Users\Ppino\Utalca\2015-2\Taller 2\estacionamiento-taller-2\Taller.Estacionamiento\bin\Taller.Estacionamiento.dll.config
-C:\Users\Ppino\Utalca\2015-2\Taller 2\estacionamiento-taller-2\Taller.Estacionamiento\bin\Taller.Estacionamiento.dll
-C:\Users\Ppino\Utalca\2015-2\Taller 2\estacionamiento-taller-2\Taller.Estacionamiento\bin\Taller.Estacionamiento.pdb
-C:\Users\Ppino\Utalca\2015-2\Taller 2\estacionamiento-taller-2\Taller.Estacionamiento\bin\Newtonsoft.Json.dll
-C:\Users\Ppino\Utalca\2015-2\Taller 2\estacionamiento-taller-2\Taller.Estacionamiento\obj\Debug\Taller.Estacionamiento.csprojResolveAssemblyReference.cache
-C:\Users\Ppino\Utalca\2015-2\Taller 2\estacionamiento-taller-2\Taller.Estacionamiento\obj\Debug\Taller.Estacionamiento.dll
-C:\Users\Ppino\Utalca\2015-2\Taller 2\estacionamiento-taller-2\Taller.Estacionamiento\obj\Debug\Taller.Estacionamiento.pdb
