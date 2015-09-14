@@ -2,4 +2,140 @@
     ViewBag.Title = "Libres";
 }
 
-<h2>Libres</h2>
+<div class="page-header">
+    <h1>
+        Estacionamiento
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Libres
+        </small>
+    </h1>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Slot</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>A-123</td>
+                    <td>
+                        <div class="action-buttons">
+                            <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
+                                <span class="label label-success">
+                                    <i class="ace-icon fa fa-car bigger-120"></i>
+                                    Registrar
+                                </span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>A-124</td>
+                    <td>
+                        <div class="action-buttons">
+                            <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
+                                <span class="label label-success">
+                                    <i class="ace-icon fa fa-car bigger-120"></i>
+                                    Registrar
+                                </span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Estacionar nuevo vehículo</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Estacionamiento</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="form-field-1" class="col-xs-12" value="Estacionamientos Annita" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Slot</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="form-field-1" class="col-xs-12" value="A-123" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Patente</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="form-field-1" class="col-xs-12" value="" placeholder="Ej: ZZ-1122"  />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Cliente</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="form-field-1" class="col-xs-12" value="" placeholder="Nombre cliente" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm" data-dismiss="modal">
+                    <i class="ace-icon fa fa-arrow-left bigger-110"></i>
+                    Cancelar
+                </button>
+                <button type="button" class="btn btn-sm btn-success">
+                    <i class="ace-icon fa fa-check bigger-110"></i>
+                    Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+@section ViewsScripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#dynamic-table").dataTable({
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
+        });
+    </script>
+}
