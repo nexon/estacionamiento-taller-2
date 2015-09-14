@@ -21,6 +21,7 @@
                     <th>Patente</th>
                     <th>Cliente</th>
                     <th>Tiempo</th>
+                    <th>Slot</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -30,14 +31,22 @@
                     <td>XX-1123</td>
                     <td>Patricio Pino</td>
                     <td>1:50</td>
+                    <td>A-12</td>
                     <td>
-                        <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
-                            <i class="ace-icon fa fa-check-square-o bigger-130"></i>
-                        </a>
-                        &nbsp;
-                        <a class="red" href="#" data-toggle="modal" data-target="#myModal">
-                            <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                        </a>
+                        <div class="action-buttons">
+                            <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
+                                <span class="label label-success">
+                                    <i class="ace-icon fa fa-car bigger-120"></i>
+                                    Registrar
+                                </span>
+                            </a>
+                            <a class="red" href="#" data-toggle="modal" data-target="#myModal">
+                                <span class="label label-danger">
+                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    Eliminar
+                                </span>
+                            </a>
+                        </div>
                     </td>
                 </tr>
 
@@ -46,14 +55,22 @@
                     <td>XX-1123</td>
                     <td>Juan Soto</td>
                     <td>1:45</td>
+                    <td>A-13</td>
                     <td>
-                        <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
-                            <i class="ace-icon fa fa-check-square-o bigger-130"></i>
-                        </a>
-                        &nbsp;
-                        <a class="red" href="#" data-toggle="modal" data-target="#myModal">
-                            <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                        </a>
+                        <div class="action-buttons">
+                            <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
+                                <span class="label label-success">
+                                    <i class="ace-icon fa fa-car bigger-120"></i>
+                                    Registrar
+                                </span>
+                            </a>
+                            <a class="red" href="#" data-toggle="modal" data-target="#myModal">
+                                <span class="label label-danger">
+                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    Eliminar
+                                </span>
+                            </a>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -66,7 +83,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Estacionar Cliente</h4>
+                <h4 class="modal-title">Estacionar vehículo</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -75,29 +92,25 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Estacionamiento</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" class="col-xs-5" value="Estacionamientos Annita" disabled/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Slot</label>
-                                <div class="col-sm-9">
-                                    <select class="col-xs-5" id="form-field-select-1">
-                                        <option disabled selected>Seleccione un slot</option>
-                                        <option>ABC-1</option>
-                                        <option>SAD-12</option>
-                                    </select>
+                                    <input type="text" id="form-field-1" class="col-xs-12" value="Estacionamientos Annita" disabled/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Patente</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" class="col-xs-5" value="XX -1123" disabled />
+                                    <input type="text" id="form-field-1" class="col-xs-12" value="XX -1123" disabled />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Cliente</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" class="col-xs-5" value="Patricio Pino" disabled />
+                                    <input type="text" id="form-field-1" class="col-xs-12" value="Patricio Pino" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Slot</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="form-field-1" class="col-xs-12" value="A-12" disabled />
                                 </div>
                             </div>
                         </form>
@@ -123,30 +136,35 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Eliminar Cliente de Reservas</h4>
+                <h4 class="modal-title">Eliminar reserva</h4>
             </div>
             <div class="modal-body">
-                <div>
-                    <label style="font-weight: bold;">Estacionamiento</label>
-                    <div>
-                        <i class="ace-icon fa fa-angle-right bigger-110 green"></i>
-                        Estacionamientos Annita
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Estacionamiento</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="form-field-1" class="col-xs-12" value="Estacionamientos Annita" disabled />
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label style="font-weight: bold;">Patente</label>
-                    <div>
-                        <i class="ace-icon fa fa-angle-right bigger-110 green"></i>
-                        XX-1122
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Patente</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="form-field-1" class="col-xs-12" value="XX-1212" disabled />
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label style="font-weight: bold;">Cliente</label>
-                    <div>
-                        <i class="ace-icon fa fa-angle-right bigger-110 green"></i>
-                        Patricio Pino
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Cliente</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="form-field-1" class="col-xs-12" value="Patricio Pino" disabled />
+                        </div>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Slot</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="form-field-1" class="col-xs-12" value="A-12" disabled />
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-sm" data-dismiss="modal">
@@ -193,4 +211,5 @@
         });
     </script>
 }
+
 
