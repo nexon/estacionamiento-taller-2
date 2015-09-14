@@ -275,6 +275,14 @@
     <script src="../Scripts/ace/ace.settings-skin.js"></script>
     <script src="../Scripts/ace/ace.widget-on-reload.js"></script>
     <script src="../Scripts/ace/ace.searchbox-autocomplete.js"></script>
+
+    <!-- Scripts para los dataTables-->
+    <script type="text/javascript" src="../Scripts/dataTables/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="../Scripts/dataTables/jquery.dataTables.bootstrap.js"></script>
+    
+    <!--Espacio donde se agregaran nuevos scripts en cada vista-->
+    @RenderSection("ViewsScripts", required: false)
+
     <!-- inline scripts related to this page -->
     <script type="text/javascript">
         jQuery(function ($) {
