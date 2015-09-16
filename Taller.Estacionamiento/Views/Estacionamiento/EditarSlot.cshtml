@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "EditarSlot";
+}
+
+<body>
+    <div class="page-content">
+        <div class="page-header">
+            <h1>
+                <a href="@Url.Action("Administrar","Estacionamiento")">
+                    Administrar</a>
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Eliminar Slot
+                    </small>
+</h1>
+        </div><!-- /.page-header -->
+
+        <div class="row">
+            <div class="col-xs-12">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Identificador</label>
+
+                        <div class="col-sm-9">
+                            <input type="text" id="form-field-1" placeholder="Ejemplo: A12" class="col-xs-5" value="ABC-123" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Estado</label>
+                        <div class="col-sm-9">
+                            <select class="col-xs-5" id="form-field-select-1">
+                                <option>Disponible</option>
+                                <option>No Disponible</option>
+                                <option>Reservado</option>
+                                <option>Ocupado</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-5 col-sd-5 col-xs-8 align-right">
+                            <a href="@Url.Action("Administrar","Estacionamiento")">
+                                <button class="btn btn-sm btn-danger" type="button">
+                                    <i class="ace-icon glyphicon glyphicon-remove bigger-110"></i>
+                                    Cancelar
+                                </button>
+                            </a>
+                            &nbsp; &nbsp;
+                            <button class="btn btn-sm btn-success" type="button">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Aceptar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

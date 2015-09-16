@@ -542,6 +542,8 @@
     <Content Include="Views\Estacionamiento\Promociones.cshtml" />
     <Content Include="Views\Estacionamiento\Reservados.cshtml" />
     <Content Include="Views\Estacionamiento\Tarifas.cshtml" />
+    <Content Include="Views\Estacionamiento\AgregarSlot.cshtml" />
+    <Content Include="Views\Estacionamiento\EditarSlot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
