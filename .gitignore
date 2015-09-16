@@ -215,3 +215,5 @@ FakesAssemblies/
 **/*.Server/GeneratedArtifacts
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
+Taller.Estacionamiento/bin/Taller.Estacionamiento.dll
+Taller.Estacionamiento/bin/Taller.Estacionamiento.pdb
