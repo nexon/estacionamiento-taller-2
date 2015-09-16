@@ -265,6 +265,7 @@
     <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\html5shiv.js" />
     <Content Include="Scripts\informacion\editar.js" />
+    <Content Include="Scripts\informacion\informacion.js" />
     <Content Include="Scripts\jqGrid\i18n\grid.locale-ar.js" />
     <Content Include="Scripts\jqGrid\i18n\grid.locale-bg.js" />
     <Content Include="Scripts\jqGrid\i18n\grid.locale-bg1251.js" />
@@ -547,12 +548,9 @@
     <Content Include="Views\Estacionamiento\Promociones.cshtml" />
     <Content Include="Views\Estacionamiento\Reservados.cshtml" />
     <Content Include="Views\Estacionamiento\Tarifas.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Estacionamiento\AgregarSlot.cshtml" />
     <Content Include="Views\Estacionamiento\EditarSlot.cshtml" />
-=======
     <Content Include="Views\Estacionamiento\EditarInformacion.cshtml" />
->>>>>>> vista para editar información del estacionamiento
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
