@@ -36,6 +36,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -169,6 +170,7 @@
     <Content Include="Content\css\jquery-ui.css" />
     <Content Include="Content\css\jquery-ui.custom.css" />
     <Content Include="Content\css\jquery.gritter.css" />
+    <Content Include="Content\css\ol.css" />
     <Content Include="Content\css\pace.css" />
     <Content Include="Content\css\prettify.css" />
     <Content Include="Content\css\select2-spinner.gif" />
@@ -210,6 +212,7 @@
     <Content Include="Content\img\clear.png" />
     <Content Include="Content\img\glyphicons-halflings-white.png" />
     <Content Include="Content\img\glyphicons-halflings.png" />
+    <Content Include="Content\img\map-pin.png" />
     <Content Include="Content\img\loading.gif" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
@@ -272,6 +275,8 @@
     <Content Include="Scripts\fuelux\fuelux.wizard.js" />
     <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\html5shiv.js" />
+    <Content Include="Scripts\informacion\editar.js" />
+    <Content Include="Scripts\informacion\informacion.js" />
     <Content Include="Scripts\jqGrid\i18n\grid.locale-ar.js" />
     <Content Include="Scripts\jqGrid\i18n\grid.locale-bg.js" />
     <Content Include="Scripts\jqGrid\i18n\grid.locale-bg1251.js" />
@@ -524,6 +529,7 @@
     <Content Include="Scripts\markdown\markdown.js" />
     <Content Include="Scripts\markdown\to-markdown.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\ol.js" />
     <Content Include="Scripts\pace.js" />
     <Content Include="Scripts\prettify.js" />
     <Content Include="Scripts\respond.js" />
@@ -556,6 +562,7 @@
     <Content Include="Views\Estacionamiento\Tarifas.cshtml" />
     <Content Include="Views\Estacionamiento\AgregarSlot.cshtml" />
     <Content Include="Views\Estacionamiento\EditarSlot.cshtml" />
+    <Content Include="Views\Estacionamiento\EditarInformacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

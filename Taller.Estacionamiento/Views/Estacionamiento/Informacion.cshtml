@@ -2,4 +2,93 @@
     ViewBag.Title = "Informacion";
 }
 
-<h2>Informacion</h2>
+<!-- /section:basics/content.breadcrumbs -->
+<div class="page-content">
+
+    <!-- /section:settings.box -->
+    <div class="page-header">
+        <h1>
+            Estacionamiento
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Información
+            </small>
+        </h1>
+        
+    </div><!-- /.page-header -->
+
+    <div class="row">
+
+        <div class="col-xs-offset-2 col-sm-offset-2 col-xs-5 col-sm-5">
+            <h4 class="blue">
+                <span class="middle">Nombre!!</span>
+            </h4>
+
+            <div class="profile-user-info">
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Telefono </div>
+
+                    <div class="profile-info-value">
+                        <span>12345678</span>
+                    </div>
+                </div>
+
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Correo </div>
+
+                    <div class="profile-info-value">
+                        <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
+                        <span>asdasd@asd.com</span>
+                    </div>
+                </div>
+
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Apertura </div>
+
+                    <div class="profile-info-value">
+                        <span>7:00</span>
+                    </div>
+                </div>
+
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Cierre </div>
+
+                    <div class="profile-info-value">
+                        <span>21:00</span>
+                    </div>
+                </div>
+
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Ubicación </div>
+
+                    
+                </div>
+                <div class="profile-info-row">
+                    
+                    <div class="profile-info-name"> </div>
+                        <div class="profile-info-value">
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-offset-2 col-lg-7">
+                <div id="map" class="map"></div>
+            </div>
+        </div>
+        <br/>
+        <div class="">
+            <div class="col-md-offset-2 col-md-9">
+                <button class="btn btn-info" type="button">
+                    <i class="ace-icon fa fa-pencil bigger-110"></i>
+                    Editar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section ViewsScripts {
+    <script type="text/javascript" src="../Scripts/ol.js"></script>
+    <script type="text/javascript" src="../Scripts/informacion/informacion.js"></script>
+}
