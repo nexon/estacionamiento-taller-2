@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="../Content/css/font-awesome.css" />
     <link rel="stylesheet" href="../Content/css/ace-fonts.css" />
     <link rel="stylesheet" href="../Content/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
+    <link rel="stylesheet" href="../Content/css/ol.css" />
+    <link rel="stylesheet" href="../Content/css/bootstrap-timepicker.css"/>
     <script src="../Scripts/ace-extra.js"></script>
 
 </head>
@@ -275,6 +277,17 @@
     <script src="../Scripts/ace/ace.settings-skin.js"></script>
     <script src="../Scripts/ace/ace.widget-on-reload.js"></script>
     <script src="../Scripts/ace/ace.searchbox-autocomplete.js"></script>
+
+    <!-- Scripts para los dataTables-->
+    <script type="text/javascript" src="../Scripts/dataTables/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="../Scripts/dataTables/jquery.dataTables.bootstrap.js"></script>
+
+    <!-- Scripts para los date-picker-->
+    <script type="text/javascript" src="../Scripts/date-time/bootstrap-timepicker.js"></script>
+                
+    <!--Espacio donde se agregaran nuevos scripts en cada vista-->
+    @RenderSection("ViewsScripts", required: false)
+
     <!-- inline scripts related to this page -->
     <script type="text/javascript">
         jQuery(function ($) {

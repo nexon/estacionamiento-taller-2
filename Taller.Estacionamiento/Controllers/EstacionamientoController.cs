@@ -19,6 +19,10 @@ namespace Taller.Estacionamiento.Controllers
         {
             return View("Informacion");
         }
+        public ActionResult EditarInformacion()
+        {
+            return View("EditarInformacion");
+        }
         public ActionResult Ocupados()
         {
             return View("Ocupados");
@@ -35,7 +39,14 @@ namespace Taller.Estacionamiento.Controllers
         {
             return View("Administrar");
         }
-
+        public ActionResult AgregarSlot()
+        {
+            return View("AgregarSlot");
+        }
+        public ActionResult EditarSlot()
+        {
+            return View("EditarSlot");
+        }
         public ActionResult Tarifas()
         {
             return View("Tarifas");
