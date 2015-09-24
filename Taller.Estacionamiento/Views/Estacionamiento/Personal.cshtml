@@ -33,10 +33,10 @@
                         <td>1234578</td>
                         <td>
                             <div class="action-buttons">
-                                <a class="green" href="#" data-toggle="modal" data-target="#modalEditar">
+                                <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
                                     <span class="label label-success">
-                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                        Editar
+                                        <i class="ace-icon fa fa-users bigger-120"></i>
+                                        Registrar
                                     </span>
                                 </a>
                                 <a class="red" href="#" data-toggle="modal" data-target="#modalEliminar">
@@ -55,10 +55,10 @@
                         <td>87456321</td>
                         <td>
                             <div class="action-buttons">
-                                <a class="green" href="#" data-toggle="modal" data-target="#modalEditar">
+                                <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
                                     <span class="label label-success">
-                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                        Editar
+                                        <i class="ace-icon fa fa-users bigger-120"></i>
+                                        Registrar
                                     </span>
                                 </a>
                                 <a class="red" href="#" data-toggle="modal" data-target="#modalEliminar">
@@ -77,10 +77,10 @@
                         <td>1365498</td>
                         <td>
                             <div class="action-buttons">
-                                <a class="green" href="#" data-toggle="modal" data-target="#modalEditar">
+                                <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
                                     <span class="label label-success">
-                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                        Editar
+                                        <i class="ace-icon fa fa-users bigger-120"></i>
+                                        Registrar
                                     </span>
                                 </a>
                                 <a class="red" href="#" data-toggle="modal" data-target="#modalEliminar">
@@ -94,16 +94,6 @@
                     </tr>
                 </tbody>
             </table>
-
-            <div class="clearfix form-actions">
-                <div class="col-md-offset-3 col-md-9">
-                    <button class="btn btn-info" type="button" data-toggle="modal" data-target="#modalRegistro">
-                        <i class="ace-icon fa fa-check bigger-110"></i>
-                        Registrar
-                    </button>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>
@@ -213,60 +203,6 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Eliminar Personal</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nombre</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" class="col-xs-12" value="Jorge Gomez"  />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> RUT</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" class="col-xs-12" value="11.111.111-1"  />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Correo</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" class="col-xs-12" value="jorgegomez@asd.com"  />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Telefono</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" class="col-xs-12" value="12345678"  />
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm" data-dismiss="modal">
-                    <i class="ace-icon fa fa-arrow-left bigger-110"></i>
-                    Cancelar
-                </button>
-                <button type="button" class="btn btn-sm btn-success">
-                    <i class="ace-icon fa fa-check bigger-110"></i>
-                    Aceptar
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 @section ViewsScripts {
     <script type="text/javascript" src="../Scripts/personal/personal.js"></script>
