@@ -7,7 +7,7 @@ namespace Taller.Estacionamiento.Models
 {
     public class Vehiculo
     {
-        public String Patente { get; set; }
+        public string Patente { get; set; }
         public Conductor Conductor { get; set; }
         public void RegistrarConductor(Conductor conductor)
         {
