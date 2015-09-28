@@ -16,5 +16,10 @@ namespace Taller.Estacionamiento.Models
         {
             throw new NotImplementedException();
         }
+
+        public List<Estacionamiento> EstacionamientoCercanos(double latitud, double longitud)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

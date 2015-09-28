@@ -9,5 +9,11 @@ namespace Taller.Estacionamiento.Models
     {
         public Erol Rol { get; set; }
 
+        public List<Estacionamiento> EstacionamientoAsociados()
+        {
+            throw new NotImplementedException();
+        }
+
     }
+
 }
