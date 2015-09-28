@@ -15,7 +15,8 @@
     <link rel="stylesheet" href=@Url.Content("~/Content/css/ace.css") class="ace-main-stylesheet" id="main-ace-style" />
     <link rel="stylesheet" href=@Url.Content("~/Content/css/ol.css") />
     <link rel="stylesheet" href=@Url.Content("~/Content/css/bootstrap-timepicker.css") />
-    <script src="../Scripts/ace-extra.js"></script>
+    <script src="@Url.Content("~/Scripts/ace-extra.js")"></script>
+    
 
 </head>
 
@@ -49,18 +50,118 @@
                 <ul class="nav ace-nav">
                     <li class="green">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="ace-icon fa fa-exchange"></i>
+                            <i class="ace-icon fa fa-sign-in"></i>
+                            <span class="badge badge-grey">4</span>
                         </a>
+
+                        <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="ace-icon fa fa-check"></i>
+                                4 Estacionamientos Libres
+                            </li>
+                        </ul>
                     </li>
+
                     <li class="red">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="ace-icon fa fa-car"></i>
+                            <i class="ace-icon fa fa-car icon-animated-bell"></i>
+                            <span class="badge badge-gray">8</span>
                         </a>
+
+                        <ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="ace-icon fa fa-exclamation-triangle"></i>
+                                8 Autos estacionados
+                            </li>
+                            <li class="dropdown-footer">
+                                <a href="#">
+                                    Ver autos
+                                    <i class="ace-icon fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="blue">
+
+                    <li class="yellow">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="ace-icon fa fa-flag"></i>
+                            <i class="ace-icon fa fa-flag icon-animated-vertical"></i>
+                            <span class="badge badge-important">5</span>
                         </a>
+
+                        <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="ace-icon fa fa-flag-o"></i>
+                                5 Reservas
+                            </li>
+
+                            <li class="dropdown-content">
+                                <ul class="dropdown-menu dropdown-navbar">
+                                    <li>
+                                        <a href="#" class="clearfix">
+                                          
+                                            <span class="msg-body">
+                                                <span class="msg-title">
+                                                    <span class="blue">Alex:</span>
+                                                </span>
+                                                <span class="msg-time">
+                                                    <i class="ace-icon fa fa-car"></i>
+                                                    Kia Río - XX-23-00
+                                                </span>
+                                                <span class="msg-time">
+                                                    <i class="ace-icon fa fa-clock-o"></i>
+                                                    <span>hace 10 mintos</span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="clearfix">
+                                          
+                                            <span class="msg-body">
+                                                <span class="msg-title">
+                                                    <span class="blue">Susan</span>
+                                                </span>
+                                                <span class="msg-time">
+                                                    <i class="ace-icon fa fa-car"></i>
+                                                    Suzuki Swift - PC-PS-21
+                                                </span>
+                                                <span class="msg-time">
+                                                    <i class="ace-icon fa fa-clock-o"></i>
+                                                    <span>hace 3 minutos</span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="clearfix">
+                                         
+                                            <span class="msg-body">
+                                                <span class="msg-title">
+                                                    <span class="blue">Bob:</span>
+                                                </span>
+                                                <span class="msg-time">
+                                                    <i class="ace-icon fa fa-car"></i>
+                                                    Porsche Caymans - KP-12-33
+                                                </span>
+                                                <span class="msg-time">
+                                                    <i class="ace-icon fa fa-clock-o"></i>
+                                                    <span>hace 2 minutos</span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown-footer">
+                                <a href="#">
+                                    Ver todas las reservas
+                                    <i class="ace-icon fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="light-blue">
                         <a data-toggle="dropdown" href="#" class="dropdown-toggle">
@@ -249,44 +350,46 @@
     <script type="text/javascript">
         if ('ontouchstart' in document.documentElement) document.write("<script src='../Scripts/jquery.mobile.custom.js'>" + "<" + "/script>");
     </script>
-    <script src="../Scripts/bootstrap.js"></script>
-    <script src="../Scripts/jquery-ui.custom.js"></script>
-    <script src="../Scripts/jquery.ui.touch-punch.js"></script>
-    <script src="../Scripts/jquery.easypiechart.js"></script>
-    <script src="../Scripts/jquery.sparkline.js"></script>
-    <script src="../Scripts/flot/jquery.flot.js"></script>
-    <script src="../Scripts/flot/jquery.flot.pie.js"></script>
-    <script src="../Scripts/flot/jquery.flot.resize.js"></script>
+
+    <script src=@Url.Content("~/Scripts/bootstrap.js")></script>
+    <script src=@Url.Content("~/Scripts/jquery-ui.custom.js")></script>
+    <script src=@Url.Content("~/Scripts/jquery.ui.touch-punch.js")></script>
+    <script src=@Url.Content("~/Scripts/jquery.easypiechart.js")></script>
+    <script src=@Url.Content("~/Scripts/jquery.sparkline.js")></script>
+    <script src=@Url.Content("~/Scripts/flot/jquery.flot.js")></script>
+    <script src=@Url.Content("~/Scripts/flot/jquery.flot.pie.js")></script>
+    <script src=@Url.Content("~/Scripts/flot/jquery.flot.resize.js")></script>
+
     <!-- ace scripts -->
-    <script src="../Scripts/ace/elements.scroller.js"></script>
-    <script src="../Scripts/ace/elements.colorpicker.js"></script>
-    <script src="../Scripts/ace/elements.fileinput.js"></script>
-    <script src="../Scripts/ace/elements.typeahead.js"></script>
-    <script src="../Scripts/ace/elements.wysiwyg.js"></script>
-    <script src="../Scripts/ace/elements.spinner.js"></script>
-    <script src="../Scripts/ace/elements.treeview.js"></script>
-    <script src="../Scripts/ace/elements.wizard.js"></script>
-    <script src="../Scripts/ace/elements.aside.js"></script>
-    <script src="../Scripts/ace/ace.js"></script>
-    <script src="../Scripts/ace/ace.ajax-content.js"></script>
-    <script src="../Scripts/ace/ace.touch-drag.js"></script>
-    <script src="../Scripts/ace/ace.sidebar.js"></script>
-    <script src="../Scripts/ace/ace.sidebar-scroll-1.js"></script>
-    <script src="../Scripts/ace/ace.submenu-hover.js"></script>
-    <script src="../Scripts/ace/ace.widget-box.js"></script>
-    <script src="../Scripts/ace/ace.settings.js"></script>
-    <script src="../Scripts/ace/ace.settings-rtl.js"></script>
-    <script src="../Scripts/ace/ace.settings-skin.js"></script>
-    <script src="../Scripts/ace/ace.widget-on-reload.js"></script>
-    <script src="../Scripts/ace/ace.searchbox-autocomplete.js"></script>
+    <script src=@Url.Content("~/Scripts/ace/elements.scroller.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/elements.colorpicker.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/elements.fileinput.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/elements.typeahead.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/elements.wysiwyg.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/elements.spinner.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/elements.treeview.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/elements.wizard.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/elements.aside.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/ace.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/ace.ajax-content.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/ace.touch-drag.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/ace.sidebar.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/ace.sidebar-scroll-1.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/ace.submenu-hover.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/ace.widget-box.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/ace.settings.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/ace.settings-rtl.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/ace.settings-skin.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/ace.widget-on-reload.js")></script>
+    <script src=@Url.Content("~/Scripts/ace/ace.searchbox-autocomplete.js")></script>
 
     <!-- Scripts para los dataTables-->
-    <script type="text/javascript" src="../Scripts/dataTables/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="../Scripts/dataTables/jquery.dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src=@Url.Content("~/Scripts/dataTables/jquery.dataTables.js")></script>
+    <script type="text/javascript" src=@Url.Content("~/Scripts/dataTables/jquery.dataTables.bootstrap.js")></script>
 
     <!-- Scripts para los date-picker-->
-    <script type="text/javascript" src="../Scripts/date-time/bootstrap-timepicker.js"></script>
-                
+    <script type="text/javascript" src=@Url.Content("~/Scripts/date-time/bootstrap-timepicker.js")></script>
+
     <!--Espacio donde se agregaran nuevos scripts en cada vista-->
     @RenderSection("ViewsScripts", required: false)
 
