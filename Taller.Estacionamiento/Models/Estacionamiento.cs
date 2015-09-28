@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+
 namespace Taller.Estacionamiento.Models
 {
     public class Estacionamiento
@@ -20,17 +21,20 @@ namespace Taller.Estacionamiento.Models
         public double CoordenadaLongitud { get; set; }
         public Tarjetero Tarjetero { get; set; }
 
-        string IngresarVehiculo(Vehiculo Vehiculo)
+        string IngresarVehiculo(Vehiculo vehiculo, Espacio espacio)
         {
             throw new NotImplementedException();
         }
 
-        int LiberarEspacio(Espacio Espacio)
+        int LiberarEspacio(Espacio espacio)
         {
             throw new NotImplementedException(); 
         }
-
-        void AgregarPersonal(Personal Personal)
+        Personal Personal()
+        {
+            throw new NotImplementedException();
+        }
+        void AgregarPersonal(Personal personal)
         {
             throw new NotImplementedException(); 
         }
@@ -40,22 +44,30 @@ namespace Taller.Estacionamiento.Models
             throw new NotImplementedException();
         }
 
-        List<Espacio> EspaciosReservados()
+        List<Espacio> Reservados()
+        {
+            throw new NotImplementedException();
+        }
+        
+        List<Espacio> Disponibles()
+        {
+            throw new NotImplementedException();
+        }
+        List<Espacio> Ocupados()
+        {
+            throw new NotImplementedException();
+        }
+        List<Espacio> Todos()
+        {
+            throw new NotImplementedException();
+        }
+        
+        bool ReservarEspacio(Vehiculo vehiculo)
         {
             throw new NotImplementedException();
         }
 
-        int CapacidadDisponible()
-        {
-            throw new NotImplementedException();
-        }
-
-        bool ReservarEspacio(Vehiculo Vehiculo)
-        {
-            throw new NotImplementedException();
-        }
-
-        abstract List<Estacionamiento> EstacionamientosCercanos(double Langitud, double Longitud)
+        void ConfirmarReserva(Espacio espacio)
         {
             throw new NotImplementedException();
         }
@@ -70,17 +82,12 @@ namespace Taller.Estacionamiento.Models
             throw new NotImplementedException();
         }
 
-        abstract List<Estacionamiento> EstacionamientoPersonal(Personal Personal)
+        void AgregarEspacio(Espacio espacio)
         {
             throw new NotImplementedException(); 
         }
 
-        void AgregarEspacio(Espacio Espacio)
-        {
-            throw new NotImplementedException(); 
-        }
-
-        void EliminarEspacio(Espacio Espacio)
+        void EliminarEspacio(Espacio espacio)
         {
             throw new NotImplementedException();
         }
@@ -96,6 +103,11 @@ namespace Taller.Estacionamiento.Models
         }
 
         void Eliminar()
+        {
+            throw new NotImplementedException();
+        }
+
+        void ReubicarVehiculo(Espacio espacio1, Espacio espacio2)
         {
             throw new NotImplementedException();
         }
