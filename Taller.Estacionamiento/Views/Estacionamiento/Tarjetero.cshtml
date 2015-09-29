@@ -1,0 +1,221 @@
+﻿@{
+    ViewBag.Title = "Tarjetero";
+}
+
+@section ViewsCCS {
+  <link rel="stylesheet" href=@Url.Content("~/Content/css/bootstrap-timepicker.css") />  
+}
+
+<div class="page-header">
+    <h1>
+        Estacionamiento
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Tarjetero
+        </small>
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Rut</th>
+                    <th>Ingreso</th>
+                    <th>Salida</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Jorge Gomez</td>
+                    <td>11.111.111-1</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <div class="action-buttons">
+                            <a class="green" href="#" data-toggle="modal" data-target="#modalEntrada">
+                                <span class="label label-success">
+                                    <i class="ace-icon fa fa-sign-in bigger-120"></i>
+                                    Entrada
+                                </span>
+                            </a>
+                            <a class="red" href="#" data-toggle="modal" data-target="#modalSalida">
+                                <span class="label label-danger">
+                                    <i class="ace-icon fa fa-sign-out bigger-120"></i>
+                                    Salida
+                                </span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>Patricio Pino</td>
+                    <td>22.222.222-2</td>
+                    <td>18:27:15</td>
+                    <td>20:27:15</td>
+                    <td>
+                        <div class="action-buttons">
+                            <a class="green" href="#" data-toggle="modal" data-target="#modalEntrada">
+                                <span class="label label-success">
+                                    <i class="ace-icon fa fa-sign-in bigger-120"></i>
+                                    Entrada
+                                </span>
+                            </a>
+                            <a class="red" href="#" data-toggle="modal" data-target="#modalSalida">
+                                <span class="label label-danger">
+                                    <i class="ace-icon fa fa-sign-out bigger-120"></i>
+                                    Salida
+                                </span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="modalEntrada" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Registrar Ingreso</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ingreso</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group bootstrap-timepicker timepicker">
+                                        <input id="timepickerEntrada" type="text" class="form-control input-small">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm" data-dismiss="modal">
+                    <i class="ace-icon fa fa-arrow-left bigger-110"></i>
+                    Cancelar
+                </button>
+                <button type="button" class="btn btn-sm btn-success">
+                    <i class="ace-icon fa fa-check bigger-110"></i>
+                    Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalSalida" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Registrar Salida</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Salida</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group bootstrap-timepicker timepicker">
+                                        <input id="timepickerSalida" type="text" class="form-control input-small">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm" data-dismiss="modal">
+                    <i class="ace-icon fa fa-arrow-left bigger-110"></i>
+                    Cancelar
+                </button>
+                <button type="button" class="btn btn-sm btn-success">
+                    <i class="ace-icon fa fa-check bigger-110"></i>
+                    Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section ViewsScripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#dynamic-table").dataTable({
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript" src=@Url.Content("~/Scripts/date-time/bootstrap-timepicker.js")></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#timepickerEntrada').timepicker({
+                minuteStep: 1,
+                secondStep: 5,
+                template: 'modal',
+                modalBackdrop: true,
+                showSeconds: true,
+                showMeridian: false
+            })
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#timepickerSalida').timepicker({
+                minuteStep: 1,
+                secondStep: 5,
+                template: 'modal',
+                modalBackdrop: true,
+                showSeconds: true,
+                showMeridian: false
+            })
+        });
+    </script>
+
+}

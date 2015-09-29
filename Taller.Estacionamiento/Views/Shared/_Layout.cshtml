@@ -16,7 +16,9 @@
     <link rel="stylesheet" href=@Url.Content("~/Content/css/ol.css") />
     <link rel="stylesheet" href=@Url.Content("~/Content/css/bootstrap-timepicker.css") />
     <script src="@Url.Content("~/Scripts/ace-extra.js")"></script>
-    
+
+    <!--Espacio donde se agregaran nuevos ccs en cada vista-->
+    @RenderSection("ViewsCCS", required: false)
 
 </head>
 
@@ -292,6 +294,14 @@
 
                             <b class="arrow"></b>
                         </li>
+                        <li class="">
+                            <a href="@Url.Action("Tarjetero","Estacionamiento")">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Tarjetero
+                            </a>
+
+                            <b class="arrow"></b>
+                        </li>
                     </ul>
                 </li>
                 <li class="">
@@ -386,9 +396,6 @@
     <!-- Scripts para los dataTables-->
     <script type="text/javascript" src=@Url.Content("~/Scripts/dataTables/jquery.dataTables.js")></script>
     <script type="text/javascript" src=@Url.Content("~/Scripts/dataTables/jquery.dataTables.bootstrap.js")></script>
-
-    <!-- Scripts para los date-picker-->
-    <script type="text/javascript" src=@Url.Content("~/Scripts/date-time/bootstrap-timepicker.js")></script>
 
     <!--Espacio donde se agregaran nuevos scripts en cada vista-->
     @RenderSection("ViewsScripts", required: false)
