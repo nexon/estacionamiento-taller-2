@@ -30,10 +30,6 @@ namespace Taller.Estacionamiento.Models
         {
             throw new NotImplementedException(); 
         }
-        Personal Personal()
-        {
-            throw new NotImplementedException();
-        }
         void AgregarPersonal(Personal personal)
         {
             throw new NotImplementedException(); 
