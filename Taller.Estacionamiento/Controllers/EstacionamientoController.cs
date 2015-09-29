@@ -60,6 +60,10 @@ namespace Taller.Estacionamiento.Controllers
         {
             return View("Personal");
         }
+        public ActionResult Tarjetero()
+        {
+            return View("Tarjetero");
+        }
 
 
     }
