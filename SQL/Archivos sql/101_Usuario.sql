@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS usuarios $$
+DROP TABLE IF EXISTS usuario $$
 CREATE TABLE usuarios
 (
  id_usuario INT NOT NULL AUTO_INCREMENT,

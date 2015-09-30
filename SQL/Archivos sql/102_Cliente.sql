@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS clientes $$
+DROP TABLE IF EXISTS cliente $$
 CREATE TABLE clientes
 (
  id_cliente INT NOT NULL AUTO_INCREMENT,

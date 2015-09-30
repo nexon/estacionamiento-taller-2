@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS estados $$
+DROP TABLE IF EXISTS estado $$
 CREATE TABLE estados
 (
  id_estado INT NOT NULL,

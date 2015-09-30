@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS promociones $$
+DROP TABLE IF EXISTS promocion $$
 CREATE TABLE promociones
 (
  id_promo INT NOT NULL AUTO_INCREMENT,
@@ -8,6 +8,6 @@ CREATE TABLE promociones
  fecha_termino DATE NOT NULL,
  id_estacionamiento INT NOT NULL,
  PRIMARY KEY (id_promo),
- FOREIGN KEY (id_estacionamiento) REFERENCES estacionamientos (id_estacionamiento)
+ FOREIGN KEY (id_estacionamiento) REFERENCES estacionamiento (id_estacionamiento)
 )
 $$
