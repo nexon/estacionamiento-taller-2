@@ -5,6 +5,6 @@ CREATE TABLE conductor
  id_usuario INT NOT NULL,
  reputacion FLOAT,
  PRIMARY KEY (id_conductor),
- FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario)
+ FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario)
 )
 $$

@@ -5,6 +5,6 @@ CREATE TABLE vehiculo
  patente VARCHAR(15) NOT NULL,
  id_conductor INT NOT NULL,
  PRIMARY KEY (id_vehiculo, patente),
- FOREIGN KEY (id_conductor) REFERENCES cliente (id_conductor)
+ FOREIGN KEY (id_conductor) REFERENCES conductor (id_conductor)
 )
 $$

@@ -8,7 +8,7 @@ CREATE TABLE valoracion
  id_conductor INT NOT NULL,
  id_estacionamiento INT NOT NULL,
  PRIMARY KEY (id_valoracion),
- FOREIGN KEY (id_conductor) REFERENCES cliente (id_conductor),
+ FOREIGN KEY (id_conductor) REFERENCES conductor (id_conductor),
  FOREIGN KEY (id_estacionamiento) REFERENCES estacionamiento (id_estacionamiento)
 )
 $$
