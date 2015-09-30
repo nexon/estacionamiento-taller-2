@@ -101,9 +101,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Conductor.cs" />
+    <Compile Include="Models\Erol.cs" />
+    <Compile Include="Models\Espacio.cs" />
+    <Compile Include="Models\Estacionamiento.cs" />
+    <Compile Include="Models\EstadoEspacio.cs" />
+    <Compile Include="Models\Personal.cs" />
+    <Compile Include="Models\Reserva.cs" />
+    <Compile Include="Models\Tarjetero.cs" />
+    <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\Vehiculo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
     <Content Include="bin\System.Web.Mvc.dll" />
     <Content Include="bin\System.Web.Optimization.dll" />
     <Content Include="bin\System.Web.Providers.dll" />
@@ -111,6 +123,8 @@
     <Content Include="bin\System.Web.WebPages.Deployment.dll" />
     <Content Include="bin\System.Web.WebPages.dll" />
     <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\Taller.Estacionamiento.dll" />
+    <Content Include="bin\Taller.Estacionamiento.pdb" />
     <Content Include="Content\avatars\avatar.png" />
     <Content Include="Content\avatars\avatar1.png" />
     <Content Include="Content\avatars\avatar2.png" />
@@ -496,6 +510,7 @@
     <Content Include="Content\fonts\OpenSans-400.woff" />
     <Content Include="Content\fonts\readme" />
     <Content Include="packages.config" />
+    <Content Include="bin\Taller.Estacionamiento.dll.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -531,6 +546,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\ol.js" />
     <Content Include="Scripts\pace.js" />
+    <Content Include="Scripts\personal\personal.js" />
     <Content Include="Scripts\prettify.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -563,10 +579,10 @@
     <Content Include="Views\Estacionamiento\AgregarSlot.cshtml" />
     <Content Include="Views\Estacionamiento\EditarSlot.cshtml" />
     <Content Include="Views\Estacionamiento\EditarInformacion.cshtml" />
+    <Content Include="Views\Estacionamiento\Tarjetero.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Estadistica\Index.cshtml" />
