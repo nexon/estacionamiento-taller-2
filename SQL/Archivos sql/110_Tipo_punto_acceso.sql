@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS tipos_punto_acceso $$
+DROP TABLE IF EXISTS tipo_punto_acceso $$
 CREATE TABLE tipos_punto_acceso
 (
  id_tipo INT NOT NULL AUTO_INCREMENT,

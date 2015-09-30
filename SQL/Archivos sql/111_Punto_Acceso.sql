@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS puntos_acceso $$
+DROP TABLE IF EXISTS punto_acceso $$
 CREATE TABLE puntos_acceso
 (
  id_punto_acceso INT NOT NULL AUTO_INCREMENT, 
@@ -9,7 +9,7 @@ CREATE TABLE puntos_acceso
  id_tipo INT NOT NULL,
  id_estacionamiento INT NOT NULL,
  PRIMARY KEY (id_punto_acceso),
- FOREIGN KEY (id_estacionamiento) REFERENCES estacionamientos (id_estacionamiento),
- FOREIGN KEY (id_tipo) REFERENCES tipos_punto_acceso (id_tipo)
+ FOREIGN KEY (id_estacionamiento) REFERENCES estacionamiento (id_estacionamiento),
+ FOREIGN KEY (id_tipo) REFERENCES tipo_punto_acceso (id_tipo)
 )
 $$

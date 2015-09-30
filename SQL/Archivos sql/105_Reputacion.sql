@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS reputaciones $$
+DROP TABLE IF EXISTS reputacion $$
 CREATE TABLE reputaciones
 (
  id_reputacion INT NOT NULL AUTO_INCREMENT,
@@ -8,7 +8,7 @@ CREATE TABLE reputaciones
  id_cliente INT NOT NULL,
  id_estacionamiento INT NOT NULL,
  PRIMARY KEY (id_reputacion),
- FOREIGN KEY (id_cliente) REFERENCES clientes (id_cliente),
- FOREIGN KEY (id_estacionamiento) REFERENCES estacionamientos (id_estacionamiento)
+ FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente),
+ FOREIGN KEY (id_estacionamiento) REFERENCES estacionamiento (id_estacionamiento)
 )
 $$
