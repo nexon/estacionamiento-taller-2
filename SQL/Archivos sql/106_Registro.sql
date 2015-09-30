@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS registro $$
-CREATE TABLE registros
+CREATE TABLE registro
 (
  id_registro INT NOT NULL AUTO_INCREMENT,
  fecha_ingreso DATETIME NOT NULL,

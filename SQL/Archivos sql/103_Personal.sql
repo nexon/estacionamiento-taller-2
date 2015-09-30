@@ -1,11 +1,11 @@
-DROP TABLE IF EXISTS empleado $$
-CREATE TABLE empleados
+DROP TABLE IF EXISTS personal $$
+CREATE TABLE personal
 (  
- id_empleado INT NOT NULL AUTO_INCREMENT,
+ id_personal INT NOT NULL AUTO_INCREMENT,
  id_usuario INT NOT NULL,
  id_estacionamiento INT NOT NULL,
  propietario BOOLEAN NOT NULL,
- PRIMARY KEY (id_empleado),
+ PRIMARY KEY (id_personal),
  FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario),
  FOREIGN KEY (id_estacionamiento) REFERENCES estacionamiento (id_estacionamiento)
 )
