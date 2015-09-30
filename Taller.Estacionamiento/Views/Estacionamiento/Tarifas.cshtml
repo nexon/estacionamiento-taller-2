@@ -4,72 +4,70 @@
 
 <div class="page-header">
     <h1>
-        Tarifas
+        Tarifa
         <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
-            Ver y ajustar
+            Actual
         </small>
     </h1>
 </div>
 <div class="row">
+
+    <div id="lista_tarifas" class="col-xs-12">
+        No tiene registrada una tarifa
+    </div>
     <div class="col-xs-12">
-        <h3 class="header smaller lighter green">Tarifas</h3>
-        <div id="lista_tarifas">
-        </div>
+        <h3 class="header smaller lighter green">Modificar Tarifa Actual</h3>
 
     </div>
     <div class="col-xs-12">
-        <div class="widget-box widget-color-blue2">
-            <div class="widget-header">
-                <h4 class="widget-title">Nueva Tarifa</h4>
-            </div>
-            <div class="widget-body">
-                <div class="widget-main">
-                    <form class="form-horizontal" id="cliente_form" role="form">
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nombre de Tarifa </label>
 
-                            <div class="col-sm-9">
-                                <input type="text" id="nombre_tarifa" name="nombre_tarifa" placeholder="Ej: Día Normal, Fin de Semana" class="col-xs-10 col-sm-5 " />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Valor Minuto </label>
+        <form class="form-horizontal" id="cliente_form" role="form">
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nombre de Tarifa </label>
 
-                            <div class="col-sm-9">
-                                <input type="number" id="precio_tarifa" name="precio_tarifa" placeholder="Ej: $150" class="col-xs-10 col-sm-5" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Cuota Mínima </label>
-
-                            <div class="col-sm-9">
-                                <input type="number" id="cuota_minima" name="cuota_minima" placeholder="Ej: $600" class="col-xs-10 col-sm-5" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1">  </label>
-
-                            <div class="col-sm-8">
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="form-field-checkbox" name="es_promo" id="es_promo" type="checkbox" class="ace">
-                                        <span class="lbl"> Promoción </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                    </form>
+                <div class="col-sm-9">
+                    <input type="text" id="nombre_tarifa" name="nombre_tarifa" placeholder="Ej: Día Normal, Fin de Semana" class="col-xs-10 col-sm-5 " />
                 </div>
-                <div class="widget-toolbox padding-8 clearfix">
-                    <button id="agregar_a_la_lista" class="btn btn-success pull-right">
-                        <i class="ace-icon fa fa-arrow-circle-up"></i>
-                        <span class="bigger-110">Agregar</span>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Valor Minuto </label>
+
+                <div class="col-sm-9">
+                    <input type="number" id="precio_tarifa" name="precio_tarifa" placeholder="Ej: $150" class="col-xs-10 col-sm-5" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Cuota Mínima </label>
+
+                <div class="col-sm-9">
+                    <input type="number" id="cuota_minima" name="cuota_minima" placeholder="Ej: $600" class="col-xs-10 col-sm-5" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">  </label>
+
+                <div class="col-sm-8">
+                    <div class="checkbox">
+                        <label>
+                            <input name="form-field-checkbox" name="es_promo" id="es_promo" type="checkbox" class="ace">
+                            <span class="lbl"> Promoción </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <button id="agregar_a_la_lista" class="btn btn-info" type="button">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Modificar Tarifa
                     </button>
                 </div>
             </div>
-        </div>
+
+        </form>
+
+
     </div>
 
     @section ViewsScripts {
@@ -92,14 +90,18 @@
                 precio_tarifa.val("");
                 cuota_minima.val("");
 
+                lista_tarifas.html("");
+
                 lista_tarifas.append(crearTrTarifa(nombre, precio, promo));
             });
             //<span class="badge badge-warning badge-left">Activo</span>
             function crearTrTarifa(nombre, precio, promo) {
-                var button_tarifa = $('<button  class="btn btn-default btn-xlg"><i class="ace-icon fa fa-pencil-ssquare-o bigger-230">' + precio + '/m</i>' + nombre + '<span class="badge badge-pink"><i class="fa fa-trash"></i></span></button> ');
+                var button_tarifa = $('<button  class="btn btn-primary btn-xlg"><i class="ace-icon fa fa-pencil-ssquare-o bigger-230">' + precio + '/m</i>' + nombre + '</button> ');
+                /*
                 button_tarifa.find(".fa-trash").click(function () {
                     $(this).parent().parent().remove();
                 });
+                
                 button_tarifa.click(function () {
                     lista_tarifas.find("button").removeClass("btn-primary").addClass("btn-default").find(".badge-left").remove();
                     lista_tarifas.find(".fa-trash").parent().show();
@@ -107,7 +109,7 @@
                     $(this).find(".fa-trash").parent().hide();
                     $(this).append('<span class="badge badge-warning badge-left">Activo</span>');
                 });
-                console.log(button_tarifa);
+                console.log(button_tarifa);*/
                 return button_tarifa;
             }
         </script>
