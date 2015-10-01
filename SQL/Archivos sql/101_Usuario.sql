@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS usuarios $$
-CREATE TABLE usuarios
+DROP TABLE IF EXISTS usuario $$
+CREATE TABLE usuario
 (
  id_usuario INT NOT NULL AUTO_INCREMENT,
  nombre VARCHAR(45) NOT NULL,

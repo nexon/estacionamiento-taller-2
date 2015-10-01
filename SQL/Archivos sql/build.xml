@@ -45,7 +45,7 @@
     <sql
       driver="${sql.driver}" url="${sql.url}${db_name}" userid="${sql.user}"
 			password="${sql.pass}" autocommit= "true"
-			classpath= "${lib}/mysql-connector-java-5.1.31.jar"
+			classpath= "mysql-connector-java-5.1.33-bin.jar"
       delimiter="$$" >
       <path>
         <fileset dir=".">
@@ -58,7 +58,7 @@
     <sql
       driver="${sql.driver}" url="${sql.url}${db_name}" userid="${sql.user}"
 			password="${sql.pass}" autocommit= "true"
-			classpath= "${lib}/mysql-connector-java-5.1.31.jar"
+			classpath= "mysql-connector-java-5.1.33-bin.jar"
       delimiter="$$" >
       <path>
         <fileset dir=".">
@@ -71,7 +71,7 @@
     <sql
       driver="${sql.driver}" url="${sql.url}${db_name}" userid="${sql.user}"
       password="${sql.pass}" autocommit= "true"
-      classpath= "${lib}/mysql-connector-java-5.1.31.jar"
+      classpath= "mysql-connector-java-5.1.33-bin.jar"
       delimiter="$$" >
       <path>
         <fileset dir=".">

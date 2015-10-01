@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS registros $$
-CREATE TABLE registros
+DROP TABLE IF EXISTS registro $$
+CREATE TABLE registro
 (
  id_registro INT NOT NULL AUTO_INCREMENT,
  fecha_ingreso DATETIME NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE registros
  id_estacionamiento INT NOT NULL,
  id_vehiculo INT NOT NULL,
  PRIMARY KEY (id_registro),
- FOREIGN KEY (id_estacionamiento) REFERENCES estacionamientos (id_estacionamiento),
- FOREIGN KEY (id_vehiculo) REFERENCES vehiculos (id_vehiculo)
+ FOREIGN KEY (id_estacionamiento) REFERENCES estacionamiento (id_estacionamiento),
+ FOREIGN KEY (id_vehiculo) REFERENCES vehiculo (id_vehiculo)
 )
 $$

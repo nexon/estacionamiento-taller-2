@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS estacionamientos $$
-CREATE TABLE estacionamientos
+DROP TABLE IF EXISTS estacionamiento $$
+CREATE TABLE estacionamiento
 (
  id_estacionamiento INT NOT NULL AUTO_INCREMENT,
  nombre VARCHAR(45) NOT NULL,
