@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS detalle_estacionamiento $$
-CREATE TABLE detalles_estacionamiento 
+CREATE TABLE detalle_estacionamiento 
 (
  id_estacionamiento INT NOT NULL,
  id_palabra INT NOT NULL,
