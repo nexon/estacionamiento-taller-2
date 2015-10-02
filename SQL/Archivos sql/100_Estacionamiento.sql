@@ -6,9 +6,13 @@ CREATE TABLE estacionamiento
  direccion VARCHAR(45) NOT NULL,
  capacidad INT NOT NULL,
  reputacion FLOAT,
- cargo_fijo INT NOT NULL,
- cargo_minuto INT NOT NULL,
+ tiempo_minimo INT NOT NULL,
+ tarifa_minuto INT NOT NULL,
  cant_minutos INT NOT NULL,
+ apertura DATETIME,
+ cierre DATETIME,
+ coordenadaLatitud DOUBLE,
+ coordenadaLongitud DOUBLE,
  PRIMARY KEY (id_estacionamiento)
 ) 
 $$
