@@ -1,6 +1,6 @@
 
-DROP PROCEDURE IF EXISTS `registro_actualizar`$
-CREATE PROCEDURE `registro_actualizar`(in id_registroIn INT, in fecha_salidaIn DATETIME, in monto_totalIn INT)
+DROP PROCEDURE IF EXISTS registro_actualizar$
+CREATE PROCEDURE registro_actualizar(in id_registroIn INT, in fecha_salidaIn DATETIME, in monto_totalIn INT)
 BEGIN
 	update registro
 	set
