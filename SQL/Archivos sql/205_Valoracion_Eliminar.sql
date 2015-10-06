@@ -1,5 +1,5 @@
-DROP PROCEDURE IF EXISTS eliminarValoracion $$
-CREATE PROCEDURE eliminarValoracion( 
+DROP PROCEDURE IF EXISTS valoracion_eliminar $$
+CREATE PROCEDURE valoracion_eliminar( 
 	inIdValoracion INT
 )
 BEGIN
