@@ -1,8 +1,8 @@
 <project name="Database creation" basedir=".">
 	<property name="sql.driver" value="org.gjt.mm.mysql.Driver"/>
 	<property name="sql.url" value="jdbc:mysql://localhost/"/>
-	<property name="sql.user" value="root"/>
-	<property name="sql.pass" value="123porti"/>
+	<property name="sql.user" value="esta_user"/>
+	<property name="sql.pass" value="Estac_Taller_2"/>
   <property name="db_name" value="estacionamiento"/>
 	<target name="CreateDataBase">
     <antcall target="CreateModel"/>
