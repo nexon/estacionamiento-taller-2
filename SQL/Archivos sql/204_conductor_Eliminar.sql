@@ -1,5 +1,5 @@
-DROP PROCEDURE IF EXISTS conductor_borrar $$
-CREATE PROCEDURE conductor_borrar
+DROP PROCEDURE IF EXISTS conductor_Eliminar $$
+CREATE PROCEDURE conductor_Eliminar
 (
 	IN inId_conductor INT
 )

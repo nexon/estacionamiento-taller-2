@@ -1,5 +1,5 @@
- DROP PROCEDURE IF EXISTS conductor_crear $$
- CREATE PROCEDURE conductor_crear
+ DROP PROCEDURE IF EXISTS conductor_Crear $$
+ CREATE PROCEDURE conductor_Crear
  (
  	IN inId_usuario INT,
  	IN inReputacion FLOAT

@@ -1,5 +1,5 @@
-DROP PROCEDURE IF EXISTS conductor_obtener $$
-CREATE PROCEDURE conductor_obtener
+DROP PROCEDURE IF EXISTS conductor_Seleccionar $$
+CREATE PROCEDURE conductor_Seleccionar
 (
 	IN inId_conductor INT
 ) 
