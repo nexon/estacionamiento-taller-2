@@ -1,0 +1,83 @@
+<project name="Database creation" basedir=".">
+	<property name="sql.driver" value="org.gjt.mm.mysql.Driver"/>
+	<property name="sql.url" value="jdbc:mysql://localhost/"/>
+	<property name="sql.user" value="esta_user"/>
+	<property name="sql.pass" value="Estac_Taller_2"/>
+  <property name="db_name" value="estacionamiento"/>
+	<target name="CreateDataBase">
+    <antcall target="CreateModel"/>
+    <antcall target="CreateLogic"/>
+	</target>
+  <target name="CreateModel">
+      <antcall target="CreateSc"/>
+      <antcall target="CreateTable"/>
+  </target>
+  <target name="CreateLogic">
+      <antcall target="CreateProcedure"/>
+      <antcall target="CreateView"/>
+      <antcall target="CreateFuntion"/>
+  </target>
+  <target name="CreateSc">
+    <sql
+      driver="${sql.driver}" url="${sql.url}" userid="${sql.user}"
+      password="${sql.pass}" autocommit= "true"
+      classpath="mysql-connector-java-5.1.33-bin.jar"
+      delimiter="$$" >
+      DROP DATABASE IF EXISTS ${db_name} $$
+      CREATE DATABASE ${db_name} $$
+      USE ${db_name} $$
+    </sql>
+  </target>
+  <target name="CreateTable">
+    <sql
+      driver="${sql.driver}" url="${sql.url}${db_name}" userid="${sql.user}"
+			password="${sql.pass}" autocommit= "true"
+			classpath="mysql-connector-java-5.1.33-bin.jar"
+      delimiter="$$" >
+      <path>
+        <fileset dir=".">
+          <include name="1*.sql"/>
+        </fileset>
+      </path>
+    </sql>
+  </target>
+  <target name="CreateProcedure">
+    <sql
+      driver="${sql.driver}" url="${sql.url}${db_name}" userid="${sql.user}"
+			password="${sql.pass}" autocommit= "true"
+			classpath= "mysql-connector-java-5.1.33-bin.jar"
+      delimiter="$$" >
+      <path>
+        <fileset dir=".">
+          <include name="2*.sql"/>
+        </fileset>
+      </path>
+    </sql>
+  </target>
+<target name="CreateView">
+    <sql
+      driver="${sql.driver}" url="${sql.url}${db_name}" userid="${sql.user}"
+			password="${sql.pass}" autocommit= "true"
+			classpath= "mysql-connector-java-5.1.33-bin.jar"
+      delimiter="$$" >
+      <path>
+        <fileset dir=".">
+          <include name="3*.sql"/>
+        </fileset>
+      </path>
+    </sql>
+  </target>
+  <target name="CreateFuntion">
+    <sql
+      driver="${sql.driver}" url="${sql.url}${db_name}" userid="${sql.user}"
+      password="${sql.pass}" autocommit= "true"
+      classpath= "mysql-connector-java-5.1.33-bin.jar"
+      delimiter="$$" >
+      <path>
+        <fileset dir=".">
+          <include name="4*.sql"/>
+        </fileset>
+      </path>
+    </sql>
+  </target>
+</project>

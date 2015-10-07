@@ -1,0 +1,275 @@
+﻿@{
+    ViewBag.Title = "Empresa";
+    Layout = "";
+}
+
+<!doctype html>
+<!--[if IE 7 ]> <html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <title>Parking-Matic</title>
+    <!-- Bootstrap core CSS -->
+    <link href=@Url.Content("~/Content/publicHome/css/bootstrap.min.css") rel="stylesheet">
+
+    <!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+          <script src="js/html5shiv.js"></script>
+          <script src="js/respond.min.js"></script>
+        <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yellowtail%7COpen%20Sans%3A400%2C300%2C600%2C700%2C800" media="screen" />
+    <!-- Custom styles for this template -->
+    <link href=@Url.Content("~/Content/publicHome/css/font-awesome.min.css") rel="stylesheet" type="text/css" media="all">
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/flexslider.css") type="text/css" media="screen" />
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/jquery.bxslider.css") type="text/css" media="screen" />
+    <link href=@Url.Content("~/Content/publicHome/css/jquery.fancybox.css") rel="stylesheet">
+    <link href=@Url.Content("~/Content/publicHome/css/jquery.selectbox.css") rel="stylesheet">
+    <link href=@Url.Content("~/Content/publicHome/css/style.css") rel="stylesheet">
+    <link href=@Url.Content("~/Content/publicHome/css/mobile.css") rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href=@Url.Content("~/Content/publicHome/css/settings.css") media="screen" />
+    <link href=@Url.Content("~/Content/publicHome/css/animate.min.css") rel="stylesheet">
+    <link href=@Url.Content("~/Content/publicHome/css/ts.css") type="text/css" rel="stylesheet">
+
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/bootstrap.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.themepunch.tools.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.themepunch.revolution.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/wow.min.js")"></script>  
+
+    <!-- Twitter Feed Scripts
+         Uncomment to activate
+
+    <script type="text/javascript" src="js/twitter/jquery.tweet.js"></script>
+    <script type="text/javascript" src="js/twitter/twitter_feed.js"></script> -->
+
+</head>
+
+<body>
+    <!--Header Start-->
+    <header data-spy="affix" data-offset-top="1" class="clearfix">
+        <section class="toolbar">
+            <div class="container">
+                <div class="row">
+                </div>
+            </div>
+            <div class="toolbar_shadow"></div>
+        </section>
+
+        <div class="bottom-header">
+            <div class="container">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                            <a class="navbar-brand" href="index-2.html"><span class="logo"><span class="primary_text">Parking-Matic</span> <span class="secondary_text">ESTACIONAMIENTOS</span></span></a>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav pull-right">
+                                <li class="active"><a href="@Url.Action("Index","PublicHome")">Inicio</a></li>
+                                <li><a href="@Url.Action("Servicios","PublicHome")">Servicios</a></li>
+                                <li><a href="@Url.Action("Empresa", "PublicHome")">Nuestra Empresa</a></li>
+                                <li><a href="@Url.Action("Contacto", "PublicHome")" >Contacto</a></li>
+                                <li><a href="@Url.Action("Login", "PublicHome")">Login</a></li>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </nav>
+            </div>
+            <div class="header_shadow"></div>
+        </div>
+    </header>
+    <!--Header End-->
+    <div class="clearfix"></div>
+    <section id="secondary-banner" class="dynamic-image-11">
+        <!--for other images just change the class name of this section block like, class="dynamic-image-2" and add css for the changed class-->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                    <h2>Nuestra Empresa</h2>
+                    <h4>profesionales a tu servicio</h4>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--#secondary-banner ends-->
+    <div class="message-shadow"></div>
+    <div class="clearfix"></div>
+    <section class="content">
+        <div class="container">
+            <div class="inner-page">
+                <div class="find_team clearfix">
+                    <div class="row">
+                        <div class="col-lg-12 padding-left-none padding-right-none">
+                            <h2 class="margin-top-none">Nuestro equipo</h2>
+                        </div>
+                        <div class="people padding-bottom-40 clearfix">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="team margin-top-15 xs-margin-bottom-30">
+                                        <a href="images/team1-lrg.jpg" class="fancybox"><img src="@Url.Content("~/Content/publicHome/images/team1.jpg")" class="aligncenter" alt="team" /> </a>
+                                        <div class="name_post padding-bottom-15">
+                                            <h4>Sebastian Cerecera</h4>
+                                            <p>Programador</p>
+                                        </div>
+                                        <div class="about_team padding-bottom-10">
+                                            <p class="margin-vertical-15">
+                                                Desarollador Web.NET
+                                            </p>
+                                            <ul>
+                                                <li><i class="fa fa-phone"></i>1-800-123-4567 - Extension 114</li>
+                                                <li><i class="fa fa-mobile"></i>1-902-361-7714</li>
+                                                <li><i class="fa fa-envelope-o"></i><a href="#">william@automotivetemplate.com</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="social_team pull-left">
+                                            <ul class="social margin-bottom-none">
+                                                <li class="margin-bottom-none"><a class="sc-1" href="#"></a></li>
+                                                <li class="margin-bottom-none"><a class="sc-2" href="#"></a></li>
+                                                <li class="margin-bottom-none"><a class="sc-5" href="#"></a></li>
+                                                <li class="margin-bottom-none"><a class="sc-7" href="#"></a></li>
+                                                <li class="margin-bottom-none"><a class="sc-9" href="#"></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 ">
+                                    <div class="team margin-top-15 xs-margin-bottom-30">
+                                        <a href="images/team2-lrg.jpg" class="fancybox"> <img src="@Url.Content("~/Content/publicHome/images/team2.jpg")" class="aligncenter" alt="team" /> </a>
+                                        <div class="name_post padding-bottom-15">
+                                            <h4>Ana Gonzales</h4>
+                                            <p>Jefe de proyecto / CEO</p>
+                                        </div>
+                                        <div class="about_team padding-bottom-10">
+                                            <p class="margin-vertical-15">
+                                               Desarollador Web .NET
+                                            </p>
+                                            <ul>
+                                                <li><i class="fa fa-phone"></i>1-800-123-4567 - Extension 107</li>
+                                                <li><i class="fa fa-mobile"></i>1-902-342-0864</li>
+                                                <li><i class="fa fa-envelope-o"></i><a href="#">leah@automotivetemplate.com</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="social_team pull-left">
+                                            <ul class="social margin-bottom-none">
+                                                <li class="margin-bottom-none"><a class="sc-1" href="#"></a></li>
+                                                <li class="margin-bottom-none"><a class="sc-2" href="#"></a></li>
+                                                <li class="margin-bottom-none"><a class="sc-5" href="#"></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="team margin-top-15">
+                                        <a href="images/team3-lrg.jpg" class="fancybox"> <img src="@Url.Content("~/Content/publicHome/images/team3.jpg")" class="aligncenter" alt="team" /> </a>
+                                        <div class="name_post padding-bottom-15">
+                                            <h4>Juan Perez</h4>
+                                            <p>Programador</p>
+                                        </div>
+                                        <div class="about_team padding-bottom-10">
+                                            <p class="margin-vertical-15">
+                                                Desarollador Web.NET
+                                            </p>
+                                            <ul>
+                                                <li><i class="fa fa-phone"></i>1-800-123-4567 - Extension 119</li>
+                                                <li><i class="fa fa-mobile"></i>1-902-832-3702</li>
+                                                <li><i class="fa fa-envelope-o"></i><a href="#">zachary@automotivetemplate.com</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="social_team pull-left">
+                                            <ul class="social margin-bottom-none">
+                                                <li class="margin-bottom-none"><a class="sc-1" href="#"></a></li>
+                                                <li class="margin-bottom-none"><a class="sc-2" href="#"></a></li>
+                                                <li class="margin-bottom-none"><a class="sc-5" href="#"></a></li>
+                                                <li class="margin-bottom-none"><a class="sc-9" href="#"></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <!--container ends-->
+    </section>
+    <!--content ends-->
+
+    <!--Footer Start-->
+    <!--Footer Start-->
+    <footer class="design_2">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 padding-right-none md-padding-right-none sm-padding-right-15 xs-padding-right-15">
+                    <h4>Contáctanos</h4>
+                    <div class="footer-contact">
+                        <ul>
+                            <li><i class="fa fa-map-marker"></i> <strong>Address:</strong> 1234 Street Name, Curico, AB 12345</li>
+                            <li><i class="fa fa-phone"></i> <strong>Phone:</strong>85874865</li>
+                            <li><i class="fa fa-envelope-o"></i> <strong>Email:</strong><a href="#">parking@gmail.com</a></li>
+                        </ul>
+
+                        <i class="fa fa-location-arrow back_icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="clearfix"></div>
+    <section class="copyright-wrap padding-bottom-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="logo-footer margin-bottom-20 md-margin-bottom-20 sm-margin-bottom-10 xs-margin-bottom-20">
+                        <a href="#">
+                            <h1>Parking-Matic</h1>
+                            <span>Estacionamientos</span>
+                        </a>
+                    </div>
+                    <p>Copyright &copy; 2015</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="back_to_top"> <img src="@Url.Content("~/Content/publicHome/images/arrow-up.png")" alt="scroll up" /> </div>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/retina.js")"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key&amp;sensor=false"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/main.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.fancybox.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/modernizr.custom.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.flexslider.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.bxslider.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.selectbox-0.2.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.mousewheel.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.easing.js")"></script>  
+
+</body>
+</html>
