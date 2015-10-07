@@ -1,5 +1,5 @@
-DROP PROCEDURE IF EXISTS valoracion_leer $$
-CREATE PROCEDURE valoracion_leer(
+DROP PROCEDURE IF EXISTS valoracion_seleccionar $$
+CREATE PROCEDURE valoracion_seleccionar(
 	inIdConductor INT,
 	inIdEstacionamiento INT
 ) 
