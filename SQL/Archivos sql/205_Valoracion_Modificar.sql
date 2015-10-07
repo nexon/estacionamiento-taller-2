@@ -1,5 +1,5 @@
-DROP PROCEDURE IF EXISTS valoracion_actualizar $$
-CREATE PROCEDURE valoracion_actualizar(
+DROP PROCEDURE IF EXISTS valoracion_modificar $$
+CREATE PROCEDURE valoracion_modificar(
 	inIdValoracion INT,
 	inValorConductor FLOAT,
 	inValorEstacionamiento FLOAT
