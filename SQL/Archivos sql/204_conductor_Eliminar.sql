@@ -1,7 +1,7 @@
-DROP PROCEDURE IF EXISTS conductor_Eliminar $$
-CREATE PROCEDURE conductor_Eliminar
+DROP PROCEDURE IF EXISTS Conductor_Eliminar $$
+CREATE PROCEDURE Conductor_Eliminar
 (
-	IN inId_conductor INT
+	inId_conductor INT
 )
 BEGIN
 DELETE FROM conductor
