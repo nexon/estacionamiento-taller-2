@@ -1,4 +1,3 @@
-DELIMITER $$
 DROP PROCEDURE IF EXISTS estacionamiento_crear $$
 CREATE PROCEDURE estacionamiento_crear(
 	inNombre VARCHAR(45),
@@ -38,4 +37,3 @@ BEGIN
 		inCoordenadaLongitud
 );
 END $$
-DELIMITER ;

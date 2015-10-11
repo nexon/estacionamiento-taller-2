@@ -1,4 +1,3 @@
-DELIMITER $$
 DROP PROCEDURE IF EXISTS estacionamiento_modificar $$
 CREATE PROCEDURE estacionamiento_modificar(
 	inIdEstacionamiento INT(11),
@@ -29,4 +28,3 @@ BEGIN
         
 	WHERE id_estacionamiento = inIdEstacionamiento;
 END $$
-DELIMITER ;
