@@ -1,5 +1,5 @@
-DROP PROCEDURE IF EXISTS vehiculo_actualizar $$
-	CREATE PROCEDURE `vehiculo_actualizar`(
+DROP PROCEDURE IF EXISTS Vehiculo_Modificar $$
+	CREATE PROCEDURE `Vehiculo_Modificar`(
 		IN patente_actual varchar(15),
 		IN id int(11),
 	    IN patente_nueva varchar(15)

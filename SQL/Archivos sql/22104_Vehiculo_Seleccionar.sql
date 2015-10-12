@@ -1,5 +1,5 @@
-DROP PROCEDURE IF EXISTS vehiculo_leer $$
-	CREATE PROCEDURE `vehiculo_leer`(
+DROP PROCEDURE IF EXISTS Vehiculo_Seleccionar $$
+	CREATE PROCEDURE `Vehiculo_Seleccionar`(
 		IN id int(11)
 	)
 	BEGIN
