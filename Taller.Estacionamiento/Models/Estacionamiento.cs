@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -73,9 +75,27 @@ namespace Taller.Estacionamiento.Models
             throw new NotImplementedException();
         }
 
-        void PromedioValoraciones()
+        double PromedioValoraciones(int idEstacionamiento)
         {
-            throw new NotImplementedException();
+            var dt = new DataTable();
+            var command = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "valoracion_seleccionar_promedio" };
+            command.Parameters.AddWithValue("inIdUsuario", -1);
+            command.Parameters.AddWithValue("inIdEstacionamiento", idEstacionamiento);
+            using (var conn = new MySqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            {
+                conn.Open();
+                command.Connection = conn;
+                var sqlda = new MySqlDataAdapter(command);
+                sqlda.Fill(dt);
+                conn.Close();
+            }
+            if (dt.Rows.Count > 0)
+            {
+                DataRow dr = dt.Rows[0];
+                float promedio = (float)dr["valoracion_valor_estacionamiento"];
+                return (double)promedio;
+            }
+            return 0;
         }
 
         void AgregarEspacio(Espacio espacio)
