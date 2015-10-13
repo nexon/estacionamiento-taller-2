@@ -38,6 +38,7 @@
     <link rel="stylesheet" type="text/css" href=@Url.Content("~/Content/publicHome/css/settings.css") media="screen" />
     <link href=@Url.Content("~/Content/publicHome/css/animate.min.css") rel="stylesheet">
     <link href=@Url.Content("~/Content/publicHome/css/ts.css") type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/modalLogin.css") type="text/css">
 
 
     <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.min.js")"></script>
@@ -82,7 +83,7 @@
                                 <li><a href="@Url.Action("Servicios","PublicHome")">Servicios</a></li>
                                 <li><a href="@Url.Action("Empresa", "PublicHome")">Nuestra Empresa</a></li>
                                 <li><a href="@Url.Action("Contacto", "PublicHome")" >Contacto</a></li>
-                                <li><a href="@Url.Action("Login", "PublicHome")">Login</a></li>
+                                <li style="cursor:pointer"><a data-toggle="modal" data-target="#login">Login</a></li>
                             </ul>
                         </div>
                         <!-- /.navbar-collapse -->
@@ -94,6 +95,42 @@
         </div>
     </header>
     <!--Header End-->
+
+
+     <!--Modal login Start-->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×    </button>
+                    <h4 class="modal-title">Ingresar al sistema</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form col-md-12 center-block">
+
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg" placeholder="Email">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" class="form-control input-lg" placeholder="Password">
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-danger btn-lg btn-block">Ingresar</button>
+                            <span class="pull-right"><a href="#">Registrarse</a></span><span><a href="#">¿Necesita ayuda?</a></span>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal login End-->
+
+
     <div class="clearfix"></div>
     <section id="secondary-banner" class="dynamic-image-11">
         <!--for other images just change the class name of this section block like, class="dynamic-image-2" and add css for the changed class-->

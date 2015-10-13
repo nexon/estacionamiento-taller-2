@@ -267,6 +267,7 @@
     <Content Include="Content\publicHome\css\jquery.isotope.css" />
     <Content Include="Content\publicHome\css\jquery.selectbox.css" />
     <Content Include="Content\publicHome\css\mobile.css" />
+    <Content Include="Content\publicHome\css\modalLogin.css" />
     <Content Include="Content\publicHome\css\print.css" />
     <Content Include="Content\publicHome\css\settings.css" />
     <Content Include="Content\publicHome\css\social-likes.css" />
@@ -829,9 +830,8 @@
     <Content Include="Views\Estacionamiento\Tarjetero.cshtml" />
     <Content Include="Views\PublicHome\Contacto.cshtml" />
     <Content Include="Views\PublicHome\Empresa.cshtml" />
-    <Content Include="Views\PublicHome\Index.cshtml" />
-    <Content Include="Views\PublicHome\Login.cshtml" />
     <Content Include="Views\PublicHome\Servicios.cshtml" />
+    <Content Include="Views\PublicHome\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
