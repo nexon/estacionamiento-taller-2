@@ -1,16 +1,18 @@
 DROP PROCEDURE IF EXISTS valoracion_seleccionar $$
 CREATE PROCEDURE valoracion_seleccionar(
-	inIdConductor INT,
+	inIdUsuario INT,
 	inIdEstacionamiento INT
 ) 
 BEGIN
   SELECT 
-	AVG(v.valor_conductor) as valoracion_valor_conductor,
-	AVG(v.valor_estacionamiento) as valoracion_valor_estacionamiento
+    valoracion.id_valoracion as valoracion_id_valoracion,
+	valoracion.valor_conductor as valoracion_valor_conductor,
+	valoracion.valor_estacionamiento as valoracion_valor_estacionamiento
   FROM 
-	valoracion as v
+	conductor RIGHT JOIN valoracion ON conductor.id_conductor = valoracion.id_conductor
   WHERE
-	v.id_conductor = inIdConductor OR
-	v.id_estacionamiento = inIdEstacionamiento;
+	conductor.id_usuario = inIdUsuario AND
+	valoracion.id_estacionamiento = inIdEstacionamiento
+    ORDER BY valoracion.fecha_hora DESC LIMIT 1;
 END
 $$
