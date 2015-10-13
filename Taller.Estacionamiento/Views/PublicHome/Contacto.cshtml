@@ -1,0 +1,349 @@
+﻿@{
+    ViewBag.Title = "Contacto";
+    Layout = "";
+}
+
+<!doctype html>
+<!--[if IE 7 ]> <html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="images/favicon.ico">
+<title>Automotive Car Dealership &amp; Business HTML Template</title>
+<!-- Bootstrap core CSS -->
+<link href=@Url.Content("~/Content/publicHome/css/bootstrap.min.css")  rel="stylesheet">
+
+<!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yellowtail%7COpen%20Sans%3A400%2C300%2C600%2C700%2C800" media="screen" />
+<!-- Custom styles for this template -->
+<link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/font-awesome.min.css") type="text/css" media="all" />     
+<link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/flexslider.css")  type="text/css" media="screen" />       
+<link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/jquery.bxslider.css")  type="text/css" media="screen" />        
+<link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/jquery.fancybox.css") >        
+<link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/jquery.selectbox.css")>        
+<link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/style.css") >        
+<link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/mobile.css") >        
+<link rel="stylesheet" type="text/css" href=@Url.Content("~/Content/publicHome/css/settings.css")  media="screen" />        
+<link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/animate.min.css")>        
+<link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/ts.css") type="text/css">
+<link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/modalLogin.css") type="text/css">
+
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.min.js")"></script>        
+<script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/bootstrap.min.js")"></script>    
+<script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.themepunch.tools.min.js")"></script>    
+<script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.themepunch.revolution.min.js")"></script>           
+<script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/wow.min.js")"></script>           
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key&amp;sensor=false"></script>
+
+<!-- Twitter Feed Scripts 
+     Uncomment to activate
+
+<script type="text/javascript" src="js/twitter/jquery.tweet.js"></script>
+<script type="text/javascript" src="js/twitter/twitter_feed.js"></script> -->
+
+</head>
+
+<body>
+<!--Header Start-->
+<header  data-spy="affix" data-offset-top="1" class="clearfix">
+     <section class="toolbar">
+        <div class="container">
+            <div class="row">
+            </div>
+        </div>
+        <div class="toolbar_shadow"></div>
+     </section>
+
+    <div class="bottom-header" >
+        <div class="container">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid"> 
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                        <a class="navbar-brand" href="index-2.html"><span class="logo"><span class="primary_text">Parking-Matic</span> <span class="secondary_text">Estacionamientos</span></span></a>
+                    </div>
+                    
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav pull-right">
+                            <li class="active"><a href="@Url.Action("Index","PublicHome")">Inicio</a></li>
+                            <li><a href="@Url.Action("Servicios","PublicHome")">Servicios</a></li>
+                            <li><a href="@Url.Action("Empresa", "PublicHome")">Nuestra Empresa</a></li>
+                            <li><a href="@Url.Action("Contacto", "PublicHome")" >Contacto</a></li>
+                            <li style="cursor:pointer"><a data-toggle="modal" data-target="#login">Login</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse --> 
+                </div>
+                <!-- /.container-fluid --> 
+            </nav>
+        </div>
+        <div class="header_shadow"></div>
+    </div>
+</header>
+<!--Header End-->
+
+
+ <!--Modal login Start-->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×    </button>
+                    <h4 class="modal-title">Ingresar al sistema</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form col-md-12 center-block">
+
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg" placeholder="Email">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" class="form-control input-lg" placeholder="Password">
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-danger btn-lg btn-block">Ingresar</button>
+                            <span class="pull-right"><a href="#">Registrarse</a></span><span><a href="#">¿Necesita ayuda?</a></span>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal login End-->
+
+
+<section id="secondary-banner" class="dynamic-image-5"><!--for other images just change the class name of this section block like, class="dynamic-image-2" and add css for the changed class-->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                <h2>Contáctanos</h2>
+                <h4>Estamos disponibles para tus consultas</h4>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 ">
+            </div>
+        </div>
+    </div>
+</section>
+<!--secondary-banner ends-->
+<div class="message-shadow"></div>
+<div class="clearfix"></div>
+<section class="content">
+    <div class="container">
+        <div class="inner-page">
+            <div class="col-md-12 padding-none"> 
+                <!--MAP-->
+                <div class="find_map row clearfix">
+                    <h2 class="margin-bottom-25 margin-top-none">Buscanos!</h2>
+                    <div class="map margin-vertical-30">
+                        <div id='google-map-listing' class="contact" data-longitude='-71.241449' data-latitude='-34.9851948' data-zoom='7' style='height: 390px;'></div>
+                    </div>
+                </div>
+                <!--MAP--> 
+                <!--CONTACT INFORMATION-->
+                <div class="row contacts margin-top-25"> 
+                    <!--LEFT INFORMATION-->
+                    <div class="col-md-6 left-information">
+                        <div class="contact_information information_head clearfix">
+                            <h3 class="margin-bottom-25 margin-top-none">Información de contacto</h3>
+                            <div class="address clearfix margin-right-25 padding-bottom-40">
+                                <div class="icon_address">
+                                    <p><i class="fa fa-map-marker"></i><strong>Address:</strong></p>
+                                </div>
+                                <div class="contact_address">
+                                    <p class="margin-bottom-none">Parking-Matic<br>
+                                       Los niches curico 1234 <br>
+                                       Curico <br>
+                                       Chile</p>
+                                </div>
+                            </div>
+                            <div class="address clearfix address_details margin-right-25 padding-bottom-40">
+                                <ul class="margin-bottom-none">
+                                    <li><i class="fa fa-phone"></i><strong>Phone:</strong> <span>1-800-123-4567</span></li>
+                                    <li><i class="fa fa-envelope-o"></i><strong>Email:</strong> <a href="mailto:sales@company.com">sales@company.com</a></li>
+                                    <li class="padding-bottom-none"><i class="fa fa-laptop"></i><strong>Web:</strong> <a href="http://company.com/">www.company.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--LEFT INFORMATION--> 
+                    
+                    <!--RIGHT INFORMATION-->
+                    <div class="col-md-5 col-lg-offset-1 col-md-offset-1 padding-right-none xs-padding-left-none sm-padding-left-none xs-margin-top-30">
+                        <div class="contact_wrapper information_head">
+                            <h3 class="margin-bottom-25 margin-top-none">Formulario de contacto</h3>
+                            <div class="form_contact margin-bottom-20">
+                                <div id="result"></div>
+                                <fieldset id="contact_form">
+                                    <input type="text" name="name" class="form-control margin-bottom-25" placeholder="Name  (Required)" />
+                                    <input type="email" name="email" class="form-control margin-bottom-25" placeholder="Email  (Required)" />
+                                    <textarea name="msg" class="form-control margin-bottom-25 contact_textarea" placeholder="Your message" rows="7"></textarea>
+                                    <input id="submit_btn" type="submit" value="Enviar Mensaje">
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <!--RIGHT INFORMATION--> 
+                    
+                </div>
+                <!---CONTACT INFORMATION--> 
+                
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <!--container ends--> 
+</section>
+<!--content ends-->
+
+
+<!--Footer Start-->
+    <footer class="design_2">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 padding-right-none md-padding-right-none sm-padding-right-15 xs-padding-right-15">
+                    <h4>Contáctanos</h4>
+                    <div class="footer-contact">
+                        <ul>
+                            <li><i class="fa fa-map-marker"></i> <strong>Address:</strong> 1234 Street Name, Curico, AB 12345</li>
+                            <li><i class="fa fa-phone"></i> <strong>Phone:</strong>85874865</li>
+                            <li><i class="fa fa-envelope-o"></i> <strong>Email:</strong><a href="#">parking@gmail.com</a></li>
+                        </ul>
+
+                        <i class="fa fa-location-arrow back_icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="clearfix"></div>
+    <section class="copyright-wrap padding-bottom-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="logo-footer margin-bottom-20 md-margin-bottom-20 sm-margin-bottom-10 xs-margin-bottom-20">
+                        <a href="#">
+                            <h1>Parking-Matic</h1>
+                            <span>Estacionamientos</span>
+                        </a>
+                    </div>
+                    <p>Copyright &copy; 2015</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<div class="clearfix"></div>
+<div class="back_to_top"> <img src="@Url.Content("~/Content/publicHome/images/arrow-up.png")"  alt="scroll up" /> </div>
+
+
+
+<div class="clearfix"></div>
+
+
+
+<script src="js/retina.js"></script> 
+<script src="js/main.js"></script> 
+<script type="text/javascript" src="js/jquery.fancybox.js"></script> 
+<script src="js/modernizr.custom.js"></script> 
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/retina.js")"></script>                
+<script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/main.js")"></script>           
+<script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.fancybox.js")"></script>           
+<script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/modernizr.custom.js")"></script>         
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#submit_btn").click(function() { 
+        //collect input field values
+        var user_name       = $("input[name='name']").val(); 
+        var user_email      = $("input[name='email']").val();
+        var user_message    = $("textarea[name='msg']").val();
+        
+        //simple validation at client's end
+        //we simply change border color to red if empty field using .css()
+        var proceed = false;//true;
+        if(user_name==""){ 
+            $("input[name='name']").css("border", "1px solid red"); 
+            proceed = false;
+        } else {
+			$("input[name='name']").css("border", "none");
+		}
+        if(user_email==""){ 
+            $("input[name='email']").css("border", "1px solid red"); 
+            proceed = false;
+        } else {
+			$("input[name='email']").css("border", "none");
+		}
+        if(user_message=="") {  
+            $("textarea[name='msg']").css("border", "1px solid red"); 
+            proceed = false;
+        } else {
+			$("textarea[name='msg']").css("border", "none");
+		}
+        
+        //everything looks good! proceed...
+        if(proceed) {
+            //data to be sent to server
+            post_data = {'userName':user_name, 'userEmail':user_email, 'userMessage':user_message};
+            
+            //Ajax post data to server
+            $.post('contact_process.html', post_data, function(data){  
+                
+                //load success massage in #result div element, with slide effect.       
+                $("#result").hide().html('<div class="success">'+data+'</div>').slideDown();
+                
+                //reset values in all input fields
+                $('#contact_form input[type="text"]').val('');
+				$('#contact_form input[type="email"]').val(''); 
+                $('#contact_form textarea').val(''); 
+                
+            }).fail(function(err) {  //load any error data
+                $("#result").hide().html('<div class="error">'+err.statusText+'</div>').slideDown();
+            });
+        }
+    });
+    
+    //reset previously set border colors and hide all message on .keyup()
+    $("#contact_form input, #contact_form textarea").keyup(function() { 
+        $("#contact_form input, #contact_form textarea").css('border-color',''); 
+        $("#result").slideUp();
+    });
+    
+});
+</script> 
+<!-- FlexSlider --> 
+
+      
+<script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.flexslider.js")"></script>           
+<script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.bxslider.js")"></script>          
+<script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.selectbox-0.2.js")"></script>       
+<script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.mousewheel.js")"></script>       
+<script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.easing.js")"></script>   
+
+</body>
+</html>
