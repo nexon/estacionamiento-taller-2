@@ -11,8 +11,6 @@ namespace Taller.Estacionamiento.Models
     public class Estacionamiento
     {
         public string Nombre { get; set; }
-        public List<Espacio> Espacios { get; set; }
-        public List<Personal> Personal { get; set; }
         public int TarifaMinuto { get; set; }
         public int TiempoMinimo { get; set; }
         public DateTime Apertura { get; set; }
@@ -30,11 +28,15 @@ namespace Taller.Estacionamiento.Models
 
         int LiberarEspacio(Espacio espacio)
         {
-            throw new NotImplementedException(); 
+            throw new NotImplementedException();
+        }
+        List<Personal> Personal()
+        {
+            throw new NotImplementedException();
         }
         void AgregarPersonal(Personal personal)
         {
-            throw new NotImplementedException(); 
+            throw new NotImplementedException();
         }
 
         void EliminarPersonal(Personal Personal)
@@ -46,7 +48,7 @@ namespace Taller.Estacionamiento.Models
         {
             throw new NotImplementedException();
         }
-        
+
         List<Espacio> Disponibles()
         {
             throw new NotImplementedException();
@@ -59,7 +61,7 @@ namespace Taller.Estacionamiento.Models
         {
             throw new NotImplementedException();
         }
-        
+
         bool ReservarEspacio(Vehiculo vehiculo)
         {
             throw new NotImplementedException();
@@ -179,7 +181,7 @@ namespace Taller.Estacionamiento.Models
 
         void AgregarEspacio(Espacio espacio)
         {
-            throw new NotImplementedException(); 
+            throw new NotImplementedException();
         }
 
         void EliminarEspacio(Espacio espacio)
@@ -189,12 +191,12 @@ namespace Taller.Estacionamiento.Models
 
         void Agregar()
         {
-            throw new NotImplementedException(); 
+            throw new NotImplementedException();
         }
 
         void Modificar()
         {
-            throw new NotImplementedException(); 
+            throw new NotImplementedException();
         }
 
         void Eliminar()
