@@ -10,6 +10,7 @@ namespace Taller.Estacionamiento.Models
 {
     public class Estacionamiento
     {
+        public int ID { get; set; }
         public string Nombre { get; set; }
         public int TarifaMinuto { get; set; }
         public int TiempoMinimo { get; set; }
