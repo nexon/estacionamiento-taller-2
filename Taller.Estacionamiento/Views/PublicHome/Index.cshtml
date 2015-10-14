@@ -19,7 +19,7 @@
     <link rel="shortcut icon" href="images/favicon.ico">
     <title>Parking-Matic</title>
     <!-- Bootstrap core CSS -->
-    <link href=@Url.Content("~/Content/publicHome/css/bootstrap.min.css")  rel="stylesheet">
+    <link href=@Url.Content("~/Content/publicHome/css/bootstrap.min.css") rel="stylesheet">
 
     <!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -28,25 +28,26 @@
         <![endif]-->
 
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yellowtail%7COpen%20Sans%3A400%2C300%2C600%2C700%2C800" media="screen" />
-    
+
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/font-awesome.min.css") type="text/css" media="all" />     
-    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/flexslider.css")  type="text/css" media="screen" />       
-    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/jquery.bxslider.css")  type="text/css" media="screen" />        
-    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/jquery.fancybox.css") >        
-    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/jquery.selectbox.css")>        
-    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/style.css") >        
-    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/mobile.css") >        
-    <link rel="stylesheet" type="text/css" href=@Url.Content("~/Content/publicHome/css/settings.css")  media="screen" />        
-    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/animate.min.css")>        
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/font-awesome.min.css") type="text/css" media="all" />
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/flexslider.css") type="text/css" media="screen" />
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/jquery.bxslider.css") type="text/css" media="screen" />
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/jquery.fancybox.css")>
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/jquery.selectbox.css")>
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/style.css")>
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/mobile.css")>
+    <link rel="stylesheet" type="text/css" href=@Url.Content("~/Content/publicHome/css/settings.css") media="screen" />
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/animate.min.css")>
     <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/ts.css") type="text/css">
-    
-        
-    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.min.js")"></script>        
-    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/bootstrap.min.js")"></script>    
-    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.themepunch.tools.min.js")"></script>    
-    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.themepunch.revolution.min.js")"></script>           
-    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/wow.min.js")"></script>           
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/modalLogin.css") type="text/css">
+
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/bootstrap.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.themepunch.tools.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.themepunch.revolution.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/wow.min.js")"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key&amp;sensor=false"></script>
     <!-- Twitter Feed Scripts
          Uncomment to activate
@@ -74,7 +75,7 @@
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="container-fluid">
                         <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">                                
+                        <div class="navbar-header">
                             <a class="navbar-brand" href="index-2.html"><span class="logo"><span class="primary_text">Parking-Matic</span> <span class="secondary_text">Estacionamientos</span></span></a>
                         </div>
 
@@ -84,8 +85,8 @@
                                 <li class="active"><a href="@Url.Action("Index","PublicHome")">Inicio</a></li>
                                 <li><a href="@Url.Action("Servicios","PublicHome")">Servicios</a></li>
                                 <li><a href="@Url.Action("Empresa", "PublicHome")">Nuestra Empresa</a></li>
-                                <li><a href="@Url.Action("Contacto", "PublicHome")" >Contacto</a></li>
-                                <li><a href="@Url.Action("Login", "PublicHome")">Login</a></li>
+                                <li><a href="@Url.Action("Contacto", "PublicHome")">Contacto</a></li>
+                                <li style="cursor:pointer"><a data-toggle="modal" data-target="#login">Login</a></li>
                             </ul>
                         </div>
                         <!-- /.navbar-collapse -->
@@ -98,6 +99,42 @@
     </header>
     <!--Header End-->
 
+    <!--Modal login Start-->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×    </button>
+                    <h4 class="modal-title">Ingresar al sistema</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form col-md-12 center-block">
+
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg" placeholder="Email">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" class="form-control input-lg" placeholder="Password">
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-danger btn-lg btn-block">Ingresar</button>
+                            <span class="pull-right"><a href="#">Registrarse</a></span><span><a href="#">¿Necesita ayuda?</a></span>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal login End-->
+    
+
+
+
     <div class="clearfix"></div>
     <section class="banner-wrap">
         <div class="banner">
@@ -107,7 +144,7 @@
                         <!-- SLIDE  -->
                         <li data-transition="fade" data-slotamount="5" data-masterspeed="700">
                             <!-- MAIN IMAGE -->
-                            <img src="@Url.Content("~/Content/publicHome/images/estacionamiento.jpg")"  alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
+                            <img src="@Url.Content("~/Content/publicHome/images/estacionamiento.jpg")" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
 
                             <!-- LAYER NR. 1 -->
                             <div class="tp-caption big_white fade"
@@ -120,12 +157,12 @@
                                  data-endeasing="Power1.easeIn"
                                  data-captionhidden="off"
                                  style="z-index: 6;">Administra tu estacionamiento</div>
-                            
+
                         </li>
 
                         <li data-transition="fade" data-slotamount="5" data-masterspeed="700">
                             <!-- MAIN IMAGE -->
-                            <img src="@Url.Content("~/Content/publicHome/images/estacionamiento2.jpg")"  alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
+                            <img src="@Url.Content("~/Content/publicHome/images/estacionamiento2.jpg")" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
 
                             <!-- LAYER NR. 1 -->
                             <div class="tp-caption big_white fade"
@@ -142,7 +179,7 @@
 
                         <li data-transition="fade" data-slotamount="5" data-masterspeed="700">
                             <!-- MAIN IMAGE -->
-                            <img src="@Url.Content("~/Content/publicHome/images/estacionamiento3.jpg")"  alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
+                            <img src="@Url.Content("~/Content/publicHome/images/estacionamiento3.jpg")" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
 
                             <!-- LAYERS -->
                             <div class="tp-caption customin customout start green"
@@ -204,7 +241,6 @@
 
 
 
-
     <section class="message-wrap">
         <div class="container">
             <div class="row">
@@ -231,10 +267,10 @@
                             </p>
                             <p>
                                 Nuestra servicio cuenta con gran cantidad de usuarios, quienes a traves de sus Smartphone localizan geograficamente los estacionamientos cercanos, para finalmente ir a uno.
-                                Por ello, facilitamos el aumento de clientes de una manera<span class="alternate-font"> rápida, eficiente, y sin perdidas de tiempo.</span>. 
+                                Por ello, facilitamos el aumento de clientes de una manera<span class="alternate-font"> rápida, eficiente, y sin perdidas de tiempo.</span>.
                             </p>
-                             <p>
-                                Revisa nuestros servicios detalladamente.Ver servicios <span class="alternate-font"> <a href="@Url.Action("Servicios","PublicHome")">aqui.</a></span>. 
+                            <p>
+                                Revisa nuestros servicios detalladamente.Ver servicios <span class="alternate-font"> <a href="@Url.Action("Servicios","PublicHome")">aqui.</a></span>.
                             </p>
                         </div>
                         <!--welcome ends-->
@@ -245,7 +281,7 @@
                             <!--show video of parking.matic-->
                             <!--show video of parking.matic-->
                             <iframe width="853px" height="480px" src="https://www.youtube.com/embed/LFqGjLOTb3s" frameborder="0" allowfullscreen></iframe>
-                              
+
                         </div>
                         <!--invetory ends-->
                     </div>
@@ -257,47 +293,47 @@
 
                 <section class="car-block-wrap padding-bottom-40">
                     <div class="container">
-                        
-                        <div class="row">                             
-                             <h4><a href="#"><strong>¿Quieres tener tu estacionamiento con muchos vehiculos? Unete a nosotros!</strong> </a></h4>
-                             </strong>  </h4>
+
+                        <div class="row">
+                            <h4><a href="#"><strong>¿Quieres tener tu estacionamiento con muchos vehiculos? Unete a nosotros!</strong> </a></h4>
+                            </strong>  </h4>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin-bottom-none">
                                 <div class="flip margin-bottom-30">
                                     <div class="card">
-                                        <div ><img class="img-responsive" src="@Url.Content("~/Content/publicHome/images/time.png")" alt=""></div>
+                                        <div><img class="img-responsive" src="@Url.Content("~/Content/publicHome/images/time.png")" alt=""></div>
                                     </div>
                                 </div>
                                 <h4><a href="#">¿Porque contratar el sistema?</a></h4>
                                 <p class="margin-bottom-none">
-                                    - Solucionamos la Gestión y Organización de tu estacionamiento.<br/>
-                                    - Aumentamos tus posibilidades de tener mas clientes.<br/>
-                                    - Te damos las herramientas necesarias para hacer crecer tu negocio en el tiempo.<br/>
-                                    - Contamos con servicio al cliente, para orientarte en tus objetivos.<br/>                        
+                                    - Solucionamos la Gestión y Organización de tu estacionamiento.<br />
+                                    - Aumentamos tus posibilidades de tener mas clientes.<br />
+                                    - Te damos las herramientas necesarias para hacer crecer tu negocio en el tiempo.<br />
+                                    - Contamos con servicio al cliente, para orientarte en tus objetivos.<br />
                                 </p>
-                                
+
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin-bottom-none">
                                 <div class="flip horizontal margin-bottom-30">
                                     <div class="card">
-                                        <div ><img class="img-responsive" src="@Url.Content("~/Content/publicHome/images/estacionar.png")" alt=""></div>
+                                        <div><img class="img-responsive" src="@Url.Content("~/Content/publicHome/images/estacionar.png")" alt=""></div>
                                     </div>
                                 </div>
                                 <h4><a href="#">¿Como aumentaran tus clientes?</a></h4>
                                 <p class="margin-bottom-none">
-                                    - Los conductores buscarán en sus Smartphone los estacionamientos mas cercanos.<br/>
-                                    - Si tu estacionamiento usa nuestro sistema, los conductores podran ver tu estacionamiento.<br/>
-                                    - Podras realizar promociones y tarifas especiales para los conductores.<br/>
+                                    - Los conductores buscarán en sus Smartphone los estacionamientos mas cercanos.<br />
+                                    - Si tu estacionamiento usa nuestro sistema, los conductores podran ver tu estacionamiento.<br />
+                                    - Podras realizar promociones y tarifas especiales para los conductores.<br />
                                 </p>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin-bottom-none">
                                 <div class="flip margin-bottom-30">
                                     <div class="card">
-                                        <div ><img class="img-responsive" src="@Url.Content("~/Content/publicHome/images/contacto.png")" alt=""></div>
+                                        <div><img class="img-responsive" src="@Url.Content("~/Content/publicHome/images/contacto.png")" alt=""></div>
                                     </div>
                                 </div>
                                 <h4><a href="#">¿Como puedo contratarlo?</a></h4>
                                 <p class="margin-bottom-none">
-                                    - Si te interesa nuestro servicio, contactanos a traves del siguiente link. <a href="@Url.Action("Index","PublicHomeContacto")" >Contáctanos</a><br/>
+                                    - Si te interesa nuestro servicio, contactanos a traves del siguiente link. <a href="@Url.Action("Index","PublicHomeContacto")">Contáctanos</a><br />
                                 </p>
                             </div>
                         </div>
@@ -313,8 +349,8 @@
                             <div class="details margin-top-25">
                                 <h5 class="customize">Sistema completo para administrar estacionamientos</h5>
                                 <p class="padding-top-10">
-                                    - El sistema para administrar el estacionamiento posee modulos para facilitar la organización de la información.<br/>
-                                    - La personalización de los modulos del estacionamiento están orientados a facilitar la administración y organización de los estacionamientos.<br/>                                    
+                                    - El sistema para administrar el estacionamiento posee modulos para facilitar la organización de la información.<br />
+                                    - La personalización de los modulos del estacionamiento están orientados a facilitar la administración y organización de los estacionamientos.<br />
                                 </p>
                             </div>
                         </div>
@@ -323,8 +359,8 @@
                             <div class="details margin-top-25">
                                 <h5 class="work">Sistema de fácil uso</h5>
                                 <p class="padding-top-10 margin-bottom-none">
-                                    - El sistema para administrar el estacionamiento es de diseño amigable, fácil de entender y el sistema de modulos facilita la administración.<br/>
-                                    - Para obtener más informacion contáctenos.<br/>                                    
+                                    - El sistema para administrar el estacionamiento es de diseño amigable, fácil de entender y el sistema de modulos facilita la administración.<br />
+                                    - Para obtener más informacion contáctenos.<br />
                                 </p>
                             </div>
                         </div>
@@ -333,7 +369,7 @@
                             <div class="details margin-top-25">
                                 <h5 class="flexible">Sistema flexible a cambios</h5>
                                 <p class="padding-top-10 margin-bottom-none">
-                                    - En el sistema para administrar el estacionamiento, se pueden realizar cambios en tiempo real del estacionamiento. Cuyo objetivo es proporcionar la información actual a los conductores, cuando estos busquen estacionamientos disponibles, buscando buenas tarifas y promociones.<br/>
+                                    - En el sistema para administrar el estacionamiento, se pueden realizar cambios en tiempo real del estacionamiento. Cuyo objetivo es proporcionar la información actual a los conductores, cuando estos busquen estacionamientos disponibles, buscando buenas tarifas y promociones.<br />
                                 </p>
                             </div>
                         </div>
@@ -350,7 +386,7 @@
     <footer class="design_2">
         <div class="container">
             <div class="row">
-                
+
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 padding-right-none md-padding-right-none sm-padding-right-15 xs-padding-right-15">
                     <h4>Contáctanos</h4>
                     <div class="footer-contact">
@@ -383,20 +419,21 @@
             </div>
         </div>
     </section>
-    <div class="back_to_top"> <img src="@Url.Content("~/Content/publicHome/images/arrow-up.png")"  alt="scroll up" /> </div>
+    <div class="back_to_top"> <img src="@Url.Content("~/Content/publicHome/images/arrow-up.png")" alt="scroll up" /> </div>
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/retina.js")"></script>       
-    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.parallax.js")"></script>          
-    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.inview.min.js")"></script>           
-    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/main.js")"></script>           
-    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.fancybox.js")"></script>           
-    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/modernizr.custom.js")"></script>         
-    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.flexslider.js")"></script>           
-    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.bxslider.js")"></script>          
-    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.selectbox-0.2.js")"></script>       
-    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.mousewheel.js")"></script>       
-    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.easing.js")"></script>   
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/retina.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.parallax.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.inview.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/main.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.fancybox.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/modernizr.custom.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.flexslider.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.bxslider.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.selectbox-0.2.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.mousewheel.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.easing.js")"></script>
 
-    
+
+
 </body>
 </html>
