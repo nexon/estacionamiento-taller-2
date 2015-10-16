@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using Taller.Estacionamiento.Utils;
 
 
 namespace Taller.Estacionamiento.Models
@@ -14,6 +15,7 @@ namespace Taller.Estacionamiento.Models
         public string Nombre { get; set; }
         public int TarifaMinuto { get; set; }
         public int TiempoMinimo { get; set; }
+        public int Capacidad { get; set; }
         public DateTime Apertura { get; set; }
         public DateTime Cierre { get; set; }
         public string Oferta { get; set; }
@@ -190,9 +192,35 @@ namespace Taller.Estacionamiento.Models
             throw new NotImplementedException();
         }
 
-        void Agregar()
+        /// <summary>
+        /// Crea este estacionamiento en la base de datos
+        /// </summary>
+        public void Agregar()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.Agregar", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "estacionamiento_crear", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inNombre", this.Nombre);
+                comando.Parameters.AddWithValue("inDireccion", this.Direccion);
+                comando.Parameters.AddWithValue("inCapacidad", this.Capacidad);
+                comando.Parameters.AddWithValue("inTiempoMinimo", this.TiempoMinimo);
+                comando.Parameters.AddWithValue("inTarifaMinuto", this.TarifaMinuto);
+                comando.Parameters.AddWithValue("inCantMinutos", 0);
+                comando.Parameters.AddWithValue("inApertura", this.Apertura);
+                comando.Parameters.AddWithValue("inCierre", this.Cierre);
+                comando.Parameters.AddWithValue("inCoordenadaLatitud", this.CoordenadaLatitud);
+                comando.Parameters.AddWithValue("inCoordenadaLongitud", this.CoordenadaLongitud);
+                Data.Ejecutar(comando);
+            }
+            catch(Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.Agregar", this.ToString());
+            }
         }
 
         void Modificar()
