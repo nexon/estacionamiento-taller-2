@@ -74,7 +74,7 @@ namespace Taller.Estacionamiento.Models
                 if (dt.Rows.Count > 0)
                 {
                     DataRow dr = dt.Rows[0];
-                    promedio = Convert.ToDouble(dr["valoracion_valor_estacionamiento"]); ;
+                    promedio = Convert.ToDouble(dr["valoracion_valor_conductor"]); ;
                 }
             }
             catch (Exception ex)
