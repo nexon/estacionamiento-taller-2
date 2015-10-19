@@ -27,7 +27,7 @@ namespace Taller.Estacionamiento.Models
                     int idValoracion = Convert.ToInt32(dr["valoracion_id_valoracion"]);
                     float valoracionConductor = (float)dr["valoracion_valor_conductor"];
                     float valoracionEstacionamiento = (float)dr["valoracion_valor_estacionamiento"];
-                    if (valoracionEstacionamiento == 0)//como la valoracion es 0 significa que no esta hecha por tanto se modifica
+                    if (valoracionConductor == 0)//como la valoracion es 0 significa que no esta hecha por tanto se modifica
                     {
                         /*se crea el comando, luego se usa una segunda coneccion para enviar los datos*/
                         var commandM = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "valoracion_modificar" };
