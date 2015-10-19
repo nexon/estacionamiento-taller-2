@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using Taller.Estacionamiento.Utils;
 
 
 namespace Taller.Estacionamiento.Models
@@ -42,7 +43,22 @@ namespace Taller.Estacionamiento.Models
 
         void EliminarPersonal(Personal Personal)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.EliminarPersonal(Personal Personal)", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Personal_Eliminar", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inId_conductor", Personal.Rut);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.EliminarPersonal", this.ToString());
+            }
+            
         }
 
         List<Espacio> Reservados()
