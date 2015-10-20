@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using Taller.Estacionamiento.Utils;
 
 
 namespace Taller.Estacionamiento.Models
@@ -14,61 +15,61 @@ namespace Taller.Estacionamiento.Models
         public string Nombre { get; set; }
         public int TarifaMinuto { get; set; }
         public int TiempoMinimo { get; set; }
+        public int Capacidad { get; set; }
         public DateTime Apertura { get; set; }
         public DateTime Cierre { get; set; }
-        public string Oferta { get; set; }
         public string Direccion { get; set; }
         public double CoordenadaLatitud { get; set; }
         public double CoordenadaLongitud { get; set; }
         public Tarjetero Tarjetero { get; set; }
 
-        string IngresarVehiculo(Vehiculo vehiculo, Espacio espacio)
+        public string IngresarVehiculo(Vehiculo vehiculo, Espacio espacio)
         {
             throw new NotImplementedException();
         }
 
-        int LiberarEspacio(Espacio espacio)
+        public int LiberarEspacio(Espacio espacio)
         {
             throw new NotImplementedException();
         }
-        List<Personal> Personal()
+        public List<Personal> Personal()
         {
             throw new NotImplementedException();
         }
-        void AgregarPersonal(Personal personal)
-        {
-            throw new NotImplementedException();
-        }
-
-        void EliminarPersonal(Personal Personal)
+        public void AgregarPersonal(Personal personal)
         {
             throw new NotImplementedException();
         }
 
-        List<Espacio> Reservados()
+        public void EliminarPersonal(Personal Personal)
         {
             throw new NotImplementedException();
         }
 
-        List<Espacio> Disponibles()
-        {
-            throw new NotImplementedException();
-        }
-        List<Espacio> Ocupados()
-        {
-            throw new NotImplementedException();
-        }
-        List<Espacio> Todos()
+        public List<Espacio> Reservados()
         {
             throw new NotImplementedException();
         }
 
-        bool ReservarEspacio(Vehiculo vehiculo)
+        public List<Espacio> Disponibles()
+        {
+            throw new NotImplementedException();
+        }
+        public List<Espacio> Ocupados()
+        {
+            throw new NotImplementedException();
+        }
+        public List<Espacio> Todos()
         {
             throw new NotImplementedException();
         }
 
-        void ConfirmarReserva(Espacio espacio)
+        public bool ReservarEspacio(Vehiculo vehiculo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ConfirmarReserva(Espacio espacio)
         {
             throw new NotImplementedException();
         }
@@ -157,7 +158,7 @@ namespace Taller.Estacionamiento.Models
             }
         }
 
-        double PromedioValoraciones(int idEstacionamiento)
+        public double PromedioValoraciones(int idEstacionamiento)
         {
             var dt = new DataTable();
             var command = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "valoracion_seleccionar_promedio" };
@@ -180,27 +181,53 @@ namespace Taller.Estacionamiento.Models
             return 0;
         }
 
-        void AgregarEspacio(Espacio espacio)
+        public void AgregarEspacio(Espacio espacio)
         {
             throw new NotImplementedException();
         }
 
-        void EliminarEspacio(Espacio espacio)
+        public void EliminarEspacio(Espacio espacio)
         {
             throw new NotImplementedException();
         }
 
-        void Agregar()
+        /// <summary>
+        /// Crea este estacionamiento en la base de datos
+        /// </summary>
+        public void Agregar()
+        {
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.Agregar", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "estacionamiento_crear", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inNombre", this.Nombre);
+                comando.Parameters.AddWithValue("inDireccion", this.Direccion);
+                comando.Parameters.AddWithValue("inCapacidad", this.Capacidad);
+                comando.Parameters.AddWithValue("inTiempoMinimo", this.TiempoMinimo);
+                comando.Parameters.AddWithValue("inTarifaMinuto", this.TarifaMinuto);
+                comando.Parameters.AddWithValue("inCantMinutos", 0);
+                comando.Parameters.AddWithValue("inApertura", this.Apertura);
+                comando.Parameters.AddWithValue("inCierre", this.Cierre);
+                comando.Parameters.AddWithValue("inCoordenadaLatitud", this.CoordenadaLatitud);
+                comando.Parameters.AddWithValue("inCoordenadaLongitud", this.CoordenadaLongitud);
+                Data.Ejecutar(comando);
+            }
+            catch(Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.Agregar", this.ToString());
+            }
+        }
+
+        public void Modificar()
         {
             throw new NotImplementedException();
         }
 
-        void Modificar()
-        {
-            throw new NotImplementedException();
-        }
-
-        void Eliminar()
+        public void Eliminar()
         {
             throw new NotImplementedException();
         }

@@ -1,21 +1,21 @@
 <project name="Database creation" basedir=".">
-	<property name="sql.driver" value="org.gjt.mm.mysql.Driver"/>
-	<property name="sql.url" value="jdbc:mysql://localhost/"/>
-	<property name="sql.user" value="esta_user"/>
-	<property name="sql.pass" value="Estac_Taller_2"/>
+  <property name="sql.driver" value="org.gjt.mm.mysql.Driver"/>
+  <property name="sql.url" value="jdbc:mysql://localhost/"/>
+  <property name="sql.user" value="esta_user"/>
+  <property name="sql.pass" value="Estac_Taller_2"/>
   <property name="db_name" value="estacionamiento"/>
-	<target name="CreateDataBase">
+  <target name="CreateDataBase">
     <antcall target="CreateModel"/>
     <antcall target="CreateLogic"/>
-	</target>
+  </target>
   <target name="CreateModel">
       <antcall target="CreateSc"/>
       <antcall target="CreateTable"/>
   </target>
   <target name="CreateLogic">
-      <antcall target="CreateProcedure"/>
       <antcall target="CreateView"/>
       <antcall target="CreateFuntion"/>
+      <antcall target="CreateProcedure"/>
   </target>
   <target name="CreateSc">
     <sql
@@ -31,8 +31,8 @@
   <target name="CreateTable">
     <sql
       driver="${sql.driver}" url="${sql.url}${db_name}" userid="${sql.user}"
-			password="${sql.pass}" autocommit= "true"
-			classpath="mysql-connector-java-5.1.33-bin.jar"
+      password="${sql.pass}" autocommit= "true"
+      classpath="mysql-connector-java-5.1.33-bin.jar"
       delimiter="$$" >
       <path>
         <fileset dir=".">
@@ -44,12 +44,12 @@
   <target name="CreateProcedure">
     <sql
       driver="${sql.driver}" url="${sql.url}${db_name}" userid="${sql.user}"
-			password="${sql.pass}" autocommit= "true"
-			classpath= "mysql-connector-java-5.1.33-bin.jar"
+      password="${sql.pass}" autocommit= "true"
+      classpath= "mysql-connector-java-5.1.33-bin.jar"
       delimiter="$$" >
       <path>
         <fileset dir=".">
-          <include name="2*.sql"/>
+          <include name="4*.sql"/>
         </fileset>
       </path>
     </sql>
@@ -57,12 +57,12 @@
 <target name="CreateView">
     <sql
       driver="${sql.driver}" url="${sql.url}${db_name}" userid="${sql.user}"
-			password="${sql.pass}" autocommit= "true"
-			classpath= "mysql-connector-java-5.1.33-bin.jar"
+      password="${sql.pass}" autocommit= "true"
+      classpath= "mysql-connector-java-5.1.33-bin.jar"
       delimiter="$$" >
       <path>
         <fileset dir=".">
-          <include name="3*.sql"/>
+          <include name="2*.sql"/>
         </fileset>
       </path>
     </sql>
@@ -75,7 +75,7 @@
       delimiter="$$" >
       <path>
         <fileset dir=".">
-          <include name="4*.sql"/>
+          <include name="3*.sql"/>
         </fileset>
       </path>
     </sql>
