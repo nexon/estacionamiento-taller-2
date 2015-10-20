@@ -6,5 +6,5 @@
  )  
  BEGIN
  	INSERT INTO Personal(id_usuario)
- 	VALUES ((SELECT id_usuario FROM usuario Where id_usuario=inId_usuario));
+ 	VALUES ((SELECT rut FROM usuario Where rut=inId_usuario));
 END$$ 	
