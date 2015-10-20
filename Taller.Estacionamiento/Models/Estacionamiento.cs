@@ -18,59 +18,58 @@ namespace Taller.Estacionamiento.Models
         public int Capacidad { get; set; }
         public DateTime Apertura { get; set; }
         public DateTime Cierre { get; set; }
-        public string Oferta { get; set; }
         public string Direccion { get; set; }
         public double CoordenadaLatitud { get; set; }
         public double CoordenadaLongitud { get; set; }
         public Tarjetero Tarjetero { get; set; }
 
-        string IngresarVehiculo(Vehiculo vehiculo, Espacio espacio)
+        public string IngresarVehiculo(Vehiculo vehiculo, Espacio espacio)
         {
             throw new NotImplementedException();
         }
 
-        int LiberarEspacio(Espacio espacio)
+        public int LiberarEspacio(Espacio espacio)
         {
             throw new NotImplementedException();
         }
-        List<Personal> Personal()
+        public List<Personal> Personal()
         {
             throw new NotImplementedException();
         }
-        void AgregarPersonal(Personal personal)
-        {
-            throw new NotImplementedException();
-        }
-
-        void EliminarPersonal(Personal Personal)
+        public void AgregarPersonal(Personal personal)
         {
             throw new NotImplementedException();
         }
 
-        List<Espacio> Reservados()
+        public void EliminarPersonal(Personal Personal)
         {
             throw new NotImplementedException();
         }
 
-        List<Espacio> Disponibles()
-        {
-            throw new NotImplementedException();
-        }
-        List<Espacio> Ocupados()
-        {
-            throw new NotImplementedException();
-        }
-        List<Espacio> Todos()
+        public List<Espacio> Reservados()
         {
             throw new NotImplementedException();
         }
 
-        bool ReservarEspacio(Vehiculo vehiculo)
+        public List<Espacio> Disponibles()
+        {
+            throw new NotImplementedException();
+        }
+        public List<Espacio> Ocupados()
+        {
+            throw new NotImplementedException();
+        }
+        public List<Espacio> Todos()
         {
             throw new NotImplementedException();
         }
 
-        void ConfirmarReserva(Espacio espacio)
+        public bool ReservarEspacio(Vehiculo vehiculo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ConfirmarReserva(Espacio espacio)
         {
             throw new NotImplementedException();
         }
@@ -153,12 +152,12 @@ namespace Taller.Estacionamiento.Models
             return promedio;
         }
 
-        void AgregarEspacio(Espacio espacio)
+        public void AgregarEspacio(Espacio espacio)
         {
             throw new NotImplementedException();
         }
 
-        void EliminarEspacio(Espacio espacio)
+        public void EliminarEspacio(Espacio espacio)
         {
             throw new NotImplementedException();
         }
@@ -194,12 +193,12 @@ namespace Taller.Estacionamiento.Models
             }
         }
 
-        void Modificar()
+        public void Modificar()
         {
             throw new NotImplementedException();
         }
 
-        void Eliminar()
+        public void Eliminar()
         {
             throw new NotImplementedException();
         }
