@@ -223,9 +223,33 @@ namespace Taller.Estacionamiento.Models
             }
         }
 
-        void Modificar()
+        public void Modificar()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.Modificar", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "estacionamiento_modificar", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inIdEstacionamiento", this.ID);
+                comando.Parameters.AddWithValue("inNombre", this.Nombre);
+                comando.Parameters.AddWithValue("inDireccion", this.Direccion);
+                comando.Parameters.AddWithValue("inCapacidad", this.Capacidad);
+                comando.Parameters.AddWithValue("inTiempoMinimo", this.TiempoMinimo);
+                comando.Parameters.AddWithValue("inTarifaMinuto", this.TarifaMinuto);
+                comando.Parameters.AddWithValue("inCantMinutos", 0);
+                comando.Parameters.AddWithValue("inApertura", this.Apertura);
+                comando.Parameters.AddWithValue("inCierre", this.Cierre);
+                comando.Parameters.AddWithValue("inCoordenadaLatitud", this.CoordenadaLatitud);
+                comando.Parameters.AddWithValue("inCoordenadaLongitud", this.CoordenadaLongitud);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.Modificar", this.ToString());
+            }
         }
 
         void Eliminar()
