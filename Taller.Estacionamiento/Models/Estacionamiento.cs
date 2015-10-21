@@ -38,7 +38,22 @@ namespace Taller.Estacionamiento.Models
         }
         public void AgregarPersonal(Personal personal)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.AgregarPersonal(Personal personal)", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "personal_estacionamiento_agregar", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("id_personalIn", personal.Rut);
+                comando.Parameters.AddWithValue("id_estacionamientoIn", this.ID);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.AgregarPersonal", this.ToString());
+            }
         }
 
         public void EliminarPersonal(Personal Personal)
@@ -174,7 +189,21 @@ namespace Taller.Estacionamiento.Models
 
         public void EliminarEspacio(Espacio espacio)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.EliminarEspacio(Espacio espacio)", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Espacio_Eliminar", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inId_espacio", espacio.Codigo);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.EliminarEspacio", this.ToString());
+            }
         }
 
         /// <summary>
