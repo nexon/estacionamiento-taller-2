@@ -173,7 +173,22 @@ namespace Taller.Estacionamiento.Models
 
         public void AgregarEspacio(Espacio espacio)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.AgregarEspacio", espacio.ToString());
+                var comando = new MySqlCommand() { CommandText = "espacio_crear", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("codigoIn", espacio.Codigo);
+                comando.Parameters.AddWithValue("id_estacionamientoIn", this.ID);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.AgregarEspacio", this.ToString());
+            }
         }
 
         public void EliminarEspacio(Espacio espacio)
