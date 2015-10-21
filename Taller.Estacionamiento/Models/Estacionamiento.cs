@@ -239,7 +239,21 @@ namespace Taller.Estacionamiento.Models
 
         public void Eliminar()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.Eliminar", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "estacionamiento_eliminar", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("idEstacionamiento", this.ID);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.Eliminar", this.ToString());
+            }
         }
 
         void ReubicarVehiculo(Espacio espacio1, Espacio espacio2)
