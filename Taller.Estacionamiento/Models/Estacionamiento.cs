@@ -43,11 +43,15 @@ namespace Taller.Estacionamiento.Models
 
         public void EliminarPersonal(Personal Personal)
         {
+
             try
             {
-                Logger.EntradaMetodo("Estacionamiento.EliminarPersonal(Personal Personal)", this.ToString());
-                var comando = new MySqlCommand() { CommandText = "Personal_Eliminar", CommandType = System.Data.CommandType.StoredProcedure };
-                comando.Parameters.AddWithValue("inId_conductor", Personal.Rut);
+                Logger.EntradaMetodo("Estacionamiento.EliminarPersonal()", this.ToString());
+
+                 var comando = new MySqlCommand() { CommandText = "Estacionamiento_Eliminar_Personal", CommandType = System.Data.CommandType.StoredProcedure };
+
+                comando.Parameters.AddWithValue("inID_Estacionamiento", this.ID);
+                comando.Parameters.AddWithValue("inID_Personal", Personal.Rut);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
@@ -56,9 +60,9 @@ namespace Taller.Estacionamiento.Models
             }
             finally
             {
-                Logger.SalidaMetodo("Estacionamiento.EliminarPersonal", this.ToString());
+                Logger.SalidaMetodo("Estacionamiento.EliminarPersonal()", this.ToString());
             }
-            
+
         }
 
         public List<Espacio> Reservados()
