@@ -1,7 +1,9 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Taller.Estacionamiento.Utils;
 
 namespace Taller.Estacionamiento.Models
 {
@@ -13,7 +15,6 @@ namespace Taller.Estacionamiento.Models
         {
             throw new NotImplementedException();
         }
-
     }
 
 }

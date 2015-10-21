@@ -1,7 +1,9 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Taller.Estacionamiento.Utils;
 
 namespace Taller.Estacionamiento.Models
 {
@@ -27,7 +29,23 @@ namespace Taller.Estacionamiento.Models
         }
         public virtual void Modificar()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Logger.EntradaMetodo("Usuario.Modificar", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "usuario_modificar", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inRut", this.Rut);
+                comando.Parameters.AddWithValue("inNombre", this.Nombre);
+                comando.Parameters.AddWithValue("inContrasenia", this.Contraseña);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.Modificar", this.ToString());
+            }
         }
         public virtual void Eliminar()
         {
