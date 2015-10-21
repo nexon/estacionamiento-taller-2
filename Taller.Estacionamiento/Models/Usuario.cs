@@ -21,9 +21,12 @@ namespace Taller.Estacionamiento.Models
         {
             throw new NotImplementedException();
         }
+        /// <summary>
+        /// Agregar un usuario en la base de datos
+        /// </summary>
         public virtual void Agregar()
         {
-            throw new NotImplementedException();
+
         }
         public virtual void Modificar()
         {
