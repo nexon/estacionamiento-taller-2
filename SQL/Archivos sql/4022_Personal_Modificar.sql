@@ -8,7 +8,7 @@ CREATE PROCEDURE Personal_Modificar
 	inId_usuario INT
 )
 BEGIN
-UPDATE conductor
+UPDATE personal
 SET 
 	id_usuario = inId_usuario
 WHERE
