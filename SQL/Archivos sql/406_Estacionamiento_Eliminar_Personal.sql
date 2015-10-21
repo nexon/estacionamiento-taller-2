@@ -1,6 +1,6 @@
-DROP PROCEDURE IF EXISTS Estacionamiento_Personal_Eliminiar  $$
+DROP PROCEDURE IF EXISTS Estacionamiento_Eliminar_Personal  $$
 
-CREATE PROCEDURE Estacionamiento_Personal_Eliminiar (
+CREATE PROCEDURE Estacionamiento_Eliminar_Personal (
 	inID_Estacionamiento INT,
 	inID_Personal INT
 )
