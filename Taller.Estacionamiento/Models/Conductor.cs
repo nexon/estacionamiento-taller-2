@@ -4,116 +4,88 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using Taller.Estacionamiento.Utils;
 
 namespace Taller.Estacionamiento.Models
 {
     public class Conductor:Usuario
     {
-        public void AgregarValoracion(double valoracion, int idUsuario, int idEstacionamiento)
+        public void AgregarValoracion(double valoracion, int idEstacionamiento)
         {
-            var dt = new DataTable();
-            var command = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "valoracion_seleccionar" };
-            command.Parameters.AddWithValue("inIdUsuario", idUsuario);
-            command.Parameters.AddWithValue("inIdEstacionamiento", idEstacionamiento);
-            using (var conn = new MySqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            try
             {
-                conn.Open();
-                command.Connection = conn;
-                var sqlda = new MySqlDataAdapter(command);
-                sqlda.Fill(dt);
-                conn.Close();
-            }
-            if (dt.Rows.Count > 0)
-            {
-                //si se obtiene una fila como respuesta es por que hay una valoracion existente que asocia el conductor y el estacionamiento
-                DataRow dr = dt.Rows[0];
-                int idValoracion = Convert.ToInt32(dr["valoracion_id_valoracion"]);
-                float valoracionConductor = (float)dr["valoracion_valor_conductor"];
-                float valoracionEstacionamiento = (float)dr["valoracion_valor_estacionamiento"];
-                if (valoracionConductor == 0)//como la valoracion es 0 significa que no esta hecha por tanto se modifica
+                Logger.EntradaMetodo("Conductor.AgregarValoracion", this.ToString());
+                var command = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "valoracion_seleccionar" };
+                command.Parameters.AddWithValue("inIdUsuario", this.Rut);
+                command.Parameters.AddWithValue("inIdEstacionamiento", idEstacionamiento);
+                DataSet ds = Data.Obtener(command);
+                DataTable dt = ds.Tables[0];
+                bool ejecucion = false;
+                if (dt.Rows.Count > 0)
                 {
-                    /*se crea el comando, luego se usa una segunda coneccion para enviar los datos*/
-                    var commandM = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "valoracion_modificar" };
-                    commandM.Parameters.AddWithValue("inIdValoracion", idValoracion);
-                    commandM.Parameters.AddWithValue("inValorConductor", (float)valoracion);
-                    commandM.Parameters.AddWithValue("inValorEstacionamiento", valoracionEstacionamiento);
-                    using (var conn2 = new MySqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+                    DataRow dr = dt.Rows[0];
+                    int idValoracion = Convert.ToInt32(dr["valoracion_id_valoracion"]);
+                    float valoracionConductor = (float)dr["valoracion_valor_conductor"];
+                    float valoracionEstacionamiento = (float)dr["valoracion_valor_estacionamiento"];
+                    if (valoracionConductor == 0)//como la valoracion es 0 significa que no esta hecha por tanto se modifica
                     {
-
-                        conn2.Open();
-                        var sqlTran = conn2.BeginTransaction();
-                        try
-                        {
-                            commandM.Connection = conn2;
-                            commandM.Transaction = sqlTran;
-                            commandM.ExecuteNonQuery();
-                            sqlTran.Commit();
-                        }
-                        catch (Exception ex)
-                        {
-                            sqlTran.Rollback();
-                            throw ex;
-                        }
-                        finally
-                        {
-                            conn2.Close();
-                        }
+                        /*se crea el comando, luego se usa una segunda coneccion para enviar los datos*/
+                        var commandM = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "valoracion_modificar" };
+                        commandM.Parameters.AddWithValue("inIdValoracion", idValoracion);
+                        commandM.Parameters.AddWithValue("inValorConductor", (float)valoracion);
+                        commandM.Parameters.AddWithValue("inValorEstacionamiento", valoracionEstacionamiento);
+                        Data.Ejecutar(commandM);
+                        ejecucion = true;
                     }
-                    return;//como ya se modifico la fila termino la funcion aqui
+                }
+                if (!ejecucion)
+                {
+                    //si la valoracion es mayor a 0 o no existe significa que la valoracion que se necesita crear una nueva
+                    /*se crea el comando, luego se usa una segunda coneccion para enviar los datos*/
+                    var commandC = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "valoracion_crear" };
+                    commandC.Parameters.AddWithValue("inIdUsuario", this.Rut);
+                    commandC.Parameters.AddWithValue("inIdEstacionamiento", idEstacionamiento);
+                    commandC.Parameters.AddWithValue("inValorConductor", (float)valoracion);
+                    commandC.Parameters.AddWithValue("inValorEstacionamiento", 0);
+                    Data.Ejecutar(commandC);
                 }
             }
-            //si la valoracion es mayor a 0 o no existe significa que la valoracion que se necesita crear una nueva
-            /*se crea el comando, luego se usa una segunda coneccion para enviar los datos*/
-            var commandC = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "valoracion_crear" };
-            commandC.Parameters.AddWithValue("inIdUsuario", idUsuario);
-            commandC.Parameters.AddWithValue("inIdEstacionamiento", idEstacionamiento);
-            commandC.Parameters.AddWithValue("inValorConductor", (float)valoracion);
-            commandC.Parameters.AddWithValue("inValorEstacionamiento", 0);
-            using (var conn2 = new MySqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            catch (Exception ex)
             {
-
-                conn2.Open();
-                var sqlTran = conn2.BeginTransaction();
-                try
-                {
-                    commandC.Connection = conn2;
-                    commandC.Transaction = sqlTran;
-                    commandC.ExecuteNonQuery();
-                    sqlTran.Commit();
-                }
-                catch (Exception ex)
-                {
-                    sqlTran.Rollback();
-                    throw ex;
-                }
-                finally
-                {
-                    conn2.Close();
-                }
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Conductor.AgregarValoracion", this.ToString());
             }
         }
 
-        double PromedioValoraciones(int idUsuario)
+        public double PromedioValoraciones()
         {
-            var dt = new DataTable();
-            var command = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "valoracion_seleccionar_promedio" };
-            command.Parameters.AddWithValue("inIdUsuario", idUsuario);
-            command.Parameters.AddWithValue("inIdEstacionamiento", -1);
-            using (var conn = new MySqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            double promedio = 0;
+            try
             {
-                conn.Open();
-                command.Connection = conn;
-                var sqlda = new MySqlDataAdapter(command);
-                sqlda.Fill(dt);
-                conn.Close();
+                Logger.EntradaMetodo("Conductor.PromedioValoraciones", this.ToString());
+                var comando = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "valoracion_seleccionar_promedio" };
+                comando.Parameters.AddWithValue("inIdUsuario", this.Rut);
+                comando.Parameters.AddWithValue("inIdEstacionamiento", -1);
+                DataSet ds = Data.Obtener(comando);
+                DataTable dt = ds.Tables[0];
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow dr = dt.Rows[0];
+                    promedio = Convert.ToDouble(dr["valoracion_valor_conductor"]); ;
+                }
             }
-            if (dt.Rows.Count > 0)
+            catch (Exception ex)
             {
-                DataRow dr = dt.Rows[0];
-                float promedio = (float)dr["valoracion_valor_conductor"];
-                return (double)promedio;
+                Logger.Excepcion(ex);
             }
-            return 0;
+            finally
+            {
+                Logger.SalidaMetodo("Conductor.PromedioValoraciones", this.ToString());
+            }
+            return promedio;
         }
 
         public List<Estacionamiento> EstacionamientoCercanos(double latitud, double longitud)
