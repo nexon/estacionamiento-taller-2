@@ -16,7 +16,7 @@ namespace Taller.Estacionamiento.Models
             throw new NotImplementedException();
         }
 
-        public void Eliminar()
+        public override void Eliminar()
         {
             try
             {

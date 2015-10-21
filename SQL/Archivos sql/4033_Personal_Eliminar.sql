@@ -6,5 +6,5 @@ CREATE PROCEDURE Personal_Eliminar
 BEGIN
 DELETE FROM personal
 WHERE
-	id_usuario=inId_personal;
+	Id_personal=inId_personal;
 END$$
