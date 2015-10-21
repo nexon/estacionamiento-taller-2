@@ -48,8 +48,7 @@ namespace Taller.Estacionamiento.Models
             {
                 Logger.EntradaMetodo("Estacionamiento.EliminarPersonal()", this.ToString());
 
-                //var comando = new MySqlCommand() { CommandText = "Proyecto_DesasociarParticipante", CommandType = System.Data.CommandType.StoredProcedure };
-                var comando = new MySqlCommand() { CommandText = "Estacionamiento_Eliminar_Personal", CommandType = System.Data.CommandType.StoredProcedure };
+                 var comando = new MySqlCommand() { CommandText = "Estacionamiento_Eliminar_Personal", CommandType = System.Data.CommandType.StoredProcedure };
 
                 comando.Parameters.AddWithValue("inID_Estacionamiento", this.ID);
                 comando.Parameters.AddWithValue("inID_Personal", Personal.Rut);
