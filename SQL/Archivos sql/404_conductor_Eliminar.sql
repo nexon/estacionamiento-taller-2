@@ -6,7 +6,7 @@ CREATE PROCEDURE Conductor_Eliminar
 BEGIN
 DELETE FROM conductor
 WHERE
-	id_conductor=inId_conductor;
+	id_usuario=inId_conductor;
 END$$
 
 

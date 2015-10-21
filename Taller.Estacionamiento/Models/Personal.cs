@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Taller.Estacionamiento.Models
 {
-    public class Personal
+    public class Personal:Usuario
     {
         public Erol Rol { get; set; }
 

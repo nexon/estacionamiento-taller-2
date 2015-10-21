@@ -1,6 +1,6 @@
 
 DROP PROCEDURE IF EXISTS registro_modificar$
-CREATE PROCEDURE registro_modificar(in id_registroIn INT, in fecha_ingresoIn INT, fecha_salidaIn DATETIME, in monto_totalIn INT)
+CREATE PROCEDURE registro_modificar(in id_registroIn INT, in fecha_ingresoIn DATETIME, fecha_salidaIn DATETIME, in monto_totalIn INT)
 BEGIN
 	update registro
 	set

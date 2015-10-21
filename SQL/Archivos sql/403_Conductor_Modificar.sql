@@ -1,5 +1,5 @@
-DROP PROCEDURE IF EXISTS Conductor_Actualizar $$
-CREATE PROCEDURE Conductor_Actualizar
+DROP PROCEDURE IF EXISTS Conductor_Modificar $$
+CREATE PROCEDURE Conductor_Modificar
 (
 	inId_conductor INT,
 	inId_usuario INT
