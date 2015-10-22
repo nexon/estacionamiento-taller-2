@@ -100,17 +100,19 @@ namespace Taller.Estacionamiento.Models
                 Logger.EntradaMetodo("Estacionamiento.Ocupados", this.ToString());
 
                 var comando = new MySqlCommand() { CommandText = "Estacionamiento_Ocupados", CommandType = System.Data.CommandType.StoredProcedure };
-                comando.Parameters.AddWithValue("inID", this.ID);
+                comando.Parameters.AddWithValue("inID_Estacionamiento", this.ID);
                 var data = Data.Obtener(comando);
-                foreach (DataRow dr in data.Rows)
+                foreach (DataRow dr in data.Tables[0].Rows)
                 {
                     Vehiculo vehiculo = new Vehiculo();
                     Reserva reserva = new Reserva();
                     Espacio espacio = new Espacio();
                     espacio.Codigo = Convert.ToString(dr["Espacio_Codigo"]);
                     vehiculo.Patente = Convert.ToString(dr["Vehiculo_Patente"]);
-                    reserva.Expiracion = Convert.ToDateTime(dr["Fecha_Reserva"]);
-                    espacio.IngresoVehiculo = Convert.ToDateTime(dr["Fecha_Ingreso"]);
+                    if (dr["Fecha_Reserva"] != DBNull.Value)
+                        reserva.Expiracion = Convert.ToDateTime(dr["Fecha_Reserva"]);
+                    if (dr["Fecha_Ingreso"] != DBNull.Value)
+                        espacio.IngresoVehiculo = Convert.ToDateTime(dr["Fecha_Ingreso"]);
                     espacio.Estado = EstadoEspacio.Ocupado;
 
                     if (reserva.Expiracion != null)
@@ -144,13 +146,33 @@ namespace Taller.Estacionamiento.Models
                 Logger.EntradaMetodo("Estacionamiento.Todos", this.ToString());
 
                 var comando = new MySqlCommand() { CommandText = "Estacionamiento_Todos", CommandType = System.Data.CommandType.StoredProcedure };
-                comando.Parameters.AddWithValue("inID", this.ID);
+                comando.Parameters.AddWithValue("inID_Estacionamiento", this.ID);
                 var data = Data.Obtener(comando);
-                foreach (DataRow dr in data.Rows)
+                foreach (DataRow dr in data.Tables[0].Rows)
                 {
+                    Vehiculo vehiculo = new Vehiculo();
+                    Reserva reserva = new Reserva();
                     Espacio espacio = new Espacio();
                     espacio.Codigo = Convert.ToString(dr["Espacio_Codigo"]);
-                    ocupados.Add(espacio);
+                    vehiculo.Patente = Convert.ToString(dr["Vehiculo_Patente"]);
+                    if (dr["Fecha_Reserva"] != DBNull.Value)
+                        reserva.Expiracion = Convert.ToDateTime(dr["Fecha_Reserva"]);
+                    if (dr["Fecha_Ingreso"] != DBNull.Value)
+                        espacio.IngresoVehiculo = Convert.ToDateTime(dr["Fecha_Ingreso"]);
+
+                    if (reserva.Expiracion == null && espacio.IngresoVehiculo == null && espacio.SalidaVehiculo == null)
+                        espacio.Estado = EstadoEspacio.Disponible;
+
+                    if (reserva.Expiracion != null && espacio.IngresoVehiculo == null && espacio.SalidaVehiculo == null)
+                        espacio.Estado = EstadoEspacio.Reservado;
+
+                    if (reserva.Expiracion != null && espacio.IngresoVehiculo != null && espacio.SalidaVehiculo == null)
+                        espacio.Estado = EstadoEspacio.Ocupado;
+
+                    espacio.Vehiculo = vehiculo;
+                    espacio.Reserva = reserva;
+
+                    todos.Add(espacio);
                 }
             }
             catch (Exception ex)
