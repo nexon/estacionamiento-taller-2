@@ -1,10 +1,10 @@
-﻿using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using Taller.Estacionamiento.Utils;
-
 namespace Taller.Estacionamiento.Models
 {
     public class Personal:Usuario
@@ -16,16 +16,13 @@ namespace Taller.Estacionamiento.Models
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Agregar un personal en la base de datos
-        /// </summary>
-        public override void Agregar()
+        public override void Eliminar()
         {
             try
             {
-                Logger.EntradaMetodo("Personal.Agregar", this.ToString());
-                var comando = new MySqlCommand() { CommandText = "Personal_Crear", CommandType = System.Data.CommandType.StoredProcedure };
-                comando.Parameters.AddWithValue("inId_usuario", this.Rut);
+                Logger.EntradaMetodo("Personal.Eliminar()", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Personal_Eliminar", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inId_personal", this.Rut);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
@@ -34,11 +31,10 @@ namespace Taller.Estacionamiento.Models
             }
             finally
             {
-                Logger.SalidaMetodo("Personal.Agregar", this.ToString());
+                Logger.SalidaMetodo("Personal.Eliminar", this.ToString());
             }
+
         }
-
-
     }
 
 }
