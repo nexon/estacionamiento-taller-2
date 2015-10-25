@@ -82,37 +82,7 @@ namespace Taller.Estacionamiento.Models
 
         public List<Espacio> Reservados()
         {
-            List<Espacio> lista = new List<Espacio>();
-            try
-            {
-                Logger.EntradaMetodo("Estacionamiento.Reservados()", this.ToString());
-                var comando = new MySqlCommand() { CommandText = "estacionamiento_Reservados", CommandType = System.Data.CommandType.StoredProcedure };
-                comando.Parameters.AddWithValue("IdEstacionamiento", this.ID);
-                DataSet ds = Data.Obtener(comando);
-                DataTable dt = ds.Tables[0];
-                TimeSpan tiempoParaExpirar = new TimeSpan(1,0,0); // aqui se tiene que definir el tiempo de expiracion por default que se dejara , por ahora suma una hora a la hora de reserva
-                foreach (DataRow row in dt.Rows)
-                {
-                    Espacio espacio = new Espacio
-                    {
-                        Codigo = Convert.ToString(row["codigo"]),
-                        Vehiculo = new Vehiculo { Patente = Convert.ToString(row["patente"]), Conductor = new Conductor { Nombre = Convert.ToString(row["nombre"]) } },
-                        Estado = EstadoEspacio.Reservado,
-                        Reserva = new Reserva { Expiracion = Convert.ToDateTime(row["fecha_reserva"]).Add(tiempoParaExpirar) }
-                    };
-                    lista.Add(espacio);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Excepcion(ex);
-            }
-            finally
-            {
-
-                Logger.SalidaMetodo("Estacionamiento.EliminarPersonal()", this.ToString());
-            }
-            return lista;
+            throw new NotImplementedException();
         }
 
         public List<Espacio> Disponibles()
