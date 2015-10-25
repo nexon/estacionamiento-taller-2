@@ -1,11 +1,14 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
+using Taller.Estacionamiento.Utils;
 
 namespace Taller.Estacionamiento.Models
 {
-    public abstract class Usuario
+    public class Usuario
     {
         public string Nombre { get; set; }
         public int Rut{get; set;}
@@ -21,10 +24,34 @@ namespace Taller.Estacionamiento.Models
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Agregar un usuario en la base de datos
+        /// </summary>
         public virtual void Agregar()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Logger.EntradaMetodo("Usuario.Agregar", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Usuario_Crear", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inRut", this.Rut);
+                comando.Parameters.AddWithValue("inNombre", this.Nombre);
+                comando.Parameters.AddWithValue("inContrasenia", this.Contraseña );
+                comando.Parameters.AddWithValue("inEmail", this.Email );
+                comando.Parameters.AddWithValue("inTelefono", this.Telefono );                
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Usuario.Agregar", this.ToString());
+            }
         }
+
+        
         public virtual void Modificar()
         {
             throw new NotImplementedException();
