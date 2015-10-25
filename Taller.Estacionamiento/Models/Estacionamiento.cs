@@ -38,16 +38,12 @@ namespace Taller.Estacionamiento.Models
         }
         public void AgregarPersonal(Personal personal)
         {
-            throw new NotImplementedException();
-        }
-
-        public void EliminarPersonal(Personal Personal)
-        {
             try
             {
-                Logger.EntradaMetodo("Estacionamiento.EliminarPersonal(Personal Personal)", this.ToString());
-                var comando = new MySqlCommand() { CommandText = "Personal_Eliminar", CommandType = System.Data.CommandType.StoredProcedure };
-                comando.Parameters.AddWithValue("inId_conductor", Personal.Rut);
+                Logger.EntradaMetodo("Estacionamiento.AgregarPersonal(Personal personal)", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "personal_estacionamiento_agregar", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("id_personalIn", personal.Rut);
+                comando.Parameters.AddWithValue("id_estacionamientoIn", this.ID);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
@@ -56,9 +52,32 @@ namespace Taller.Estacionamiento.Models
             }
             finally
             {
-                Logger.SalidaMetodo("Estacionamiento.EliminarPersonal", this.ToString());
+                Logger.SalidaMetodo("Estacionamiento.AgregarPersonal", this.ToString());
             }
-            
+        }
+
+        public void EliminarPersonal(Personal Personal)
+        {
+
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.EliminarPersonal()", this.ToString());
+
+                 var comando = new MySqlCommand() { CommandText = "Estacionamiento_Eliminar_Personal", CommandType = System.Data.CommandType.StoredProcedure };
+
+                comando.Parameters.AddWithValue("inID_Estacionamiento", this.ID);
+                comando.Parameters.AddWithValue("inID_Personal", Personal.Rut);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.EliminarPersonal()", this.ToString());
+            }
+
         }
 
         public List<Espacio> Reservados()
@@ -169,12 +188,41 @@ namespace Taller.Estacionamiento.Models
 
         public void AgregarEspacio(Espacio espacio)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.AgregarEspacio", espacio.ToString());
+                var comando = new MySqlCommand() { CommandText = "espacio_crear", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("codigoIn", espacio.Codigo);
+                comando.Parameters.AddWithValue("id_estacionamientoIn", this.ID);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.AgregarEspacio", this.ToString());
+            }
         }
 
         public void EliminarEspacio(Espacio espacio)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.EliminarEspacio(Espacio espacio)", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Espacio_Eliminar", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inId_espacio", espacio.Codigo);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.EliminarEspacio", this.ToString());
+            }
         }
 
         /// <summary>

@@ -12,7 +12,7 @@ UPDATE personal
 SET 
 	id_usuario = inId_usuario
 WHERE
-	id_conductor = inid_personal;
+	id_personal = inid_personal;
 END$$
 
 

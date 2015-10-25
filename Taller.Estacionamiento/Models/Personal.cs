@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 using MySql.Data.MySqlClient;
+=======
+﻿using MySql.Data.MySqlClient;
+>>>>>>> refs/remotes/origin/develop
 using System;
 using System.Collections.Generic;
 using System.Data;
