@@ -38,16 +38,12 @@ namespace Taller.Estacionamiento.Models
         }
         public void AgregarPersonal(Personal personal)
         {
-            throw new NotImplementedException();
-        }
-
-        public void EliminarPersonal(Personal Personal)
-        {
             try
             {
-                Logger.EntradaMetodo("Estacionamiento.EliminarPersonal(Personal Personal)", this.ToString());
-                var comando = new MySqlCommand() { CommandText = "Personal_Eliminar", CommandType = System.Data.CommandType.StoredProcedure };
-                comando.Parameters.AddWithValue("inId_conductor", Personal.Rut);
+                Logger.EntradaMetodo("Estacionamiento.AgregarPersonal(Personal personal)", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "personal_estacionamiento_agregar", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("id_personalIn", personal.Rut);
+                comando.Parameters.AddWithValue("id_estacionamientoIn", this.ID);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
@@ -56,27 +52,168 @@ namespace Taller.Estacionamiento.Models
             }
             finally
             {
-                Logger.SalidaMetodo("Estacionamiento.EliminarPersonal", this.ToString());
+                Logger.SalidaMetodo("Estacionamiento.AgregarPersonal", this.ToString());
             }
-            
+        }
+
+        public void EliminarPersonal(Personal Personal)
+        {
+
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.EliminarPersonal()", this.ToString());
+
+                 var comando = new MySqlCommand() { CommandText = "Estacionamiento_Eliminar_Personal", CommandType = System.Data.CommandType.StoredProcedure };
+
+                comando.Parameters.AddWithValue("inID_Estacionamiento", this.ID);
+                comando.Parameters.AddWithValue("inID_RUT", Personal.Rut);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.EliminarPersonal()", this.ToString());
+            }
+
         }
 
         public List<Espacio> Reservados()
         {
-            throw new NotImplementedException();
+            List<Espacio> lista = new List<Espacio>();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.Reservados()", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "estacionamiento_Reservados", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("IdEstacionamiento", this.ID);
+                DataSet ds = Data.Obtener(comando);
+                DataTable dt = ds.Tables[0];
+                TimeSpan tiempoParaExpirar = new TimeSpan(1,0,0); // aqui se tiene que definir el tiempo de expiracion por default que se dejara , por ahora suma una hora a la hora de reserva
+                foreach (DataRow row in dt.Rows)
+                {
+                    Espacio espacio = new Espacio
+                    {
+                        Codigo = Convert.ToString(row["codigo"]),
+                        Vehiculo = new Vehiculo { Patente = Convert.ToString(row["patente"]), Conductor = new Conductor { Nombre = Convert.ToString(row["nombre"]) } },
+                        Estado = EstadoEspacio.Reservado,
+                        Reserva = new Reserva { Expiracion = Convert.ToDateTime(row["fecha_reserva"]).Add(tiempoParaExpirar) }
+                    };
+                    lista.Add(espacio);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+
+                Logger.SalidaMetodo("Estacionamiento.EliminarPersonal()", this.ToString());
+            }
+            return lista;
         }
 
         public List<Espacio> Disponibles()
         {
             throw new NotImplementedException();
         }
+        /// <summary>
+        /// Crea este estacionamiento en la base de datos
+        /// </summary>
         public List<Espacio> Ocupados()
         {
-            throw new NotImplementedException();
+            var ocupados = new List<Espacio>();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.Ocupados", this.ToString());
+
+                var comando = new MySqlCommand() { CommandText = "Estacionamiento_Ocupados", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inID_Estacionamiento", this.ID);
+                var data = Data.Obtener(comando);
+                foreach (DataRow dr in data.Tables[0].Rows)
+                {
+                    Vehiculo vehiculo = new Vehiculo();
+                    Reserva reserva = new Reserva();
+                    Espacio espacio = new Espacio();
+                    espacio.Codigo = Convert.ToString(dr["Espacio_Codigo"]);
+                    vehiculo.Patente = Convert.ToString(dr["Vehiculo_Patente"]);
+                    if (dr["Fecha_Reserva"] != DBNull.Value)
+                        reserva.Expiracion = Convert.ToDateTime(dr["Fecha_Reserva"]);
+                    if (dr["Fecha_Ingreso"] != DBNull.Value)
+                        espacio.IngresoVehiculo = Convert.ToDateTime(dr["Fecha_Ingreso"]);
+                    espacio.Estado = EstadoEspacio.Ocupado;
+
+                    if (reserva.Expiracion != null)
+                        reserva.Concretada = true;
+                    espacio.Vehiculo = vehiculo;
+                    espacio.Reserva = reserva;
+
+                    ocupados.Add(espacio);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.Ocupados", this.ToString());
+            }
+            return ocupados;
         }
+
+
+        /// <summary>
+        /// Crea este estacionamiento en la base de datos
+        /// </summary>
         public List<Espacio> Todos()
         {
-            throw new NotImplementedException();
+            var todos = new List<Espacio>();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.Todos", this.ToString());
+
+                var comando = new MySqlCommand() { CommandText = "Estacionamiento_Todos", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inID_Estacionamiento", this.ID);
+                var data = Data.Obtener(comando);
+                foreach (DataRow dr in data.Tables[0].Rows)
+                {
+                    Vehiculo vehiculo = new Vehiculo();
+                    Reserva reserva = new Reserva();
+                    Espacio espacio = new Espacio();
+                    espacio.Codigo = Convert.ToString(dr["Espacio_Codigo"]);
+                    vehiculo.Patente = Convert.ToString(dr["Vehiculo_Patente"]);
+                    if (dr["Fecha_Reserva"] != DBNull.Value)
+                        reserva.Expiracion = Convert.ToDateTime(dr["Fecha_Reserva"]);
+                    if (dr["Fecha_Ingreso"] != DBNull.Value)
+                        espacio.IngresoVehiculo = Convert.ToDateTime(dr["Fecha_Ingreso"]);
+
+                    if (reserva.Expiracion == null && espacio.IngresoVehiculo == null && espacio.SalidaVehiculo == null)
+                        espacio.Estado = EstadoEspacio.Disponible;
+
+                    if (reserva.Expiracion != null && espacio.IngresoVehiculo == null && espacio.SalidaVehiculo == null)
+                        espacio.Estado = EstadoEspacio.Reservado;
+
+                    if (reserva.Expiracion != null && espacio.IngresoVehiculo != null && espacio.SalidaVehiculo == null)
+                        espacio.Estado = EstadoEspacio.Ocupado;
+
+                    espacio.Vehiculo = vehiculo;
+                    espacio.Reserva = reserva;
+
+                    todos.Add(espacio);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.Todos", this.ToString());
+            }
+            return todos;
         }
 
         public bool ReservarEspacio(Vehiculo vehiculo)
@@ -169,12 +306,41 @@ namespace Taller.Estacionamiento.Models
 
         public void AgregarEspacio(Espacio espacio)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.AgregarEspacio", espacio.ToString());
+                var comando = new MySqlCommand() { CommandText = "espacio_crear", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("codigoIn", espacio.Codigo);
+                comando.Parameters.AddWithValue("id_estacionamientoIn", this.ID);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.AgregarEspacio", this.ToString());
+            }
         }
 
         public void EliminarEspacio(Espacio espacio)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.EliminarEspacio(Espacio espacio)", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Espacio_Eliminar", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inId_espacio", espacio.Codigo);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.EliminarEspacio", this.ToString());
+            }
         }
 
         /// <summary>
