@@ -409,7 +409,7 @@ namespace Taller.Estacionamiento.Models
             {
                 Logger.EntradaMetodo("Estacionamiento.Eliminar", this.ToString());
                 var comando = new MySqlCommand() { CommandText = "estacionamiento_eliminar", CommandType = System.Data.CommandType.StoredProcedure };
-                comando.Parameters.AddWithValue("inidEstacionamiento", this.ID);
+                comando.Parameters.AddWithValue("inIdEstacionamiento", this.ID);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
