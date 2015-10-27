@@ -65,8 +65,8 @@ namespace Taller.Estacionamiento.Models
 
                 var comando = new MySqlCommand() { CommandText = "Estacionamiento_ Desvincular_Personal", CommandType = System.Data.CommandType.StoredProcedure };
 
-                comando.Parameters.AddWithValue("inID_Estacionamiento", this.ID);
-                comando.Parameters.AddWithValue("inID_RUT", Personal.Rut);
+                comando.Parameters.AddWithValue("inIDEstacionamiento", this.ID);
+                comando.Parameters.AddWithValue("inIDRut", Personal.Rut);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
