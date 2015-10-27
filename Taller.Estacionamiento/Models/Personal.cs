@@ -41,25 +41,7 @@ namespace Taller.Estacionamiento.Models
         }
 
         
-        public override void Eliminar()
-        {
-            try
-            {
-                Logger.EntradaMetodo("Personal.Eliminar()", this.ToString());
-                var comando = new MySqlCommand() { CommandText = "Personal_Eliminar", CommandType = System.Data.CommandType.StoredProcedure };
-                comando.Parameters.AddWithValue("inId_personal", this.Rut);
-                Data.Ejecutar(comando);
-            }
-            catch (Exception ex)
-            {
-                Logger.Excepcion(ex);
-            }
-            finally
-            {
-                Logger.SalidaMetodo("Personal.Eliminar", this.ToString());
-            }
 
-        }
     }
 
 }
