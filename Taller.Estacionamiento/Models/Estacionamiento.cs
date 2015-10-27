@@ -56,14 +56,14 @@ namespace Taller.Estacionamiento.Models
             }
         }
 
-        public void EliminarPersonal(Personal Personal)
+        public void DesvincularPersonal(Personal Personal)
         {
 
             try
             {
-                Logger.EntradaMetodo("Estacionamiento.EliminarPersonal()", this.ToString());
+                Logger.EntradaMetodo("Estacionamiento. DesvincularPersonal()", this.ToString());
 
-                 var comando = new MySqlCommand() { CommandText = "Estacionamiento_Eliminar_Personal", CommandType = System.Data.CommandType.StoredProcedure };
+                var comando = new MySqlCommand() { CommandText = "Estacionamiento_ Desvincular_Personal", CommandType = System.Data.CommandType.StoredProcedure };
 
                 comando.Parameters.AddWithValue("inID_Estacionamiento", this.ID);
                 comando.Parameters.AddWithValue("inID_RUT", Personal.Rut);
@@ -75,7 +75,7 @@ namespace Taller.Estacionamiento.Models
             }
             finally
             {
-                Logger.SalidaMetodo("Estacionamiento.EliminarPersonal()", this.ToString());
+                Logger.SalidaMetodo("Estacionamiento. DesvincularPersonal()", this.ToString());
             }
 
         }
