@@ -310,8 +310,8 @@ namespace Taller.Estacionamiento.Models
             {
                 Logger.EntradaMetodo("Estacionamiento.AgregarEspacio", espacio.ToString());
                 var comando = new MySqlCommand() { CommandText = "espacio_crear", CommandType = System.Data.CommandType.StoredProcedure };
-                comando.Parameters.AddWithValue("codigoIn", espacio.Codigo);
-                comando.Parameters.AddWithValue("id_estacionamientoIn", this.ID);
+                comando.Parameters.AddWithValue("inCodigo", espacio.Codigo);
+                comando.Parameters.AddWithValue("inId_estacionamiento", this.ID);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
