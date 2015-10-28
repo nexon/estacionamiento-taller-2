@@ -4,15 +4,15 @@ CREATE PROCEDURE usuario_modificar(
     inNombre VARCHAR(45),
 	inContrasenia VARCHAR(45),
     inEmail VARCHAR(45),
-    inTelefono INT,
+    inTelefono INT
 )
 BEGIN
 	UPDATE usuario
-	SET 
+	SET
 		nombre = inNombre,
         contrasenia = inContrasenia,
         email = inEmail,
         inTelefono = inTelefono
-        
+
 	WHERE rut = inRut;
 END $$
