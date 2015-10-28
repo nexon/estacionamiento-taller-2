@@ -1,4 +1,4 @@
-DROP PROCEDURE IF EXISTS Estacionamiento_ Desvincular_Personal  $$
+DROP PROCEDURE IF EXISTS Estacionamiento_Desvincular_Personal $$
 
 CREATE PROCEDURE Estacionamiento_Desvincular_Personal (
 	inIDEstacionamiento INT,
