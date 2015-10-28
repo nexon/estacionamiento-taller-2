@@ -1,13 +1,13 @@
 
 DROP PROCEDURE IF EXISTS registro_modificar$
-CREATE PROCEDURE registro_modificar(in id_registroIn INT, in fecha_ingresoIn DATETIME, fecha_salidaIn DATETIME, in monto_totalIn INT)
+CREATE PROCEDURE registro_modificar(in inId_registro INT, in inFecha_ingreso DATETIME, inFecha_salida DATETIME, in inMonto_total INT)
 BEGIN
 	update registro
 	set
-		fecha_ingreso = fecha_ingresoIn,
-		fecha_salida = fecha_salidaIn, 
-		monto_total = monto_totalIn
+		fecha_ingreso = inFecha_ingreso,
+		fecha_salida = inFecha_salida, 
+		monto_total = inMonto_total
 	where 
-		id_registro = id_registroIn;
+		id_registro = inId_registro;
 
 END

@@ -1,5 +1,5 @@
 DROP PROCEDURE IF EXISTS registro_seleccionar$
-CREATE PROCEDURE registro_seleccionar(in id_registroIn INT)
+CREATE PROCEDURE registro_seleccionar(in inId_registro INT)
 BEGIN
 	select
 		r.id_registro as registro_id_registro,
@@ -13,7 +13,7 @@ BEGIN
 	from
 		registro as r
 	where
-		r.id_registro = id_registroIn
+		r.id_registro = inId_registro
 	limit
 		1;
 	
