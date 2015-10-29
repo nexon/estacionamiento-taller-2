@@ -16,6 +16,7 @@
     <link rel="stylesheet" href=@Url.Content("~/Content/css/ace.css") class="ace-main-stylesheet" id="main-ace-style" />
     <link rel="stylesheet" href=@Url.Content("~/Content/css/ol.css") />
     <link rel="stylesheet" href=@Url.Content("~/Content/css/bootstrap-timepicker.css") />
+    <link rel="stylesheet" href=@Url.Content("~/Content/css/bootstrap-datetimepicker.css") />
     <script src="@Url.Content("~/Scripts/ace-extra.js")"></script>
     <link rel="stylesheet" href=@Url.Content("~/Content/css/myStyles.css") />
 
@@ -395,7 +396,9 @@
     <!-- Scripts para los dataTables-->
     <script type="text/javascript" src=@Url.Content("~/Scripts/dataTables/jquery.dataTables.js")></script>
     <script type="text/javascript" src=@Url.Content("~/Scripts/dataTables/jquery.dataTables.bootstrap.js")></script>
-
+    <!--Date time bonito-->
+    <script type="text/javascript" src=@Url.Content("~/Scripts/date-time/moment.js")></script>
+    <script type="text/javascript" src=@Url.Content("~/Scripts/date-time/bootstrap-datetimepicker.min.js")></script>
     <!--Espacio donde se agregaran nuevos scripts en cada vista-->
     @RenderSection("ViewsScripts", required: false)
 
