@@ -23,6 +23,47 @@ namespace Taller.Estacionamiento.Models
         public double CoordenadaLongitud { get; set; }
         public Tarjetero Tarjetero { get; set; }
 
+        public bool Seleccionar(int estacionamientoId)
+        {
+            this.ID = -1;//se usa el id -1 que jamas se asignara para revisar si es que se pudieron obtener los datos
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.Seleccionar", this.ToString());
+                var comando = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "estacionamiento_seleccionar" };
+                comando.Parameters.AddWithValue("inIdEstacionamiento", estacionamientoId);
+                DataSet ds = Data.Obtener(comando);
+                DataTable dt = ds.Tables[0];
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow dr = dt.Rows[0];
+                    this.ID = estacionamientoId;
+                    this.Nombre = dr["estacionamiento_Nombre"].ToString();
+                    this.Direccion = dr["estacionamiento_Direccion"].ToString();
+                    this.Capacidad = Convert.ToInt32(dr["estacionamiento_Capacidad"]);
+                    this.TiempoMinimo = Convert.ToInt32(dr["estacionamiento_TiempoMinimo"]);
+                    this.TarifaMinuto = Convert.ToInt32(dr["estacionamiento_TarifaMinuto"]);
+                    //el campo estacionamiento_CantMinutos no tengo idea para que es
+                    this.Apertura = Convert.ToDateTime(dr["estacionamiento_Apertura"]);
+                    this.Cierre = Convert.ToDateTime(dr["estacionamiento_Cierre"]);
+                    this.CoordenadaLatitud = Convert.ToDouble(dr["estacionamiento_CoordenadaLatitud"]);
+                    this.CoordenadaLongitud = Convert.ToDouble(dr["estacionamiento_CoordenadaLongitud"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.Seleccionar", this.ToString());
+            }
+            if (this.ID > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public string IngresarVehiculo(Vehiculo vehiculo, Espacio espacio)
         {
             throw new NotImplementedException();
