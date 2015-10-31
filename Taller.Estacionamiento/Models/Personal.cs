@@ -41,7 +41,7 @@ namespace Taller.Estacionamiento.Models
             }
         }
 
-        public override void Modificar(int id_estacionamiento)
+        public void Modificar(int id_estacionamiento)
         {
             try
             {
