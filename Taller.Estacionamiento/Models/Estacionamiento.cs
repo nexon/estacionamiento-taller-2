@@ -72,9 +72,9 @@ namespace Taller.Estacionamiento.Models
 
             try
             {
-                Logger.EntradaMetodo("Estacionamiento. DesvincularPersonal()", this.ToString());
+                Logger.EntradaMetodo("Estacionamiento.DesvincularPersonal()", this.ToString());
 
-                var comando = new MySqlCommand() { CommandText = "Estacionamiento_ Desvincular_Personal", CommandType = System.Data.CommandType.StoredProcedure };
+                var comando = new MySqlCommand() { CommandText = "Estacionamiento_Desvincular_Personal", CommandType = System.Data.CommandType.StoredProcedure };
 
                 comando.Parameters.AddWithValue("inIDEstacionamiento", this.ID);
                 comando.Parameters.AddWithValue("inIDRut", Personal.Rut);
@@ -86,7 +86,7 @@ namespace Taller.Estacionamiento.Models
             }
             finally
             {
-                Logger.SalidaMetodo("Estacionamiento. DesvincularPersonal()", this.ToString());
+                Logger.SalidaMetodo("Estacionamiento.DesvincularPersonal()", this.ToString());
             }
 
         }
