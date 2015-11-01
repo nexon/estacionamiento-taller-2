@@ -13,6 +13,8 @@ namespace Taller.Estacionamiento.Models
     {
         public int ID { get; set; }
         public string Nombre { get; set; }
+        public string Email { get; set; }
+        public int Telefono { get; set; }
         public int TarifaMinuto { get; set; }
         public int TiempoMinimo { get; set; }
         public int Capacidad { get; set; }
@@ -39,6 +41,8 @@ namespace Taller.Estacionamiento.Models
                     this.ID = estacionamientoId;
                     this.Nombre = dr["estacionamiento_Nombre"].ToString();
                     this.Direccion = dr["estacionamiento_Direccion"].ToString();
+                    this.Email = dr["estacionamiento_Email"].ToString();
+                    this.Telefono = Convert.ToInt32(dr["estacionamiento_Telefono"]);
                     this.Capacidad = Convert.ToInt32(dr["estacionamiento_Capacidad"]);
                     this.TiempoMinimo = Convert.ToInt32(dr["estacionamiento_TiempoMinimo"]);
                     this.TarifaMinuto = Convert.ToInt32(dr["estacionamiento_TarifaMinuto"]);
