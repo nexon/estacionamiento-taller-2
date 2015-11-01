@@ -15,9 +15,11 @@ namespace Taller.Estacionamiento.Controllers
         {
             return View();
         }
-        public ActionResult Informacion()
+        public ActionResult Informacion(int estacionamientoId)
         {
-            return View("Informacion");
+            var est = new Models.Estacionamiento();
+            est.Seleccionar(estacionamientoId);
+            return View(est);
         }
         public ActionResult EditarInformacion()
         {
