@@ -22,6 +22,15 @@ namespace Taller.Estacionamiento.Models
         public double CoordenadaLatitud { get; set; }
         public double CoordenadaLongitud { get; set; }
         public Tarjetero Tarjetero { get; set; }
+        public List<Personal> listaPersonal;
+
+        /// <summary>
+        /// constructor
+        /// </summary>
+        public Estacionamiento()
+        {
+            this.listaPersonal = new List<Personal>();
+        }
 
         public string IngresarVehiculo(Vehiculo vehiculo, Espacio espacio)
         {
@@ -33,8 +42,8 @@ namespace Taller.Estacionamiento.Models
             throw new NotImplementedException();
         }
         public List<Personal> Personal()
-        {
-            throw new NotImplementedException();
+        {                     
+            return listaPersonal;
         }
         public void AgregarPersonal(Personal personal)
         {
