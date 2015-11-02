@@ -38,7 +38,7 @@ namespace Taller.Estacionamiento.Controllers
         public ActionResult Administrar(Taller.Estacionamiento.Models.Estacionamiento estacionamiento)
         {
             //Para la prueba de que ingresa en el estacionamiento.
-            estacionamiento.ID = 1;
+            //estacionamiento.ID = 1;
             return View("Administrar", estacionamiento);
         }
 
@@ -50,7 +50,6 @@ namespace Taller.Estacionamiento.Controllers
         [HttpPost]
         public ActionResult AgregarSlot(Models.Espacio espacio, Models.Estacionamiento estacionamiento)
         {
-
             estacionamiento.AgregarEspacio(espacio);
             return RedirectToAction("Administrar", new { ID = estacionamiento.ID });
         }
