@@ -133,11 +133,11 @@
                         <form class="form-horizontal" role="form">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Salida</label>
-                                <div class="col-sm-9">
-                                    <div class="input-group bootstrap-timepicker timepicker">
-                                        <input id="timepickerSalida" type="text" class="form-control input-small">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                                    </div>
+                                <div class='input-group date' id='datetimepicker2'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
                                 </div>
                             </div>
                         </form>
@@ -194,20 +194,14 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#datetimepicker1').datetimepicker()
-        });
-    </script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#timepickerSalida').timepicker({
-                minuteStep: 1,
-                secondStep: 5,
-                template: 'modal',
-                modalBackdrop: true,
-                showSeconds: true,
-                showMeridian: false
+            $('#datetimepicker1').datetimepicker();
+            $('#datetimepicker2').datetimepicker({
+                useCurrent: false
+            });
+            $('#datetimepicker1').on("dp.change", function (e) {
+                $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
             })
+
         });
     </script>
 
