@@ -41,9 +41,20 @@ namespace Taller.Estacionamiento.Models
             try
             {
                 Logger.EntradaMetodo("Estacionamiento.AgregarPersonal(Personal personal)", this.ToString());
+
+                var command = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "personal_estacionamiento_seleccionar" };
+                command.Parameters.AddWithValue("inIdPersonal", personal.Rut);
+                command.Parameters.AddWithValue("inIdEstacionamiento", this.ID);
+                DataSet ds = Data.Obtener(command);
+                DataTable dt = ds.Tables[0];
+                if (dt.Rows.Count > 0)
+                {
+                    return; //ya existe uno así que no hacemos nada :P
+                }
+
                 var comando = new MySqlCommand() { CommandText = "personal_estacionamiento_agregar", CommandType = System.Data.CommandType.StoredProcedure };
-                comando.Parameters.AddWithValue("id_personalIn", personal.Rut);
-                comando.Parameters.AddWithValue("id_estacionamientoIn", this.ID);
+                comando.Parameters.AddWithValue("inIdPersonal", personal.Rut);
+                comando.Parameters.AddWithValue("inIdEstacionamiento", this.ID);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
@@ -56,17 +67,17 @@ namespace Taller.Estacionamiento.Models
             }
         }
 
-        public void EliminarPersonal(Personal Personal)
+        public void DesvincularPersonal(Personal Personal)
         {
 
             try
             {
-                Logger.EntradaMetodo("Estacionamiento.EliminarPersonal()", this.ToString());
+                Logger.EntradaMetodo("Estacionamiento.DesvincularPersonal()", this.ToString());
 
-                 var comando = new MySqlCommand() { CommandText = "Estacionamiento_Eliminar_Personal", CommandType = System.Data.CommandType.StoredProcedure };
+                var comando = new MySqlCommand() { CommandText = "Estacionamiento_Desvincular_Personal", CommandType = System.Data.CommandType.StoredProcedure };
 
-                comando.Parameters.AddWithValue("inID_Estacionamiento", this.ID);
-                comando.Parameters.AddWithValue("inID_RUT", Personal.Rut);
+                comando.Parameters.AddWithValue("inIDEstacionamiento", this.ID);
+                comando.Parameters.AddWithValue("inIDRut", Personal.Rut);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
@@ -75,7 +86,7 @@ namespace Taller.Estacionamiento.Models
             }
             finally
             {
-                Logger.SalidaMetodo("Estacionamiento.EliminarPersonal()", this.ToString());
+                Logger.SalidaMetodo("Estacionamiento.DesvincularPersonal()", this.ToString());
             }
 
         }
@@ -330,7 +341,7 @@ namespace Taller.Estacionamiento.Models
             {
                 Logger.EntradaMetodo("Estacionamiento.EliminarEspacio(Espacio espacio)", this.ToString());
                 var comando = new MySqlCommand() { CommandText = "Espacio_Eliminar", CommandType = System.Data.CommandType.StoredProcedure };
-                comando.Parameters.AddWithValue("inId_espacio", espacio.Codigo);
+                comando.Parameters.AddWithValue("inCodigo", espacio.Codigo);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)

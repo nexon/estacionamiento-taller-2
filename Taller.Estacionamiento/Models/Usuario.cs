@@ -54,7 +54,25 @@ namespace Taller.Estacionamiento.Models
         
         public virtual void Modificar()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Logger.EntradaMetodo("Usuario.Modificar", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Usuario_Modificar", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inRut", this.Rut);
+                comando.Parameters.AddWithValue("inNombre", this.Nombre);
+                comando.Parameters.AddWithValue("inContrasenia", this.Contraseña);
+                comando.Parameters.AddWithValue("inEmail", this.Email);
+                comando.Parameters.AddWithValue("inTelefono", this.Telefono);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Usuario.Modificar", this.ToString());
+            }
         }
         public virtual void Eliminar()
         {

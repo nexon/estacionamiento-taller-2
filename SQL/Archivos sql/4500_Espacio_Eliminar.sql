@@ -1,10 +1,10 @@
 DROP PROCEDURE IF EXISTS Espacio_Eliminar $$
 CREATE PROCEDURE Espacio_Eliminar
 (
-	inId_espacio INT
+	inCodigo INT
 )
 BEGIN
 DELETE FROM espacio
 WHERE
-	id_espacio=inId_espacio;
+	codigo=inCodigo;
 END$$
