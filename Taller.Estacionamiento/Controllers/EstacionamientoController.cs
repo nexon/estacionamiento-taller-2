@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Taller.Estacionamiento.Models;
 
 namespace Taller.Estacionamiento.Controllers
 {
@@ -33,7 +34,10 @@ namespace Taller.Estacionamiento.Controllers
         }
         public ActionResult Libres()
         {
-            return View("Libres");
+            var estacionamiento = new Estacionamiento.Models.Estacionamiento();
+            List<Espacio> listaLibres = estacionamiento.Disponibles();
+
+            return View(listaLibres);
         }
         public ActionResult Administrar()
         {

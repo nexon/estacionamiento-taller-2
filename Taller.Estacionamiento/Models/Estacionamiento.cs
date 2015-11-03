@@ -128,8 +128,17 @@ namespace Taller.Estacionamiento.Models
 
         public List<Espacio> Disponibles()
         {
-            throw new NotImplementedException();
+            List<Espacio> listaEspacio = new List<Espacio>();
+            Espacio e = new Espacio();
+            e.Codigo = "Prueba 1";
+            Espacio e1 = new Espacio();
+            e1.Codigo = "Prueba 2";
+            listaEspacio.Add(e);
+            listaEspacio.Add(e1);
+            return listaEspacio;
         }
+
+
         /// <summary>
         /// Crea este estacionamiento en la base de datos
         /// </summary>
