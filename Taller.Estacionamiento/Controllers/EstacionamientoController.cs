@@ -35,13 +35,14 @@ namespace Taller.Estacionamiento.Controllers
         {
             return View("Libres");
         }
+
         public ActionResult Administrar(Taller.Estacionamiento.Models.Estacionamiento estacionamiento)
         {
             //Para la prueba de que ingresa en el estacionamiento.
             //estacionamiento.ID = 1;
             return View("Administrar", estacionamiento);
         }
-
+        [HttpGet]
         public ActionResult AgregarSlot()
         {
             return View("AgregarSlot");
