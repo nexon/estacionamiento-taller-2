@@ -18,8 +18,11 @@ namespace Taller.Estacionamiento.Controllers
         public ActionResult Informacion(int estacionamientoId)
         {
             var est = new Models.Estacionamiento();
-            est.Seleccionar(estacionamientoId);
-            return View(est);
+            if (est.Seleccionar(estacionamientoId))
+            {
+                return View(est);
+            }
+            return RedirectToAction("Index","Home");
         }
         public ActionResult EditarInformacion()
         {
