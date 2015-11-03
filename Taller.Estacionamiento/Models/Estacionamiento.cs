@@ -42,15 +42,34 @@ namespace Taller.Estacionamiento.Models
                     this.Nombre = dr["estacionamiento_Nombre"].ToString();
                     this.Direccion = dr["estacionamiento_Direccion"].ToString();
                     this.Email = dr["estacionamiento_Email"].ToString();
-                    this.Telefono = Convert.ToInt32(dr["estacionamiento_Telefono"]);
+                    if (dr["estacionamiento_Telefono"].ToString() != "" && dr["estacionamiento_Telefono"] != null)
+                    {
+                        this.Telefono = Convert.ToInt32(dr["estacionamiento_Telefono"]);
+                    }
+                    else 
+                    {
+                        this.Telefono = -1;
+                    }
                     this.Capacidad = Convert.ToInt32(dr["estacionamiento_Capacidad"]);
                     this.TiempoMinimo = Convert.ToInt32(dr["estacionamiento_TiempoMinimo"]);
                     this.TarifaMinuto = Convert.ToInt32(dr["estacionamiento_TarifaMinuto"]);
                     //el campo estacionamiento_CantMinutos no tengo idea para que es
-                    this.Apertura = Convert.ToDateTime(dr["estacionamiento_Apertura"]);
-                    this.Cierre = Convert.ToDateTime(dr["estacionamiento_Cierre"]);
-                    this.CoordenadaLatitud = Convert.ToDouble(dr["estacionamiento_CoordenadaLatitud"]);
-                    this.CoordenadaLongitud = Convert.ToDouble(dr["estacionamiento_CoordenadaLongitud"]);
+                    if (dr["estacionamiento_Apertura"].ToString() != "" && dr["estacionamiento_Apertura"] != null)
+                    {
+                        this.Apertura = Convert.ToDateTime(dr["estacionamiento_Apertura"]);
+                    }
+                    if (dr["estacionamiento_Cierre"].ToString() != "" && dr["estacionamiento_Cierre"] != null)
+                    {
+                        this.Cierre = Convert.ToDateTime(dr["estacionamiento_Cierre"]);
+                    }
+                    this.CoordenadaLatitud = 0;
+                    this.CoordenadaLongitud = 0;
+                    if (dr["estacionamiento_CoordenadaLatitud"].ToString() != "" && dr["estacionamiento_CoordenadaLatitud"] != null && dr["estacionamiento_CoordenadaLongitud"].ToString() != "" && dr["estacionamiento_CoordenadaLongitud"] != null)
+                    {
+                        this.CoordenadaLatitud = Convert.ToDouble(dr["estacionamiento_CoordenadaLatitud"]);
+                        this.CoordenadaLongitud = Convert.ToDouble(dr["estacionamiento_CoordenadaLongitud"]);
+                    }
+                    
                 }
             }
             catch (Exception ex)
