@@ -184,6 +184,11 @@
 @section ViewsScripts {
     <script type="text/javascript">
         $(document).ready(function () {
+            $(".boton_salida").click(function () {
+                var codigo = $(this).attr('data-button');
+                alert(codigo);
+            });
+
             $("#dynamic-table").dataTable({
                 "language": {
                     "sProcessing": "Procesando...",
