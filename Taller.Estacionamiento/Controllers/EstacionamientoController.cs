@@ -11,8 +11,6 @@ namespace Taller.Estacionamiento.Controllers
     {
         private static Models.Estacionamiento estacionamiento = new Models.Estacionamiento();
 
-        static int cont_personal = 0;//despues se elimina, es solo para probar la vista personal
-
 
         //
         // GET: /Estacionamiento/
@@ -65,21 +63,7 @@ namespace Taller.Estacionamiento.Controllers
 
         public ActionResult Personal()
         {
-            //solo para probar la vista, se cargan datos al comienzo
-            if (cont_personal == 0)
-            {
-                Personal p1 = new Personal(); p1.Nombre = "Pedro"; p1.Rut = 11; p1.Email = "p@sda.com"; p1.Telefono = 123;
-                Personal p2 = new Personal(); p2.Nombre = "Bartolome"; p2.Rut = 221; p2.Email = "b@sda.com"; p2.Telefono = 222;
-                Personal p3 = new Personal(); p3.Nombre = "cecilia"; p3.Rut = 311; p3.Email = "c@sda.com"; p3.Telefono = 333;
-                estacionamiento.listaPersonal.Add(p1);
-                estacionamiento.listaPersonal.Add(p2);
-                estacionamiento.listaPersonal.Add(p3);
-
-                cont_personal++;
-            }
-
-
-            //llamar a SP Personal_Todos
+            estacionamiento.ID = 1;            
 
             return View("Personal", estacionamiento.Personal() );
         }
@@ -102,7 +86,7 @@ namespace Taller.Estacionamiento.Controllers
                 if(personalSeleccionado==null){
                     estacionamiento.listaPersonal.Add(personal);
 
-                    //llamar a SP Personal_Agregar
+                    //llamar a metodo de SP Personal_Agregar
 
                     return RedirectToAction("Personal", estacionamiento.listaPersonal); 
                 }
@@ -143,7 +127,7 @@ namespace Taller.Estacionamiento.Controllers
                 personalSeleccionado.Email = email;
                 personalSeleccionado.Telefono = telefono;
 
-                //llamar a SP Personal_Editar
+                //llamar a metodo de SP Personal_Editar
 
                 return RedirectToAction("Personal", estacionamiento.listaPersonal);
             }
@@ -164,7 +148,7 @@ namespace Taller.Estacionamiento.Controllers
                 Personal personalSeleccionado = estacionamiento.listaPersonal.Find(x => x.Rut == personal.Rut);
                 estacionamiento.listaPersonal.Remove(personalSeleccionado);
 
-                //llamar a SP Personal_Eliminar
+                //llamar a metodo de SP Personal_Eliminar
 
                 return RedirectToAction("Personal", estacionamiento.listaPersonal);
             }

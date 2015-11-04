@@ -42,7 +42,34 @@ namespace Taller.Estacionamiento.Models
             throw new NotImplementedException();
         }
         public List<Personal> Personal()
-        {                     
+        {
+            listaPersonal = new List<Personal>();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.Personal_Todos", this.ToString());
+
+                var comando = new MySqlCommand() { CommandText = "Personal_Estacionamiento_Todos", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inIdEstacionamiento", this.ID);
+                var data = Data.Obtener(comando);
+                foreach (DataRow dr in data.Tables[0].Rows)
+                {
+                    Personal personal = new Personal();
+                    personal.Rut= Convert.ToInt32(dr["Usuario_rut"]);
+                    personal.Nombre= Convert.ToString(dr["Usuario_Nombre"]);
+                    personal.Contraseña = Convert.ToString(dr["Usuario_Contrasenia"]);
+                    personal.Email = Convert.ToString(dr["Usuario_Email"]);
+                    personal.Telefono = Convert.ToInt32(dr["Usuario_Telefono"]);
+                    listaPersonal.Add(personal);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.Personal_Todos", this.ToString());
+            }
             return listaPersonal;
         }
         public void AgregarPersonal(Personal personal)
