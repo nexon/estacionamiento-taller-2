@@ -13,6 +13,8 @@ namespace Taller.Estacionamiento.Models
     {
         public int ID { get; set; }
         public string Nombre { get; set; }
+        public string Email { get; set; }
+        public int Telefono { get; set; }
         public int TarifaMinuto { get; set; }
         public int TiempoMinimo { get; set; }
         public int Capacidad { get; set; }
@@ -30,6 +32,68 @@ namespace Taller.Estacionamiento.Models
         public Estacionamiento()
         {
             this.listaPersonal = new List<Personal>();
+        }
+
+        public bool Seleccionar(int estacionamientoId)
+        {
+            this.ID = -1;//se usa el id -1 que jamas se asignara para revisar si es que se pudieron obtener los datos
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.Seleccionar", this.ToString());
+                var comando = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "estacionamiento_seleccionar" };
+                comando.Parameters.AddWithValue("inIdEstacionamiento", estacionamientoId);
+                DataSet ds = Data.Obtener(comando);
+                DataTable dt = ds.Tables[0];
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow dr = dt.Rows[0];
+                    this.ID = estacionamientoId;
+                    this.Nombre = dr["estacionamiento_Nombre"].ToString();
+                    this.Direccion = dr["estacionamiento_Direccion"].ToString();
+                    this.Email = dr["estacionamiento_Email"].ToString();
+                    if (dr["estacionamiento_Telefono"].ToString() != "" && dr["estacionamiento_Telefono"] != null)
+                    {
+                        this.Telefono = Convert.ToInt32(dr["estacionamiento_Telefono"]);
+                    }
+                    else 
+                    {
+                        this.Telefono = -1;
+                    }
+                    this.Capacidad = Convert.ToInt32(dr["estacionamiento_Capacidad"]);
+                    this.TiempoMinimo = Convert.ToInt32(dr["estacionamiento_TiempoMinimo"]);
+                    this.TarifaMinuto = Convert.ToInt32(dr["estacionamiento_TarifaMinuto"]);
+                    //el campo estacionamiento_CantMinutos no tengo idea para que es
+                    if (dr["estacionamiento_Apertura"].ToString() != "" && dr["estacionamiento_Apertura"] != null)
+                    {
+                        this.Apertura = Convert.ToDateTime(dr["estacionamiento_Apertura"]);
+                    }
+                    if (dr["estacionamiento_Cierre"].ToString() != "" && dr["estacionamiento_Cierre"] != null)
+                    {
+                        this.Cierre = Convert.ToDateTime(dr["estacionamiento_Cierre"]);
+                    }
+                    this.CoordenadaLatitud = 0;
+                    this.CoordenadaLongitud = 0;
+                    if (dr["estacionamiento_CoordenadaLatitud"].ToString() != "" && dr["estacionamiento_CoordenadaLatitud"] != null && dr["estacionamiento_CoordenadaLongitud"].ToString() != "" && dr["estacionamiento_CoordenadaLongitud"] != null)
+                    {
+                        this.CoordenadaLatitud = Convert.ToDouble(dr["estacionamiento_CoordenadaLatitud"]);
+                        this.CoordenadaLongitud = Convert.ToDouble(dr["estacionamiento_CoordenadaLongitud"]);
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.Seleccionar", this.ToString());
+            }
+            if (this.ID > 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         public string IngresarVehiculo(Vehiculo vehiculo, Espacio espacio)
