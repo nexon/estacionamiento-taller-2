@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Taller.Estacionamiento.Models;
 
 namespace Taller.Estacionamiento.Controllers
 {
     public class EstacionamientoController : Controller
     {
+        private static Models.Estacionamiento estacionamiento = new Models.Estacionamiento();
+
+
         //
         // GET: /Estacionamiento/
 
@@ -56,10 +60,101 @@ namespace Taller.Estacionamiento.Controllers
         {
             return View("Promociones");
         }
+
         public ActionResult Personal()
         {
-            return View("Personal");
+            estacionamiento.ID = 1;            
+
+            return View("Personal", estacionamiento.Personal() );
         }
+
+        public PartialViewResult PersonalCrear()
+        {
+            Personal nuevoPersonal = new Personal();                        
+            return PartialView(nuevoPersonal);
+        }
+
+        [HttpPost]
+        public ActionResult PersonalCrear(Personal personal)
+        {
+            if (ModelState.IsValid)
+            {
+                Personal personalSeleccionado = new Personal();
+                personalSeleccionado = estacionamiento.listaPersonal.FirstOrDefault(x => x.Rut == personal.Rut);
+                
+                // no existe un personal con el mismo Rut
+                if(personalSeleccionado==null){
+                    estacionamiento.listaPersonal.Add(personal);
+
+                    //llamar a metodo de SP Personal_Agregar
+
+                    return RedirectToAction("Personal", estacionamiento.listaPersonal); 
+                }
+                // no se crea un nuevo personal
+                else{
+                    //mostar mensaje que ya existe un personal con ese Rut
+
+                }
+                     
+            }
+            return RedirectToAction("Personal");  
+                      
+        }
+
+        public ActionResult PersonalEditar()
+        {
+            Personal personal = new Personal();
+            return PartialView(personal);
+        }
+
+        [HttpPost]
+        public ActionResult PersonalEditar(Personal personal)
+        {
+            if (ModelState.IsValid)
+            {
+                Personal personalSeleccionado = new Personal();
+
+                //obtener atributos      
+                string nombre = personal.Nombre;
+                string email = personal.Email;
+                int telefono = personal.Telefono;
+
+                //busqueda por el rut, porque es unico para cada usuario
+                personalSeleccionado = estacionamiento.listaPersonal.FirstOrDefault(x => x.Rut == personal.Rut);
+
+                //actualizar atributos
+                personalSeleccionado.Nombre = nombre;
+                personalSeleccionado.Email = email;
+                personalSeleccionado.Telefono = telefono;
+
+                //llamar a metodo de SP Personal_Editar
+
+                return RedirectToAction("Personal", estacionamiento.listaPersonal);
+            }
+            return RedirectToAction("Personal");            
+        }
+
+        public ActionResult PersonalEliminar()
+        {
+            Personal personal = new Personal();
+            return PartialView(personal);
+        }
+
+        [HttpPost]
+        public ActionResult PersonalEliminar(Personal personal)
+        {
+            if (ModelState.IsValid)
+            {
+                Personal personalSeleccionado = estacionamiento.listaPersonal.Find(x => x.Rut == personal.Rut);
+                estacionamiento.listaPersonal.Remove(personalSeleccionado);
+
+                //llamar a metodo de SP Personal_Eliminar
+
+                return RedirectToAction("Personal", estacionamiento.listaPersonal);
+            }
+            return RedirectToAction("Personal");            
+        }
+
         public ActionResult Tarjetero()
         {
             return View("Tarjetero");

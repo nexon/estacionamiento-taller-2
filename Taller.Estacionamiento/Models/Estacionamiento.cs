@@ -22,6 +22,15 @@ namespace Taller.Estacionamiento.Models
         public double CoordenadaLatitud { get; set; }
         public double CoordenadaLongitud { get; set; }
         public Tarjetero Tarjetero { get; set; }
+        public List<Personal> listaPersonal;
+
+        /// <summary>
+        /// constructor
+        /// </summary>
+        public Estacionamiento()
+        {
+            this.listaPersonal = new List<Personal>();
+        }
 
         public string IngresarVehiculo(Vehiculo vehiculo, Espacio espacio)
         {
@@ -34,7 +43,34 @@ namespace Taller.Estacionamiento.Models
         }
         public List<Personal> Personal()
         {
-            throw new NotImplementedException();
+            listaPersonal = new List<Personal>();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.Personal_Todos", this.ToString());
+
+                var comando = new MySqlCommand() { CommandText = "Personal_Estacionamiento_Todos", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inIdEstacionamiento", this.ID);
+                var data = Data.Obtener(comando);
+                foreach (DataRow dr in data.Tables[0].Rows)
+                {
+                    Personal personal = new Personal();
+                    personal.Rut= Convert.ToInt32(dr["Usuario_rut"]);
+                    personal.Nombre= Convert.ToString(dr["Usuario_Nombre"]);
+                    personal.Contraseña = Convert.ToString(dr["Usuario_Contrasenia"]);
+                    personal.Email = Convert.ToString(dr["Usuario_Email"]);
+                    personal.Telefono = Convert.ToInt32(dr["Usuario_Telefono"]);
+                    listaPersonal.Add(personal);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.Personal_Todos", this.ToString());
+            }
+            return listaPersonal;
         }
         public void AgregarPersonal(Personal personal)
         {

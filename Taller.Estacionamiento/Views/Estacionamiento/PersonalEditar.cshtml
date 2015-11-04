@@ -1,0 +1,70 @@
+﻿@model Taller.Estacionamiento.Models.Personal
+
+
+<div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <!-- form start-->
+        @using (Html.BeginForm("personalEditar", "Estacionamiento", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Editar Personal</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <form class="form-horizontal" role="form">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(model => model.Nombre, new { @class = "col-xs-12", @id = "personal-editar-nombre", placeholder = "Nombre Apellido" })
+                                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Rut, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(model => model.Rut, new { @class = "col-xs-12", @id = "personal-editar-rut", disabled = "disabled" })
+                                        @Html.HiddenFor(model => model.Rut, new { @id = "personal-editar-rut-hidden" })
+                                        @Html.ValidationMessageFor(model => model.Rut, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "col-xs-12", @id = "personal-editar-email", placeholder = "correo@ejemplo.com" })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(model => model.Telefono, new { @class = "col-xs-12", @id = "personal-editar-telefono", placeholder = "1112223333" })
+                                        @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm" data-dismiss="modal">
+                        <i class="ace-icon fa fa-arrow-left bigger-110"></i>
+                        Cancelar
+                    </button>
+                    <button type="submit" value="Submit" class="btn btn-sm btn-success" id="boton-personal-editar">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Aceptar
+                    </button>
+                </div>
+            </div>
+        }
+        <!-- form end-->
+    </div>
+</div>
