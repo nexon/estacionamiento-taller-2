@@ -1,13 +1,13 @@
 DROP PROCEDURE IF EXISTS personal_estacionamiento_agregar $$
 CREATE PROCEDURE personal_estacionamiento_agregar(
 	inIdPersonal INT, 
-	inIdEstacionamientoIn INT,
+	inIdEstacionamiento INT,
 	inIdRol INT
 )
 BEGIN
-	INSERT INTO
+	insert into 
 		personal_estacionamiento(id_personal, id_estacionamiento, id_rol)
-	VALUES
+	values
 		(inIdPersonal, inIdEstacionamiento, inIdRol);
 
 END

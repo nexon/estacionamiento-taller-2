@@ -8,6 +8,7 @@
     <meta name="description" content="Revisión &amp; estado" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
+    <link rel="icon" type="image/png" href=@Url.Content("~/Content/images/logo/favico.png") />
 
     <link rel="stylesheet" href=@Url.Content("~/Content/css/bootstrap.css") />
     <link rel="stylesheet" href=@Url.Content("~/Content/css/font-awesome.css") />
@@ -16,6 +17,7 @@
     <link rel="stylesheet" href=@Url.Content("~/Content/css/ol.css") />
     <link rel="stylesheet" href=@Url.Content("~/Content/css/bootstrap-timepicker.css") />
     <script src="@Url.Content("~/Scripts/ace-extra.js")"></script>
+    <link rel="stylesheet" href=@Url.Content("~/Content/css/myStyles.css") />
 
     <!--Espacio donde se agregaran nuevos ccs en cada vista-->
     @RenderSection("ViewsCCS", required: false)
@@ -42,10 +44,7 @@
             </button>
             <div class="navbar-header pull-left">
                 <a href="@Url.Action("Index","Home")" class="navbar-brand">
-                    <small>
-                        <i class="fa fa-car"></i>
-                        Parking-matic
-                    </small>
+                    <img src=@Url.Content("~/Content/images/logo/header1.png") />
                 </a>
             </div>
             <div class="navbar-buttons navbar-header pull-right" role="navigation">
@@ -396,6 +395,10 @@
     <!-- Scripts para los dataTables-->
     <script type="text/javascript" src=@Url.Content("~/Scripts/dataTables/jquery.dataTables.js")></script>
     <script type="text/javascript" src=@Url.Content("~/Scripts/dataTables/jquery.dataTables.bootstrap.js")></script>
+
+    <!-- Scripts para la validacion de los campos de los formularios-->
+    <script src=@Url.Content("~/Scripts/jquery.validate.js")></script>
+    <script src=@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")></script>
 
     <!--Espacio donde se agregaran nuevos scripts en cada vista-->
     @RenderSection("ViewsScripts", required: false)

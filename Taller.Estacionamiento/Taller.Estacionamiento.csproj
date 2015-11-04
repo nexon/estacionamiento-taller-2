@@ -779,6 +779,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\ol.js" />
     <Content Include="Scripts\pace.js" />
+    <Content Include="Scripts\personal\personal-vista.js" />
     <Content Include="Scripts\personal\personal.js" />
     <Content Include="Scripts\prettify.js" />
     <Content Include="Scripts\publicHome\bootstrap.min.js" />
@@ -835,6 +836,9 @@
     <Content Include="Views\PublicHome\Empresa.cshtml" />
     <Content Include="Views\PublicHome\Servicios.cshtml" />
     <Content Include="Views\PublicHome\Index.cshtml" />
+    <Content Include="Views\Estacionamiento\PersonalCrear.cshtml" />
+    <Content Include="Views\Estacionamiento\PersonalEditar.cshtml" />
+    <Content Include="Views\Estacionamiento\PersonalEliminar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
