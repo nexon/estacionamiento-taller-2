@@ -207,10 +207,10 @@ namespace Taller.Estacionamiento.Models
                 {
                     Espacio espacio = new Espacio
                     {
-                        Codigo = Convert.ToString(row["codigo"]),
-                        Vehiculo = new Vehiculo { Patente = Convert.ToString(row["patente"]), Conductor = new Conductor { Nombre = Convert.ToString(row["nombre"]) } },
+                        Codigo = Convert.ToString(row["espacio_codigo"]),
+                        Vehiculo = new Vehiculo { Patente = Convert.ToString(row["vehiculo_patente"]), Conductor = new Conductor { Nombre = Convert.ToString(row["usuario_nombre"]) } },
                         Estado = EstadoEspacio.Reservado,
-                        Reserva = new Reserva { Expiracion = Convert.ToDateTime(row["fecha_reserva"]).Add(tiempoParaExpirar) }
+                        Reserva = new Reserva { Expiracion = Convert.ToDateTime(row["registro_fecha_reserva"]).Add(tiempoParaExpirar) }
                     };
                     lista.Add(espacio);
                 }

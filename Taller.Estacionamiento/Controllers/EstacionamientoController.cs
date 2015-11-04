@@ -42,7 +42,10 @@ namespace Taller.Estacionamiento.Controllers
         }
         public ActionResult Reservados()
         {
-            return View("Reservados");
+            var estacionamiento = new Estacionamiento.Models.Estacionamiento();
+            List<Espacio> reservados = estacionamiento.Reservados();
+
+            return View(reservados);
         }
         public ActionResult Libres()
         {
