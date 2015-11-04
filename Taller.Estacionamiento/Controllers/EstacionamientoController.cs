@@ -34,7 +34,11 @@ namespace Taller.Estacionamiento.Controllers
         }
         public ActionResult Ocupados()
         {
-            return View("Ocupados");
+            var estacionamiento = new Estacionamiento.Models.Estacionamiento();
+            ///////////ESTACIONAMIENTO DE PRUEBA///////////
+            estacionamiento.ID = 1;
+            List < Espacio > listaOcupados = estacionamiento.Ocupados();
+            return View("Ocupados", listaOcupados);
         }
         public ActionResult Reservados()
         {
