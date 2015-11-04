@@ -229,14 +229,31 @@ namespace Taller.Estacionamiento.Models
 
         public List<Espacio> Disponibles()
         {
-            List<Espacio> listaEspacio = new List<Espacio>();
-            Espacio e = new Espacio();
-            e.Codigo = "Prueba 1";
-            Espacio e1 = new Espacio();
-            e1.Codigo = "Prueba 2";
-            listaEspacio.Add(e);
-            listaEspacio.Add(e1);
-            return listaEspacio;
+            var disponibles = new List<Espacio>();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.Disponibles", this.ToString());
+
+                var comando = new MySqlCommand() { CommandText = "Estacionamiento_Disponibles", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inID_Estacionamiento", this.ID);
+                var data = Data.Obtener(comando);
+                foreach (DataRow dr in data.Tables[0].Rows)
+                {
+
+                    Espacio espacio = new Espacio();
+                    espacio.Codigo = Convert.ToString(dr["Espacio_Codigo"]);
+                    disponibles.Add(espacio);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.Disponibles", this.ToString());
+            }
+            return disponibles;
         }
 
 
