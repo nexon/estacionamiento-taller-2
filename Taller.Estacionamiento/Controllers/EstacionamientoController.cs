@@ -44,14 +44,25 @@ namespace Taller.Estacionamiento.Controllers
         {
             return View("Libres");
         }
-        public ActionResult Administrar()
+        public ActionResult Administrar(Taller.Estacionamiento.Models.Estacionamiento estacionamiento)
         {
-            return View("Administrar");
+            //Para la prueba de que ingresa en el estacionamiento.
+            //estacionamiento.ID = 1;
+            return View("Administrar", estacionamiento);
         }
+
         public ActionResult AgregarSlot()
         {
             return View("AgregarSlot");
         }
+
+        [HttpPost]
+        public ActionResult AgregarSlot(Models.Espacio espacio, Models.Estacionamiento estacionamiento)
+        {
+            estacionamiento.AgregarEspacio(espacio);
+            return RedirectToAction("Administrar", new { ID = estacionamiento.ID });
+        }
+        
         public ActionResult EditarSlot()
         {
             return View("EditarSlot");
