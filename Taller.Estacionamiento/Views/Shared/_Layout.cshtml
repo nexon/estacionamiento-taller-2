@@ -396,6 +396,10 @@
     <script type="text/javascript" src=@Url.Content("~/Scripts/dataTables/jquery.dataTables.js")></script>
     <script type="text/javascript" src=@Url.Content("~/Scripts/dataTables/jquery.dataTables.bootstrap.js")></script>
 
+    <!-- Scripts para la validacion de los campos de los formularios-->
+    <script src=@Url.Content("~/Scripts/jquery.validate.js")></script>
+    <script src=@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")></script>
+
     <!--Espacio donde se agregaran nuevos scripts en cada vista-->
     @RenderSection("ViewsScripts", required: false)
 

@@ -1,5 +1,5 @@
 
-DROP PROCEDURE IF EXISTS registro_modificar$
+DROP PROCEDURE IF EXISTS registro_modificar$$
 CREATE PROCEDURE registro_modificar(in inId_registro INT, in inFecha_ingreso DATETIME, inFecha_salida DATETIME, in inMonto_total INT)
 BEGIN
 	update registro
@@ -10,4 +10,4 @@ BEGIN
 	where 
 		id_registro = inId_registro;
 
-END
+END$$

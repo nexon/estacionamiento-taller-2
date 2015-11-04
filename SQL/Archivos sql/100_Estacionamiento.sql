@@ -4,6 +4,8 @@ CREATE TABLE estacionamiento
  id_estacionamiento INT NOT NULL AUTO_INCREMENT,
  nombre VARCHAR(45) NOT NULL,
  direccion VARCHAR(45) NOT NULL,
+ email VARCHAR(45) NOT NULL,
+ telefono INT,
  capacidad INT NOT NULL,
  reputacion FLOAT,
  tiempo_minimo INT NOT NULL,

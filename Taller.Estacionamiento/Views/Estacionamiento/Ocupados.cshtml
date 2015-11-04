@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Taller.Estacionamiento.Models.Espacio>
+@{
     ViewBag.Title = "Ocupados";
 }
 
@@ -34,187 +35,43 @@
             </thead>
 
             <tbody>
-                <tr>
+                @foreach (var ocupado in Model)
+                {
+                    <tr>
+                        <td>
+                            @ocupado.Codigo
+                        </td>
+                        <td>Por Hacer</td>
+                        <td>Por Hacer</td>
+                        <td>Por Hacer</td>
+                        <td>
+                            <button class="btn btn-xs btn-danger boton_salida" data-button="@ocupado.Codigo">
+                                <i class="ace-icon fa fa-bolt bigger-110"></i>
 
-
-                    <td>
-                        <a href="#">cwfl49</a>
-                    </td>
-                    <td>Sebastian Cerecera</td>
-                    <td class="hidden-480">1:30</td>
-                    <td>1200</td>
-
-                    <td class="hidden-480">
-                        <button class="btn btn-xs btn-danger">
-                            <i class="ace-icon fa fa-bolt bigger-110"></i>
-
-                            Salida
-                            <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-                        </button>
-                    </td>
-
-                    <td>
-                        <div class="action-buttons">
-                            <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
-                                <span class="label label-success">
-                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                    Editar
-                                </span>
-                            </a>
-                            <a class="red" href="#" data-toggle="modal" data-target="#myModal">
-                                <span class="label label-danger">
-                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                    Eliminar
-                                </span>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-
-                <tr>
-
-                    <td>
-                        <a href="#">hdbb19</a>
-                    </td>
-                    <td>Edgardo Ortiz</td>
-                    <td class="hidden-480">2:00</td>
-                    <td>2000</td>
-
-                    <td class="hidden-480">
-                        <button class="btn btn-xs btn-danger">
-                            <i class="ace-icon fa fa-bolt bigger-110"></i>
-
-                            Salida
-                            <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-                        </button>
-                    </td>
-
-                    <td>
-                        <div class="action-buttons">
-                            <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
-                                <span class="label label-success">
-                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                    Editar
-                                </span>
-                            </a>
-                            <a class="red" href="#" data-toggle="modal" data-target="#myModal">
-                                <span class="label label-danger">
-                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                    Eliminar
-                                </span>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-
-                <tr>
-
-                    <td>
-                        <a href="#">erty54</a>
-                    </td>
-                    <td>Patricio Pepino</td>
-                    <td class="hidden-480">5:00</td>
-                    <td>6000</td>
-
-                    <td class="hidden-480">
-                        <button class="btn btn-xs btn-danger">
-                            <i class="ace-icon fa fa-bolt bigger-110"></i>
-
-                            Salida
-                            <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-                        </button>
-                    </td>
-
-                    <td>
-                        <div class="action-buttons">
-                            <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
-                                <span class="label label-success">
-                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                    Editar
-                                </span>
-                            </a>
-                            <a class="red" href="#" data-toggle="modal" data-target="#myModal">
-                                <span class="label label-danger">
-                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                    Eliminar
-                                </span>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-
-                <tr>
-
-
-                    <td>
-                        <a href="#">tyuj29</a>
-                    </td>
-                    <td>Jorge Gummy</td>
-                    <td class="hidden-480">9:00</td>
-                    <td>9000</td>
-
-                    <td class="hidden-480">
-                        <button class="btn btn-xs btn-danger">
-                            <i class="ace-icon fa fa-bolt bigger-110"></i>
-
-                            Salida
-                            <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-                        </button>
-                    </td>
-
-                    <td>
-                        <div class="action-buttons">
-                            <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
-                                <span class="label label-success">
-                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                    Editar
-                                </span>
-                            </a>
-                            <a class="red" href="#" data-toggle="modal" data-target="#myModal">
-                                <span class="label label-danger">
-                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                    Eliminar
-                                </span>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-
-                <tr>
-
-                    <td>
-                        <a href="#">uukk69</a>
-                    </td>
-                    <td>Elvis Tec</td>
-                    <td class="hidden-480">2:00</td>
-                    <td>2000</td>
-
-                    <td class="hidden-480">
-                        <button class="btn btn-xs btn-danger">
-                            <i class="ace-icon fa fa-bolt bigger-110"></i>
-
-                            Salida
-                            <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-                        </button>
-                    </td>
-
-                    <td>
-                        <div class="action-buttons">
-                            <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
-                                <span class="label label-success">
-                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                    Editar
-                                </span>
-                            </a>
-                            <a class="red" href="#" data-toggle="modal" data-target="#myModal">
-                                <span class="label label-danger">
-                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                    Eliminar
-                                </span>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
+                                Salida
+                                <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
+                                    <span class="label label-success">
+                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        Editar
+                                    </span>
+                                </a>
+                                <a class="red" href="#" data-toggle="modal" data-target="#myModal">
+                                    <span class="label label-danger">
+                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                        Eliminar
+                                    </span>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                }
+                
 
         </table>
     </div>
@@ -327,6 +184,11 @@
 @section ViewsScripts {
     <script type="text/javascript">
         $(document).ready(function () {
+            $(".boton_salida").click(function () {
+                var codigo = $(this).attr('data-button');
+                alert(codigo);
+            });
+
             $("#dynamic-table").dataTable({
                 "language": {
                     "sProcessing": "Procesando...",

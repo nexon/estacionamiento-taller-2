@@ -13,6 +13,8 @@ namespace Taller.Estacionamiento.Models
     {
         public int ID { get; set; }
         public string Nombre { get; set; }
+        public string Email { get; set; }
+        public int Telefono { get; set; }
         public int TarifaMinuto { get; set; }
         public int TiempoMinimo { get; set; }
         public int Capacidad { get; set; }
@@ -22,6 +24,77 @@ namespace Taller.Estacionamiento.Models
         public double CoordenadaLatitud { get; set; }
         public double CoordenadaLongitud { get; set; }
         public Tarjetero Tarjetero { get; set; }
+        public List<Personal> listaPersonal;
+
+        /// <summary>
+        /// constructor
+        /// </summary>
+        public Estacionamiento()
+        {
+            this.listaPersonal = new List<Personal>();
+        }
+
+        public bool Seleccionar(int estacionamientoId)
+        {
+            this.ID = -1;//se usa el id -1 que jamas se asignara para revisar si es que se pudieron obtener los datos
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.Seleccionar", this.ToString());
+                var comando = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "estacionamiento_seleccionar" };
+                comando.Parameters.AddWithValue("inIdEstacionamiento", estacionamientoId);
+                DataSet ds = Data.Obtener(comando);
+                DataTable dt = ds.Tables[0];
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow dr = dt.Rows[0];
+                    this.ID = estacionamientoId;
+                    this.Nombre = dr["estacionamiento_Nombre"].ToString();
+                    this.Direccion = dr["estacionamiento_Direccion"].ToString();
+                    this.Email = dr["estacionamiento_Email"].ToString();
+                    if (dr["estacionamiento_Telefono"].ToString() != "" && dr["estacionamiento_Telefono"] != null)
+                    {
+                        this.Telefono = Convert.ToInt32(dr["estacionamiento_Telefono"]);
+                    }
+                    else 
+                    {
+                        this.Telefono = -1;
+                    }
+                    this.Capacidad = Convert.ToInt32(dr["estacionamiento_Capacidad"]);
+                    this.TiempoMinimo = Convert.ToInt32(dr["estacionamiento_TiempoMinimo"]);
+                    this.TarifaMinuto = Convert.ToInt32(dr["estacionamiento_TarifaMinuto"]);
+                    //el campo estacionamiento_CantMinutos no tengo idea para que es
+                    if (dr["estacionamiento_Apertura"].ToString() != "" && dr["estacionamiento_Apertura"] != null)
+                    {
+                        this.Apertura = Convert.ToDateTime(dr["estacionamiento_Apertura"]);
+                    }
+                    if (dr["estacionamiento_Cierre"].ToString() != "" && dr["estacionamiento_Cierre"] != null)
+                    {
+                        this.Cierre = Convert.ToDateTime(dr["estacionamiento_Cierre"]);
+                    }
+                    this.CoordenadaLatitud = 0;
+                    this.CoordenadaLongitud = 0;
+                    if (dr["estacionamiento_CoordenadaLatitud"].ToString() != "" && dr["estacionamiento_CoordenadaLatitud"] != null && dr["estacionamiento_CoordenadaLongitud"].ToString() != "" && dr["estacionamiento_CoordenadaLongitud"] != null)
+                    {
+                        this.CoordenadaLatitud = Convert.ToDouble(dr["estacionamiento_CoordenadaLatitud"]);
+                        this.CoordenadaLongitud = Convert.ToDouble(dr["estacionamiento_CoordenadaLongitud"]);
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.Seleccionar", this.ToString());
+            }
+            if (this.ID > 0)
+            {
+                return true;
+            }
+            return false;
+        }
 
         public string IngresarVehiculo(Vehiculo vehiculo, Espacio espacio)
         {
@@ -34,7 +107,34 @@ namespace Taller.Estacionamiento.Models
         }
         public List<Personal> Personal()
         {
-            throw new NotImplementedException();
+            listaPersonal = new List<Personal>();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.Personal_Todos", this.ToString());
+
+                var comando = new MySqlCommand() { CommandText = "Personal_Estacionamiento_Todos", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inIdEstacionamiento", this.ID);
+                var data = Data.Obtener(comando);
+                foreach (DataRow dr in data.Tables[0].Rows)
+                {
+                    Personal personal = new Personal();
+                    personal.Rut= Convert.ToInt32(dr["Usuario_rut"]);
+                    personal.Nombre= Convert.ToString(dr["Usuario_Nombre"]);
+                    personal.Contraseña = Convert.ToString(dr["Usuario_Contrasenia"]);
+                    personal.Email = Convert.ToString(dr["Usuario_Email"]);
+                    personal.Telefono = Convert.ToInt32(dr["Usuario_Telefono"]);
+                    listaPersonal.Add(personal);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.Personal_Todos", this.ToString());
+            }
+            return listaPersonal;
         }
         public void AgregarPersonal(Personal personal)
         {
@@ -45,6 +145,7 @@ namespace Taller.Estacionamiento.Models
                 var command = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "personal_estacionamiento_seleccionar" };
                 command.Parameters.AddWithValue("inIdPersonal", personal.Rut);
                 command.Parameters.AddWithValue("inIdEstacionamiento", this.ID);
+                command.Parameters.AddWithValue("inIdRol", personal.Rol);
                 DataSet ds = Data.Obtener(command);
                 DataTable dt = ds.Tables[0];
                 if (dt.Rows.Count > 0)
@@ -128,8 +229,34 @@ namespace Taller.Estacionamiento.Models
 
         public List<Espacio> Disponibles()
         {
-            throw new NotImplementedException();
+            var disponibles = new List<Espacio>();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.Disponibles", this.ToString());
+
+                var comando = new MySqlCommand() { CommandText = "Estacionamiento_Disponibles", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inID_Estacionamiento", this.ID);
+                var data = Data.Obtener(comando);
+                foreach (DataRow dr in data.Tables[0].Rows)
+                {
+
+                    Espacio espacio = new Espacio();
+                    espacio.Codigo = Convert.ToString(dr["Espacio_Codigo"]);
+                    disponibles.Add(espacio);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.Disponibles", this.ToString());
+            }
+            return disponibles;
         }
+
+
         /// <summary>
         /// Crea este estacionamiento en la base de datos
         /// </summary>

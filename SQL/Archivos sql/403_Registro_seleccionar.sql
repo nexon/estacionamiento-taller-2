@@ -1,4 +1,4 @@
-DROP PROCEDURE IF EXISTS registro_seleccionar$
+DROP PROCEDURE IF EXISTS registro_seleccionar$$
 CREATE PROCEDURE registro_seleccionar(in inId_registro INT)
 BEGIN
 	select
@@ -17,5 +17,5 @@ BEGIN
 	limit
 		1;
 	
-END
+END$$
 

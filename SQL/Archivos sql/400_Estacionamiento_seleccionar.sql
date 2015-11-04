@@ -6,6 +6,8 @@ BEGIN
   SELECT
 	nombre as estacionamiento_Nombre,
 	direccion as estacionamiento_Direccion,
+	email as estacionamiento_Email,
+	telefono as estacionamiento_Telefono,
 	capacidad as estacionamiento_Capacidad,
     tiempo_minimo as estacionamiento_TiempoMinimo,
     tarifa_minuto as estacionamiento_TarifaMinuto,
