@@ -1,0 +1,63 @@
+﻿@model Taller.Estacionamiento.Models.Espacio
+
+@{
+    ViewBag.Title = "AgregarSlot";
+}
+
+
+<body>
+    <div class="page-content">
+        <div class="page-header">
+            <h1>
+                <a href="@Url.Action("Administrar","Estacionamiento")">
+                    Administrar
+                </a>
+                <small>
+                    <i class="ace-icon fa fa-angle-double-right"></i>
+                    Agregar Slot
+                </small>
+            </h1>
+        </div><!-- /.page-header -->
+        @using (Html.BeginForm("AgregarSlot", "Estacionamiento", FormMethod.Post))
+        {
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="fieldset">
+                        
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Identificador</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="fieldset">
+                            <input type="text" required pattern="[a-zA-Z0-9]+" placeholder="Ejemplo: A12"
+                                   @Html.TextBoxFor(model => model.Codigo)</div>
+                    </div>
+                    <p>
+                        &nbsp;
+                    </p>
+
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Estado</label>
+                    <div class="col-sm-9">
+                        @Html.DropDownListFor(model => model.Estado, Enum.GetNames(typeof(Taller.Estacionamiento.Models.EstadoEspacio)).Select(e => new SelectListItem { Text = e }))
+                    </div>
+
+                    <div class="col-sm-5 control-label  align-right">
+                        <p>
+                            &nbsp;
+                        </p>
+                        <a href="@Url.Action("Administrar","Estacionamiento")" class="btn btn-sm btn-danger" type="button">
+                                <i class="ace-icon glyphicon glyphicon-remove bigger-110"></i>
+                                Cancelar
+                        </a>
+                        &nbsp; &nbsp;
+                        <button class="btn btn-sm btn-success" type="submit">
+                            <i class="ace-icon fa fa-check bigger-110"></i>
+                            Aceptar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</body>
