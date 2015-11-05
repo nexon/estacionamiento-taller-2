@@ -145,7 +145,6 @@ namespace Taller.Estacionamiento.Models
                 var command = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "personal_estacionamiento_seleccionar" };
                 command.Parameters.AddWithValue("inIdPersonal", personal.Rut);
                 command.Parameters.AddWithValue("inIdEstacionamiento", this.ID);
-                command.Parameters.AddWithValue("inIdRol", personal.Rol);
                 DataSet ds = Data.Obtener(command);
                 DataTable dt = ds.Tables[0];
                 if (dt.Rows.Count > 0)
@@ -156,6 +155,7 @@ namespace Taller.Estacionamiento.Models
                 var comando = new MySqlCommand() { CommandText = "personal_estacionamiento_agregar", CommandType = System.Data.CommandType.StoredProcedure };
                 comando.Parameters.AddWithValue("inIdPersonal", personal.Rut);
                 comando.Parameters.AddWithValue("inIdEstacionamiento", this.ID);
+                command.Parameters.AddWithValue("inIdRol", personal.Rol);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
