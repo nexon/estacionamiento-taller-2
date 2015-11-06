@@ -19,10 +19,10 @@ namespace Taller.Estacionamiento.Controllers
         {
             return View();
         }
-        public ActionResult Informacion(int estacionamientoId)
+        public ActionResult Informacion(int id)
         {
             var est = new Models.Estacionamiento();
-            if (est.Seleccionar(estacionamientoId))
+            if (est.Seleccionar(id))
             {
                 return View(est);
             }
