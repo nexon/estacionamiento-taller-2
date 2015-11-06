@@ -117,7 +117,9 @@
     <Compile Include="Utils\Logger.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\log4net.dll" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\MySql.Data.dll" />
     <Content Include="bin\Newtonsoft.Json.dll" />
     <Content Include="bin\System.Web.Mvc.dll" />
     <Content Include="bin\System.Web.Optimization.dll" />

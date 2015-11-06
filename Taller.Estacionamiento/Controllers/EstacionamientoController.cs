@@ -180,10 +180,13 @@ namespace Taller.Estacionamiento.Controllers
             }
             return RedirectToAction("Personal");            
         }
-
+        [HttpGet]
         public ActionResult Tarjetero()
         {
-            return View("Tarjetero");
+            var idEstacionamiento = 1;
+            Models.Tarjetero tarjetero = new Models.Tarjetero();
+            List<Models.Personal> personaltrajando = tarjetero.personalTrabajando(idEstacionamiento);
+            return View("Tarjetero", personaltrajando);
         }
 
 
