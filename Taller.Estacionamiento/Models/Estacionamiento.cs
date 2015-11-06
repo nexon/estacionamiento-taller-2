@@ -564,5 +564,43 @@ namespace Taller.Estacionamiento.Models
         {
             throw new NotImplementedException();
         }
+
+        //funciones para evitar poner codigo explicito en vista
+        public bool tieneTelefono()
+        { 
+            if(this.Telefono>0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool tieneHorario()
+        {
+            if (this.Apertura.Year > 1 && this.Cierre.Year > 1)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public String horaApertura()
+        {
+            return this.Apertura.ToString("HH:mm");
+        }
+
+        public String horaCierre()
+        {
+            return this.Cierre.ToString("HH:mm");
+        }
+
+        public bool coordenadasDisponibles()
+        {
+            if (this.CoordenadaLatitud != 0 && this.CoordenadaLongitud != 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
