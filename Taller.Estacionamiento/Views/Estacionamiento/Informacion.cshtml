@@ -28,7 +28,7 @@
                 <div class="profile-info-name"> Telefono </div>
 
                 <div class="profile-info-value">
-                    @if(Model.Telefono > 0)
+                    @if(Model.tieneTelefono())
                     {
                         <span>@Model.Telefono</span>
                     }
@@ -47,13 +47,13 @@
                     <span>@Model.Email</span>
                 </div>
             </div>
-            @if (Model.Apertura.Year > 1 && Model.Cierre.Year > 1)
+            @if (Model.tieneHorario())
             {
                 <div class="profile-info-row">
                     <div class="profile-info-name"> Apertura </div>
 
                     <div class="profile-info-value">
-                        <span>@Model.Apertura.ToString("HH:mm") </span>
+                        <span>@Model.horaApertura() </span>
                     </div>
                 </div>
 
@@ -61,7 +61,7 @@
                     <div class="profile-info-name"> Cierre </div>
 
                     <div class="profile-info-value">
-                        <span>@Model.Cierre.ToString("HH:mm")</span>
+                        <span>@Model.horaCierre()</span>
                     </div>
                 </div>
             }
@@ -99,7 +99,7 @@
             </div>
         </div>
     </div>
-    @if (Model.CoordenadaLatitud != 0 && Model.CoordenadaLongitud != 0)
+    @if (Model.coordenadasDisponibles())
     {
         <div class="row">
             <div class="col-lg-offset-2 col-lg-7">
