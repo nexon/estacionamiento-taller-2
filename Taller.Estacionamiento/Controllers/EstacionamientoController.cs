@@ -32,24 +32,22 @@ namespace Taller.Estacionamiento.Controllers
         {
             return View("EditarInformacion");
         }
-        public ActionResult Ocupados()
+        public ActionResult Ocupados(int ID)
         {
             var estacionamiento = new Estacionamiento.Models.Estacionamiento();
-            ///////////ESTACIONAMIENTO DE PRUEBA///////////
-            estacionamiento.ID = 1;
-            List < Espacio > listaOcupados = estacionamiento.Ocupados();
-            return View("Ocupados", listaOcupados);
+            estacionamiento.Seleccionar(ID);
+            return View(estacionamiento);
         }
         public ActionResult Reservados()
         {
             return View("Reservados");
         }
-        public ActionResult Libres()
+        public ActionResult Libres(int ID)
         {
             var estacionamiento = new Estacionamiento.Models.Estacionamiento();
-            List<Espacio> listaLibres = estacionamiento.Disponibles();
+            estacionamiento.Seleccionar(ID);
 
-            return View(listaLibres);
+            return View(estacionamiento);
         }
         public ActionResult Administrar(Taller.Estacionamiento.Models.Estacionamiento estacionamiento)
         {
@@ -184,5 +182,30 @@ namespace Taller.Estacionamiento.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult EstacionarVehiculo(Espacio espacio, int ID, string Patente)
+        {
+            var estacionamiento = new Models.Estacionamiento();
+            var vehiculo = new Vehiculo();
+
+            estacionamiento.Seleccionar(ID);
+            vehiculo.Patente = Patente;
+
+            estacionamiento.EstacionarVehiculo(vehiculo, espacio);
+
+            return RedirectToAction("Libres", new {  id_estacionamiento = estacionamiento.ID});
+        }
+
+        [HttpPost]
+        public ActionResult DespacharVehiculo(Espacio espacio, int ID)
+        {
+            var estacionamiento = new Models.Estacionamiento();
+
+            estacionamiento.Seleccionar(ID);
+
+            estacionamiento.DespacharVehiculo(espacio);
+
+            return RedirectToAction("Ocupados", new { id_estacionamiento = estacionamiento.ID });
+        }
     }
 }

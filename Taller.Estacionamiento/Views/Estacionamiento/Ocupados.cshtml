@@ -1,6 +1,8 @@
-﻿@model IEnumerable<Taller.Estacionamiento.Models.Espacio>
+﻿@model Taller.Estacionamiento.Models.Estacionamiento
+
 @{
     ViewBag.Title = "Ocupados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="page-header">
@@ -19,7 +21,7 @@
             <thead>
                 <tr>
 
-                    </th>
+                    <th>Espacio</th>
                     <th>Patente</th>
                     <th>Nombre Dueño</th>
                     <th class="hidden-480">Tiempo</th>
@@ -30,191 +32,87 @@
                     </th>
                     <th class="hidden-480">Salir</th>
 
-                    <th width="20%">Acciones</th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach (var ocupado in Model)
+                @foreach (var ocupado in Model.Ocupados())
                 {
                     <tr>
                         <td>
                             @ocupado.Codigo
                         </td>
-                        <td>Por Hacer</td>
-                        <td>Por Hacer</td>
-                        <td>Por Hacer</td>
                         <td>
-                            <button class="btn btn-xs btn-danger boton_salida" data-button="@ocupado.Codigo">
-                                <i class="ace-icon fa fa-bolt bigger-110"></i>
-
-                                Salida
-                                <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-                            </button>
+                            @ocupado.Vehiculo.Patente
                         </td>
+                        <td>Por Hacer</td>
+                        <td>Por Hacer</td>
+                        <td>Por Hacer</td>
                         <td>
-                            <div class="action-buttons">
-                                <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
-                                    <span class="label label-success">
-                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                        Editar
-                                    </span>
-                                </a>
-                                <a class="red" href="#" data-toggle="modal" data-target="#myModal">
-                                    <span class="label label-danger">
-                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                        Eliminar
-                                    </span>
-                                </a>
-                            </div>
+                            <a data-toggle="modal" data-id="@Model.ID" data-nombre="@Model.Nombre" data-codigo="@ocupado.Codigo" data-patente="@ocupado.Vehiculo.Patente" data-ingreso="@ocupado.IngresoVehiculo" class="open-DespacharVehiculoModal" href="#DespacharVehiculoModal">
+                                <span class="btn btn-xs btn-danger boton_salida">
+                                    <i class="ace-icon fa fa-bolt bigger-110"></i>
+                                    Salida
+                                </span>
+                            </a>
                         </td>
                     </tr>
-                    
-                }
-                
 
+                }
         </table>
     </div>
 </div>
 
-<div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Estacionar vehículo</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Estacionamiento</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" class="col-xs-12" value="Estacionamientos Annita" disabled />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Patente</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" class="col-xs-12" value="XX -1123" disabled />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Cliente</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" class="col-xs-12" value="Patricio Pino" disabled />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Slot</label>
-                                <div class="col-sm-9">
-                                    <select class="form-control" id="form-field-select-1">
-                                        <option value="A-12">A-12</option>
-                                        <option value="A-13">A-13</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm" data-dismiss="modal">
-                    <i class="ace-icon fa fa-arrow-left bigger-110"></i>
-                    Cancelar
-                </button>
-                <button type="button" class="btn btn-sm btn-success">
-                    <i class="ace-icon fa fa-check bigger-110"></i>
-                    Aceptar
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+@Html.Partial("_DespacharVehiculo", new Taller.Estacionamiento.Models.Espacio() { Vehiculo = new Taller.Estacionamiento.Models.Vehiculo() })
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Eliminar reserva</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Estacionamiento</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="form-field-1" class="col-xs-12" value="Estacionamientos Annita" disabled />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Patente</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="form-field-1" class="col-xs-12" value="XX-1212" disabled />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Cliente</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="form-field-1" class="col-xs-12" value="Patricio Pino" disabled />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Slot</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="form-field-1" class="col-xs-12" value="A-12" disabled />
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm" data-dismiss="modal">
-                    <i class="ace-icon fa fa-arrow-left bigger-110"></i>
-                    Cancelar
-                </button>
-                <button type="button" class="btn btn-sm btn-danger">
-                    <i class="ace-icon fa fa-trash-o bigger-110"></i>
-                    Eliminar
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 @section ViewsScripts {
     <script type="text/javascript">
-        $(document).ready(function () {
-            $(".boton_salida").click(function () {
-                var codigo = $(this).attr('data-button');
-                alert(codigo);
-            });
-
-            $("#dynamic-table").dataTable({
-                "language": {
-                    "sProcessing": "Procesando...",
-                    "sLengthMenu": "Mostrar _MENU_ registros",
-                    "sZeroRecords": "No se encontraron resultados",
-                    "sEmptyTable": "Ningún dato disponible en esta tabla",
-                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                    "sInfoPostFix": "",
-                    "sSearch": "Buscar:",
-                    "sUrl": "",
-                    "sInfoThousands": ",",
-                    "sLoadingRecords": "Cargando...",
-                    "oPaginate": {
-                        "sFirst": "Primero",
-                        "sLast": "Último",
-                        "sNext": "Siguiente",
-                        "sPrevious": "Anterior"
-                    },
-                    "oAria": {
-                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                    }
+        $("#dynamic-table").dataTable({
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                 }
-            });
+            }
+        });
+        $(document).on("click", ".open-DespacharVehiculoModal", function () {
+            var data_id = $(this).data('id');
+            var data_nombre = $(this).data('nombre');
+            var data_codigo = $(this).data('codigo');
+            var data_patente = $(this).data('patente');
+            var data_ingreso = $(this).data('ingreso');
+
+            var id = document.getElementById("id");
+            var nombre = document.getElementById("nombre");
+            var codigo = document.getElementById("codigo");
+            var patente = document.getElementById("patente");
+            var ingreso = document.getElementById("ingreso");
+            var monto = document.getElementById("monto");
+            
+            id.value = data_id;
+            nombre.value = data_nombre;
+            codigo.value = data_codigo;
+            patente.value = data_patente;
+            ingreso.value = data_ingreso;
+
         });
     </script>
 }
