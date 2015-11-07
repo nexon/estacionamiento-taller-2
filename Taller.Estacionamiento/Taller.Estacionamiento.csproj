@@ -108,6 +108,7 @@
     <Compile Include="Models\Estacionamiento.cs" />
     <Compile Include="Models\EstadoEspacio.cs" />
     <Compile Include="Models\Personal.cs" />
+    <Compile Include="Models\RegistroPersonal.cs" />
     <Compile Include="Models\Reserva.cs" />
     <Compile Include="Models\Tarjetero.cs" />
     <Compile Include="Models\Usuario.cs" />

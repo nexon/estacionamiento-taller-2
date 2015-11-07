@@ -32,6 +32,7 @@ namespace Taller.Estacionamiento.Models
         public Estacionamiento()
         {
             this.listaPersonal = new List<Personal>();
+            this.Tarjetero = new Tarjetero(this); //es necesario setear siempre el ID de Estacionamiento!!!! 
         }
 
         public bool Seleccionar(int estacionamientoId)

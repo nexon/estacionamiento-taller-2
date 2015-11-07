@@ -184,8 +184,10 @@ namespace Taller.Estacionamiento.Controllers
         public ActionResult Tarjetero()
         {
             var idEstacionamiento = 1;
-            Models.Tarjetero tarjetero = new Models.Tarjetero();
-            List<Models.Personal> personaltrajando = tarjetero.personalTrabajando(idEstacionamiento);
+            Models.Estacionamiento e = new Models.Estacionamiento();
+            e.Seleccionar(idEstacionamiento);
+            Models.Tarjetero tarjetero = new Models.Tarjetero(e);
+            List<Models.Personal> personaltrajando = tarjetero.PersonalTrabajando();
             return View("Tarjetero", personaltrajando);
         }
 

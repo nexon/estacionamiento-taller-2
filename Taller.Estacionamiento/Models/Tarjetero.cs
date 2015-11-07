@@ -10,26 +10,27 @@ namespace Taller.Estacionamiento.Models
 {
     public class Tarjetero
     {
-        public bool registarIngreso(Personal personal)
+        public Estacionamiento Estacionamiento { get; set; }
+        public Tarjetero(Estacionamiento Estacionamiento)
+        {
+            this.Estacionamiento = Estacionamiento;
+        }
+        public bool RegistarIngreso(Personal personal)
         {
             throw new NotImplementedException();
         }
-        public bool registrarSalida(Personal personal)
+        public bool RegistrarSalida(Personal personal)
         {
             throw new NotImplementedException();
         }
-        public bool eliminarRegistroPersonal(Personal personal)
-        {
-            throw new NotImplementedException();
-        }
-        public List<Personal> personalTrabajando(int idEstacionamiento)
+        public List<Personal> PersonalTrabajando()
         {
             List<Personal> lista = new List<Personal>();
             try
             {
                 Logger.EntradaMetodo("Tarjetero.personalTrabajando", this.ToString());
                 var comando = new MySqlCommand() { CommandText = "registro_personal_todos", CommandType = System.Data.CommandType.StoredProcedure };
-                comando.Parameters.AddWithValue("inIdEstacionamiento", idEstacionamiento);
+                comando.Parameters.AddWithValue("inIdEstacionamiento", this.Estacionamiento.ID);
                 DataSet ds = Data.Obtener(comando);
                 DataTable dt = ds.Tables[0];
                 // Nose como agregar las fechas a la lista de Personal
@@ -51,11 +52,7 @@ namespace Taller.Estacionamiento.Models
             }
             return lista;
         }
-        public List<DateTime> entradasPersonal(Personal personal)
-        {
-            throw new NotImplementedException();
-        }
-        public List<DateTime> salidasPersonal(Personal personal)
+        public List<RegistroPersonal> RegistrosPersonal(Personal personal)
         {
             throw new NotImplementedException();
         }
