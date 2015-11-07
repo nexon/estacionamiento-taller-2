@@ -24,14 +24,13 @@ namespace Taller.Estacionamiento.Models
         public double CoordenadaLatitud { get; set; }
         public double CoordenadaLongitud { get; set; }
         public Tarjetero Tarjetero { get; set; }
-        public List<Personal> listaPersonal;
+
 
         /// <summary>
         /// constructor
         /// </summary>
         public Estacionamiento()
         {
-            this.listaPersonal = new List<Personal>();
         }
 
         public bool Seleccionar(int estacionamientoId)
@@ -105,9 +104,15 @@ namespace Taller.Estacionamiento.Models
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// retorna una lista de personales de un estacionamiento,
+        /// con los datos que tienen como usuario
+        /// </summary>
+        /// <returns></returns>
         public List<Personal> Personal()
         {
-            listaPersonal = new List<Personal>();
+            List<Personal> listaPersonal = new List<Personal>();
             try
             {
                 Logger.EntradaMetodo("Estacionamiento.Personal_Todos", this.ToString());
@@ -136,13 +141,14 @@ namespace Taller.Estacionamiento.Models
             }
             return listaPersonal;
         }
+
         public void AgregarPersonal(Personal personal)
         {
             try
             {
                 Logger.EntradaMetodo("Estacionamiento.AgregarPersonal(Personal personal)", this.ToString());
 
-                var command = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "personal_estacionamiento_seleccionar" };
+               /* var command = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "personal_estacionamiento_seleccionar" };
                 command.Parameters.AddWithValue("inIdPersonal", personal.Rut);
                 command.Parameters.AddWithValue("inIdEstacionamiento", this.ID);
                 DataSet ds = Data.Obtener(command);
@@ -150,13 +156,14 @@ namespace Taller.Estacionamiento.Models
                 if (dt.Rows.Count > 0)
                 {
                     return; //ya existe uno así que no hacemos nada :P
-                }
+                }*/
 
                 var comando = new MySqlCommand() { CommandText = "personal_estacionamiento_agregar", CommandType = System.Data.CommandType.StoredProcedure };
-                comando.Parameters.AddWithValue("inIdPersonal", personal.Rut);
+                int rol = personal.RolToInt();
+                comando.Parameters.AddWithValue("inIdPersonal", personal.ID);
                 comando.Parameters.AddWithValue("inIdEstacionamiento", this.ID);
-                command.Parameters.AddWithValue("inIdRol", personal.Rol);
-                Data.Ejecutar(comando);
+                comando.Parameters.AddWithValue("inIdRol", rol);
+                Data.Ejecutar(comando); 
             }
             catch (Exception ex)
             {
@@ -165,7 +172,7 @@ namespace Taller.Estacionamiento.Models
             finally
             {
                 Logger.SalidaMetodo("Estacionamiento.AgregarPersonal", this.ToString());
-            }
+            }            
         }
 
         public void DesvincularPersonal(Personal Personal)
