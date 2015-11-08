@@ -11,15 +11,14 @@ BEGIN
   		espacio.codigo AS espacio_codigo,
   		usuario.nombre AS usuario_nombre
 
-  FROM registro ,vehiculo , espacio, conductor, usuario
+  FROM registro inner join vehiculo on vehiculo.id_vehiculo = registro.id_vehiculo
+  				inner join espacio on registro.id_espacio = espacio.id_espacio
+  				inner join conductor on conductor.id_conductor = vehiculo.id_conductor
+  				inner join usuario on conductor.id_usuario = usuario.rut
 
-  WHERE Registro.id_estacionamiento=IdEstacionamiento AND
-        Registro.fecha_reserva is not NULL AND 
-        Registro.fecha_ingreso is NULL AND
-        Registro.fecha_salida  is NULL AND
-        vehiculo.id_vehiculo = registro.id_vehiculo AND
-        registro.id_espacio = espacio.id_espacio AND
-        conductor.id_conductor = vehiculo.id_conductor AND
-        conductor.id_usuario = usuario.rut;
+  WHERE registro.id_estacionamiento=IdEstacionamiento AND
+        registro.fecha_reserva is not NULL AND 
+        registro.fecha_ingreso is NULL AND
+        registro.fecha_salida  is NULL AND;
 
 END $$
