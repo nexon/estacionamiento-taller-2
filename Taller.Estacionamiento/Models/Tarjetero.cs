@@ -6,6 +6,7 @@ using Taller.Estacionamiento.Utils;
 using MySql.Data.MySqlClient;
 using System.Data;
 
+
 namespace Taller.Estacionamiento.Models
 {
     public class Tarjetero
@@ -21,25 +22,50 @@ namespace Taller.Estacionamiento.Models
         }
         public bool RegistrarSalida(Personal personal)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException();   
         }
         public List<Personal> PersonalTrabajando()
         {
-            List<Personal> lista = new List<Personal>();
+            throw new NotImplementedException();
+        }
+        public List<RegistroPersonal> RegistrosPersonal()
+        {
+            List<RegistroPersonal> lista = new List<RegistroPersonal>();
             try
             {
-                Logger.EntradaMetodo("Tarjetero.personalTrabajando", this.ToString());
+                Logger.EntradaMetodo("Tarjetero.registroPersonal", this.ToString());
                 var comando = new MySqlCommand() { CommandText = "registro_personal_todos", CommandType = System.Data.CommandType.StoredProcedure };
                 comando.Parameters.AddWithValue("inIdEstacionamiento", this.Estacionamiento.ID);
                 DataSet ds = Data.Obtener(comando);
                 DataTable dt = ds.Tables[0];
-                // Nose como agregar las fechas a la lista de Personal
                 foreach (DataRow row in dt.Rows)
                 {
-                    Personal pe = new Personal();
-                    pe.Nombre = Convert.ToString(row["nombre"]);
-                    pe.Rut = Convert.ToInt32(row["rut"]);
-                    lista.Add(pe);
+                    Personal personal = new Personal();
+                    personal.Nombre = Convert.ToString(row["nombre"]);
+                    personal.Rut = Convert.ToInt32(row["rut"]);
+
+                    RegistroPersonal rp = new RegistroPersonal();
+                    rp.Personal = personal;
+                    
+                    if(row["fecha_ingreso"].ToString() != ""){
+                        DateTime ingreso = Convert.ToDateTime(row["fecha_ingreso"]);
+                        rp.Ingreso = ingreso;
+                    }
+                    else{
+                        rp.Ingreso = null;
+                    }
+                    
+                    if (row["fecha_salida"].ToString() != "")
+                    {
+                        DateTime salida = Convert.ToDateTime(row["fecha_salida"]);
+                        rp.Salida = salida;
+                    }
+                    else
+                    {
+                        rp.Salida = null;
+                    }
+                    
+                    lista.Add(rp);
                 }
             }
             catch (Exception ex)
@@ -48,13 +74,9 @@ namespace Taller.Estacionamiento.Models
             }
             finally
             {
-                Logger.SalidaMetodo("Tarjetero.personalTrabajando", this.ToString());
+                Logger.SalidaMetodo("Tarjetero.registroPersonal", this.ToString());
             }
             return lista;
-        }
-        public List<RegistroPersonal> RegistrosPersonal(Personal personal)
-        {
-            throw new NotImplementedException();
         }
     }
 }

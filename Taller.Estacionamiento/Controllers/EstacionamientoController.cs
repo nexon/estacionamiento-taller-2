@@ -181,14 +181,13 @@ namespace Taller.Estacionamiento.Controllers
             return RedirectToAction("Personal");            
         }
         [HttpGet]
-        public ActionResult Tarjetero()
+        public ActionResult Tarjetero(int id)
         {
-            var idEstacionamiento = 1;
             Models.Estacionamiento e = new Models.Estacionamiento();
-            e.Seleccionar(idEstacionamiento);
+            e.Seleccionar(id);
             Models.Tarjetero tarjetero = new Models.Tarjetero(e);
-            List<Models.Personal> personaltrajando = tarjetero.PersonalTrabajando();
-            return View("Tarjetero", personaltrajando);
+            List<Models.RegistroPersonal> registroPersonal = tarjetero.RegistrosPersonal();
+            return View("Tarjetero", registroPersonal);
         }
 
 

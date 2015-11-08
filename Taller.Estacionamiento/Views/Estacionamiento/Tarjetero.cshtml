@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Taller.Estacionamiento.Models.RegistroPersonal>
+@{
     ViewBag.Title = "Tarjetero";
 }
 
@@ -23,24 +24,21 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Rut</th>
-                    <th>Fecha</th>
                     <th>Ingreso</th>
                     <th>Salida</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @{var a = false;}
-                @foreach (var personal in Model)
+                @foreach (var registro in Model)
                 {
                     <tr>
-                        <td>@personal.Nombre</td>
-                        <td>@personal.Rut</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>@registro.Personal.Nombre</td>
+                        <td>@registro.Personal.Rut</td>
+                        <td>@registro.Ingreso</td>
+                        <td>@registro.Salida</td>
                         <td>
-                            @if (@a == true)
+                            @if (@registro.Ingreso != null && @registro.Salida == null)
                             {
                                 <div class="action-buttons">
                                     <a class="red" href="#" data-toggle="modal" data-target="#modalSalida">

@@ -9,7 +9,7 @@ namespace Taller.Estacionamiento.Models
     {
         public int ID { get; set; }
         public Personal Personal { get; set; }
-        public DateTime Ingreso { get; set; }
-        public DateTime Salida { get; set; }
+        public DateTime? Ingreso { get; set; }
+        public DateTime? Salida { get; set; }
     }
 }
