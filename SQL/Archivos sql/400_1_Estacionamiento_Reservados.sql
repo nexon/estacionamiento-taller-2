@@ -19,6 +19,6 @@ BEGIN
   WHERE registro.id_estacionamiento=IdEstacionamiento AND
         registro.fecha_reserva is not NULL AND 
         registro.fecha_ingreso is NULL AND
-        registro.fecha_salida  is NULL AND;
+        registro.fecha_salida  is NULL;
 
 END $$
