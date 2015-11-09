@@ -62,7 +62,6 @@ namespace Taller.Estacionamiento.Models
                     this.Capacidad = Convert.ToInt32(dr["estacionamiento_Capacidad"]);
                     this.TiempoMinimo = Convert.ToInt32(dr["estacionamiento_TiempoMinimo"]);
                     this.TarifaMinuto = Convert.ToInt32(dr["estacionamiento_TarifaMinuto"]);
-                    //el campo estacionamiento_CantMinutos no tengo idea para que es
                     if (dr["estacionamiento_Apertura"].ToString() != "" && dr["estacionamiento_Apertura"] != null)
                     {
                         this.Apertura = Convert.ToDateTime(dr["estacionamiento_Apertura"]);
@@ -495,7 +494,6 @@ namespace Taller.Estacionamiento.Models
                 comando.Parameters.AddWithValue("inCapacidad", this.Capacidad);
                 comando.Parameters.AddWithValue("inTiempoMinimo", this.TiempoMinimo);
                 comando.Parameters.AddWithValue("inTarifaMinuto", this.TarifaMinuto);
-                comando.Parameters.AddWithValue("inCantMinutos", 0);
                 comando.Parameters.AddWithValue("inApertura", this.Apertura);
                 comando.Parameters.AddWithValue("inCierre", this.Cierre);
                 comando.Parameters.AddWithValue("inCoordenadaLatitud", this.CoordenadaLatitud);
@@ -524,7 +522,6 @@ namespace Taller.Estacionamiento.Models
                 comando.Parameters.AddWithValue("inCapacidad", this.Capacidad);
                 comando.Parameters.AddWithValue("inTiempoMinimo", this.TiempoMinimo);
                 comando.Parameters.AddWithValue("inTarifaMinuto", this.TarifaMinuto);
-                comando.Parameters.AddWithValue("inCantMinutos", 0);
                 comando.Parameters.AddWithValue("inApertura", this.Apertura);
                 comando.Parameters.AddWithValue("inCierre", this.Cierre);
                 comando.Parameters.AddWithValue("inCoordenadaLatitud", this.CoordenadaLatitud);
