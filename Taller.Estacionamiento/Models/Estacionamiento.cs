@@ -222,7 +222,7 @@ namespace Taller.Estacionamiento.Models
             finally
             {
 
-                Logger.SalidaMetodo("Estacionamiento.EliminarPersonal()", this.ToString());
+                Logger.SalidaMetodo("Estacionamiento.Reservados()", this.ToString());
             }
             return lista;
         }
