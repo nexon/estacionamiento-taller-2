@@ -62,8 +62,6 @@ namespace Taller.Estacionamiento.Controllers
             dbEstacionamiento.Seleccionar(estacionamiento.ID);
             dbEstacionamiento.TarifaMinuto = estacionamiento.TarifaMinuto;
             dbEstacionamiento.TiempoMinimo = estacionamiento.TiempoMinimo;
-            //dbEstacionamiento.NombreTarifa = estacionamiento.NombreTarifa;
-            //dbEstacionamiento.Promocion = estacionamiento.Promocion;
             dbEstacionamiento.Modificar();
 
             return RedirectToAction("Index", "Home");
