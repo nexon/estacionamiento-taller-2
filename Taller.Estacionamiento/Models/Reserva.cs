@@ -9,5 +9,12 @@ namespace Taller.Estacionamiento.Models
     {
         public DateTime Expiracion { get; set; }
         public bool Concretada { get; set; }
+
+        public string TiempoRestante()
+        {
+            DateTime tiempoActual = DateTime.Now;
+            TimeSpan ts = tiempoActual - Expiracion;
+            return ts.Hours+":"+ts.Minutes;
+        }
     }
 }
