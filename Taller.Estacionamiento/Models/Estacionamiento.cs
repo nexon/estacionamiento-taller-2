@@ -119,7 +119,8 @@ namespace Taller.Estacionamiento.Models
                 foreach (DataRow dr in data.Tables[0].Rows)
                 {
                     Personal personal = new Personal();
-                    personal.Rut= Convert.ToInt32(dr["Usuario_rut"]);
+                    personal.ID = Convert.ToInt32(dr["Personal_ID"]);
+                    personal.Rut = Convert.ToInt32(dr["Usuario_rut"]);
                     personal.Nombre= Convert.ToString(dr["Usuario_Nombre"]);
                     personal.Contraseña = Convert.ToString(dr["Usuario_Contrasenia"]);
                     personal.Email = Convert.ToString(dr["Usuario_Email"]);

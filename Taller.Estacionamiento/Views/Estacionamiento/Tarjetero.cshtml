@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Taller.Estacionamiento.Models.RegistroPersonal>
+﻿@model Taller.Estacionamiento.Models.Tarjetero
 @{
     ViewBag.Title = "Tarjetero";
 }
 
 @section ViewsCCS {
-    <link rel="stylesheet" href=@Url.Content("~/Content/css/bootstrap-timepicker.css") />
+    <link rel="stylesheet" href=@Url.Content("~/Content/css/bootstrap-datetimepicker.css") />
 }
 
 <div class="page-header">
@@ -30,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var registro in Model)
+                @foreach (var registro in Model.RegistrosPersonal())
                 {
                     <tr>
                         <td>@registro.Personal.Nombre</td>
@@ -49,8 +49,8 @@
                                     </a>
                                 </div>
                             }
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
@@ -65,44 +65,10 @@
         </button>
     </div>
 </div>
-
-<div class="modal fade" id="modalEntrada" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Registrar Ingreso</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ingreso</label>
-                                <div class="col-sm-9">
-                                    <div class="input-group bootstrap-timepicker timepicker">
-                                        <input id="timepickerEntrada" type="text" class="form-control input-small">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm" data-dismiss="modal">
-                    <i class="ace-icon fa fa-arrow-left bigger-110"></i>
-                    Cancelar
-                </button>
-                <button type="button" class="btn btn-sm btn-success">
-                    <i class="ace-icon fa fa-check bigger-110"></i>
-                    Aceptar
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+@Html.Partial("_IngresoPersonal", new Taller.Estacionamiento.Models.RegistroPersonal(){
+                                    Personal = new Taller.Estacionamiento.Models.Personal(),
+                                    Estacionamiento = @Model.Estacionamiento
+})
 
 <div class="modal fade" id="modalSalida" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -118,12 +84,15 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Salida</label>
                                 <div class="col-sm-9">
-                                    <div class="input-group bootstrap-timepicker timepicker">
-                                        <input id="timepickerSalida" type="text" class="form-control input-small">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                    <div class="form-group">
+                                        <div class='input-group date' id='datetimepickerSalida'>
+                                            <input type='text' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -174,30 +143,23 @@
         });
     </script>
 
-    <script type="text/javascript" src=@Url.Content("~/Scripts/date-time/bootstrap-timepicker.js")></script>
+    <script type="text/javascript" src=@Url.Content("~/Scripts/date-time/moment.js")></script>
+    <script type="text/javascript" src=@Url.Content("~/Scripts/date-time/bootstrap-datetimepicker.js")></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#timepickerEntrada').timepicker({
-                minuteStep: 1,
-                secondStep: 5,
-                template: 'modal',
-                modalBackdrop: true,
-                showSeconds: true,
-                showMeridian: false
+            $('#datetimepickerEntrada').datetimepicker({
+                format: "DD/MM/YYYY HH:mm",
+                useCurrent: new Date()
             })
         });
     </script>
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#timepickerSalida').timepicker({
-                minuteStep: 1,
-                secondStep: 5,
-                template: 'modal',
-                modalBackdrop: true,
-                showSeconds: true,
-                showMeridian: false
+            $('#datetimepickerSalida').datetimepicker({
+                format: "DD/MM/YYYY HH:mm",
+                useCurrent: new Date()
             })
         });
     </script>

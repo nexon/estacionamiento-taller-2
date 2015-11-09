@@ -185,11 +185,19 @@ namespace Taller.Estacionamiento.Controllers
         {
             Models.Estacionamiento e = new Models.Estacionamiento();
             e.Seleccionar(id);
+            //List<Personal> free_personal = e.Personal().Except(e.Tarjetero.PersonalTrabajando()).ToList();
             Models.Tarjetero tarjetero = new Models.Tarjetero(e);
-            List<Models.RegistroPersonal> registroPersonal = tarjetero.RegistrosPersonal();
-            return View("Tarjetero", registroPersonal);
+            IEnumerable<SelectListItem> items = new SelectList(e.Personal(), "ID","Nombre");
+            ViewData["PersonaSelectList"] = items;
+            return View("Tarjetero", tarjetero);
         }
-
+        
+        [HttpPost]
+        public ActionResult IngresoPersonal(RegistroPersonal rp)
+        {
+            rp.Estacionamiento.Tarjetero.RegistarIngreso(rp);
+            return RedirectToAction("Tarjetero", rp.Estacionamiento);
+        }
 
     }
 }

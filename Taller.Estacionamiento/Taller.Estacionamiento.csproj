@@ -842,6 +842,7 @@
     <Content Include="Views\Estacionamiento\PersonalCrear.cshtml" />
     <Content Include="Views\Estacionamiento\PersonalEditar.cshtml" />
     <Content Include="Views\Estacionamiento\PersonalEliminar.cshtml" />
+    <Content Include="Views\Estacionamiento\_IngresoPersonal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

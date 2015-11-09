@@ -16,11 +16,29 @@ namespace Taller.Estacionamiento.Models
         {
             this.Estacionamiento = Estacionamiento;
         }
-        public bool RegistarIngreso(Personal personal)
+        public bool RegistarIngreso(RegistroPersonal registro_personal)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Logger.EntradaMetodo("Tarjetero.IngresoPersonal", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "registro_personal_crear", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inIdEstacionamiento", this.Estacionamiento.ID);
+                comando.Parameters.AddWithValue("inIdPersonal", registro_personal.Personal.ID);
+                comando.Parameters.AddWithValue("inIngreso", registro_personal.Ingreso);
+                comando.Parameters.AddWithValue("InSalida", registro_personal.Salida);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Tarjetero.IngresoPersonal", this.ToString());
+            }
+            return true;
         }
-        public bool RegistrarSalida(Personal personal)
+        public bool RegistrarSalida(RegistroPersonal personal)
         {
             throw new NotImplementedException();   
         }
@@ -33,7 +51,7 @@ namespace Taller.Estacionamiento.Models
             List<RegistroPersonal> lista = new List<RegistroPersonal>();
             try
             {
-                Logger.EntradaMetodo("Tarjetero.registroPersonal", this.ToString());
+                Logger.EntradaMetodo("Tarjetero.registrosPersonal", this.ToString());
                 var comando = new MySqlCommand() { CommandText = "registro_personal_todos", CommandType = System.Data.CommandType.StoredProcedure };
                 comando.Parameters.AddWithValue("inIdEstacionamiento", this.Estacionamiento.ID);
                 DataSet ds = Data.Obtener(comando);
@@ -74,7 +92,7 @@ namespace Taller.Estacionamiento.Models
             }
             finally
             {
-                Logger.SalidaMetodo("Tarjetero.registroPersonal", this.ToString());
+                Logger.SalidaMetodo("Tarjetero.registrosPersonal", this.ToString());
             }
             return lista;
         }
