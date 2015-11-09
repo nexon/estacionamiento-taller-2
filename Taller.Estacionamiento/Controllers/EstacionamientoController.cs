@@ -40,12 +40,11 @@ namespace Taller.Estacionamiento.Controllers
             List < Espacio > listaOcupados = estacionamiento.Ocupados();
             return View("Ocupados", listaOcupados);
         }
-        public ActionResult Reservados()
+        public ActionResult Reservados(int id)
         {
-            var estacionamiento = new Estacionamiento.Models.Estacionamiento();
-            List<Espacio> reservados = estacionamiento.Reservados();
 
-            return View(reservados);
+            var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = id};
+            return View(estacionamiento);
         }
         public ActionResult Libres()
         {
