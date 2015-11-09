@@ -10,7 +10,6 @@ CREATE TABLE estacionamiento
  reputacion FLOAT,
  tiempo_minimo INT NOT NULL,
  tarifa_minuto INT NOT NULL,
- cant_minutos INT NOT NULL,
  apertura DATETIME,
  cierre DATETIME,
  coordenadaLatitud DOUBLE,
