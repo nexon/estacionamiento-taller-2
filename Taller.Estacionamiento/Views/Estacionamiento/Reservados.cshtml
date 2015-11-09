@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Taller.Estacionamiento.Models.Espacio>
+﻿@model Taller.Estacionamiento.Models.Estacionamiento
 @{
     ViewBag.Title = "Reservados";
 }
@@ -26,7 +26,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var espacio in Model){
+                @foreach (var espacio in Model.Reservados()){
                     <tr>
                         <td>@Html.Label(espacio.Codigo)</td>
                         <td>@Html.Label(espacio.Vehiculo.Patente)</td>

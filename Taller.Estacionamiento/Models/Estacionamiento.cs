@@ -264,7 +264,7 @@ namespace Taller.Estacionamiento.Models
             finally
             {
 
-                Logger.SalidaMetodo("Estacionamiento.EliminarPersonal()", this.ToString());
+                Logger.SalidaMetodo("Estacionamiento.Reservados()", this.ToString());
             }
             return lista;
         }
@@ -605,6 +605,44 @@ namespace Taller.Estacionamiento.Models
         void ReubicarVehiculo(Espacio espacio1, Espacio espacio2)
         {
             throw new NotImplementedException();
+        }
+
+        //funciones para evitar poner codigo explicito en vista
+        public bool tieneTelefono()
+        { 
+            if(this.Telefono>0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool tieneHorario()
+        {
+            if (this.Apertura.Year > 1 && this.Cierre.Year > 1)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public String horaApertura()
+        {
+            return this.Apertura.ToString("HH:mm");
+        }
+
+        public String horaCierre()
+        {
+            return this.Cierre.ToString("HH:mm");
+        }
+
+        public bool coordenadasDisponibles()
+        {
+            if (this.CoordenadaLatitud != 0 && this.CoordenadaLongitud != 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

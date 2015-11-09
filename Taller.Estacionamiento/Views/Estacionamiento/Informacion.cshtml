@@ -28,7 +28,14 @@
                 <div class="profile-info-name"> Telefono </div>
 
                 <div class="profile-info-value">
-                    <span>@Model.Telefono</span>
+                    @if(Model.tieneTelefono())
+                    {
+                        <span>@Model.Telefono</span>
+                    }
+                    else
+                    {
+                        <span><b>No Disponible</b></span>
+                    }
                 </div>
             </div>
 
@@ -40,22 +47,42 @@
                     <span>@Model.Email</span>
                 </div>
             </div>
+            @if (Model.tieneHorario())
+            {
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Apertura </div>
 
-            <div class="profile-info-row">
-                <div class="profile-info-name"> Apertura </div>
-
-                <div class="profile-info-value">
-                    <span>@Model.Apertura.ToString("HH:mm") </span>
+                    <div class="profile-info-value">
+                        <span>@Model.horaApertura() </span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="profile-info-row">
-                <div class="profile-info-name"> Cierre </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Cierre </div>
 
-                <div class="profile-info-value">
-                    <span>@Model.Cierre.ToString("HH:mm")</span>
+                    <div class="profile-info-value">
+                        <span>@Model.horaCierre()</span>
+                    </div>
                 </div>
-            </div>
+            }
+            else
+            {
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Apertura </div>
+
+                    <div class="profile-info-value">
+                        <span><b>No Disponible</b></span>
+                    </div>
+                </div>
+
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Cierre </div>
+
+                    <div class="profile-info-value">
+                        <span><b>No Disponible</b></span>
+                    </div>
+                </div>
+            }
 
             <div class="profile-info-row">
                 <div class="profile-info-name"> Ubicación </div>
@@ -72,12 +99,14 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-offset-2 col-lg-7">
-            <div id="map" class="map"></div>
-
+    @if (Model.coordenadasDisponibles())
+    {
+        <div class="row">
+            <div class="col-lg-offset-2 col-lg-7">
+                <div id="map" class="map"></div>
+            </div>
         </div>
-    </div>
+    }
     <br />
     <div class="">
         <div class="col-md-offset-2 col-md-9">
