@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Taller.Estacionamiento.Models.Estacionamiento
+@{
     ViewBag.Title = "Tarifas";
 }
 
@@ -13,59 +14,45 @@
 </div>
 <div class="row">
 
-    <div id="lista_tarifas" class="col-xs-12">
-        No tiene registrada una tarifa
-    </div>
     <div class="col-xs-12">
-        <h3 class="header smaller lighter green">Modificar Tarifa Actual</h3>
+        <h3 class="header smaller lighter green">Tarifa Actual</h3>
 
     </div>
     <div class="col-xs-12">
 
-        <form class="form-horizontal" id="cliente_form" role="form">
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nombre de Tarifa </label>
-
-                <div class="col-sm-9">
-                    <input type="text" id="nombre_tarifa" name="nombre_tarifa" placeholder="Ej: Día Normal, Fin de Semana" class="col-xs-10 col-sm-5 " />
-                </div>
-            </div>
+        @using (Html.BeginForm("Tarifas", "Estacionamiento", FormMethod.Post, new { @class = "form-horizontal"}))
+        {
+            @Html.HiddenFor(m => m.ID)
+            
+            <!--<form class="form-horizontal" id="cliente_form" role="form">-->
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Valor Minuto </label>
 
                 <div class="col-sm-9">
-                    <input type="number" id="precio_tarifa" name="precio_tarifa" placeholder="Ej: $150" class="col-xs-10 col-sm-5" />
+                    <!--<input type="number" id="precio_tarifa" name="precio_tarifa" placeholder="Ej: $150" class="col-xs-10 col-sm-5" />-->
+                    @Html.TextBoxFor(m => m.TarifaMinuto, new {@type = "number", @placeholder =  "Ej: $150", @class = "col-xs-10 col-sm-5"})
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Cuota Mínima </label>
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Timepo Mínimo </label>
 
                 <div class="col-sm-9">
-                    <input type="number" id="cuota_minima" name="cuota_minima" placeholder="Ej: $600" class="col-xs-10 col-sm-5" />
+                    <!--<input type="number" id="cuota_minima" name="cuota_minima" placeholder="Ej: $600" class="col-xs-10 col-sm-5" />-->
+                    @Html.TextBoxFor(m => m.TiempoMinimo, new { @type = "number", @placeholder = "Ej: 5", @class = "col-xs-10 col-sm-5" })
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">  </label>
-
-                <div class="col-sm-8">
-                    <div class="checkbox">
-                        <label>
-                            <input name="form-field-checkbox" name="es_promo" id="es_promo" type="checkbox" class="ace">
-                            <span class="lbl"> Promoción </span>
-                        </label>
-                    </div>
-                </div>
-            </div>
+  
             <div class="clearfix form-actions">
                 <div class="col-md-offset-3 col-md-9">
-                    <button id="agregar_a_la_lista" class="btn btn-info" type="button">
+                    <button id="agregar_a_la_lista" class="btn btn-info" type="submit">
                         <i class="ace-icon fa fa-check bigger-110"></i>
                         Modificar Tarifa
                     </button>
                 </div>
             </div>
 
-        </form>
+        <!--</form>-->
+        }
 
 
     </div>

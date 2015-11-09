@@ -76,10 +76,26 @@ namespace Taller.Estacionamiento.Controllers
         {
             return View("EditarSlot");
         }
-        public ActionResult Tarifas()
+        [HttpGet]
+        public ActionResult Tarifas(int ID)
         {
-            return View("Tarifas");
+            var estacionamiento = new Models.Estacionamiento();
+            estacionamiento.Seleccionar(ID);
+
+            return View(estacionamiento);
         }
+        [HttpPost]
+        public ActionResult Tarifas(Models.Estacionamiento estacionamiento)
+        {
+            var dbEstacionamiento = new Models.Estacionamiento();
+            dbEstacionamiento.Seleccionar(estacionamiento.ID);
+            dbEstacionamiento.TarifaMinuto = estacionamiento.TarifaMinuto;
+            dbEstacionamiento.TiempoMinimo = estacionamiento.TiempoMinimo;
+            dbEstacionamiento.Modificar();
+
+            return RedirectToAction("Index", "Home");
+        }
+
 
         public ActionResult Promociones()
         {
