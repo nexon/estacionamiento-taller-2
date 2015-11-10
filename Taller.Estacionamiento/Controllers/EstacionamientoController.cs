@@ -43,13 +43,12 @@ namespace Taller.Estacionamiento.Controllers
             var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = id};
             return View(estacionamiento);
         }
-        public ActionResult Libres()
+        public ActionResult Libres(int id)
         {
-            var estacionamiento = new Estacionamiento.Models.Estacionamiento();
-            List<Espacio> listaLibres = estacionamiento.Disponibles();
-
-            return View(listaLibres);
+            var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = id };
+            return View(estacionamiento);
         }
+
         public ActionResult Administrar(Taller.Estacionamiento.Models.Estacionamiento estacionamiento)
         {
             //Para la prueba de que ingresa en el estacionamiento.
