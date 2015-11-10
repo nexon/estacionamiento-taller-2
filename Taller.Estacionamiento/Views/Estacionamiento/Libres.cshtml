@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Taller.Estacionamiento.Models.Espacio>
+﻿@model Taller.Estacionamiento.Models.Estacionamiento
 @{
     ViewBag.Title = "Libres";
 }
@@ -26,11 +26,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var espacio in Model)
+                @Html.HiddenFor(m => m.ID)
+                @foreach (var espacio in Model.Disponibles())
                 {
                     <tr>
                         
-                        <td>@Html.Label("Nombre", espacio.Codigo)</td>
+                        <td>@Html.Label(espacio.Codigo)</td>
                         <td>
                             <div class="action-buttons">
                                 <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">

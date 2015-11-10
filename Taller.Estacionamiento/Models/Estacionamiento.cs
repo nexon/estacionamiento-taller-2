@@ -235,7 +235,10 @@ namespace Taller.Estacionamiento.Models
 
         public List<Espacio> Disponibles()
         {
+
             var disponibles = new List<Espacio>();
+    
+            
             try
             {
                 Logger.EntradaMetodo("Estacionamiento.Disponibles", this.ToString());
@@ -259,6 +262,7 @@ namespace Taller.Estacionamiento.Models
             {
                 Logger.SalidaMetodo("Estacionamiento.Disponibles", this.ToString());
             }
+             
             return disponibles;
         }
 
