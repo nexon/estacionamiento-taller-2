@@ -40,12 +40,11 @@ namespace Taller.Estacionamiento.Controllers
             List < Espacio > listaOcupados = estacionamiento.Ocupados();
             return View("Ocupados", listaOcupados);
         }
-        public ActionResult Reservados()
+        public ActionResult Reservados(int id)
         {
-            var estacionamiento = new Estacionamiento.Models.Estacionamiento();
-            List<Espacio> reservados = estacionamiento.Reservados();
 
-            return View(reservados);
+            var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = id};
+            return View(estacionamiento);
         }
         public ActionResult Libres()
         {
@@ -77,10 +76,26 @@ namespace Taller.Estacionamiento.Controllers
         {
             return View("EditarSlot");
         }
-        public ActionResult Tarifas()
+        [HttpGet]
+        public ActionResult Tarifas(int ID)
         {
-            return View("Tarifas");
+            var estacionamiento = new Models.Estacionamiento();
+            estacionamiento.Seleccionar(ID);
+
+            return View(estacionamiento);
         }
+        [HttpPost]
+        public ActionResult Tarifas(Models.Estacionamiento estacionamiento)
+        {
+            var dbEstacionamiento = new Models.Estacionamiento();
+            dbEstacionamiento.Seleccionar(estacionamiento.ID);
+            dbEstacionamiento.TarifaMinuto = estacionamiento.TarifaMinuto;
+            dbEstacionamiento.TiempoMinimo = estacionamiento.TiempoMinimo;
+            dbEstacionamiento.Modificar();
+
+            return RedirectToAction("Index", "Home");
+        }
+
 
         public ActionResult Promociones()
         {
