@@ -49,24 +49,46 @@ namespace Taller.Estacionamiento.Controllers
             return View(estacionamiento);
         }
 
-        public ActionResult Administrar(Taller.Estacionamiento.Models.Estacionamiento estacionamiento)
+        public ActionResult Administrar(int ID)
         {
-            //Para la prueba de que ingresa en el estacionamiento.
-            //estacionamiento.ID = 1;
-            return View("Administrar", estacionamiento);
+            var est = new Models.Estacionamiento();
+            if (est.Seleccionar(ID))
+            {
+                return View("Administrar", est);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult AgregarSlot()
+        public ActionResult AgregarSlot(int ID)
         {
+            ViewData["ID"] = ID;
             return View("AgregarSlot");
         }
 
         [HttpPost]
-        public ActionResult AgregarSlot(Models.Espacio espacio, Models.Estacionamiento estacionamiento)
+        public ActionResult AgregarSlot(Models.Espacio espacio, int ID)
         {
-            estacionamiento.AgregarEspacio(espacio);
-            return RedirectToAction("Administrar", new { ID = estacionamiento.ID });
-        }
+                var est = new Models.Estacionamiento();
+                if (est.Seleccionar(ID))
+                {
+                    if (est.SeleccionarEspacio(ID, espacio) || espacio.Codigo == null)
+                    {
+                        return RedirectToAction("AgregarSlot", new { ID = ID });
+                    }
+                    else
+                    {
+                        est.AgregarEspacio(espacio);
+                        return RedirectToAction("Administrar", new { ID = ID });
+
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("AgregarSlot", new { ID = ID });
+                }
+                
+         }
+        
         
         public ActionResult EditarSlot()
         {
