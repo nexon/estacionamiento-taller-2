@@ -12,7 +12,7 @@ BEGIN
 		nombre = inNombre,
         contrasenia = inContrasenia,
         email = inEmail,
-        inTelefono = inTelefono
+        telefono = inTelefono
 
 	WHERE rut = inRut;
 END $$
