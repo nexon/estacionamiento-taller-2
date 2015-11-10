@@ -50,25 +50,50 @@ namespace Taller.Estacionamiento.Controllers
 
             return View(listaLibres);
         }
-        public ActionResult Administrar(Taller.Estacionamiento.Models.Estacionamiento estacionamiento)
+        [HttpGet]
+        public ActionResult Administrar(int ID)
         {
-            //Para la prueba de que ingresa en el estacionamiento.
-            //estacionamiento.ID = 1;
-            return View("Administrar", estacionamiento);
-        }
 
-        public ActionResult AgregarSlot()
+            var est = new Models.Estacionamiento();
+            if (est.Seleccionar(ID))
+            {
+                return View("Administrar", est);
+            }
+            return View("Administrar");
+        }
+        [HttpGet]
+        public ActionResult AgregarSlot(int ID)
         {
+            ViewData["ID"] = ID ;
             return View("AgregarSlot");
         }
 
         [HttpPost]
-        public ActionResult AgregarSlot(Models.Espacio espacio, Models.Estacionamiento estacionamiento)
+        public ActionResult AgregarSlot(Models.Espacio espacio, int ID)
         {
-            estacionamiento.AgregarEspacio(espacio);
-            return RedirectToAction("Administrar", new { ID = estacionamiento.ID });
+            if (ModelState.IsValid)
+            {
+                var est = new Models.Estacionamiento();
+                if (est.Seleccionar(ID))
+                {
+                    if (est.SeleccionarEspacio(ID, espacio))
+                    {
+                        return View("AgregarSlot");
+                    }
+                    else
+                    {
+                        est.AgregarEspacio(espacio);
+                        return RedirectToAction("Administrar", new { ID = ID });
+
+                    }
+                }
+                return View("AgregarSlot");
+            }
+            else
+            {
+                return View("AgregarSlot");
+            }
         }
-        
         public ActionResult EditarSlot()
         {
             return View("EditarSlot");
