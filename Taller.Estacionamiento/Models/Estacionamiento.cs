@@ -97,7 +97,7 @@ namespace Taller.Estacionamiento.Models
         }
 
         //public string IngresarVehiculo(Vehiculo vehiculo, Espacio espacio)
-        public void EstacionarVehiculo(Vehiculo vehiculo, Espacio espacio)
+        public void EstacionarVehiculo(Espacio espacio)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace Taller.Estacionamiento.Models
                 var comando = new MySqlCommand() { CommandText = "Estacionamiento_EstacionarVehiculo", CommandType = System.Data.CommandType.StoredProcedure };
                 comando.Parameters.AddWithValue("inFecha_ingreso", espacio.IngresoVehiculo);
                 comando.Parameters.AddWithValue("inId_estacionamiento", this.ID);
-                comando.Parameters.AddWithValue("inId_vehiculo", vehiculo.Patente);
+                comando.Parameters.AddWithValue("inId_vehiculo", espacio.Vehiculo.Patente);
                 comando.Parameters.AddWithValue("inId_espacio", espacio.Codigo);
                 Data.Ejecutar(comando);
             }

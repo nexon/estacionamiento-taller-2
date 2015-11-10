@@ -4,7 +4,7 @@ CREATE PROCEDURE Estacionamiento_DespacharVehiculo (
     inFecha_salida datetime,
     inMonto int,
     inId_estacionamiento int,
-    inId_espacio int,
+    inId_espacio int
 )
 
 BEGIN 

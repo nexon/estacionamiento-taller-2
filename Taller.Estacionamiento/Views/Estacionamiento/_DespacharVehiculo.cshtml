@@ -10,7 +10,7 @@
             <div class="modal-body">
                 @using (Html.BeginForm("DespacharVehiculo", "Estacionamiento", FormMethod.Post))
                 {
-                    <input type="hidden" id="id" class="form-control" />
+                    <input type="hidden" id="ID" name="ID" class="form-control" />
                     @Html.HiddenFor(model => model.IngresoVehiculo, new { @id = "ingreso"})
                     <div class="form-group">
                         <label for="Nombre">Estacionamiento</label>
@@ -23,10 +23,6 @@
                     <div class="form-group">
                         <label for="Nombre">Patente</label>
                         @Html.TextBoxFor(model => model.Vehiculo.Patente, new { @id = "patente", @class = "form-control", disabled = true })
-                    </div>
-                    <div class="form-group">
-                        <label for="Nombre">Monto</label>
-                        <input type="text" value="@monto" class="form-control" disabled />
                     </div>
                     <input type="submit" class="btn btn-primary" value="Despachar" />
                 }

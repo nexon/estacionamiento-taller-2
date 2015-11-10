@@ -201,17 +201,15 @@ namespace Taller.Estacionamiento.Controllers
 
 
         [HttpPost]
-        public ActionResult EstacionarVehiculo(Espacio espacio, int ID, string Patente)
+        public ActionResult EstacionarVehiculo(Espacio espacio, int ID)
         {
             var estacionamiento = new Models.Estacionamiento();
-            var vehiculo = new Vehiculo();
 
             estacionamiento.Seleccionar(ID);
-            vehiculo.Patente = Patente;
 
-            estacionamiento.EstacionarVehiculo(vehiculo, espacio);
+            estacionamiento.EstacionarVehiculo(espacio);
 
-            return RedirectToAction("Libres", new {  id_estacionamiento = estacionamiento.ID});
+            return RedirectToAction("Libres", new {  ID = estacionamiento.ID});
         }
 
         [HttpPost]
@@ -223,7 +221,7 @@ namespace Taller.Estacionamiento.Controllers
 
             estacionamiento.DespacharVehiculo(espacio);
 
-            return RedirectToAction("Ocupados", new { id_estacionamiento = estacionamiento.ID });
+            return RedirectToAction("Ocupados", new { ID = estacionamiento.ID });
         }
     }
 }
