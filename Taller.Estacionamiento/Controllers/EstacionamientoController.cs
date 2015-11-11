@@ -226,6 +226,28 @@ namespace Taller.Estacionamiento.Controllers
             return View("Tarjetero");
         }
 
+        [HttpPost]
+        public ActionResult EstacionarVehiculo(Espacio espacio, int ID)
+        {
+            var estacionamiento = new Models.Estacionamiento();
 
+            estacionamiento.Seleccionar(ID);
+
+            estacionamiento.EstacionarVehiculo(espacio);
+
+            return RedirectToAction("Libres", new { ID = estacionamiento.ID });
+        }
+
+        [HttpPost]
+        public ActionResult DespacharVehiculo(Espacio espacio, int ID)
+        {
+            var estacionamiento = new Models.Estacionamiento();
+
+            estacionamiento.Seleccionar(ID);
+
+            estacionamiento.DespacharVehiculo(espacio);
+
+            return RedirectToAction("Ocupados", new { ID = estacionamiento.ID });
+        }
     }
 }

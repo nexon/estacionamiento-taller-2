@@ -94,14 +94,56 @@ namespace Taller.Estacionamiento.Models
             return false;
         }
 
-        public string IngresarVehiculo(Vehiculo vehiculo, Espacio espacio)
+        //public string IngresarVehiculo(Vehiculo vehiculo, Espacio espacio)
+        public void EstacionarVehiculo(Espacio espacio)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.EstacionarVehiculo", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Estacionamiento_EstacionarVehiculo", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inFecha_ingreso", espacio.IngresoVehiculo);
+                comando.Parameters.AddWithValue("inId_estacionamiento", this.ID);
+                comando.Parameters.AddWithValue("inId_vehiculo", espacio.Vehiculo.Patente);
+                comando.Parameters.AddWithValue("inId_espacio", espacio.Codigo);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.EstacionarVehiculo", this.ToString());
+            }
         }
 
-        public int LiberarEspacio(Espacio espacio)
+        //public int LiberarEspacio(Espacio espacio)
+        public void DespacharVehiculo(Espacio espacio)
         {
-            throw new NotImplementedException();
+            try
+            {
+                int monto;
+                int cant_minutos = (int)(espacio.SalidaVehiculo - espacio.IngresoVehiculo).TotalMinutes;
+                if (cant_minutos <= this.TiempoMinimo)
+                    monto = this.TarifaMinuto * this.TiempoMinimo;
+                else
+                    monto = cant_minutos * this.TarifaMinuto;
+                Logger.EntradaMetodo("Estacionamiento.EstacionarVehiculo", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Estacionamiento_EstacionarVehiculo", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inFecha_salida", DateTime.Now);
+                comando.Parameters.AddWithValue("inMonto", monto);
+                comando.Parameters.AddWithValue("inId_estacionamiento", this.ID);
+                comando.Parameters.AddWithValue("inId_espacio", espacio.Codigo);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.EstacionarVehiculo", this.ToString());
+            }
         }
 
         /// <summary>
