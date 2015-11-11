@@ -29,13 +29,11 @@ namespace Taller.Estacionamiento.Controllers
         {
             return View("EditarInformacion");
         }
-        public ActionResult Ocupados()
+        public ActionResult Ocupados(int ID)
         {
             var estacionamiento = new Estacionamiento.Models.Estacionamiento();
-            ///////////ESTACIONAMIENTO DE PRUEBA///////////
-            estacionamiento.ID = 1;
-            List < Espacio > listaOcupados = estacionamiento.Ocupados();
-            return View("Ocupados", listaOcupados);
+            estacionamiento.Seleccionar(ID); 
+            return View(estacionamiento);
         }
         public ActionResult Reservados(int id)
         {
@@ -245,8 +243,15 @@ namespace Taller.Estacionamiento.Controllers
 
             estacionamiento.Seleccionar(ID);
 
-            estacionamiento.DespacharVehiculo(espacio);
+            int monto;
+            int cant_minutos = (int)(espacio.SalidaVehiculo - espacio.IngresoVehiculo).TotalMinutes;
+            if (cant_minutos <= estacionamiento.TiempoMinimo)
+                monto = estacionamiento.TarifaMinuto * estacionamiento.TiempoMinimo;
+            else
+                monto = cant_minutos * estacionamiento.TarifaMinuto;
 
+            estacionamiento.DespacharVehiculo(espacio);
+            HttpContext.Session.Add("INFO_MESSAGE", "El monto a pagar es: " + monto);
             return RedirectToAction("Ocupados", new { ID = estacionamiento.ID });
         }
     }
