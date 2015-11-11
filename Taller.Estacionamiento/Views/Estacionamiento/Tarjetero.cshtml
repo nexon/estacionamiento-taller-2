@@ -1,6 +1,7 @@
 ﻿@model Taller.Estacionamiento.Models.Tarjetero
 @{
     ViewBag.Title = "Tarjetero";
+    var personalList = ViewData["PersonaSelectList"] as IEnumerable<SelectListItem>;
 }
 
 @section ViewsCCS {
@@ -57,19 +58,21 @@
     </div>
 </div>
 &nbsp;
-<div class="row">
-    <div class="col-xs-12">
-        <button class="btn btn-success" data-toggle="modal" data-target="#modalEntrada">
-            <i class="ace-icon fa fa-sign-in bigger-120"></i>
-            Entrada
-        </button>
+@if(@personalList.Count()>0)
+{ 
+    <div class="row">
+        <div class="col-xs-12">
+            <button class="btn btn-success" data-toggle="modal" data-target="#modalEntrada">
+                <i class="ace-icon fa fa-sign-in bigger-120"></i>
+                Entrada
+            </button>
+        </div>
     </div>
-</div>
-@Html.Partial("_IngresoPersonal", new Taller.Estacionamiento.Models.RegistroPersonal(){
-                                    Personal = new Taller.Estacionamiento.Models.Personal(),
-                                    Estacionamiento = @Model.Estacionamiento
-})
-
+    @Html.Partial("_IngresoPersonal", new Taller.Estacionamiento.Models.RegistroPersonal(){
+                                        Personal = new Taller.Estacionamiento.Models.Personal(),
+                                        Estacionamiento = @Model.Estacionamiento
+    })
+}
 <div class="modal fade" id="modalSalida" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -93,6 +96,7 @@
                                         </div>
                                     </div>
                                 </div>
+                             </div>
                         </form>
                     </div>
                 </div>

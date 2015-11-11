@@ -185,9 +185,11 @@ namespace Taller.Estacionamiento.Controllers
         {
             Models.Estacionamiento e = new Models.Estacionamiento();
             e.Seleccionar(id);
-            //List<Personal> free_personal = e.Personal().Except(e.Tarjetero.PersonalTrabajando()).ToList();
+            List<Personal> free_personal = e.Personal();
+            List<Personal> busy_personal = e.Tarjetero.PersonalTrabajando();
+            free_personal.RemoveAll(c => busy_personal.Any(c2 => c2.ID == c.ID ));
             Models.Tarjetero tarjetero = new Models.Tarjetero(e);
-            IEnumerable<SelectListItem> items = new SelectList(e.Personal(), "ID","Nombre");
+            IEnumerable<SelectListItem> items = new SelectList(free_personal, "ID","Nombre");
             ViewData["PersonaSelectList"] = items;
             return View("Tarjetero", tarjetero);
         }

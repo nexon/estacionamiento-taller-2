@@ -44,7 +44,31 @@ namespace Taller.Estacionamiento.Models
         }
         public List<Personal> PersonalTrabajando()
         {
-            throw new NotImplementedException();
+            List<Personal> listaPersonal = new List<Personal>();
+            try
+            {
+                Logger.EntradaMetodo("Tarjetero.PersonalTrabajando", this.ToString());
+
+                var comando = new MySqlCommand() { CommandText = "personal_trabajando", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inIdEstacionamiento", this.Estacionamiento.ID);
+                var data = Data.Obtener(comando);
+                foreach (DataRow dr in data.Tables[0].Rows)
+                {
+                    Personal personal = new Personal();
+                    int id_personal = Convert.ToInt32(dr["id_personal"]);
+                    personal.Seleccionar(id_personal);
+                    listaPersonal.Add(personal);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.Personal_Todos", this.ToString());
+            }
+            return listaPersonal;
         }
         public List<RegistroPersonal> RegistrosPersonal()
         {
