@@ -45,7 +45,8 @@ namespace Taller.Estacionamiento.Controllers
         }
         public ActionResult Libres(int id)
         {
-            var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = id };
+            var estacionamiento = new Estacionamiento.Models.Estacionamiento();
+            estacionamiento.Seleccionar(id);
             return View(estacionamiento);
         }
 
