@@ -166,7 +166,7 @@
                     </li>
                     <li class="light-blue">
                         <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                            <img class="nav-user-photo" src="/Content/avatars/user.jpg" alt="Jason's Photo" />
+                            <img class="nav-user-photo" src="~/Content/avatars/user.jpg" alt="Jason's Photo" />
                             <span class="user-info">
                                 <small>Bienvenido,</small>
                                 Jason
@@ -264,14 +264,14 @@
                             <b class="arrow"></b>
                         </li>
                         <li class="">
-                            <a href="@Url.Action("Administrar","Estacionamiento")">
+                            <a href="@Url.Action("Administrar", "Estacionamiento", new RouteValueDictionary(new { ID = 1 }))">
                                 <i class="menu-icon fa fa-caret-right"></i>
                                 Administrar
                             </a>
                             <b class="arrow"></b>
                         </li>
                         <li class="">
-                            <a href="@Url.Action("Tarifas","Estacionamiento")">
+                            <a href="@Url.Action("Tarifas", "Estacionamiento", new RouteValueDictionary(new {ID = 1}))">
                                 <i class="menu-icon fa fa-caret-right"></i>
                                 Tarifas
                             </a>
@@ -286,7 +286,7 @@
                             <b class="arrow"></b>
                         </li>
                         <li class="">
-                            <a href="@Url.Action("Personal","Estacionamiento")">
+                            <a href="@Url.Action("Personal", "Estacionamiento", new RouteValueDictionary(new {ID = 1}))">
                                 <i class="menu-icon fa fa-caret-right"></i>
                                 Personal
                             </a>
@@ -395,10 +395,6 @@
     <!-- Scripts para los dataTables-->
     <script type="text/javascript" src=@Url.Content("~/Scripts/dataTables/jquery.dataTables.js")></script>
     <script type="text/javascript" src=@Url.Content("~/Scripts/dataTables/jquery.dataTables.bootstrap.js")></script>
-
-    <!-- Scripts para la validacion de los campos de los formularios-->
-    <script src=@Url.Content("~/Scripts/jquery.validate.js")></script>
-    <script src=@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")></script>
 
     <!--Espacio donde se agregaran nuevos scripts en cada vista-->
     @RenderSection("ViewsScripts", required: false)

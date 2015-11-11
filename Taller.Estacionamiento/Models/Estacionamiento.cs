@@ -24,14 +24,13 @@ namespace Taller.Estacionamiento.Models
         public double CoordenadaLatitud { get; set; }
         public double CoordenadaLongitud { get; set; }
         public Tarjetero Tarjetero { get; set; }
-        public List<Personal> listaPersonal;
+
 
         /// <summary>
         /// constructor
         /// </summary>
         public Estacionamiento()
         {
-            this.listaPersonal = new List<Personal>();
             this.Tarjetero = new Tarjetero(this); //es necesario setear siempre el ID de Estacionamiento!!!! 
         }
 
@@ -63,7 +62,6 @@ namespace Taller.Estacionamiento.Models
                     this.Capacidad = Convert.ToInt32(dr["estacionamiento_Capacidad"]);
                     this.TiempoMinimo = Convert.ToInt32(dr["estacionamiento_TiempoMinimo"]);
                     this.TarifaMinuto = Convert.ToInt32(dr["estacionamiento_TarifaMinuto"]);
-                    //el campo estacionamiento_CantMinutos no tengo idea para que es
                     if (dr["estacionamiento_Apertura"].ToString() != "" && dr["estacionamiento_Apertura"] != null)
                     {
                         this.Apertura = Convert.ToDateTime(dr["estacionamiento_Apertura"]);
@@ -97,18 +95,66 @@ namespace Taller.Estacionamiento.Models
             return false;
         }
 
-        public string IngresarVehiculo(Vehiculo vehiculo, Espacio espacio)
+        //public string IngresarVehiculo(Vehiculo vehiculo, Espacio espacio)
+        public void EstacionarVehiculo(Espacio espacio)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.EstacionarVehiculo", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Estacionamiento_EstacionarVehiculo", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inFecha_ingreso", espacio.IngresoVehiculo);
+                comando.Parameters.AddWithValue("inId_estacionamiento", this.ID);
+                comando.Parameters.AddWithValue("inId_vehiculo", espacio.Vehiculo.Patente);
+                comando.Parameters.AddWithValue("inCodigo", espacio.Codigo);
+                Data.Ejecutar(comando);
+        }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.EstacionarVehiculo", this.ToString());
+            }
         }
 
-        public int LiberarEspacio(Espacio espacio)
+        //public int LiberarEspacio(Espacio espacio)
+        public void DespacharVehiculo(Espacio espacio)
         {
-            throw new NotImplementedException();
+            try
+            {
+                int monto;
+                int cant_minutos = (int)(espacio.SalidaVehiculo - espacio.IngresoVehiculo).TotalMinutes;
+                if (cant_minutos <= this.TiempoMinimo)
+                    monto = this.TarifaMinuto * this.TiempoMinimo;
+                else
+                    monto = cant_minutos * this.TarifaMinuto;
+                Logger.EntradaMetodo("Estacionamiento.DespacharVehiculo", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Estacionamiento_DespacharVehiculo", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inFecha_salida", DateTime.Now);
+                comando.Parameters.AddWithValue("inMonto", monto);
+                comando.Parameters.AddWithValue("inId_estacionamiento", this.ID);
+                comando.Parameters.AddWithValue("inCodigo", espacio.Codigo);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.DespacharVehiculo", this.ToString());
+            }
         }
+
+        /// <summary>
+        /// retorna una lista de personales de un estacionamiento,
+        /// con los datos que tienen como usuario
+        /// </summary>
+        /// <returns></returns>
         public List<Personal> Personal()
         {
-            listaPersonal = new List<Personal>();
+            List<Personal> listaPersonal = new List<Personal>();
             try
             {
                 Logger.EntradaMetodo("Estacionamiento.Personal_Todos", this.ToString());
@@ -138,13 +184,14 @@ namespace Taller.Estacionamiento.Models
             }
             return listaPersonal;
         }
+
         public void AgregarPersonal(Personal personal)
         {
             try
             {
                 Logger.EntradaMetodo("Estacionamiento.AgregarPersonal(Personal personal)", this.ToString());
 
-                var command = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "personal_estacionamiento_seleccionar" };
+               /* var command = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "personal_estacionamiento_seleccionar" };
                 command.Parameters.AddWithValue("inIdPersonal", personal.Rut);
                 command.Parameters.AddWithValue("inIdEstacionamiento", this.ID);
                 DataSet ds = Data.Obtener(command);
@@ -152,12 +199,13 @@ namespace Taller.Estacionamiento.Models
                 if (dt.Rows.Count > 0)
                 {
                     return; //ya existe uno así que no hacemos nada :P
-                }
+                }*/
 
                 var comando = new MySqlCommand() { CommandText = "personal_estacionamiento_agregar", CommandType = System.Data.CommandType.StoredProcedure };
-                comando.Parameters.AddWithValue("inIdPersonal", personal.Rut);
+                int rol = personal.RolToInt();
+                comando.Parameters.AddWithValue("inIdPersonal", personal.ID);
                 comando.Parameters.AddWithValue("inIdEstacionamiento", this.ID);
-                command.Parameters.AddWithValue("inIdRol", personal.Rol);
+                comando.Parameters.AddWithValue("inIdRol", rol);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
@@ -224,7 +272,7 @@ namespace Taller.Estacionamiento.Models
             finally
             {
 
-                Logger.SalidaMetodo("Estacionamiento.EliminarPersonal()", this.ToString());
+                Logger.SalidaMetodo("Estacionamiento.Reservados()", this.ToString());
             }
             return lista;
         }
@@ -464,6 +512,36 @@ namespace Taller.Estacionamiento.Models
             }
         }
 
+        public bool SeleccionarEspacio(int ID, Espacio e)
+        {
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.SeleccionarEspacio", this.ToString());
+
+                var comando = new MySqlCommand() { CommandText = "Estacionamiento_SeleccionarEspacio", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inID", ID);
+                comando.Parameters.AddWithValue("inCodigo", e.Codigo);
+
+                DataSet ds = Data.Obtener(comando);
+                DataTable dt = ds.Tables[0];
+
+                if (dt.Rows.Count > 0)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.SeleccionarEspacio", this.ToString());
+            }
+            return false;
+        }
+
+
         public void EliminarEspacio(Espacio espacio)
         {
             try
@@ -497,7 +575,6 @@ namespace Taller.Estacionamiento.Models
                 comando.Parameters.AddWithValue("inCapacidad", this.Capacidad);
                 comando.Parameters.AddWithValue("inTiempoMinimo", this.TiempoMinimo);
                 comando.Parameters.AddWithValue("inTarifaMinuto", this.TarifaMinuto);
-                comando.Parameters.AddWithValue("inCantMinutos", 0);
                 comando.Parameters.AddWithValue("inApertura", this.Apertura);
                 comando.Parameters.AddWithValue("inCierre", this.Cierre);
                 comando.Parameters.AddWithValue("inCoordenadaLatitud", this.CoordenadaLatitud);
@@ -526,7 +603,6 @@ namespace Taller.Estacionamiento.Models
                 comando.Parameters.AddWithValue("inCapacidad", this.Capacidad);
                 comando.Parameters.AddWithValue("inTiempoMinimo", this.TiempoMinimo);
                 comando.Parameters.AddWithValue("inTarifaMinuto", this.TarifaMinuto);
-                comando.Parameters.AddWithValue("inCantMinutos", 0);
                 comando.Parameters.AddWithValue("inApertura", this.Apertura);
                 comando.Parameters.AddWithValue("inCierre", this.Cierre);
                 comando.Parameters.AddWithValue("inCoordenadaLatitud", this.CoordenadaLatitud);
