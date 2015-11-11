@@ -4,7 +4,7 @@ CREATE PROCEDURE Estacionamiento_Disponibles (
 )
 
 BEGIN
-	SELECT codigo AS Espacio_Codigo
+	SELECT Espacios.codigo AS Espacio_Codigo
 	FROM
 		(SELECT codigo 
 		FROM Espacio 

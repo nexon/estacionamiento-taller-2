@@ -4,7 +4,7 @@ CREATE PROCEDURE Estacionamiento_EstacionarVehiculo (
     inFecha_ingreso datetime,
     inId_estacionamiento int,
     inId_vehiculo int,
-    inCodigo int
+    inCodigo varchar(15)
 )
 
 BEGIN 

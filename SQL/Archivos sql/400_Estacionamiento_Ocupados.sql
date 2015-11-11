@@ -13,6 +13,6 @@ BEGIN
 		Espacio, Vehiculo, (SELECT fecha_reserva, fecha_ingreso, codigo, id_vehiculo 
 								 FROM Registro
 							  	 WHERE id_estacionamiento = inID_Estacionamiento AND fecha_ingreso is NOT NULL AND fecha_salida is NULL) AS ocupados
-	WHERE Espacio.codigo = 	ocupados.codigo AND Vehiculo.id_vehiculo = ocupados.id_vehiculo;
+	WHERE Espacio.codigo = 	ocupados.codigo AND Vehiculo.patente = ocupados.id_vehiculo;
 END
 $$

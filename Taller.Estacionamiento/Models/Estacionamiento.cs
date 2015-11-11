@@ -104,7 +104,7 @@ namespace Taller.Estacionamiento.Models
                 comando.Parameters.AddWithValue("inFecha_ingreso", espacio.IngresoVehiculo);
                 comando.Parameters.AddWithValue("inId_estacionamiento", this.ID);
                 comando.Parameters.AddWithValue("inId_vehiculo", espacio.Vehiculo.Patente);
-                comando.Parameters.AddWithValue("inId_espacio", espacio.Codigo);
+                comando.Parameters.AddWithValue("inCodigo", espacio.Codigo);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
@@ -128,12 +128,12 @@ namespace Taller.Estacionamiento.Models
                     monto = this.TarifaMinuto * this.TiempoMinimo;
                 else
                     monto = cant_minutos * this.TarifaMinuto;
-                Logger.EntradaMetodo("Estacionamiento.EstacionarVehiculo", this.ToString());
-                var comando = new MySqlCommand() { CommandText = "Estacionamiento_EstacionarVehiculo", CommandType = System.Data.CommandType.StoredProcedure };
+                Logger.EntradaMetodo("Estacionamiento.DespacharVehiculo", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Estacionamiento_DespacharVehiculo", CommandType = System.Data.CommandType.StoredProcedure };
                 comando.Parameters.AddWithValue("inFecha_salida", DateTime.Now);
                 comando.Parameters.AddWithValue("inMonto", monto);
                 comando.Parameters.AddWithValue("inId_estacionamiento", this.ID);
-                comando.Parameters.AddWithValue("inId_espacio", espacio.Codigo);
+                comando.Parameters.AddWithValue("inCodigo", espacio.Codigo);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
@@ -142,7 +142,7 @@ namespace Taller.Estacionamiento.Models
             }
             finally
             {
-                Logger.SalidaMetodo("Estacionamiento.EstacionarVehiculo", this.ToString());
+                Logger.SalidaMetodo("Estacionamiento.DespacharVehiculo", this.ToString());
             }
         }
 

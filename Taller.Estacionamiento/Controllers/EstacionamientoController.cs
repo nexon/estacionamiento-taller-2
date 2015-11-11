@@ -240,8 +240,9 @@ namespace Taller.Estacionamiento.Controllers
         public ActionResult DespacharVehiculo(Espacio espacio, int ID)
         {
             var estacionamiento = new Models.Estacionamiento();
-
             estacionamiento.Seleccionar(ID);
+
+            espacio.SalidaVehiculo = DateTime.Now;
 
             int monto;
             int cant_minutos = (int)(espacio.SalidaVehiculo - espacio.IngresoVehiculo).TotalMinutes;
@@ -251,7 +252,6 @@ namespace Taller.Estacionamiento.Controllers
                 monto = cant_minutos * estacionamiento.TarifaMinuto;
 
             estacionamiento.DespacharVehiculo(espacio);
-            HttpContext.Session.Add("INFO_MESSAGE", "El monto a pagar es: " + monto);
             return RedirectToAction("Ocupados", new { ID = estacionamiento.ID });
         }
     }
