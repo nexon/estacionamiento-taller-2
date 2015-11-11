@@ -228,9 +228,8 @@ namespace Taller.Estacionamiento.Controllers
         public ActionResult EstacionarVehiculo(Espacio espacio, int ID)
         {
             var estacionamiento = new Models.Estacionamiento();
-
             estacionamiento.Seleccionar(ID);
-
+            espacio.IngresoVehiculo = DateTime.Now;
             estacionamiento.EstacionarVehiculo(espacio);
 
             return RedirectToAction("Libres", new { ID = estacionamiento.ID });
