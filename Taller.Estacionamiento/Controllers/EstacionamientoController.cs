@@ -29,13 +29,11 @@ namespace Taller.Estacionamiento.Controllers
         {
             return View("EditarInformacion");
         }
-        public ActionResult Ocupados()
+        public ActionResult Ocupados(int ID)
         {
             var estacionamiento = new Estacionamiento.Models.Estacionamiento();
-            ///////////ESTACIONAMIENTO DE PRUEBA///////////
-            estacionamiento.ID = 1;
-            List < Espacio > listaOcupados = estacionamiento.Ocupados();
-            return View("Ocupados", listaOcupados);
+            estacionamiento.Seleccionar(ID); 
+            return View(estacionamiento);
         }
         public ActionResult Reservados(int id)
         {
@@ -45,7 +43,8 @@ namespace Taller.Estacionamiento.Controllers
         }
         public ActionResult Libres(int id)
         {
-            var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = id };
+            var estacionamiento = new Estacionamiento.Models.Estacionamiento();
+            estacionamiento.Seleccionar(id);
             return View(estacionamiento);
         }
 
@@ -247,6 +246,34 @@ namespace Taller.Estacionamiento.Controllers
             return View("Tarjetero");
         }
 
+        [HttpPost]
+        public ActionResult EstacionarVehiculo(Espacio espacio, int ID)
+        {
+            var estacionamiento = new Models.Estacionamiento();
+            estacionamiento.Seleccionar(ID);
+            espacio.IngresoVehiculo = DateTime.Now;
+            estacionamiento.EstacionarVehiculo(espacio);
 
+            return RedirectToAction("Libres", new { ID = estacionamiento.ID });
+        }
+
+        [HttpPost]
+        public ActionResult DespacharVehiculo(Espacio espacio, int ID)
+        {
+            var estacionamiento = new Models.Estacionamiento();
+            estacionamiento.Seleccionar(ID);
+
+            espacio.SalidaVehiculo = DateTime.Now;
+
+            int monto;
+            int cant_minutos = (int)(espacio.SalidaVehiculo - espacio.IngresoVehiculo).TotalMinutes;
+            if (cant_minutos <= estacionamiento.TiempoMinimo)
+                monto = estacionamiento.TarifaMinuto * estacionamiento.TiempoMinimo;
+            else
+                monto = cant_minutos * estacionamiento.TarifaMinuto;
+
+            estacionamiento.DespacharVehiculo(espacio);
+            return RedirectToAction("Ocupados", new { ID = estacionamiento.ID });
+        }
     }
 }
