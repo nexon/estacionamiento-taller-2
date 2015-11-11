@@ -11,20 +11,10 @@ namespace Taller.Estacionamiento.Models
 {
     public class Usuario
     {
-        [Required(ErrorMessage = "Ingrese un Nombre valido")]
         public virtual string Nombre { get; set; }
-
-        [Required(ErrorMessage = "Ingrese un Rut valido")]
         public virtual int Rut { get; set; }
-
-
-        [Display(Name = "Correo")]
-        [EmailAddress(ErrorMessage = "Ingrese un Correo valido")]
         public virtual string Email { get; set; }
-
         public virtual string Contraseña { get; set; }
-
-        [Required(ErrorMessage = "Ingrese un Telefono valido")]
         public virtual int Telefono { get; set; }
 
         public virtual bool IniciarSesion(string email, string contraseña)
@@ -39,7 +29,7 @@ namespace Taller.Estacionamiento.Models
         /// <summary>
         /// Agregar un usuario en la base de datos
         /// </summary>
-        public virtual void Agregar()
+        public void Agregar()
         {
             try
             {

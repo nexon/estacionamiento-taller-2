@@ -9,7 +9,7 @@ BEGIN
 		r.monto_total as registro_monto_total,
 		r.id_estacionamiento as registro_id_estacionamiento,
 		r.id_vehiculo as registro_id_vehiculo,
-		r.id_espacio as registro_id_espacio
+		r.codigo as registro_codigo
 	from
 		registro as r
 	where
