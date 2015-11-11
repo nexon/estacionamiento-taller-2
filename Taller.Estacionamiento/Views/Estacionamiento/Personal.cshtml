@@ -2,7 +2,9 @@
 
 @{
     ViewBag.Title = "Personal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <div class="main-content">
     <div class="page-header">
@@ -76,7 +78,7 @@
 <div>
     <!-- PartialView PersonalCrear -start -->
     @{
-        Html.RenderAction("PersonalCrear","Estacionamiento");
+        Html.RenderAction("PersonalCrear", "Estacionamiento", new { id = @ViewData["idEstacionamiento"] });
     }
     <!-- PartialView PersonalCrear -end -->
 </div>
@@ -84,7 +86,7 @@
 <div>
     <!-- Bootstrap modal editar -start -->
     @{
-        Html.RenderAction("PersonalEditar", "Estacionamiento");
+        Html.RenderAction("PersonalEditar", "Estacionamiento", new { id = @ViewData["idEstacionamiento"] });
     }
     <!-- Bootstrap modal editar -end -->
 </div>
@@ -92,17 +94,17 @@
 <div>
     <!-- Bootstrap modal eliminar -start -->
     @{
-        Html.RenderAction("PersonalEliminar", "Estacionamiento");
+        Html.RenderAction("PersonalEliminar", "Estacionamiento", new { id = @ViewData["idEstacionamiento"] });
     }
     <!-- Bootstrap modal eliminar-end -->
 </div>
 
 
 @section ViewsScripts {
-    <script type="text/javascript" src="../Scripts/personal/personal.js"></script>
+   
+   <script type="text/javascript" src="@Url.Content("../../Scripts/personal/personal.js")"></script>
 
     <!-- Permite editar y eliminar un personal -->
-    <script type="text/javascript" src="../Scripts/personal/personal-vista.js"></script>
-
+    <script type="text/javascript" src="@Url.Content("~/Scripts/personal/personal-vista.js")"></script>    
 
 }
