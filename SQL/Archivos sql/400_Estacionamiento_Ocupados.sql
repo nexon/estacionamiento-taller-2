@@ -10,9 +10,9 @@ BEGIN
 		fecha_reserva	AS Fecha_Reserva,
 		fecha_ingreso 	AS Fecha_Ingreso
 	FROM
-		Espacio, Vehiculo, (SELECT fecha_reserva, fecha_ingreso, id_espacio, id_vehiculo 
+		Espacio, Vehiculo, (SELECT fecha_reserva, fecha_ingreso, codigo, id_vehiculo 
 								 FROM Registro
 							  	 WHERE id_estacionamiento = inID_Estacionamiento AND fecha_ingreso is NOT NULL AND fecha_salida is NULL) AS ocupados
-	WHERE Espacio.id_espacio = 	ocupados.id_espacio AND Vehiculo.id_vehiculo = ocupados.id_vehiculo;
+	WHERE Espacio.codigo = 	ocupados.codigo AND Vehiculo.id_vehiculo = ocupados.id_vehiculo;
 END
 $$
