@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Promociones";
+}
+
+<div class="page-header">
+    <h1>
+        Promociones
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Crear Nueva
+        </small>
+    </h1>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <form class="form-horizontal" id="cliente_form" role="form">
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nombre de Promoción </label>
+
+                <div class="col-sm-9">
+                    <input type="text" id="nombre_tarifa" name="nombre_tarifa" placeholder="Ej: Día Normal, Fin de Semana" class="col-xs-10 col-sm-5 " />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Descripción </label>
+
+                <div class="col-sm-9">
+                    <input type="text" id="precio_tarifa" name="precio_tarifa" placeholder="ej: Solo por hoy" class="col-xs-10 col-sm-5" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Inicio y Termino </label>
+
+                <div class="col-sm-9">
+                    <div class="input-daterange input-group col-xs-10 col-sm-5">
+                        <input type="text" class="input-sm form-control" name="fecha_inicio" id="fecha_inicio" />
+                        <span class="input-group-addon">
+                            <i class="fa fa-exchange"></i>
+                        </span>
+
+                        <input type="text" class="input-sm form-control" name="fecha_termino" id="fecha_termino" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Porcentaje de descuento </label>
+
+                <div class="col-sm-9">
+                    <input type="text" id="precio_tarifa" name="precio_tarifa" placeholder="ej: 10%, -200" class="col-xs-10 col-sm-5" />
+                </div>
+            </div>
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-info" type="button">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Crear
+                    </button>
+
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        Reiniciar
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+
+@section ViewsScripts {
+    <link rel="stylesheet" href=@Url.Content("~/Content/css/datepicker.css") />
+    <link rel="stylesheet" href=@Url.Content("~/Content/css/bootstrap-timepicker.css") />
+    <link rel="stylesheet" href=@Url.Content("~/Content/css/daterangepicker.css") />
+
+    <script src="../Scripts/date-time/bootstrap-datepicker.js"></script>
+    <script src="../Scripts/date-time/daterangepicker.js"></script>
+    <script type="text/javascript">
+    $('.input-daterange').datepicker({ autoclose: true });
+
+    </script>
+}
