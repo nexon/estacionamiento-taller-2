@@ -5,7 +5,7 @@ CREATE PROCEDURE Estacionamiento_Ocupados (
 BEGIN
 
 	SELECT
-		codigo			AS Espacio_Codigo,
+		Espacio.codigo	AS Espacio_Codigo,
 		patente			AS Vehiculo_Patente,
 		fecha_reserva	AS Fecha_Reserva,
 		fecha_ingreso 	AS Fecha_Ingreso
