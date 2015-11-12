@@ -369,6 +369,7 @@ namespace Taller.Estacionamiento.Models
                     Vehiculo vehiculo = new Vehiculo();
                     Reserva reserva = new Reserva();
                     Espacio espacio = new Espacio();
+
                     espacio.Codigo = Convert.ToString(dr["Espacio_Codigo"]);
                     vehiculo.Patente = Convert.ToString(dr["Vehiculo_Patente"]);
                     if (dr["Fecha_Reserva"] != DBNull.Value)
@@ -376,13 +377,13 @@ namespace Taller.Estacionamiento.Models
                     if (dr["Fecha_Ingreso"] != DBNull.Value)
                         espacio.IngresoVehiculo = Convert.ToDateTime(dr["Fecha_Ingreso"]);
 
-                    if (reserva.Expiracion == null && espacio.IngresoVehiculo == null && espacio.SalidaVehiculo == null)
+                    if (reserva.Expiracion == default(DateTime) && espacio.IngresoVehiculo == default(DateTime) && espacio.SalidaVehiculo == default(DateTime))
                         espacio.Estado = EstadoEspacio.Disponible;
 
-                    if (reserva.Expiracion != null && espacio.IngresoVehiculo == null && espacio.SalidaVehiculo == null)
+                    if (reserva.Expiracion != default(DateTime) && espacio.IngresoVehiculo == default(DateTime) && espacio.SalidaVehiculo == default(DateTime))
                         espacio.Estado = EstadoEspacio.Reservado;
 
-                    if (reserva.Expiracion != null && espacio.IngresoVehiculo != null && espacio.SalidaVehiculo == null)
+                    if (reserva.Expiracion != default(DateTime) && espacio.IngresoVehiculo != default(DateTime) && espacio.SalidaVehiculo == default(DateTime))
                         espacio.Estado = EstadoEspacio.Ocupado;
 
                     espacio.Vehiculo = vehiculo;
