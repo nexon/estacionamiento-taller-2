@@ -31,6 +31,7 @@ namespace Taller.Estacionamiento.Models
         /// </summary>
         public Estacionamiento()
         {
+            this.Tarjetero = new Tarjetero(this); //es necesario setear siempre el ID de Estacionamiento!!!! 
         }
 
         public bool Seleccionar(int estacionamientoId)
@@ -106,7 +107,7 @@ namespace Taller.Estacionamiento.Models
                 comando.Parameters.AddWithValue("inId_vehiculo", espacio.Vehiculo.Patente);
                 comando.Parameters.AddWithValue("inCodigo", espacio.Codigo);
                 Data.Ejecutar(comando);
-            }
+        }
             catch (Exception ex)
             {
                 Logger.Excepcion(ex);
@@ -164,7 +165,8 @@ namespace Taller.Estacionamiento.Models
                 foreach (DataRow dr in data.Tables[0].Rows)
                 {
                     Personal personal = new Personal();
-                    personal.Rut= Convert.ToInt32(dr["Usuario_rut"]);
+                    personal.ID = Convert.ToInt32(dr["Personal_ID"]);
+                    personal.Rut = Convert.ToInt32(dr["Usuario_rut"]);
                     personal.Nombre= Convert.ToString(dr["Usuario_Nombre"]);
                     personal.Contraseña = Convert.ToString(dr["Usuario_Contrasenia"]);
                     personal.Email = Convert.ToString(dr["Usuario_Email"]);
@@ -204,7 +206,7 @@ namespace Taller.Estacionamiento.Models
                 comando.Parameters.AddWithValue("inIdPersonal", personal.ID);
                 comando.Parameters.AddWithValue("inIdEstacionamiento", this.ID);
                 comando.Parameters.AddWithValue("inIdRol", rol);
-                Data.Ejecutar(comando); 
+                Data.Ejecutar(comando);
             }
             catch (Exception ex)
             {
@@ -213,7 +215,7 @@ namespace Taller.Estacionamiento.Models
             finally
             {
                 Logger.SalidaMetodo("Estacionamiento.AgregarPersonal", this.ToString());
-            }            
+            }
         }
 
         public void DesvincularPersonal(Personal Personal)

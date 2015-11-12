@@ -54,7 +54,7 @@ namespace Taller.Estacionamiento.Controllers
             if (est.Seleccionar(ID))
             {
                 return View("Administrar", est);
-            }
+        }
             return RedirectToAction("Index", "Home");
         }
 
@@ -73,12 +73,12 @@ namespace Taller.Estacionamiento.Controllers
                     if (est.SeleccionarEspacio(ID, espacio) || espacio.Codigo == null)
                     {
                         return RedirectToAction("AgregarSlot", new { ID = ID });
-                    }
+        }
                     else
                     {
                         est.AgregarEspacio(espacio);
                         return RedirectToAction("Administrar", new { ID = ID });
-
+        
                     }
                 }
                 else
@@ -130,7 +130,7 @@ namespace Taller.Estacionamiento.Controllers
                 //mostrar en la vista que no exiten personales en el estacionamiento
                 if(listaPersonal.Count==0){
 
-                }                                
+        }
                 return View(listaPersonal);
             }
             return RedirectToAction("Index", "Home");
@@ -138,7 +138,7 @@ namespace Taller.Estacionamiento.Controllers
 
         public PartialViewResult PersonalCrear(int id)
         {
-            Personal nuevoPersonal = new Personal();
+            Personal nuevoPersonal = new Personal();                        
             ViewData["idEstacionamiento"] = id;         
             return PartialView(nuevoPersonal);
         }
@@ -149,11 +149,11 @@ namespace Taller.Estacionamiento.Controllers
             var estacionamiento = new Models.Estacionamiento();
 
             if (estacionamiento.Seleccionar(id))
-            {                
+            {
                 List<Personal> listaPersonal =estacionamiento.Personal();
                 Personal personalSeleccionado = new Personal();
                 personalSeleccionado = listaPersonal.FirstOrDefault(x => x.Rut == personal.Rut);
-
+                
                 // se crea un nuevo personal, porque no existe un personal con el mismo Rut
                 if (personalSeleccionado == null)
                 {
@@ -173,8 +173,8 @@ namespace Taller.Estacionamiento.Controllers
                 else
                 {
                     //mostar mensaje que ya existe un personal con ese Rut
-                }                
-
+                }
+                     
             }
             return RedirectToAction("Personal", new { id = id });                     
         }
@@ -200,7 +200,7 @@ namespace Taller.Estacionamiento.Controllers
                 // modificar personal con mismo Rut
                 if (personalSeleccionado != null)
                 {
-                    //actualizar atributos
+                //actualizar atributos
                     personalSeleccionado.Nombre = personal.Nombre;
                     personalSeleccionado.Email = personal.Email;
                     personalSeleccionado.Telefono = personal.Telefono;
@@ -223,7 +223,7 @@ namespace Taller.Estacionamiento.Controllers
 
         [HttpPost]
         public ActionResult PersonalEliminar(int id, Personal personal)
-        {
+            {
             var estacionamiento = new Models.Estacionamiento();
 
             if (estacionamiento.Seleccionar(id))
@@ -240,10 +240,25 @@ namespace Taller.Estacionamiento.Controllers
             }
             return RedirectToAction("Personal", new { id = id });                  
         }
-
-        public ActionResult Tarjetero()
+        [HttpGet]
+        public ActionResult Tarjetero(int id)
         {
-            return View("Tarjetero");
+            Models.Estacionamiento e = new Models.Estacionamiento();
+            e.Seleccionar(id);
+            List<Personal> free_personal = e.Personal();
+            List<Personal> busy_personal = e.Tarjetero.PersonalTrabajando();
+            free_personal.RemoveAll(c => busy_personal.Any(c2 => c2.ID == c.ID ));
+            Models.Tarjetero tarjetero = new Models.Tarjetero(e);
+            IEnumerable<SelectListItem> items = new SelectList(free_personal, "ID","Nombre");
+            ViewData["PersonaSelectList"] = items;
+            return View("Tarjetero", tarjetero);
+        }
+
+        [HttpPost]
+        public ActionResult IngresoPersonal(RegistroPersonal rp)
+        {
+            rp.Estacionamiento.Tarjetero.RegistarIngreso(rp);
+            return RedirectToAction("Tarjetero", rp.Estacionamiento);
         }
 
         [HttpPost]
