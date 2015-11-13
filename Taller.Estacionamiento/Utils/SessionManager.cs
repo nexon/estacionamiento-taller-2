@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Taller.Estacionamiento
+namespace Taller.Estacionamiento.Utils
 {
     public class SessionManager
     {
