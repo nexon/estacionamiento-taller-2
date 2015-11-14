@@ -112,13 +112,6 @@ namespace Taller.Estacionamiento.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
-
-        public ActionResult Promociones()
-        {
-            return View("Promociones");
-        }
-
         public ActionResult Personal(int id)
         {
             var estacionamiento = new Models.Estacionamiento();
