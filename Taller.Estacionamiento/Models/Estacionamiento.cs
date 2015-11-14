@@ -292,6 +292,7 @@ namespace Taller.Estacionamiento.Models
 
                     Espacio espacio = new Espacio();
                     espacio.Codigo = Convert.ToString(dr["Espacio_Codigo"]);
+                    espacio.Estado = EstadoEspacio.Disponible;
                     disponibles.Add(espacio);
                 }
             }
