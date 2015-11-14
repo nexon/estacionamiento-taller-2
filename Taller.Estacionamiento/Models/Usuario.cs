@@ -79,5 +79,32 @@ namespace Taller.Estacionamiento.Models
         {
             throw new NotImplementedException();
         }
+
+        public void Estacionamientos()
+        {
+            var estacionamientos = new List<Estacionamiento>();
+            try
+            {
+                Logger.EntradaMetodo("Usuario.Estacionamientos", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Estacionamiento_Todos", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inRut", this.Rut);
+                var data = Data.Obtener(comando);
+                foreach (DataRow dr in data.Tables[0].Rows)
+                {
+                    Estacionamiento estacionamiento = new Estacionamiento();
+
+                    estacionamiento.Seleccionar(Convert.ToInt32(dr["ID_Estacionamiento"]));
+                    estacionamientos.Add(estacionamiento);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Usuario.Estacionamientos", this.ToString());
+            }
+        }
     }
 }
