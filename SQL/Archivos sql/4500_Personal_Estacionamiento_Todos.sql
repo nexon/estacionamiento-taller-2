@@ -4,6 +4,7 @@ CREATE PROCEDURE Personal_Estacionamiento_Todos(
 ) 
 BEGIN
   SELECT 
+  	personal.id_personal		AS Personal_ID,
     rut			    AS Usuario_rut,
 	nombre			AS Usuario_Nombre,
 	contrasenia	    AS Usuario_Contrasenia,	
