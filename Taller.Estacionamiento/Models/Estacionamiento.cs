@@ -412,7 +412,27 @@ namespace Taller.Estacionamiento.Models
 
         public void ConfirmarReserva(Espacio espacio)
         {
-            throw new NotImplementedException();
+           
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.ConfirmarReserva", this.ToString());
+                var command = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "estacionamiento_ConfirmarReserva" };
+                command.Parameters.AddWithValue("inFecha_ingreso", DateTime.Now);
+                command.Parameters.AddWithValue("inidEstacionamiento", this.ID);
+                command.Parameters.AddWithValue("inCodigoEspacio", espacio.Codigo);
+                Data.Ejecutar(command);
+ 
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.ReservarEspacio", this.ToString());
+            }
+
+
         }
 
         public void AgregarValoracion(double valoracion, int idUsuario)
