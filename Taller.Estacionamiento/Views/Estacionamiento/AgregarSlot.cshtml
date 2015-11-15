@@ -1,0 +1,72 @@
+﻿@model Taller.Estacionamiento.Models.Espacio
+
+@{
+    ViewBag.Title = "AgregarSlot";
+}
+@Html.ValidationMessage("validar")
+<div class="page-content">
+    <div class="page-header">
+        <h1>
+            <a href="@Url.Action("Administrar", "Estacionamiento", new { ID = (int)ViewData["ID"] })">
+                Administrar
+            </a>
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Agregar Slot
+            </small>
+        </h1>
+    </div><!-- /.page-header -->
+    @using (Html.BeginForm("AgregarSlot", "Estacionamiento", FormMethod.Post))
+    {
+   
+        <div class="row">
+            <div class="col-xs-12">
+
+                <div class="form-group">
+                    <label class="col-sm-3"> Identificador</label>
+                
+                    <div class="col-sm-9">
+                      
+                        @Html.TextBoxFor(model => model.Codigo)
+                        @Html.ValidationMessageFor(model => model.Codigo)
+                    </div>
+                </div>
+                <p>
+                    &nbsp;
+                </p>
+                <div class="form-group">
+                    <label class="col-sm-3">Estado</label>
+            
+                    <div class="col-sm-7">
+                       
+                        @Html.DropDownListFor(model => model.Estado, Enum.GetNames(typeof(Taller.Estacionamiento.Models.EstadoEspacio)).Select(e => new SelectListItem { Text = e }))
+                    </div>
+                </div>
+
+                &nbsp;
+                &nbsp;
+                @Html.ValidationSummary("")
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        @*<button type="button" class="btn btn-sm" data-dismiss="modal">
+                                <i class="ace-icon fa fa-arrow-left bigger-110"></i>
+                                Cancelar
+                            </button>*@
+
+                        <a href="@Url.Action("Administrar", "Estacionamiento", new { ID = (int) ViewData["ID"] })" class="btn btn-sm btn-danger" type="button">
+                            <i class="ace-icon glyphicon glyphicon-remove bigger-110"></i>
+                            Cancelar
+                        </a>
+
+                        &nbsp; &nbsp;
+                        <button class="btn btn-sm btn-success" type="submit">
+                            <i class="ace-icon fa fa-check bigger-110"></i>
+                            Aceptar
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
