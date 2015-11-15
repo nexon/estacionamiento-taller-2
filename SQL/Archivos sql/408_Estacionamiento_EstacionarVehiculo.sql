@@ -3,7 +3,7 @@ DROP PROCEDURE IF EXISTS Estacionamiento_EstacionarVehiculo $$
 CREATE PROCEDURE Estacionamiento_EstacionarVehiculo (
     inFecha_ingreso datetime,
     inId_estacionamiento int,
-    inId_vehiculo varchar(15),
+    inId_vehiculo int,
     inCodigo varchar(15)
 )
 
