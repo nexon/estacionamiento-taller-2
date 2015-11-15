@@ -26,55 +26,33 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var espacio in Model.Reservados()){
-                    <tr>
-                        <td>@Html.Label(espacio.Codigo)</td>
-                        <td>@Html.Label(espacio.Vehiculo.Patente)</td>
-                        <td>@Html.Label(espacio.Vehiculo.Conductor.Nombre)</td>
-                        <td>@Html.Label(espacio.Reserva.Expiracion.ToString())</td>
-                        
-                        <td>
-                            <div class="action-buttons">
-                                <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
-                                    <span class="label label-success">
-                                        <i class="ace-icon fa fa-car bigger-120"></i>
-                                        Registrar
-                                    </span>
-                                </a>
-                                <a class="red" href="#" data-toggle="modal" data-target="#myModal">
-                                    <span class="label label-danger">
-                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                        Eliminar
-                                    </span>
-                                </a>
-                            </div>
+                                @foreach (var espacio in Model.Reservados())
+                                {
+                                    <tr>
+                                        <td>@Html.Label(espacio.Codigo)</td>
+                                        <td>@Html.Label(espacio.Vehiculo.Patente)</td>
+                                        <td>@Html.Label(espacio.Vehiculo.Conductor.Nombre)</td>
+                                        <td>@Html.Label(espacio.Reserva.Expiracion.ToString())</td>
+
+                                        <td>
+                                            <div class="action-buttons">
+                                                <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
+                                                    <span class="label label-success">
+                                                        <i class="ace-icon fa fa-car bigger-120"></i>
+                                                        Registrar
+                                                    </span>
+                                                </a>
+                                        <a class="red eliminar" href="#" data-toggle="modal" data-target="#modalEliminar" data-codigo="@espacio.Codigo" data-nombre="@Model.Nombre" data-estacionamiento="@Model.ID" data-patente="@espacio.Vehiculo.Patente" data-cliente="@espacio.Vehiculo.Conductor.Nombre">
+                                            <span class="label label-danger">
+                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                Eliminar
+                                            </span>
+                                        </a>
+</div>
                         </td>
                     </tr>
                 }
 
-                <tr>
-                    <td>A-13</td>
-                    <td>XX-1123</td>
-                    <td>Juan Soto</td>
-                    <td>1:45</td>
-                    
-                    <td>
-                        <div class="action-buttons">
-                            <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
-                                <span class="label label-success">
-                                    <i class="ace-icon fa fa-car bigger-120"></i>
-                                    Registrar
-                                </span>
-                            </a>
-                            <a class="red" href="#" data-toggle="modal" data-target="#myModal">
-                                <span class="label label-danger">
-                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                    Eliminar
-                                </span>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>
@@ -127,7 +105,7 @@
                     <i class="ace-icon fa fa-arrow-left bigger-110"></i>
                     Cancelar
                 </button>
-                <button type="button" class="btn btn-sm btn-success">
+                <button type="button" class="btn btn-sm btn-success" data-dismiss="modal">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     Aceptar
                 </button>
@@ -136,54 +114,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Eliminar reserva</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Estacionamiento</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="form-field-1" class="col-xs-12" value="Estacionamientos Annita" disabled />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Patente</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="form-field-1" class="col-xs-12" value="XX-1212" disabled />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Cliente</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="form-field-1" class="col-xs-12" value="Patricio Pino" disabled />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Slot</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="form-field-1" class="col-xs-12" value="A-12" disabled />
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm" data-dismiss="modal">
-                    <i class="ace-icon fa fa-arrow-left bigger-110"></i>
-                    Cancelar
-                </button>
-                <button type="button" class="btn btn-sm btn-danger">
-                    <i class="ace-icon fa fa-trash-o bigger-110"></i>
-                    Eliminar
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+@Html.Partial("EliminarReserva", new Taller.Estacionamiento.Models.Espacio() { })
+
 @section ViewsScripts {
     <script type="text/javascript">
         $(document).ready(function () {
@@ -214,6 +146,24 @@
                 }
             });
         });
+
+        $(document).on("click", ".eliminar", function () {
+
+            $(".form-group #form-field-nombre").val($(this).data('nombre'));
+            console.log($(this).data('nombre'));
+            $(".form-group #form-field-patente").val($(this).data('patente'));
+            $(".form-group #form-field-cliente").val($(this).data('cliente'));
+
+
+            $(".form-group #ID").val($(this).data('estacionamiento'));
+            $(".form-group #Codigo").val($(this).data('codigo'));
+            $(".form-group #codigo1").val($(this).data('codigo'));
+
+            $('#modalEliminar').modal('show');
+        });
+
+
+
     </script>
 }
 

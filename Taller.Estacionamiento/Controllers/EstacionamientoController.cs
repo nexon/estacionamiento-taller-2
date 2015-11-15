@@ -39,6 +39,7 @@ namespace Taller.Estacionamiento.Controllers
         {
 
             var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = id};
+            estacionamiento.Seleccionar(estacionamiento.ID);
             return View(estacionamiento);
         }
         public ActionResult Libres(int id)
@@ -283,5 +284,19 @@ namespace Taller.Estacionamiento.Controllers
             estacionamiento.DespacharVehiculo(espacio);
             return RedirectToAction("Ocupados", new { ID = estacionamiento.ID });
         }
+
+
+        [HttpPost]
+        public ActionResult EliminarReserva(Models.Espacio espacio, int ID)
+        {
+            Models.Estacionamiento estacionamiento = new Models.Estacionamiento();
+
+            estacionamiento.Seleccionar(ID);
+
+            estacionamiento.EliminarReserva(espacio);
+
+            return RedirectToAction("Reservados", new { id = estacionamiento.ID });
+        }
+
     }
 }

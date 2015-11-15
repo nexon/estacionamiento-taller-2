@@ -682,5 +682,31 @@ namespace Taller.Estacionamiento.Models
             }
             return false;
         }
+
+        public void EliminarReserva(Espacio espacio)
+        {
+
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.EliminarReserva", this.ToString());
+                var command = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "registro_eliminar" };
+                command.Parameters.AddWithValue("inId_estacionamiento", this.ID);
+                command.Parameters.AddWithValue("inCodigo", espacio.Codigo);
+                Data.Ejecutar(command);
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.ReservarEspacio", this.ToString());
+            }
+
+
+        }
+
+
     }
 }
