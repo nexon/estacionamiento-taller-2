@@ -8,12 +8,14 @@
         var rut = $(this).attr("data-rut");
         var email = $(this).attr("data-email");
         var telefono = $(this).attr("data-telefono");
+        var rol = $(this).attr("data-rol");
 
         // se muestran los valores de los atributos que se quieren editar
         $("#personal-editar-nombre").val(nombre);
         $("#personal-editar-rut").val(rut);
         $("#personal-editar-email").val(email);
         $("#personal-editar-telefono").val(telefono);
+        $("#personal-editar-rol").val(rol);
 
         /* -solo el rut atributo tiene un campo hidden, porque no se puede editar */
         $("#personal-editar-rut-hidden").val(rut);
@@ -33,12 +35,14 @@
         var rut = $(this).attr("data-rut");
         var email = $(this).attr("data-email");
         var telefono = $(this).attr("data-telefono");
+        var rol = $(this).attr("data-rol");
 
         // se muestran los valores de los atributos que se quieren editar
         $("#personal-eliminar-nombre").val(nombre);
         $("#personal-eliminar-rut").val(rut);
         $("#personal-eliminar-email").val(email);
         $("#personal-eliminar-telefono").val(telefono);
+        $("#personal-eliminar-rol").val(rol);
 
         /* -cada atributo tiene un campo hidden
            -los atributos se deben modificar para ser enviado por post cuando se elimine un personal
@@ -47,13 +51,14 @@
         $("#personal-eliminar-rut-hidden").val(rut);
         $("#personal-eliminar-email-hidden").val(email);
         $("#personal-eliminar-telefono-hidden").val(telefono);
+        $("#personal-eliminar-rol-hidden").val(rol);
 
         // se muestra el modal dialog de eliminar personal
         $(this).attr("#modalEliminar").dialog("open");
 
         return false;
     });
-  
+
 
 
 });
