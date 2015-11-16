@@ -109,15 +109,20 @@
     <br />
     <div class="">
         <div class="col-md-offset-2 col-md-9">
-            <a href="@Url.Action("EditarInformacion", "Estacionamiento", new { id = Model.ID })">
-                <span class="label label-success">
-                    <i class="ace-icon fa fa-pencil bigger-110"></i>
-                    Editar
-                </span>
-            </a>
-
+            <button class="btn btn-info" style="margin-bottom:5px" type="button" data-toggle="modal" data-target="#modalInformacion">
+                <i class="ace-icon fa fa-pencil bigger-110"></i>
+                Editar
+            </button>
         </div>
     </div>
+</div>
+
+<div>
+    <!-- PartialView PersonalCrear -start -->
+    @{
+        Html.RenderAction("EstacionamientoEditar", "Estacionamiento", new { id = Model.ID });
+    }
+    <!-- PartialView PersonalCrear -end -->
 </div>
 
 @section ViewsScripts {

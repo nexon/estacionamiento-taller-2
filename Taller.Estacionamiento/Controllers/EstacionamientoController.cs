@@ -25,16 +25,18 @@ namespace Taller.Estacionamiento.Controllers
             }
             return RedirectToAction("Index","Home");
         }
-        public ActionResult EditarInformacion(int id)
+
+        public PartialViewResult EstacionamientoEditar(int id)
         {
             Models.Estacionamiento estacionamiento = new Models.Estacionamiento();
             estacionamiento.Seleccionar(id);
-            return View(estacionamiento);
+            return PartialView(estacionamiento);
         }
+
         [HttpPost]
-        public ActionResult EditarInformacion(Models.Estacionamiento estacionamiento,String apertura,String cierre)
+        public ActionResult EstacionamientoEditar(Models.Estacionamiento estacionamiento, String apertura, String cierre)
         {
-            string auxiliar = apertura+":00";
+            string auxiliar = apertura + ":00";
             estacionamiento.Apertura = DateTime.Parse(auxiliar);
             auxiliar = cierre + ":00";
             estacionamiento.Cierre = DateTime.Parse(auxiliar);
