@@ -7,4 +7,5 @@
  BEGIN
  	INSERT INTO Personal(id_usuario)
  	VALUES (inId_usuario);
+ 	SELECT LAST_INSERT_ID();
 END$$

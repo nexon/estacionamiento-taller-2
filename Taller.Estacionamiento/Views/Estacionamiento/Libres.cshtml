@@ -1,17 +1,15 @@
-﻿@model IEnumerable<Taller.Estacionamiento.Models.Espacio>
+﻿@model Taller.Estacionamiento.Models.Estacionamiento
 @{
     ViewBag.Title = "Libres";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-
 
 <div class="page-header">
     <h1>
-        Estacionamiento
+        @Model.Nombre
         <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
-            Libres
+            @ViewBag.Title
         </small>
     </h1>
 </div>
@@ -20,20 +18,18 @@
         <table id="dynamic-table" class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
-                    
-                    <th>Slot</th>
+                    <th>Espacio</th>
                     <th>Acción</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var espacio in Model)
+                @foreach (var libre in Model.Disponibles())
                 {
                     <tr>
-                        
-                        <td>@Html.Label("Nombre", espacio.Codigo)</td>
+                        <td>@Html.Label("Nombre", libre.Codigo)</td>
                         <td>
                             <div class="action-buttons">
-                                <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
+                                <a data-toggle="modal" data-id="@Model.ID" data-nombre="@Model.Nombre" data-codigo="@libre.Codigo" class="open-EstacionarVehiculoModal" href="#EstacionarVehiculoModal">
                                     <span class="label label-success">
                                         <i class="ace-icon fa fa-car bigger-120"></i>
                                         Registrar
@@ -49,81 +45,50 @@
     </div>
 </div>
 
-<div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Estacionar nuevo vehículo</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Estacionamiento</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" class="col-xs-12" value="Estacionamientos Annita" disabled />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Slot</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" class="col-xs-12" value="A-123" disabled />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Patente</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" class="col-xs-12" value="" placeholder="Ej: ZZ-1122" />
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm" data-dismiss="modal">
-                    <i class="ace-icon fa fa-arrow-left bigger-110"></i>
-                    Cancelar
-                </button>
-                <button type="button" class="btn btn-sm btn-success">
-                    <i class="ace-icon fa fa-check bigger-110"></i>
-                    Aceptar
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+@Html.Partial("_EstacionarVehiculo", new Taller.Estacionamiento.Models.Espacio() { })
+
+
 @section ViewsScripts {
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("#dynamic-table").dataTable({
-                "language": {
-                    "sProcessing": "Procesando...",
-                    "sLengthMenu": "Mostrar _MENU_ registros",
-                    "sZeroRecords": "No se encontraron resultados",
-                    "sEmptyTable": "Ningún dato disponible en esta tabla",
-                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                    "sInfoPostFix": "",
-                    "sSearch": "Buscar:",
-                    "sUrl": "",
-                    "sInfoThousands": ",",
-                    "sLoadingRecords": "Cargando...",
-                    "oPaginate": {
-                        "sFirst": "Primero",
-                        "sLast": "Último",
-                        "sNext": "Siguiente",
-                        "sPrevious": "Anterior"
-                    },
-                    "oAria": {
-                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                    }
+        $("#dynamic-table").dataTable({
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                 }
-            });
+            }
+        });
+        $(document).on("click", ".open-EstacionarVehiculoModal", function () {
+            var data_id = $(this).data('id');
+            var data_nombre = $(this).data('nombre');
+            var data_codigo = $(this).data('codigo');
+
+            var id = document.getElementById("ID");
+            var nombre = document.getElementById("nombre");
+            var codigo = document.getElementById("codigo");
+
+            id.value = data_id;
+            nombre.value = data_nombre;
+            codigo.value = data_codigo;
+
         });
     </script>
 }

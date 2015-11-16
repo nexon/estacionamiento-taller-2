@@ -11,7 +11,6 @@ BEGIN
 	capacidad as estacionamiento_Capacidad,
     tiempo_minimo as estacionamiento_TiempoMinimo,
     tarifa_minuto as estacionamiento_TarifaMinuto,
-    cant_minutos as estacionamiento_CantMinutos,
 	apertura as estacionamiento_Apertura,
     cierre as estacionamiento_Cierre,
     coordenadaLatitud as estacionamiento_CoordenadaLatitud,

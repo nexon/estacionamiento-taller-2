@@ -11,20 +11,10 @@ namespace Taller.Estacionamiento.Models
 {
     public class Usuario
     {
-        [Required(ErrorMessage = "Ingrese un Nombre valido")]
         public virtual string Nombre { get; set; }
-
-        [Required(ErrorMessage = "Ingrese un Rut valido")]
         public virtual int Rut { get; set; }
-
-
-        [Display(Name = "Correo")]
-        [EmailAddress(ErrorMessage = "Ingrese un Correo valido")]
         public virtual string Email { get; set; }
-
         public virtual string Contraseña { get; set; }
-
-        [Required(ErrorMessage = "Ingrese un Telefono valido")]
         public virtual int Telefono { get; set; }
 
         public virtual bool IniciarSesion(string email, string contraseña)
@@ -39,7 +29,7 @@ namespace Taller.Estacionamiento.Models
         /// <summary>
         /// Agregar un usuario en la base de datos
         /// </summary>
-        public virtual void Agregar()
+        public void Agregar()
         {
             try
             {
@@ -88,6 +78,33 @@ namespace Taller.Estacionamiento.Models
         public virtual void Eliminar()
         {
             throw new NotImplementedException();
+        }
+
+        public void Estacionamientos()
+        {
+            var estacionamientos = new List<Estacionamiento>();
+            try
+            {
+                Logger.EntradaMetodo("Usuario.Estacionamientos", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Estacionamiento_Todos", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inRut", this.Rut);
+                var data = Data.Obtener(comando);
+                foreach (DataRow dr in data.Tables[0].Rows)
+                {
+                    Estacionamiento estacionamiento = new Estacionamiento();
+
+                    estacionamiento.Seleccionar(Convert.ToInt32(dr["ID_Estacionamiento"]));
+                    estacionamientos.Add(estacionamiento);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Usuario.Estacionamientos", this.ToString());
+            }
         }
     }
 }

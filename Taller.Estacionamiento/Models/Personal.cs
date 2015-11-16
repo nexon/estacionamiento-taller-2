@@ -20,16 +20,20 @@ namespace Taller.Estacionamiento.Models
 
 
         /// <summary>
-        /// Agregar un personal en la base de datos
+        /// Agregar un personal en la base de datos,
+        /// retorna el id del personal insertado en la bd
         /// </summary>
-        public override void Agregar()
+        public new int Agregar()
         {
+            int last_inserted_id = 0;
             try
             {
                 Logger.EntradaMetodo("Personal.Agregar", this.ToString());
                 var comando = new MySqlCommand() { CommandText = "Personal_Crear", CommandType = System.Data.CommandType.StoredProcedure };
                 comando.Parameters.AddWithValue("inId_usuario", this.Rut);
-                Data.Ejecutar(comando);
+
+                var data = Data.Obtener(comando);
+                last_inserted_id= Convert.ToInt32(data.Tables[0].Rows[0]["LAST_INSERT_ID()"]);
             }
             catch (Exception ex)
             {
@@ -39,6 +43,7 @@ namespace Taller.Estacionamiento.Models
             {
                 Logger.SalidaMetodo("Personal.Agregar", this.ToString());
             }
+            return last_inserted_id;
         }
 
         public void Modificar(int id_estacionamiento)
@@ -63,12 +68,63 @@ namespace Taller.Estacionamiento.Models
             {
                 Logger.SalidaMetodo("Personal.Modificar", this.ToString());
             }
-
-            
-
         }
-        
 
+        public bool Seleccionar(int id_personal)
+        {
+            try
+            {
+                Logger.EntradaMetodo("Personal.Seleccionar", this.ToString());
+            
+                var comando = new MySqlCommand() { CommandText = "Personal_Seleccionar", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inId_personal", id_personal);
+                var data = Data.Obtener(comando);
+                DataTable dt = data.Tables[0];
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow dr = dt.Rows[0]; 
+                    this.ID = Convert.ToInt32(dr["id_personal"]);
+                    this.Rut = Convert.ToInt32(dr["rut"]);
+                    this.Nombre = Convert.ToString(dr["nombre"]);
+                    this.Email = Convert.ToString(dr["email"]);
+                    this.Contraseña = Convert.ToString(dr["contrasenia"]);
+                    this.Telefono = Convert.ToInt32(dr["telefono"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Personal.Seleccionar", this.ToString());
+            }
+            return false;
+        }
+        /// <summary>
+        /// convierte el atributo Rol en un numero,
+        /// para insertar el rol como int en la bd       
+        /// </summary>
+        /// <returns></returns>
+        public int RolToInt()
+        {
+            switch (this.Rol.ToString())
+            {
+                case "Propietario":
+                    return 1;
+                case "Encargado":
+                    return 2;
+                case "Aparcador":
+                    return 3;
+                case "Secretaria":
+                    return 4;
+                case "Guardia":
+                    return 5;
+                default:
+                    break;
+            }
+            return 0;
+        }
     }
 
 }
