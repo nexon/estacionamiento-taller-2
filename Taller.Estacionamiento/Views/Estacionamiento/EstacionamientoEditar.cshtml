@@ -3,7 +3,7 @@
 <div class="modal fade" id="modalInformacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <!-- form start-->
-        @using (Html.BeginForm("EditarInformacion", "Estacionamiento", FormMethod.Post, new { @class = "form-horizontal" }))
+        @using (Html.BeginForm("EstacionamientoEditar", "Estacionamiento", FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.HiddenFor(model => model.ID)
             @Html.HiddenFor(model => model.TiempoMinimo)
