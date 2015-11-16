@@ -31,7 +31,7 @@
                         <td>@Html.Label(espacio.Codigo)</td>
                         <td>@Html.Label(espacio.Vehiculo.Patente)</td>
                         <td>@Html.Label(espacio.Vehiculo.Conductor.Nombre)</td>
-                        <td>@Html.Label(espacio.Reserva.Expiracion.ToString())</td>
+                        <td>@Html.Label(espacio.Reserva.TiempoRestante())</td>
                         
                         <td>
                             <div class="action-buttons">
@@ -51,30 +51,6 @@
                         </td>
                     </tr>
                 }
-
-                <tr>
-                    <td>A-13</td>
-                    <td>XX-1123</td>
-                    <td>Juan Soto</td>
-                    <td>1:45</td>
-                    
-                    <td>
-                        <div class="action-buttons">
-                            <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
-                                <span class="label label-success">
-                                    <i class="ace-icon fa fa-car bigger-120"></i>
-                                    Registrar
-                                </span>
-                            </a>
-                            <a class="red" href="#" data-toggle="modal" data-target="#myModal">
-                                <span class="label label-danger">
-                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                    Eliminar
-                                </span>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>

@@ -35,10 +35,10 @@ namespace Taller.Estacionamiento.Controllers
             estacionamiento.Seleccionar(ID); 
             return View(estacionamiento);
         }
-        public ActionResult Reservados(int id)
+        public ActionResult Reservados(int ID)
         {
 
-            var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = id};
+            var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = ID};
             return View(estacionamiento);
         }
         public ActionResult Libres(int id)

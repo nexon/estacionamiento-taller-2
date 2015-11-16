@@ -252,7 +252,7 @@
                                 <b class="arrow"></b>
                             </li>
                             <li class="">
-                                <a href="@Url.Action("Reservados","Estacionamiento")">
+                                <a href="@Url.Action("Reservados", "Estacionamiento", new { ID = @SessionManager.EstacionamientoSeleccionado().ID })">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Reservados
                                 </a>
