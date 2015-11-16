@@ -1,14 +1,16 @@
-﻿@{
+﻿@model Taller.Estacionamiento.Models.Estacionamiento
+@{
     ViewBag.Title = "EditarInformacion";
-
-        }
+}
 
 <div class="page-header">
     <h1>
         Estacionamiento
         <small>
-            <i class="ace-icon fa fa-angle-double-right"></i>
-            Información
+            <a href="@Url.Action("Informacion", "Estacionamiento", new { ID = Model.ID })">
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Información
+            </a>
         </small>
         <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
@@ -18,17 +20,31 @@
 </div><!-- /.page-header -->
 
 <div class="row">
-    <div class="col-xs-12">
-        <form class="form-horizontal" role="form">
-            <!-- #section:elements.form -->
-            <div class="form-group">
+    <div class="col-xs-10">
+        @using (Html.BeginForm("EditarInformacion", "Estacionamiento", FormMethod.Post))
+        {
+            @Html.HiddenFor(model => model.ID)
+            @Html.HiddenFor(model => model.TiempoMinimo)
+            @Html.HiddenFor(model => model.TarifaMinuto)
+            
+            <div class="row">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nombre Estacionamiento </label>
                 <div class="col-sm-9">
-                    <input type="text" id="form-field-1" class="col-xs-10 col-sm-5" />
+                    @Html.TextBoxFor(model => model.Nombre)
                 </div>
             </div>
+            <br />
+            <div class="row">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-2"> Capacidad </label>
 
-            <div class="form-group">
+                <div class="col-xs-10 col-sm-5">
+                    <div class="input-group">
+                        @Html.TextBoxFor(model => model.Capacidad, new { type = "number" , min=0})
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-2"> Telefono </label>
 
                 <div class="col-xs-10 col-sm-5">
@@ -38,12 +54,13 @@
                                 <i class="ace-icon fa fa-phone"></i>
                             </span>
                         </div>
-                        <input type="text" id="form-field-mask-2" class="col-xs-10 col-sm-9" />
+                       
+                        @Html.TextBoxFor(model => model.Telefono, new { type="number" })
                     </div>
                 </div>
             </div>
-
-            <div class="form-group">
+            <br />
+            <div class="row">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-3"> Correo </label>
 
                 <div class="col-xs-10 col-sm-5">
@@ -53,12 +70,12 @@
                                 <i class="ace-icon fa fa-envelope"></i>
                             </span>
                         </div>
-                        <input type="text" id="form-field-mask-3" class="col-xs-10 col-sm-9" />
+                        @Html.TextBoxFor(model => model.Email)
                     </div>
                 </div>
             </div>
-
-            <div class="form-group">
+            <br />
+            <div class="row">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-4"> Horario apertura </label>
                 <div class="col-xs-10 col-sm-5">
                     <div class="input-group">
@@ -67,12 +84,24 @@
                                 <i class="ace-icon fa fa-clock-o"></i>
                             </span>
                         </div>
-                        <input type="text" id="form-field-mask-4" class="col-xs-5 col-sm-5" />
+                        <select name="apertura">
+                            @foreach (var apertura in Model.horariosPosibles())
+                            {
+                                if (apertura == Model.horaCierre())
+                                {
+                                    <option value="@apertura" selected>@apertura</option>
+                                }
+                                else
+                                {
+                                    <option value="@apertura">@apertura</option>
+                                }
+                            }
+                        </select>
                     </div>
                 </div>
             </div>
-
-            <div class="form-group">
+            <br />
+            <div class="row">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-5"> horario cierre </label>
                 <div class="col-xs-10 col-sm-5">
                     <div class="input-group">
@@ -81,42 +110,63 @@
                                 <i class="ace-icon fa fa-clock-o"></i>
                             </span>
                         </div>
-                        <input type="text" id="form-field-mask-5" class="col-xs-5 col-sm-5" />
+                        <select name="cierre">
+                            @foreach (var cierre in Model.horariosPosibles())
+                            {
+                                if (cierre == Model.horaCierre())
+                                {
+                                    <option value="@cierre" selected>@cierre</option>
+                                }
+                                else
+                                {
+                                    <option value="@cierre">@cierre</option>
+                                }
+                            }
+                        </select>
                     </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-5"> 24 Hrs </label>
-                <div class="col-xs-3">
-                    <label>
-                        <input id="24hrs-check" name="switch-field-1" class="ace ace-switch" type="checkbox">
-                        <span class="lbl" data-lbl="SI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NO"></span>
-                    </label>
+            <br />
+            <div class="row">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Dirección </label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(model => model.Direccion)
                 </div>
             </div>
-            <div class="form-group">
+            <br />
+            <div class="row">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-6"> Ubicación </label>
+                <div class="col-lg-5">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <span>
+                                <i class="nav-search-icon fa"> Latitud </i>
+                            </span>
+                        </div>
+                        @Html.EditorFor(model => model.CoordenadaLatitud)
+                    </div>
+                    <br />
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <span>
+                                <i class="nav-search-icon fa"> Longitud </i>
+                            </span>
+                        </div>
+                        @Html.EditorFor(model => model.CoordenadaLongitud)
+                    </div>
+                </div>
+                <!--
                 <div class="col-lg-5">
                     <div id="map" class="map"></div>
                 </div>
+                -->
             </div>
-
-            <div class="clearfix form-actions">
-                <div class="col-md-offset-3 col-md-9">
-                    <button class="btn btn-info" type="button">
+            <br />
+            <button type="submit" class="btn btn-sm btn-success">
                         <i class="ace-icon fa fa-check bigger-110"></i>
-                        Guardar
+                        Aceptar
                     </button>
-
-                    &nbsp; &nbsp; &nbsp;
-                    <button class="btn" type="reset">
-                        <i class="ace-icon fa fa-remove bigger-110"></i>
-                        Cancelar
-                    </button>
-                </div>
-            </div>
-        </form>
+        }
      </div>
 </div>
 @section ViewsScripts {

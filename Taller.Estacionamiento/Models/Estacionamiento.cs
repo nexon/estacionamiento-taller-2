@@ -682,5 +682,39 @@ namespace Taller.Estacionamiento.Models
             }
             return false;
         }
+
+        public List<String> horariosPosibles()
+        {
+            List<String> retorno = new List<string>();
+            int m;//minutos
+            String sh;//string hora
+            String sm;//string minutos
+            for (int h = 0; h < 24;h++ )
+            {
+                m=0;
+                while(m<60)
+                {
+                    if (h < 10)
+                    {
+                        sh = "0" + h.ToString();
+                    }
+                    else
+                    {
+                        sh = h.ToString();
+                    }
+                    if (m < 10)
+                    {
+                        sm = "0" + m.ToString();
+                    }
+                    else
+                    {
+                        sm = m.ToString();
+                    }
+                    retorno.Add(sh+":"+sm);
+                    m += 15;
+                }
+            }
+            return retorno;
+        }
     }
 }
