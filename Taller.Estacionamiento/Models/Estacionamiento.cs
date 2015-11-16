@@ -602,6 +602,8 @@ namespace Taller.Estacionamiento.Models
                 comando.Parameters.AddWithValue("inIdEstacionamiento", this.ID);
                 comando.Parameters.AddWithValue("inNombre", this.Nombre);
                 comando.Parameters.AddWithValue("inDireccion", this.Direccion);
+                comando.Parameters.AddWithValue("inEmail", this.Email);
+                comando.Parameters.AddWithValue("inTelefono", this.Telefono);
                 comando.Parameters.AddWithValue("inCapacidad", this.Capacidad);
                 comando.Parameters.AddWithValue("inTiempoMinimo", this.TiempoMinimo);
                 comando.Parameters.AddWithValue("inTarifaMinuto", this.TarifaMinuto);
