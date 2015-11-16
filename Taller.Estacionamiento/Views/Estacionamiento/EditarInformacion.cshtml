@@ -87,7 +87,7 @@
                         <select name="apertura">
                             @foreach (var apertura in Model.horariosPosibles())
                             {
-                                if (apertura == Model.horaCierre())
+                                if (apertura == Model.horaApertura())
                                 {
                                     <option value="@apertura" selected>@apertura</option>
                                 }
