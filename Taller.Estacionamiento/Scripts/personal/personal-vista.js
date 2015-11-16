@@ -15,10 +15,14 @@
         $("#personal-editar-rut").val(rut);
         $("#personal-editar-email").val(email);
         $("#personal-editar-telefono").val(telefono);
-        $("#personal-editar-rol").val(rol);
 
-        /* -solo el rut atributo tiene un campo hidden, porque no se puede editar */
+        /* -cada atributo tiene un campo hidden
+           -los atributos se deben modificar para ser enviado por post cuando se elimine un personal
+        */
+        $("#personal-editar-nombre-hidden").val(nombre);
         $("#personal-editar-rut-hidden").val(rut);
+        $("#personal-editar-email-hidden").val(email);
+        $("#personal-editar-telefono-hidden").val(telefono);
 
         // se muestra el modal dialog de editar personal
         $(this).attr("#modalEditar").dialog("open");

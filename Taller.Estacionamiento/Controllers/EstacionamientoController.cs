@@ -234,28 +234,14 @@ namespace Taller.Estacionamiento.Controllers
 
                 // modificar personal con mismo Rut
                 if (personalSeleccionado != null)
-                {
-                    //actualizar atributos de Usuario de Personal
-                    personalSeleccionado.Nombre = personal.Nombre;
-                    personalSeleccionado.Email = personal.Email;
-                    personalSeleccionado.Telefono = personal.Telefono;
-
+                {                   
+                    //buscar id del Personal 
+                    int personal_id = personalSeleccionado.Buscar();
+                    personalSeleccionado.ID = personal_id;
                     personalSeleccionado.Rol = personal.Rol;
 
-                    // modificar los atributos de Usuario del Personal en la bd
-                    Usuario usuario = (Usuario)personal;
-                    usuario.Contraseña = "";//la contraseña por el momento es vacia, no puede ser null
-                    usuario.Modificar();
-
-
-                    //buscar id del Personal 
-                    //int personal_id = personalSeleccionado.Buscar();
-                    //personalSeleccionado.ID = personal_id;
-
-
                     // modifica el Rol de Personal_Estacionamiento                    
-                    //estacionamiento.ModificarPersonal(personalSeleccionado);
-
+                    estacionamiento.ModificarPersonal(personalSeleccionado);
                 }
             }
             return RedirectToAction("Personal", new { id = id });

@@ -222,6 +222,7 @@ namespace Taller.Estacionamiento.Models
             return listaPersonal;
         }
 
+
         public void AgregarPersonal(Personal personal)
         {
             try
@@ -245,6 +246,29 @@ namespace Taller.Estacionamiento.Models
         }
 
 
+        public void ModificarPersonal(Personal personal)
+        {
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.ModificarPersonal(Personal personal)", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "personal_estacionamiento_modificar", CommandType = System.Data.CommandType.StoredProcedure };
+                int rol = personal.RolToInt();
+                comando.Parameters.AddWithValue("inIDPersonal", personal.ID);
+                comando.Parameters.AddWithValue("inIDEstacionamiento", this.ID);
+                comando.Parameters.AddWithValue("inIDRol", rol);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.ModificarPersonal", this.ToString());
+            }
+        }
+
+
         public void DesvincularPersonal(Personal Personal)
         {
 
@@ -255,8 +279,7 @@ namespace Taller.Estacionamiento.Models
                 var comando = new MySqlCommand() { CommandText = "Estacionamiento_Desvincular_Personal", CommandType = System.Data.CommandType.StoredProcedure };
                 int rol = Personal.RolToInt();
                 comando.Parameters.AddWithValue("inIDEstacionamiento", this.ID);
-                comando.Parameters.AddWithValue("inIDRut", Personal.Rut);
-                comando.Parameters.AddWithValue("inIDRol", rol);
+                comando.Parameters.AddWithValue("inIDRut", Personal.Rut);                
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
