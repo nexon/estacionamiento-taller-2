@@ -1,4 +1,3 @@
-
  DROP PROCEDURE IF EXISTS Personal_Crear $$
  CREATE PROCEDURE Personal_Crear
  (
@@ -7,5 +6,5 @@
  BEGIN
  	INSERT INTO Personal(id_usuario)
  	VALUES (inId_usuario);
- 	SELECT LAST_INSERT_ID();
+ 	SELECT LAST_INSERT_ID() AS ultimo_id_insertado;
 END$$
