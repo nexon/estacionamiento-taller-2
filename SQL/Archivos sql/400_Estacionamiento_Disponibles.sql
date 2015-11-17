@@ -4,15 +4,16 @@ CREATE PROCEDURE Estacionamiento_Disponibles (
 )
 
 BEGIN
-	SELECT Espacios.codigo AS Espacio_Codigo
+	SELECT 
+		   Espacio.codigo AS Espacio_codigo
 	FROM
-		(SELECT codigo 
-		FROM Espacio 
-		WHERE id_estacionamiento = inID_Estacionamiento) as Espacios 
-	LEFT JOIN Registro
-	ON Registro.codigo = Espacios.codigo AND ((registro.fecha_reserva is NULL
-		AND registro.fecha_ingreso is NULL) OR (registro.fecha_reserva is not NULL
-		AND registro.fecha_ingreso is not NULL
-        AND registro.fecha_salida is not NULL));
+			(SELECT codigo 
+			FROM Registro 
+			WHERE fecha_salida IS NULL) AS NoDisponibles
+	RIGHT Join Espacio
+	ON NoDisponibles.codigo = Espacio.codigo 
+	WHERE NoDisponibles.codigo IS NULL 
+		AND  Espacio.id_estacionamiento = inID_Estacionamiento;
+
 END
 $$
