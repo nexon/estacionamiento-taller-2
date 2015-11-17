@@ -406,6 +406,26 @@ namespace Taller.Estacionamiento.Models
             return todos;
         }
 
+
+        public void ModificarEspacio(Espacio espacio)
+        {
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.ModificarEspacio", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "estacionamiento_modificarEspacio", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("incodigo", espacio.Codigo);
+                comando.Parameters.AddWithValue("inIDEstacionamiento", this.ID);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.ModificarEspacio", this.ToString());
+            }
+        }
         public bool ReservarEspacio(Vehiculo vehiculo)
         {
             throw new NotImplementedException();

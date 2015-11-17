@@ -49,50 +49,95 @@ namespace Taller.Estacionamiento.Controllers
             return View(estacionamiento);
         }
 
-        public ActionResult Administrar(int ID)
+        public ActionResult Administrar(int id)
         {
-            var est = new Models.Estacionamiento();
-            if (est.Seleccionar(ID))
+            var estacionamiento = new Models.Estacionamiento();
+            if (estacionamiento.Seleccionar(id))
             {
-                return View("Administrar", est);
-        }
+                List<Espacio> listaEspacios = estacionamiento.Todos();
+                ViewData["idEstacionamiento"] = id;
+
+                //mostrar en la vista que no exiten personales en el estacionamiento
+                if (listaEspacios.Count == 0)
+                {
+
+                }
+                return View(listaEspacios);
+            }
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult AgregarSlot(int ID)
+        public PartialViewResult AgregarSlot(int id)
         {
-            ViewData["ID"] = ID;
-            return View("AgregarSlot");
+            Espacio nuevoespacio = new Espacio();
+            ViewData["idEstacionamiento"] = id;
+            return PartialView(nuevoespacio);
         }
 
         [HttpPost]
-        public ActionResult AgregarSlot(Models.Espacio espacio, int ID)
+        public ActionResult AgregarSlot(int id, Espacio espacio)
         {
-                var est = new Models.Estacionamiento();
-                if (est.Seleccionar(ID))
-                {
-                    if (est.SeleccionarEspacio(ID, espacio) || espacio.Codigo == null)
-                    {
-                        return RedirectToAction("AgregarSlot", new { ID = ID });
+
+            var estacionamiento = new Models.Estacionamiento();
+            estacionamiento.Seleccionar(id);
+            estacionamiento.AgregarEspacio(espacio);
+            return RedirectToAction("Administrar", new { id = id });
         }
-                    else
-                    {
-                        est.AgregarEspacio(espacio);
-                        return RedirectToAction("Administrar", new { ID = ID });
-        
-                    }
-                }
-                else
-                {
-                    return RedirectToAction("AgregarSlot", new { ID = ID });
-                }
-                
-         }
-        
-        
-        public ActionResult EditarSlot()
+
+        public ActionResult EditarSlot(int id)
         {
-            return View("EditarSlot");
+            Espacio espacio = new Espacio();
+            ViewData["idEstacionamiento"] = id;
+            return PartialView(espacio);
+        }
+
+        [HttpPost]
+        public ActionResult EditarSlot(Models.Espacio espacio, int id)
+        {
+            var estacionamiento = new Models.Estacionamiento();
+
+            if (estacionamiento.Seleccionar(id))
+            {
+                List<Espacio> listaespacio = estacionamiento.Todos();
+                Espacio espacioSeleccionado = new Espacio();
+                espacioSeleccionado = listaespacio.FirstOrDefault(x => x.Codigo == espacio.Codigo);
+
+                // modificar personal con mismo Rut
+                if (espacioSeleccionado != null)
+                {
+                    //actualizar atributos
+                    espacioSeleccionado.Codigo = espacio.Codigo;
+                    estacionamiento.ModificarEspacio(espacioSeleccionado);
+                }
+            }
+            return RedirectToAction("Administrar", new { id = id });
+
+        }
+        public ActionResult EliminarSlot(int id)
+        {
+            Espacio espacio = new Espacio();
+            ViewData["idEstacionamiento"] = id;
+            return PartialView(espacio);
+        }
+
+        [HttpPost]
+        public ActionResult EliminarSlot(Models.Espacio espacio, int id)
+        {
+            var estacionamiento = new Models.Estacionamiento();
+
+            if (estacionamiento.Seleccionar(id))
+            {
+                List<Espacio> listaespacio = estacionamiento.Todos();
+                Espacio espacios = new Espacio();
+                espacios = listaespacio.FirstOrDefault(x => x.Codigo == espacio.Codigo);
+
+                // eliminar Personal con mismo Rut
+                if (espacios != null)
+                {
+                    estacionamiento.EliminarEspacio(espacio);
+                }
+            }
+            return RedirectToAction("Administrar", new { id = id });
         }
         [HttpGet]
         public ActionResult Tarifas(int ID)

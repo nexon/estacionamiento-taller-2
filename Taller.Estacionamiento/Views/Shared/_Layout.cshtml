@@ -320,6 +320,71 @@
                         @RenderBody()
                     </div>
                 </div>
+            </div><!-- /.sidebar-shortcuts -->
+            <ul class="nav nav-list">
+                <li class="active">
+                    <a href="@Url.Action("Index","Home")">
+                        <i class="menu-icon fa fa-home"></i>
+                        <span class="menu-text"> Inicio </span>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-tachometer"></i>
+                        <span class="menu-text"> Estacionamiento </span>
+
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        <li class="">
+                            <a href="@Url.Action("Informacion","Estacionamiento")">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Información
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="">
+                            <a href="@Url.Action("Ocupados","Estacionamiento")">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Ocupados
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="">
+                            <a href="@Url.Action("Reservados","Estacionamiento")">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Reservados
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="">
+                            <a href="@Url.Action("Libres","Estacionamiento")">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Libres
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="">
+                            <a href="@Url.Action("Administrar", "Estacionamiento", new { ID = @SessionManager.EstacionamientoSeleccionado().ID })">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Administrar
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="">
+                            <a href="@Url.Action("Tarifas", "Estacionamiento", new RouteValueDictionary(new {ID = 1}))">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Tarifas
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="">
+                            <a href="@Url.Action("Promociones","Estacionamiento")">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Promociones
+                            </a>
             </div>
             <div class="footer">
                 <div class="footer-inner">
@@ -328,7 +393,6 @@
                             <span class="blue bolder">Taller II</span>
                             Parking-matic &copy; 2015
                         </span>
-
                         &nbsp; &nbsp;
                         <span class="action-buttons">
                             <a href="#">
