@@ -32,10 +32,15 @@ namespace Taller.Estacionamiento.Controllers
         {
             return View();
         }
-
-        public ActionResult SeleccionarEstacionamiento()
+        [HttpPost]
+        public ActionResult SeleccionarEstacionamiento(int ID)
         {
-            return View();
+            if (SessionManager.UsuarioAutenticado() != null)
+            {
+                var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = ID };
+                SessionManager.ModificarEstacionamientoSeleccionado(estacionamiento);
+            }           
+            return RedirectToAction("Index", "Home");
         }
 
     }
