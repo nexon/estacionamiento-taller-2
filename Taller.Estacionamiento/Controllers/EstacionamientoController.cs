@@ -127,27 +127,42 @@ namespace Taller.Estacionamiento.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
         public ActionResult Personal(int id)
         {
+            string mensaje = TempData["mensajeCrearPersonal"] as string;
+            if (String.IsNullOrEmpty(mensaje))
+            {
+                mensaje = "";
+            }
+
             var estacionamiento = new Models.Estacionamiento();
             if (estacionamiento.Seleccionar(id))
             {
-                List<Personal> listaPersonal = estacionamiento.Personal();
+                List<Personal> listaPersonalEstacionamiento = estacionamiento.Personal();
                 ViewData["idEstacionamiento"] = id;
-
-                //mostrar en la vista que no exiten personales en el estacionamiento
-                if(listaPersonal.Count==0){
-
-        }
-                return View(listaPersonal);
+                ViewData["mensajeCrearPersonal"] = mensaje;
+                return View(listaPersonalEstacionamiento);
             }
             return RedirectToAction("Index", "Home");
         }
 
         public PartialViewResult PersonalCrear(int id)
         {
-            Personal nuevoPersonal = new Personal();                        
-            ViewData["idEstacionamiento"] = id;         
+            Personal nuevoPersonal = new Personal();
+
+            //se crea una lista con todos los roles posibles para un personal
+            List<SelectListItem> lista = new List<SelectListItem>();
+            var listaRoles = nuevoPersonal.ErolEnumToList();
+            int cont = 0;
+            foreach (string erol in listaRoles)
+            {
+                lista.Add(new SelectListItem { Text = erol, Value = cont.ToString() });
+                cont++;
+            }
+
+            ViewData["idEstacionamiento"] = id;
+            ViewData["roles"] = lista;
             return PartialView(nuevoPersonal);
         }
 
@@ -155,42 +170,69 @@ namespace Taller.Estacionamiento.Controllers
         public ActionResult PersonalCrear(int id, Personal personal)
         {
             var estacionamiento = new Models.Estacionamiento();
-
+            string mensaje = "";
             if (estacionamiento.Seleccionar(id))
             {
-                List<Personal> listaPersonal =estacionamiento.Personal();
-                Personal personalSeleccionado = new Personal();
-                personalSeleccionado = listaPersonal.FirstOrDefault(x => x.Rut == personal.Rut);
-                
-                // se crea un nuevo personal, porque no existe un personal con el mismo Rut
-                if (personalSeleccionado == null)
+                Usuario usuarioSeleccionado = new Usuario();
+                usuarioSeleccionado.Email = personal.Email;
+                bool usuario_existe = usuarioSeleccionado.Seleccionar(usuarioSeleccionado.Email);
+
+                // se puede crear un nuevo Personal, porque existe un Usuario con el correo ingresado.
+                if (usuario_existe)
                 {
-                    // crear Usuario en la BD
-                    Usuario usuario = (Usuario)personal ;
-                    usuario.Contraseña = "";//la contraseña por el momento es vacia, no puede ser null
-                    usuario.Agregar();
-
                     //crear Personal en la BD
-                    int id_personal_insertado = personal.Agregar();
+                    personal.Rut = usuarioSeleccionado.Rut;
+                    int personal_last_id_insertado = personal.Agregar();
 
-                    // crear personal-estacionamiento en la BD                    
-                    personal.ID = id_personal_insertado;                 
-                    estacionamiento.AgregarPersonal(personal);
+                    //ya existe un Personal asociado a un Usuario con ese correo,
+                    //entonces, solo se crea Personal_Estacionamiento
+                    if (personal_last_id_insertado == 0)
+                    {
+
+                        //buscar id del Personal ya existente(con ese correo)
+                        int personal_id = personal.Buscar();
+
+                        // crear Personal_Estacionamiento en la BD                    
+                        personal.ID = personal_id;
+                        estacionamiento.AgregarPersonal(personal);
+
+                    }
+                    //no existe un Personal asociado a un Usuario con ese correo,                    
+                    else
+                    {
+                        // crear Personal_Estacionamiento en la BD                    
+                        personal.ID = personal_last_id_insertado;
+                        estacionamiento.AgregarPersonal(personal);
+                    }
                 }
-                // no se crea un nuevo personal
+                // no se crea un nuevo Personal, porque no existe un Usuario con ese correo
                 else
                 {
-                    //mostar mensaje que ya existe un personal con ese Rut
+                    //mostar mensaje que no existe un Usuario con ese correo
+                    mensaje = "No se puede asociar el nuevo Personal al email ingresado";
                 }
-                     
+
             }
-            return RedirectToAction("Personal", new { id = id });                     
+            TempData["mensajeCrearPersonal"] = mensaje;
+            return RedirectToAction("Personal", new { id = id });
         }
 
         public ActionResult PersonalEditar(int id)
         {
             Personal personal = new Personal();
-            ViewData["idEstacionamiento"] = id;   
+
+            //se crea una lista con todos los roles posibles para un personal
+            List<SelectListItem> lista = new List<SelectListItem>();
+            var listaRoles = personal.ErolEnumToList();
+            int cont = 0;
+            foreach (string erol in listaRoles)
+            {
+                lista.Add(new SelectListItem { Text = erol, Value = cont.ToString() });
+                cont++;
+            }
+
+            ViewData["idEstacionamiento"] = id;
+            ViewData["roles"] = lista;
             return PartialView(personal);
         }
 
@@ -207,47 +249,48 @@ namespace Taller.Estacionamiento.Controllers
 
                 // modificar personal con mismo Rut
                 if (personalSeleccionado != null)
-                {
-                //actualizar atributos
-                    personalSeleccionado.Nombre = personal.Nombre;
-                    personalSeleccionado.Email = personal.Email;
-                    personalSeleccionado.Telefono = personal.Telefono;
+                {                   
+                    //buscar id del Personal 
+                    int personal_id = personalSeleccionado.Buscar();
+                    personalSeleccionado.ID = personal_id;
+                    personalSeleccionado.Rol = personal.Rol;
 
-                    // modificar solo los datos de Usuario del Personal en la bd
-                    Usuario usuario = (Usuario)personal;
-                    usuario.Contraseña = "";//la contraseña por el momento es vacia, no puede ser null
-                    usuario.Modificar();
+                    // modifica el Rol de Personal_Estacionamiento                    
+                    estacionamiento.ModificarPersonal(personalSeleccionado);
                 }
             }
-            return RedirectToAction("Personal", new { id = id });              
+            return RedirectToAction("Personal", new { id = id });
         }
 
         public ActionResult PersonalEliminar(int id)
         {
             Personal personal = new Personal();
-            ViewData["idEstacionamiento"] = id;   
+            ViewData["idEstacionamiento"] = id;
             return PartialView(personal);
         }
 
         [HttpPost]
         public ActionResult PersonalEliminar(int id, Personal personal)
-            {
+        {
             var estacionamiento = new Models.Estacionamiento();
 
             if (estacionamiento.Seleccionar(id))
             {
+                //se obtienen todos los personales que tiene el estacionamiento
                 List<Personal> listaPersonal = estacionamiento.Personal();
                 Personal personalSeleccionado = new Personal();
                 personalSeleccionado = listaPersonal.FirstOrDefault(x => x.Rut == personal.Rut);
 
-                // eliminar Personal con mismo Rut
+                // se desvincula el Personal(con ese Rut) del estacionamiento,
+                // no se elimina el Personal, solo se desvincula del estacionamiento.
                 if (personalSeleccionado != null)
                 {
-                    estacionamiento.DesvincularPersonal(personal);                    
+                    estacionamiento.DesvincularPersonal(personal);
                 }
             }
-            return RedirectToAction("Personal", new { id = id });                  
+            return RedirectToAction("Personal", new { id = id });
         }
+
         [HttpGet]
         public ActionResult Tarjetero(int id)
         {

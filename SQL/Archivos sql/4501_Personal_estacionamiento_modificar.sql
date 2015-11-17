@@ -1,13 +1,11 @@
 DROP PROCEDURE IF EXISTS personal_estacionamiento_modificar $$
 CREATE PROCEDURE personal_estacionamiento_modificar(
-	inIdPersonal INT,
-  inIdEstacionamiento INT,
-	inIdRol INT
+	inIDPersonal INT,
+  	inIDEstacionamiento INT,
+  	inIDRol INT
 )
 BEGIN
 	UPDATE personal_estacionamiento
-	SET
-		rol = inIdRol
-
-	WHERE id_personal = inIdPersonal AND id_estacionamiento = inIdEstacionamiento AND id_rol = inIdRol;
+	SET id_rol = inIDRol
+	WHERE id_personal = inIDPersonal AND id_estacionamiento = inIDEstacionamiento;
 END $$
