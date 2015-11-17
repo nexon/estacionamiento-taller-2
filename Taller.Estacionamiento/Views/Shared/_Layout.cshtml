@@ -238,7 +238,7 @@
                         <b class="arrow"></b>
                         <ul class="submenu">
                             <li class="">
-                                <a href="@Url.Action("Informacion","Estacionamiento")">
+                                <a href="@Url.Action("Informacion", "Estacionamiento", new { ID = @SessionManager.EstacionamientoSeleccionado().ID })">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Información
                                 </a>
