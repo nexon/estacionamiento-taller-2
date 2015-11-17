@@ -848,6 +848,7 @@
     <Content Include="Views\Estacionamiento\_EstacionarVehiculo.cshtml" />
     <Content Include="Views\Estacionamiento\_DespacharVehiculo.cshtml" />
     <Content Include="Views\Estacionamiento\_IngresoPersonal.cshtml" />
+    <Content Include="Views\Estacionamiento\EliminarReserva.cshtml" />
     <Content Include="Views\Estacionamiento\EliminarSlot.cshtml" />
     <Content Include="Views\Estacionamiento\EstacionamientoEditar.cshtml" />
     <Content Include="Views\Estacionamiento\_ConfirmarReserva.cshtml" />
