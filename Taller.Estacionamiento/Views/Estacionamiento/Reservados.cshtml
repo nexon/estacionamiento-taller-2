@@ -35,10 +35,10 @@
                         
                         <td>
                             <div class="action-buttons">
-                                <a class="green" href="#" data-toggle="modal" data-target="#modalRegistro">
+                                <a class="green confirmar " href="#" data-toggle="modal" data-target="#modalRegistro" data-codigo="@espacio.Codigo" data-nombre="@Model.Nombre" data-estacionamiento="@Model.ID" data-patente="@espacio.Vehiculo.Patente" data-cliente="@espacio.Vehiculo.Conductor.Nombre">
                                     <span class="label label-success">
                                         <i class="ace-icon fa fa-car bigger-120"></i>
-                                        Registrar
+                                        Confirmar
                                     </span>
                                 </a>
                                 <a class="red" href="#" data-toggle="modal" data-target="#myModal">
@@ -56,61 +56,9 @@
     </div>
 </div>
 
-<div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Estacionar vehículo</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Estacionamiento</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" class="col-xs-12" value="Estacionamientos Annita" disabled/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Patente</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" class="col-xs-12" value="XX -1123" disabled />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Cliente</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" class="col-xs-12" value="Patricio Pino" disabled />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Slot</label>
-                                <div class="col-sm-9">
-                                    <select class="form-control" id="form-field-select-1">
-                                        <option value="A-12">A-12</option>
-                                        <option value="A-13">A-13</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm" data-dismiss="modal">
-                    <i class="ace-icon fa fa-arrow-left bigger-110"></i>
-                    Cancelar
-                </button>
-                <button type="button" class="btn btn-sm btn-success">
-                    <i class="ace-icon fa fa-check bigger-110"></i>
-                    Aceptar
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+
+
+@Html.Partial("_ConfirmarReserva", new Taller.Estacionamiento.Models.Espacio() { })
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -190,6 +138,25 @@
                 }
             });
         });
+
+
+        $(document).on("click", ".confirmar", function () {
+        
+            $(".form-group #form-field-nombre").val($(this).data('nombre'));
+            $(".form-group #form-field-patente").val($(this).data('patente'));
+            $(".form-group #form-field-cliente").val($(this).data('cliente'));
+
+
+            $(".form-group #ID").val($(this).data('estacionamiento'));
+            $(".form-group #Codigo").val($(this).data('codigo'));
+            $(".form-group #codigo1").val($(this).data('codigo'));
+
+            $('#modalRegistro').modal('show');
+        });
+
+
+
+
     </script>
 }
 

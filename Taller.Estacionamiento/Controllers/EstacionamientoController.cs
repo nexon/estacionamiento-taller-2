@@ -25,9 +25,23 @@ namespace Taller.Estacionamiento.Controllers
             }
             return RedirectToAction("Index","Home");
         }
-        public ActionResult EditarInformacion()
+
+        public PartialViewResult EstacionamientoEditar(int id)
         {
-            return View("EditarInformacion");
+            Models.Estacionamiento estacionamiento = new Models.Estacionamiento();
+            estacionamiento.Seleccionar(id);
+            return PartialView(estacionamiento);
+        }
+
+        [HttpPost]
+        public ActionResult EstacionamientoEditar(Models.Estacionamiento estacionamiento, String apertura, String cierre)
+        {
+            string auxiliar = apertura + ":00";
+            estacionamiento.Apertura = DateTime.Parse(auxiliar);
+            auxiliar = cierre + ":00";
+            estacionamiento.Cierre = DateTime.Parse(auxiliar);
+            estacionamiento.Modificar();
+            return RedirectToAction("Informacion", new { ID = estacionamiento.ID });
         }
         public ActionResult Ocupados(int ID)
         {
@@ -37,7 +51,6 @@ namespace Taller.Estacionamiento.Controllers
         }
         public ActionResult Reservados(int ID)
         {
-
             var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = ID};
             return View(estacionamiento);
         }
@@ -283,5 +296,19 @@ namespace Taller.Estacionamiento.Controllers
             estacionamiento.DespacharVehiculo(espacio);
             return RedirectToAction("Ocupados", new { ID = estacionamiento.ID });
         }
+
+
+        [HttpPost]
+        public ActionResult ConfirmarReserva(Models.Espacio espacio , int ID)
+        {
+            Models.Estacionamiento estacionamiento = new Models.Estacionamiento();
+
+            estacionamiento.Seleccionar(ID);
+            
+            estacionamiento.ConfirmarReserva(espacio);
+
+            return RedirectToAction("Reservados", new { id=estacionamiento.ID });
+        }
+
     }
 }
