@@ -49,6 +49,7 @@ namespace Taller.Estacionamiento.Utils
         public static Models.Estacionamiento EstacionamientoSeleccionado()
         {
             var estacionamiento = new Models.Estacionamiento();
+            HttpContext.Current.Session.Add("ESTACIONAMIENTO_ID", 1);
             if (HttpContext.Current.Session["ESTACIONAMIENTO_ID"] != null)
             {
                 if(!estacionamiento.Seleccionar(Convert.ToInt32(HttpContext.Current.Session["ESTACIONAMIENTO_ID"])))
@@ -60,6 +61,7 @@ namespace Taller.Estacionamiento.Utils
             {
                 estacionamiento = null;
             }
+            
             return estacionamiento;
         }
 
