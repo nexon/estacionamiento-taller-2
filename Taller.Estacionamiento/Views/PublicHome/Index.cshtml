@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Taller.Estacionamiento.Models.Usuario
+@{
     ViewBag.Title = "Index";
     Layout = "";
 }
@@ -109,21 +110,26 @@
                     <h4 class="modal-title">Ingresar al sistema</h4>
                 </div>
                 <div class="modal-body">
+                    @using (Html.BeginForm("Ingresar", "Cuenta", FormMethod.Post))
+                    {
+                        @Html.ValidationSummary(true, "Login failed") 
                     <form class="form col-md-12 center-block">
 
                         <div class="form-group">
-                            <input type="text" class="form-control input-lg" placeholder="Email">
+                            @Html.TextBoxFor(u => u.Email, new { @placeholder = "Email" })
+                            @Html.ValidationMessageFor(u => u.Email)
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(u => u.Contraseña, new { @placeholder = "Contraseña", @type="password" })
+                            @Html.ValidationMessageFor(u => u.Contraseña)
                         </div>
 
                         <div class="form-group">
-                            <input type="password" class="form-control input-lg" placeholder="Password">
-                        </div>
-
-                        <div class="form-group">
-                            <button class="btn btn-danger btn-lg btn-block">Ingresar</button>
+                            <button type="submit" class="btn btn-danger btn-lg btn-block">Ingresar</button>
                             <span class="pull-right"><a href="#">Registrarse</a></span><span><a href="#">¿Necesita ayuda?</a></span>
                         </div>
                     </form>
+                    }
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
