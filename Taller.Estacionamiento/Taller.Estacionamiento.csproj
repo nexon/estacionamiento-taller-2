@@ -835,6 +835,8 @@
     <Content Include="Views\Estacionamiento\Reservados.cshtml" />
     <Content Include="Views\Estacionamiento\Tarifas.cshtml" />
     <Content Include="Views\Estacionamiento\EditarInformacion.cshtml" />
+    <Content Include="Views\Estacionamiento\AgregarSlot.cshtml" />
+    <Content Include="Views\Estacionamiento\EditarSlot.cshtml" />
     <Content Include="Views\Estacionamiento\Tarjetero.cshtml" />
     <Content Include="Views\PublicHome\Contacto.cshtml" />
     <Content Include="Views\PublicHome\Empresa.cshtml" />
@@ -846,9 +848,9 @@
     <Content Include="Views\Estacionamiento\_EstacionarVehiculo.cshtml" />
     <Content Include="Views\Estacionamiento\_DespacharVehiculo.cshtml" />
     <Content Include="Views\Estacionamiento\_IngresoPersonal.cshtml" />
-    <Content Include="Views\Estacionamiento\AgregarSlot.cshtml" />
-    <Content Include="Views\Estacionamiento\EditarSlot.cshtml" />
     <Content Include="Views\Estacionamiento\EliminarSlot.cshtml" />
+    <Content Include="Views\Estacionamiento\EstacionamientoEditar.cshtml" />
+    <Content Include="Views\Estacionamiento\_ConfirmarReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
