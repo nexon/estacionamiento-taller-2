@@ -31,7 +31,7 @@
                         <td>@Html.Label(espacio.Codigo)</td>
                         <td>@Html.Label(espacio.Vehiculo.Patente)</td>
                         <td>@Html.Label(espacio.Vehiculo.Conductor.Nombre)</td>
-                        <td>@Html.Label(espacio.Reserva.Expiracion.ToString())</td>
+                        <td>@Html.Label(espacio.Reserva.TiempoRestante())</td>
                         
                         <td>
                             <div class="action-buttons">
