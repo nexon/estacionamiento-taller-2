@@ -413,7 +413,27 @@ namespace Taller.Estacionamiento.Models
 
         public void ConfirmarReserva(Espacio espacio)
         {
-            throw new NotImplementedException();
+           
+            try
+            {
+                Logger.EntradaMetodo("Estacionamiento.ConfirmarReserva", this.ToString());
+                var command = new MySqlCommand() { CommandType = CommandType.StoredProcedure, CommandText = "estacionamiento_ConfirmarReserva" };
+                command.Parameters.AddWithValue("inFecha_ingreso", DateTime.Now);
+                command.Parameters.AddWithValue("inidEstacionamiento", this.ID);
+                command.Parameters.AddWithValue("inCodigoEspacio", espacio.Codigo);
+                Data.Ejecutar(command);
+ 
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Estacionamiento.ReservarEspacio", this.ToString());
+            }
+
+
         }
 
         public void AgregarValoracion(double valoracion, int idUsuario)
@@ -602,6 +622,8 @@ namespace Taller.Estacionamiento.Models
                 comando.Parameters.AddWithValue("inIdEstacionamiento", this.ID);
                 comando.Parameters.AddWithValue("inNombre", this.Nombre);
                 comando.Parameters.AddWithValue("inDireccion", this.Direccion);
+                comando.Parameters.AddWithValue("inEmail", this.Email);
+                comando.Parameters.AddWithValue("inTelefono", this.Telefono);
                 comando.Parameters.AddWithValue("inCapacidad", this.Capacidad);
                 comando.Parameters.AddWithValue("inTiempoMinimo", this.TiempoMinimo);
                 comando.Parameters.AddWithValue("inTarifaMinuto", this.TarifaMinuto);
@@ -707,6 +729,38 @@ namespace Taller.Estacionamiento.Models
 
         }
 
-
+        public List<String> horariosPosibles()
+        {
+            List<String> retorno = new List<string>();
+            int m;//minutos
+            String sh;//string hora
+            String sm;//string minutos
+            for (int h = 0; h < 24;h++ )
+            {
+                m=0;
+                while(m<60)
+                {
+                    if (h < 10)
+                    {
+                        sh = "0" + h.ToString();
+                    }
+                    else
+                    {
+                        sh = h.ToString();
+                    }
+                    if (m < 10)
+                    {
+                        sm = "0" + m.ToString();
+                    }
+                    else
+                    {
+                        sm = m.ToString();
+                    }
+                    retorno.Add(sh+":"+sm);
+                    m += 15;
+                }
+            }
+            return retorno;
+        }
     }
 }

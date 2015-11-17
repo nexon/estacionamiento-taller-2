@@ -23,23 +23,34 @@ namespace Taller.Estacionamiento.Controllers
             {
                 return View(est);
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
-        public ActionResult EditarInformacion()
+
+        public PartialViewResult EstacionamientoEditar(int id)
         {
-            return View("EditarInformacion");
+            Models.Estacionamiento estacionamiento = new Models.Estacionamiento();
+            estacionamiento.Seleccionar(id);
+            return PartialView(estacionamiento);
+        }
+
+        [HttpPost]
+        public ActionResult EstacionamientoEditar(Models.Estacionamiento estacionamiento, String apertura, String cierre)
+        {
+            string auxiliar = apertura + ":00";
+            estacionamiento.Apertura = DateTime.Parse(auxiliar);
+            auxiliar = cierre + ":00";
+            estacionamiento.Cierre = DateTime.Parse(auxiliar);
+            estacionamiento.Modificar();
+            return RedirectToAction("Informacion", new { ID = estacionamiento.ID });
         }
         public ActionResult Ocupados(int ID)
         {
-            var estacionamiento = new Estacionamiento.Models.Estacionamiento();
-            estacionamiento.Seleccionar(ID); 
+            var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = ID };
             return View(estacionamiento);
         }
-        public ActionResult Reservados(int id)
+        public ActionResult Reservados(int ID)
         {
-
-            var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = id};
-            estacionamiento.Seleccionar(estacionamiento.ID);
+            var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = ID };
             return View(estacionamiento);
         }
         public ActionResult Libres(int id)
@@ -49,50 +60,109 @@ namespace Taller.Estacionamiento.Controllers
             return View(estacionamiento);
         }
 
-        public ActionResult Administrar(int ID)
+        public ActionResult Administrar(int id)
         {
-            var est = new Models.Estacionamiento();
-            if (est.Seleccionar(ID))
+            var estacionamiento = new Models.Estacionamiento();
+            if (estacionamiento.Seleccionar(id))
             {
-                return View("Administrar", est);
-        }
+                List<Espacio> listaEspacios = estacionamiento.Todos();
+                ViewData["idEstacionamiento"] = id;
+
+                if (listaEspacios.Count == 0)
+                {
+
+                }
+                return View(listaEspacios);
+            }
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult AgregarSlot(int ID)
+        public PartialViewResult AgregarSlot(int id)
         {
-            ViewData["ID"] = ID;
-            return View("AgregarSlot");
+            Espacio nuevoespacio = new Espacio();
+            ViewData["idEstacionamiento"] = id;
+            return PartialView(nuevoespacio);
         }
 
         [HttpPost]
-        public ActionResult AgregarSlot(Models.Espacio espacio, int ID)
+        public ActionResult AgregarSlot(int id, Espacio espacio)
         {
-                var est = new Models.Estacionamiento();
-                if (est.Seleccionar(ID))
-                {
-                    if (est.SeleccionarEspacio(ID, espacio) || espacio.Codigo == null)
-                    {
-                        return RedirectToAction("AgregarSlot", new { ID = ID });
+
+            var estacionamiento = new Models.Estacionamiento();
+            estacionamiento.Seleccionar(id);
+            estacionamiento.AgregarEspacio(espacio);
+            return RedirectToAction("Administrar", new { id = id });
         }
-                    else
-                    {
-                        est.AgregarEspacio(espacio);
-                        return RedirectToAction("Administrar", new { ID = ID });
-        
-                    }
-                }
-                else
-                {
-                    return RedirectToAction("AgregarSlot", new { ID = ID });
-                }
-                
-         }
-        
-        
-        public ActionResult EditarSlot()
+
+        public ActionResult EditarSlot(int id)
         {
-            return View("EditarSlot");
+            Espacio espacio = new Espacio();
+            ViewData["idEstacionamiento"] = id;
+            return PartialView(espacio);
+        }
+
+        [HttpPost]
+        public ActionResult EditarSlot(Models.Espacio espacio, int id)
+        {
+            var estacionamiento = new Models.Estacionamiento();
+
+            if (estacionamiento.Seleccionar(id))
+            {
+                List<Espacio> listaespacio = estacionamiento.Todos();
+                Espacio espacioSeleccionado = new Espacio();
+                espacioSeleccionado = listaespacio.FirstOrDefault(x => x.Codigo == espacio.Codigo);
+
+
+                if (espacioSeleccionado != null)
+                {
+                    //actualizar atributos
+                    espacioSeleccionado.Estado = espacio.Estado;
+                    if (espacio.Estado.Equals(EstadoEspacio.Ocupado))
+                    {
+                        estacionamiento.EstacionarVehiculo(espacio);
+                    }
+                    if (espacio.Estado.Equals(EstadoEspacio.Reservado))
+                    {
+                        estacionamiento.EstacionarVehiculo(espacio);
+                    }
+                    if (espacio.Estado.Equals(EstadoEspacio.Disponible))
+                    {
+                        estacionamiento.DespacharVehiculo(espacio);
+                    }
+                    if (espacio.Estado.Equals(EstadoEspacio.NoDisponible))
+                    {
+                        estacionamiento.EstacionarVehiculo(espacio);
+                    }
+
+                }
+            }
+            return RedirectToAction("Administrar", new { id = id });
+
+        }
+        public ActionResult EliminarSlot(int id)
+        {
+            Espacio espacio = new Espacio();
+            ViewData["idEstacionamiento"] = id;
+            return PartialView(espacio);
+        }
+
+        [HttpPost]
+        public ActionResult EliminarSlot(Models.Espacio espacio, int id)
+        {
+            var estacionamiento = new Models.Estacionamiento();
+
+            if (estacionamiento.Seleccionar(id))
+            {
+                List<Espacio> listaespacio = estacionamiento.Todos();
+                Espacio espacios = new Espacio();
+                espacios = listaespacio.FirstOrDefault(x => x.Codigo == espacio.Codigo);
+
+                if (espacios != null)
+                {
+                    estacionamiento.EliminarEspacio(espacio);
+                }
+            }
+            return RedirectToAction("Administrar", new { id = id });
         }
         [HttpGet]
         public ActionResult Tarifas(int ID)
@@ -122,9 +192,10 @@ namespace Taller.Estacionamiento.Controllers
                 ViewData["idEstacionamiento"] = id;
 
                 //mostrar en la vista que no exiten personales en el estacionamiento
-                if(listaPersonal.Count==0){
+                if (listaPersonal.Count == 0)
+                {
 
-        }
+                }
                 return View(listaPersonal);
             }
             return RedirectToAction("Index", "Home");
@@ -132,8 +203,8 @@ namespace Taller.Estacionamiento.Controllers
 
         public PartialViewResult PersonalCrear(int id)
         {
-            Personal nuevoPersonal = new Personal();                        
-            ViewData["idEstacionamiento"] = id;         
+            Personal nuevoPersonal = new Personal();
+            ViewData["idEstacionamiento"] = id;
             return PartialView(nuevoPersonal);
         }
 
@@ -144,15 +215,15 @@ namespace Taller.Estacionamiento.Controllers
 
             if (estacionamiento.Seleccionar(id))
             {
-                List<Personal> listaPersonal =estacionamiento.Personal();
+                List<Personal> listaPersonal = estacionamiento.Personal();
                 Personal personalSeleccionado = new Personal();
                 personalSeleccionado = listaPersonal.FirstOrDefault(x => x.Rut == personal.Rut);
-                
+
                 // se crea un nuevo personal, porque no existe un personal con el mismo Rut
                 if (personalSeleccionado == null)
                 {
                     // crear Usuario en la BD
-                    Usuario usuario = (Usuario)personal ;
+                    Usuario usuario = (Usuario)personal;
                     usuario.Contraseña = "";//la contraseña por el momento es vacia, no puede ser null
                     usuario.Agregar();
 
@@ -160,7 +231,7 @@ namespace Taller.Estacionamiento.Controllers
                     int id_personal_insertado = personal.Agregar();
 
                     // crear personal-estacionamiento en la BD                    
-                    personal.ID = id_personal_insertado;                 
+                    personal.ID = id_personal_insertado;
                     estacionamiento.AgregarPersonal(personal);
                 }
                 // no se crea un nuevo personal
@@ -168,15 +239,15 @@ namespace Taller.Estacionamiento.Controllers
                 {
                     //mostar mensaje que ya existe un personal con ese Rut
                 }
-                     
+
             }
-            return RedirectToAction("Personal", new { id = id });                     
+            return RedirectToAction("Personal", new { id = id });
         }
 
         public ActionResult PersonalEditar(int id)
         {
             Personal personal = new Personal();
-            ViewData["idEstacionamiento"] = id;   
+            ViewData["idEstacionamiento"] = id;
             return PartialView(personal);
         }
 
@@ -194,7 +265,7 @@ namespace Taller.Estacionamiento.Controllers
                 // modificar personal con mismo Rut
                 if (personalSeleccionado != null)
                 {
-                //actualizar atributos
+                    //actualizar atributos
                     personalSeleccionado.Nombre = personal.Nombre;
                     personalSeleccionado.Email = personal.Email;
                     personalSeleccionado.Telefono = personal.Telefono;
@@ -205,19 +276,19 @@ namespace Taller.Estacionamiento.Controllers
                     usuario.Modificar();
                 }
             }
-            return RedirectToAction("Personal", new { id = id });              
+            return RedirectToAction("Personal", new { id = id });
         }
 
         public ActionResult PersonalEliminar(int id)
         {
             Personal personal = new Personal();
-            ViewData["idEstacionamiento"] = id;   
+            ViewData["idEstacionamiento"] = id;
             return PartialView(personal);
         }
 
         [HttpPost]
         public ActionResult PersonalEliminar(int id, Personal personal)
-            {
+        {
             var estacionamiento = new Models.Estacionamiento();
 
             if (estacionamiento.Seleccionar(id))
@@ -229,10 +300,10 @@ namespace Taller.Estacionamiento.Controllers
                 // eliminar Personal con mismo Rut
                 if (personalSeleccionado != null)
                 {
-                    estacionamiento.DesvincularPersonal(personal);                    
+                    estacionamiento.DesvincularPersonal(personal);
                 }
             }
-            return RedirectToAction("Personal", new { id = id });                  
+            return RedirectToAction("Personal", new { id = id });
         }
         [HttpGet]
         public ActionResult Tarjetero(int id)
@@ -241,9 +312,9 @@ namespace Taller.Estacionamiento.Controllers
             e.Seleccionar(id);
             List<Personal> free_personal = e.Personal();
             List<Personal> busy_personal = e.Tarjetero.PersonalTrabajando();
-            free_personal.RemoveAll(c => busy_personal.Any(c2 => c2.ID == c.ID ));
+            free_personal.RemoveAll(c => busy_personal.Any(c2 => c2.ID == c.ID));
             Models.Tarjetero tarjetero = new Models.Tarjetero(e);
-            IEnumerable<SelectListItem> items = new SelectList(free_personal, "ID","Nombre");
+            IEnumerable<SelectListItem> items = new SelectList(free_personal, "ID", "Nombre");
             ViewData["PersonaSelectList"] = items;
             return View("Tarjetero", tarjetero);
         }
@@ -290,13 +361,10 @@ namespace Taller.Estacionamiento.Controllers
         public ActionResult EliminarReserva(Models.Espacio espacio, int ID)
         {
             Models.Estacionamiento estacionamiento = new Models.Estacionamiento();
-
             estacionamiento.Seleccionar(ID);
-
             estacionamiento.EliminarReserva(espacio);
 
             return RedirectToAction("Reservados", new { id = estacionamiento.ID });
         }
-
     }
 }
