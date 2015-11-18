@@ -18,7 +18,8 @@
                     </div>
                     <div class="form-group">
                         <label for="Nombre">Espacio</label>
-                        @Html.TextBoxFor(model => model.Codigo, new { @id = "codigo", @class = "form-control" })
+                        @Html.HiddenFor(model => model.Codigo, new { @id = "codigo", @class = "form-control" })
+                        @Html.LabelFor(model => model.Codigo, new { @class = "form-control" })
                     </div>
                     <div class="form-group">
                         <label for="Nombre">Patente</label>
