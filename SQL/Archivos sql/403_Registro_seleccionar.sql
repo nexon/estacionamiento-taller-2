@@ -1,5 +1,5 @@
 DROP PROCEDURE IF EXISTS registro_seleccionar$$
-CREATE PROCEDURE registro_seleccionar(in inId_registro INT)
+CREATE PROCEDURE registro_seleccionar(inId_registro INT)
 BEGIN
 	select
 		r.id_registro as registro_id_registro,
