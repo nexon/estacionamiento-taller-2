@@ -1,0 +1,13 @@
+﻿.bordered {
+    
+    text-shadow: -2px 0 #666, 0 2px #666, 2px 0 #666, 0 -2px #666;
+}
+.borderedw{
+    text-shadow: -2px 0 #fff, 0 2px #fff, 2px 0 #fff, 0 -2px #fff;
+}
+.margintop10{
+    margin-top: 10px;
+}
+iframe {
+        height: 350px;
+}

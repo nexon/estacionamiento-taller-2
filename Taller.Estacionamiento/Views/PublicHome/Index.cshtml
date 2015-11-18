@@ -1,0 +1,550 @@
+﻿@model Taller.Estacionamiento.Models.Usuario
+@{
+    ViewBag.Title = "Index";
+    Layout = "";
+}
+
+
+<!doctype html>
+<!--[if IE 7 ]> <html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <title>Parking-Matic</title>
+    <!-- Bootstrap core CSS -->
+    <link href=@Url.Content("~/Content/publicHome/css/bootstrap.min.css") rel="stylesheet">
+
+    <!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+          <script src="js/html5shiv.js"></script>
+          <script src="js/respond.min.js"></script>
+        <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yellowtail%7COpen%20Sans%3A400%2C300%2C600%2C700%2C800" media="screen" />
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/font-awesome.min.css") type="text/css" media="all" />
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/flexslider.css") type="text/css" media="screen" />
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/jquery.bxslider.css") type="text/css" media="screen" />
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/jquery.fancybox.css")>
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/jquery.selectbox.css")>
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/style.css")>
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/mobile.css")>
+    <link rel="stylesheet" type="text/css" href=@Url.Content("~/Content/publicHome/css/settings.css") media="screen" />
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/animate.min.css")>
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/ts.css") type="text/css">
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/modalLogin.css") type="text/css">
+    <link rel="stylesheet" href=@Url.Content("~/Content/publicHome/css/myStyle.css") type="text/css">
+
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/bootstrap.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.themepunch.tools.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.themepunch.revolution.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/wow.min.js")"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key&amp;sensor=false"></script>
+    <!-- Twitter Feed Scripts
+         Uncomment to activate
+
+    <script type="text/javascript" src="js/twitter/jquery.tweet.js"></script>
+    <script type="text/javascript" src="js/twitter/twitter_feed.js"></script> -->
+
+</head>
+
+
+
+<body>
+    <!--Header Start-->
+    <header data-spy="affix" data-offset-top="1" class="clearfix">
+        <section class="toolbar">
+            <div class="container">
+                <div class="row">
+                </div>
+            </div>
+            <div class="toolbar_shadow"></div>
+        </section>
+
+        <div class="bottom-header">
+            <div class="container">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                            <a class="navbar-brand" href="index-2.html"><span class="logo"><span class="primary_text">Parking-Matic</span> <span class="secondary_text">Estacionamientos</span></span></a>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav pull-right">
+                                <li class="active"><a href="@Url.Action("Index","PublicHome")">Inicio</a></li>
+                                <li><a href="@Url.Action("Servicios","PublicHome")">Servicios</a></li>
+                                <li><a href="@Url.Action("Empresa", "PublicHome")">Nuestra Empresa</a></li>
+                                <li><a href="@Url.Action("Contacto", "PublicHome")">Contacto</a></li>
+                                <li style="cursor:pointer"><a data-toggle="modal" data-target="#login">Login</a></li>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </nav>
+            </div>
+            <div class="header_shadow"></div>
+        </div>
+    </header>
+    <!--Header End-->
+    <!--Modal login Start-->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×    </button>
+                    <h4 class="modal-title">Ingresar al sistema</h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("Ingresar", "Cuenta", FormMethod.Post))
+                    {
+                        @Html.ValidationSummary(true, "Login failed") 
+                    <form class="form col-md-12 center-block">
+
+                        <div class="form-group">
+                            @Html.TextBoxFor(u => u.Email, new { @placeholder = "Email" })
+                            @Html.ValidationMessageFor(u => u.Email)
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(u => u.Contraseña, new { @placeholder = "Contraseña", @type="password" })
+                            @Html.ValidationMessageFor(u => u.Contraseña)
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-danger btn-lg btn-block">Ingresar</button>
+                            <span class="pull-right"><a href="#">Registrarse</a></span><span><a href="#">¿Necesita ayuda?</a></span>
+                        </div>
+                    </form>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal login End-->
+
+
+
+
+    <div class="clearfix"></div>
+    <section class="banner-wrap">
+        <div class="banner">
+            <div class="tp-banner-container">
+                <div class="tp-banner">
+                    <ul>
+                        <!-- SLIDE  -->
+                        <li data-transition="fade" data-slotamount="5" data-masterspeed="700">
+                            <!-- MAIN IMAGE -->
+                            <img src="@Url.Content("~/Content/publicHome/images/slider/1.jpg")" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
+                            <div class="tp-caption customin customout start green bordered"
+                                 data-x="40"
+                                 data-hoffset="0"
+                                 data-y="510"
+                                 data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
+                                 data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                 data-speed="1000"
+                                 data-start="500"
+                                 data-easing="Back.easeInOut"
+                                 data-endspeed="300">Tu estacionamiento, un solo click</div>
+                            <!-- LAYER NR. 1 -->
+                            <div class="tp-caption big_white fade bordered margintop10"
+                                 data-x="40"
+                                 data-y="560"
+                                 data-speed="500"
+                                 data-start="800"
+                                 data-easing="Power4.easeOut"
+                                 data-endspeed="300"
+                                 data-endeasing="Power1.easeIn"
+                                 data-captionhidden="off"
+                                 style="z-index: 6;">
+                                Únete a NaviPark
+                            </div>
+
+
+                        </li>
+
+                        <li data-transition="fade" data-slotamount="5" data-masterspeed="700">
+                            <!-- MAIN IMAGE -->
+                            <img src="@Url.Content("~/Content/publicHome/images/slider/3.jpg")" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
+
+                            <!-- LAYERS -->
+                            <div class="tp-caption customin customout start green bordered"
+                                 data-x="40"
+                                 data-hoffset="0"
+                                 data-y="510"
+                                 data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
+                                 data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                 data-speed="1000"
+                                 data-start="500"
+                                 data-easing="Back.easeInOut"
+                                 data-endspeed="300">Busca, reserva, administra</div>
+
+                            <!-- LAYER NR. 1 -->
+                            <div class="tp-caption big_white fade bordered margintop10"
+                                 data-x="40"
+                                 data-y="560"
+                                 data-speed="500"
+                                 data-start="800"
+                                 data-easing="Power4.easeOut"
+                                 data-endspeed="300"
+                                 data-endeasing="Power1.easeIn"
+                                 data-captionhidden="off"
+                                 style="z-index: 6;">Directamente desde tu Smatphone</div>
+                        </li>
+
+                        <li data-transition="fade" data-slotamount="5" data-masterspeed="700">
+                            <!-- MAIN IMAGE -->
+                            <img src="@Url.Content("~/Content/publicHome/images/slider/2.jpg")" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
+
+                            <!-- LAYER NR. 1 -->
+
+                            <div class="tp-caption mediumlarge_light_white_center domainate customin customout start"
+                                 data-x="0"
+                                 data-hoffset="0"
+                                 data-y="199"
+                                 data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
+                                 data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                 data-speed="1000"
+                                 data-start="500"
+                                 data-easing="Back.easeInOut"
+                                 data-endspeed="300">HAZ</div>
+
+                            <!-- LAYER NR. 1 -->
+                            <div class="tp-caption thin_dark_blue fade borderedw"
+                                 data-x="270"
+                                 data-y="210"
+                                 data-speed="500"
+                                 data-start="800"
+                                 data-easing="Power4.easeOut"
+                                 data-endspeed="300"
+                                 data-endeasing="Power1.easeIn"
+                                 data-captionhidden="off"
+                                 style="z-index: 6; letter-spacing: 0;">VISIBLE TU LOTE</div>
+                            <!-- LAYER NR. 2 -->
+                            <div class="tp-caption thinner_white sfl"
+                                 data-x="05"
+                                 data-y="270"
+                                 data-speed="500"
+                                 data-start="1200"
+                                 data-easing="Power4.easeOut"
+                                 data-endspeed="300"
+                                 data-endeasing="Power1.easeIn"
+                                 data-captionhidden="off"
+                                 style="z-index: 6; top: 371px; ">AUMENTA TUS CLIENTES</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <script type="text/javascript">
+
+                var revapi;
+
+                jQuery(document).ready(function () {
+
+                    revapi = jQuery('.tp-banner').revolution(
+                     {
+                         delay: 8000,
+                         startwidth: 1170,
+                         startheight: 645,
+                         hideThumbs: 10,
+                         fullWidth: "off",
+                         fullScreen: "off",
+                         fullScreenOffsetContainer: "",
+                         hideTimerBar: "on",
+                         navigationType: "none",
+                         stopAtSlide: 1
+
+                     });
+
+                });	//ready
+
+            </script>
+
+            <!-- END REVOLUTION SLIDER -->
+            <!-- Content End -->
+
+        </div>
+    </section>
+
+
+
+    <section class="message-wrap">
+        <div class="container">
+            <div class="row">
+                <h2 class="col-lg-9 col-md-8 col-sm-12 col-xs-12 xs-padding-left-15">Conoce nuestro sitema para administrar <span class="alternate-font">estacionamientos</span></h2>
+                <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 xs-padding-right-15"> <a href="@Url.Action("Contacto","PublicHome")" class="default-btn pull-right action_button lg-button">Contáctanos</a> </div>
+            </div>
+        </div>
+        <div class="message-shadow"></div>
+    </section>
+    <!--message-wrap ends-->
+
+    <section class="content">
+        <div class="container">
+            <div class="inner-page homepage margin-bottom-none">
+
+                <section class="welcome-wrap padding-top-30 sm-horizontal-15">
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin-bottom-none">
+                            <div class="flip margin-bottom-30">
+                                <div class="card">
+                                    <div class="face front"><img class="img-responsive" src="@Url.Content("~/Content/publicHome/images/car1.jpg")" alt=""></div>
+                                    <div class="face back">
+                                        <div class='hover_title'>¡Lo encontramos!</div>
+                                        <a href="inventory-listing.html"><i class="fa fa-link button_icon"></i></a> <a href="@Url.Content("~/Content/publicHome/images/car1.jpg")" class="fancybox"><i class="fa fa-arrows-alt button_icon"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4><a href="#">RÁPIDO Y DIRECTO</a></h4>
+                            <p class="margin-bottom-none">
+                                Estés donde estés, NaviPark se encargará
+                                de encontrar un estacionamiento cercano a ti,
+                                sus características y sus precios. ¡Siempre habrá
+                                algo disponible para ti!
+
+                            </p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin-bottom-none">
+                            <div class="flip horizontal margin-bottom-30">
+                                <div class="card">
+                                    <div class="face front"><img class="img-responsive" src="@Url.Content("~/Content/publicHome/images/car2.jpg")" alt=""></div>
+                                    <div class="face back">
+                                        <div class='hover_title'>Orientado a ti</div>
+                                        <a href="inventory-listing.html"><i class="fa fa-link button_icon"></i></a> <a href="@Url.Content("~/Content/publicHome/images/car2.jpg")" class="fancybox"><i class="fa fa-arrows-alt button_icon"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4><a href="#">FÁCIL E INTUITIVO</a></h4>
+                            <p class="margin-bottom-none">
+                                Con una interfáz sencilla y práctica,
+                                todo se encuentra justo donde debe estar
+                                facilitandote la navegación y la experiencia
+                                en la búsqueda de estacionamiento.
+                            </p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin-bottom-none">
+                            <div class="flip margin-bottom-30">
+                                <div class="card">
+                                    <div class="face front"><img class="img-responsive" src="@Url.Content("~/Content/publicHome/images/car3.jpg")" alt=""></div>
+                                    <div class="face back">
+                                        <div class='hover_title'>Todo OK</div>
+                                        <a href="inventory-listing.html"><i class="fa fa-link button_icon"></i></a> <a href="@Url.Content("~/Content/publicHome/images/car3.jpg")" class="fancybox"><i class="fa fa-arrows-alt button_icon"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4><a href="#">SEGURO Y ADMINISTRABLE</a></h4>
+                            <p class="margin-bottom-none">
+                                Tanto si eres dueño de un lote o un cliente
+                                en búsqueda de estacionamiento, te aseguramos
+                                organizar toda la información que
+                                necesites a mano.
+                            </p>
+                        </div>
+                    </div>
+                    <!--invetory ends-->
+            </div>
+
+
+            <div class="row parallax_parent design_2 margin-bottom-40 margin-top-30">
+                <div class="parallax_scroll clearfix" data-velocity="-.5" data-offset="-200">
+                    <div class="overlay">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 xs-margin-bottom-none xs-padding-top-30 padding-right-none scroll_effect bounceInRight">
+                                    <span class="align-center"><i class="fa fa-6x fa-dashboard"></i></span>
+                                    <h3>Acelera tu negocio</h3>
+                                    <p>
+                                        Si eres propietario de tu lote
+                                        podrás aumentar tu precencia con
+                                        tus clientes, mímalos con buenos
+                                        precios y promociones. La reputación
+                                        de tu lote te hará crecer.
+                                    </p>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 xs-margin-bottom-none xs-padding-top-30 scroll_effect bounceInLeft" data-wow-delay=".2s">
+                                    <span class="align-center"><i class="fa fa-6x fa-road"></i></span>
+                                    <h3>Con tigo hacia tu ruta</h3>
+                                    <p>
+                                        Si eres usuario y buscas
+                                        estacionamiento, NaviPark puede guiarte
+                                        y proporcionarte un lugar seguro donde
+                                        dejar tu auto.
+                                    </p>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 xs-margin-bottom-none xs-padding-top-30 scroll_effect bounceInRight" data-wow-delay=".2s">
+                                    <span class="align-center"><i class="fa fa-6x fa-flag-checkered"></i></span>
+                                    <h3>Reserva tu estacionamiento</h3>
+                                    <p>
+                                        Puedes reservar y pagar al llegar a
+                                        tu estacionamiento de destino. Las
+                                        tarifas serán siempre las mismas
+                                        y cada lote administra su propio
+                                        sistema.
+                                    </p>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 padding-left-none xs-margin-bottom-none xs-padding-top-30 scroll_effect bounceInLeft">
+                                    <span class="align-center"><i class="fa fa-6x fa-bar-chart-o"></i></span>
+                                    <h3>Administra tu lote</h3>
+                                    <p>
+                                        Puedes administrar, gestionar y
+                                        cambiar los parámetros de tu lote.
+                                        Lleva un registro de ventas y mira
+                                        cómo tu negocio crece.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="welcome-wrap padding-top-30 sm-horizontal-15">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 welcome padding-left-none padding-bottom-40 scroll_effect fadeInUp">
+                        <h4 class="margin-bottom-25 margin-top-none"><strong>Bienvenido</strong> a una nueva experiencia</h4>
+                        <p>
+                            Parking-Matic es un servicio destinado a las empresas dueñas de <span class="alternate-font">estacionamientos</span>. El servicio provee un sistema administracion de estacionamientos, control del flujo de vehiculos en tiempo real, administracion del personal, y estadisticas del funcionamiento del estacionamiento.
+                        </p>
+                        <p>
+                            Nuestra servicio cuenta con gran cantidad de usuarios, quienes a traves de sus Smartphone localizan geograficamente los estacionamientos cercanos, para finalmente ir a uno.
+                            Por ello, facilitamos el aumento de clientes de una manera<span class="alternate-font"> rápida, eficiente, y sin perdidas de tiempo.</span>.
+                        </p>
+                        <p>
+                            Revisa nuestros servicios detalladamente.Ver servicios <span class="alternate-font"> <a href="@Url.Action("Servicios","PublicHome")">aqui.</a></span>.
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 welcome padding-left-none padding-bottom-40 scroll_effect fadeInUp">
+                        <iframe width="853px" height="480px" src="https://www.youtube.com/embed/LFqGjLOTb3s" frameborder="0" allowfullscreen></iframe>
+                    </div>
+            </section>
+
+            <div class="row parallax_parent margin-top-30">
+                <div class="parallax_scroll clearfix" data-velocity="-.5" data-offset="-300" data-no-repeat="true">
+                    <div class="overlay">
+                        <div class="container">
+
+                            <div class="row">
+
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 padding-left-none margin-vertical-60">
+                                    <i class="fa fa-car"></i>
+
+                                    <span class="animate_number margin-vertical-15">
+                                        <span class="number">5,224</span>
+                                    </span>
+
+                                    Autos estacionados
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 margin-vertical-60">
+                                    <i class="fa  fa-star"></i>
+
+                                    <span class="animate_number margin-vertical-15">
+                                        $<span class="number">2114</span>
+                                    </span>
+
+                                    Reservas de autos
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 margin-vertical-60">
+                                    <i class="fa fa-users"></i>
+
+                                    <span class="animate_number margin-vertical-15">
+                                        <span class="number">5541</span>
+                                    </span>
+
+                                    Usuarios activos
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 padding-right-none margin-vertical-60">
+                                    <i class="fa fa-location-arrow"></i>
+
+                                    <span class="animate_number margin-vertical-15">
+                                        <span class="number">1142</span>
+                                    </span>
+
+                                    Estacionamientos establecidos
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </section>
+    <!--welcome-wrap ends-->
+
+
+    <!--Footer Start-->
+    <footer class="design_2">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 padding-right-none md-padding-right-none sm-padding-right-15 xs-padding-right-15">
+                    <h4>Contáctanos</h4>
+                    <div class="footer-contact">
+                        <ul>
+                            <li><i class="fa fa-map-marker"></i> <strong>Address:</strong> 1234 Street Name, Curico, AB 12345</li>
+                            <li><i class="fa fa-phone"></i> <strong>Phone:</strong>85874865</li>
+                            <li><i class="fa fa-envelope-o"></i> <strong>Email:</strong><a href="#">parking@gmail.com</a></li>
+                        </ul>
+
+                        <i class="fa fa-location-arrow back_icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="clearfix"></div>
+    <section class="copyright-wrap padding-bottom-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="logo-footer margin-bottom-20 md-margin-bottom-20 sm-margin-bottom-10 xs-margin-bottom-20">
+                        <a href="#">
+                            <h1>Parking-Matic</h1>
+                            <span>Estacionamientos</span>
+                        </a>
+                    </div>
+                    <p>Copyright &copy; 2015</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="back_to_top"> <img src="@Url.Content("~/Content/publicHome/images/arrow-up.png")" alt="scroll up" /> </div>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/retina.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.parallax.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.inview.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/main.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.fancybox.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/modernizr.custom.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.flexslider.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.bxslider.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.selectbox-0.2.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.mousewheel.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/publicHome/jquery.easing.js")"></script>
+
+
+
+</body>
+</html>

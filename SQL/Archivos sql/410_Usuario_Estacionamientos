@@ -1,0 +1,15 @@
+DROP PROCEDURE IF EXISTS Usuario_Estacionamientos $$
+CREATE PROCEDURE Usuario_Estacionamientos
+(
+	inRut INT
+) 
+BEGIN
+SELECT
+	id_estacionamiento
+FROM Personal_Estacionamiento, (SELECT id_personal 
+								 FROM Personal
+							  	 WHERE id_usuario = inRut ) AS propietario
+WHERE 	Personal_Estacionamiento.id_rol = 1 AND
+		Personal_Estacionamiento.id_personal = propietario.id_personal;
+END$$
+$$
