@@ -4,12 +4,13 @@ CREATE PROCEDURE Personal_Estacionamiento_Todos(
 ) 
 BEGIN
   SELECT 
-  	personal.id_personal		AS Personal_ID,
-    rut			    AS Usuario_rut,
-	nombre			AS Usuario_Nombre,
-	contrasenia	    AS Usuario_Contrasenia,	
-	email 	        AS Usuario_Email,
-	telefono	    AS Usuario_Telefono
+  	personal.id_personal				AS Personal_ID,
+  	personal_estacionamiento.id_rol     AS Personal_Estacionamiento_IdRol,
+    rut			    					AS Usuario_Rut,
+	nombre								AS Usuario_Nombre,
+	contrasenia	    					AS Usuario_Contrasenia,	
+	email 	        					AS Usuario_Email,
+	telefono	    					AS Usuario_Telefono
   FROM 
 	personal_estacionamiento, personal, usuario
   WHERE

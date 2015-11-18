@@ -13,13 +13,19 @@ namespace Taller.Estacionamiento.Models
     {
         public virtual string Nombre { get; set; }
         public virtual int Rut { get; set; }
+        [Required]
         public virtual string Email { get; set; }
+        [Required]
         public virtual string Contraseña { get; set; }
         public virtual int Telefono { get; set; }
 
         public virtual bool IniciarSesion(string email, string contraseña)
         {
-            throw new NotImplementedException();
+            if (this.Seleccionar(email) && contraseña == this.Contraseña)
+            {
+                return true;
+            }
+            return false;
         }
         public virtual bool CerrarSesion(string email)
         {
@@ -37,9 +43,9 @@ namespace Taller.Estacionamiento.Models
                 var comando = new MySqlCommand() { CommandText = "Usuario_Crear", CommandType = System.Data.CommandType.StoredProcedure };
                 comando.Parameters.AddWithValue("inRut", this.Rut);
                 comando.Parameters.AddWithValue("inNombre", this.Nombre);
-                comando.Parameters.AddWithValue("inContrasenia", this.Contraseña );
-                comando.Parameters.AddWithValue("inEmail", this.Email );
-                comando.Parameters.AddWithValue("inTelefono", this.Telefono );                
+                comando.Parameters.AddWithValue("inContrasenia", this.Contraseña);
+                comando.Parameters.AddWithValue("inEmail", this.Email);
+                comando.Parameters.AddWithValue("inTelefono", this.Telefono);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
@@ -51,7 +57,41 @@ namespace Taller.Estacionamiento.Models
                 Logger.SalidaMetodo("Usuario.Agregar", this.ToString());
             }
         }
-
+        
+        public bool Seleccionar(string email)
+        {
+            try
+            {
+                Logger.EntradaMetodo("Usuario.Seleccionar", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Usuario_Seleccionar", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inEmail", email);
+                var data = Data.Obtener(comando);
+                DataTable dt = data.Tables[0];
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow dr = dt.Rows[0];
+                    this.Rut = Convert.ToInt32(dr["rut"]);
+                    this.Nombre = Convert.ToString(dr["nombre"]);
+                    this.Email = Convert.ToString(dr["email"]);
+                    this.Contraseña = Convert.ToString(dr["contrasenia"]);
+                    this.Telefono = Convert.ToInt32(dr["telefono"]);
+                    return true;
+                }
+                else 
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Usuario.Seleccionar", this.ToString());
+            }
+            return true;
+        }
         
         public virtual void Modificar()
         {
