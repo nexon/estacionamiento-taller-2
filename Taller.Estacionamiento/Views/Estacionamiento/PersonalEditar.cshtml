@@ -19,7 +19,8 @@
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
                                     <div class="col-sm-9">
-                                        @Html.TextBoxFor(model => model.Nombre, new { @class = "col-xs-12", @id = "personal-editar-nombre", placeholder = "Nombre Apellido" })
+                                        @Html.TextBoxFor(model => model.Nombre, new { @class = "col-xs-12", @id = "personal-editar-nombre", disabled = "disabled" })
+                                        @Html.HiddenFor(model => model.Nombre, new { @id = "personal-editar-nombre-hidden" })
                                         @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -36,7 +37,8 @@
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
                                     <div class="col-sm-9">
-                                        @Html.TextBoxFor(model => model.Email, new { @class = "col-xs-12", @id = "personal-editar-email", placeholder = "correo@ejemplo.com" })
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "col-xs-12", @id = "personal-editar-email", disabled = "disabled" })
+                                        @Html.HiddenFor(model => model.Email, new { @id = "personal-editar-email-hidden" })
                                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -44,8 +46,17 @@
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
                                     <div class="col-sm-9">
-                                        @Html.TextBoxFor(model => model.Telefono, new { @class = "col-xs-12", @id = "personal-editar-telefono", placeholder = "1112223333" })
+                                        @Html.TextBoxFor(model => model.Telefono, new { @class = "col-xs-12", @id = "personal-editar-telefono", disabled = "disabled" })
+                                        @Html.HiddenFor(model => model.Telefono, new { @id = "personal-editar-telefono-hidden" })
                                         @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Rol, htmlAttributes: new { @class = "col-sm-3 control-label no-padding-right" })
+                                    <div class="col-sm-9">
+                                        @Html.DropDownListFor(model => model.Rol, ViewData["roles"] as List<SelectListItem>, new { @class = "col-xs-12" })
+                                        @Html.ValidationMessageFor(model => model.Rol, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 

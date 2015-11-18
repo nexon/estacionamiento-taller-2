@@ -43,9 +43,9 @@ namespace Taller.Estacionamiento.Models
                 var comando = new MySqlCommand() { CommandText = "Usuario_Crear", CommandType = System.Data.CommandType.StoredProcedure };
                 comando.Parameters.AddWithValue("inRut", this.Rut);
                 comando.Parameters.AddWithValue("inNombre", this.Nombre);
-                comando.Parameters.AddWithValue("inContrasenia", this.Contraseña );
-                comando.Parameters.AddWithValue("inEmail", this.Email );
-                comando.Parameters.AddWithValue("inTelefono", this.Telefono );                
+                comando.Parameters.AddWithValue("inContrasenia", this.Contraseña);
+                comando.Parameters.AddWithValue("inEmail", this.Email);
+                comando.Parameters.AddWithValue("inTelefono", this.Telefono);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
@@ -57,6 +57,7 @@ namespace Taller.Estacionamiento.Models
                 Logger.SalidaMetodo("Usuario.Agregar", this.ToString());
             }
         }
+        
         public bool Seleccionar(string email)
         {
             try

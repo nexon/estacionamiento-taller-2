@@ -22,6 +22,8 @@ namespace Taller.Estacionamiento.Models
         /// <summary>
         /// Agregar un personal en la base de datos,
         /// retorna el id del personal insertado en la bd
+        /// 
+        /// si retorna cero, es porque existe un Personal asociado al mismo Usuario
         /// </summary>
         public new int Agregar()
         {
@@ -33,7 +35,7 @@ namespace Taller.Estacionamiento.Models
                 comando.Parameters.AddWithValue("inId_usuario", this.Rut);
 
                 var data = Data.Obtener(comando);
-                last_inserted_id= Convert.ToInt32(data.Tables[0].Rows[0]["LAST_INSERT_ID()"]);
+                last_inserted_id = Convert.ToInt32(data.Tables[0].Rows[0]["ultimo_id_insertado"]);
             }
             catch (Exception ex)
             {
@@ -101,6 +103,35 @@ namespace Taller.Estacionamiento.Models
             }
             return false;
         }
+
+        /// <summary>
+        /// Se retorna el id del Personal,
+        /// asociado a un Usuario especifico.
+        /// </summary>
+        /// <returns></returns>
+        public int Buscar()
+        {
+            int last_inserted_id = 0;
+            try
+            {
+                Logger.EntradaMetodo("Personal.Buscar", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Personal_Buscar", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inId_usuario", this.Rut);
+
+                var data = Data.Obtener(comando);
+                last_inserted_id = Convert.ToInt32(data.Tables[0].Rows[0]["Personal_Id"]);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Personal.Buscar", this.ToString());
+            }
+            return last_inserted_id;
+        }
+
         /// <summary>
         /// convierte el atributo Rol en un numero,
         /// para insertar el rol como int en la bd       
@@ -111,20 +142,32 @@ namespace Taller.Estacionamiento.Models
             switch (this.Rol.ToString())
             {
                 case "Propietario":
-                    return 1;
+                    return 0;//porque el indice del enum empieza de cero
                 case "Encargado":
-                    return 2;
+                    return 1;
                 case "Aparcador":
-                    return 3;
+                    return 2;
                 case "Secretaria":
-                    return 4;
+                    return 3;
                 case "Guardia":
-                    return 5;
+                    return 4;
                 default:
                     break;
             }
             return 0;
         }
+
+        /// <summary>
+        /// retorna una lista de string con todos los roles
+        /// que puede tener un personal
+        /// </summary>
+        /// <returns> </returns>
+        public List<string> ErolEnumToList()
+        {
+            var erolNameList = Enum.GetNames(typeof(Erol)).ToList();
+            return erolNameList;
+        }
+
     }
 
 }
