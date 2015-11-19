@@ -46,6 +46,14 @@
                     <span>@Model.Email</span>
                 </div>
             </div>
+            <div class="profile-info-row">
+                <div class="profile-info-name"> Capacidad </div>
+
+                <div class="profile-info-value">
+                    <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
+                    <span>@Model.Todos().Count</span>
+                </div>
+            </div>
             @if (Model.tieneHorario())
             {
                 <div class="profile-info-row">
