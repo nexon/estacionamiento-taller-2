@@ -46,7 +46,8 @@ namespace Taller.Estacionamiento.Controllers
         }
         public ActionResult Ocupados(int ID)
         {
-            var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = ID };
+            var estacionamiento = new Estacionamiento.Models.Estacionamiento();
+            estacionamiento.Seleccionar(ID);
             return View(estacionamiento);
         }
         public ActionResult Reservados(int ID)
@@ -399,8 +400,8 @@ namespace Taller.Estacionamiento.Controllers
 
             estacionamiento.DespacharVehiculo(espacio);
             var mensaje = "El pago para el espacio: " + espacio.Codigo + " es: " + monto;
-            
-            HttpContext.Session.Add("ERROR_MESSAGE", mensaje);
+
+            TempData["alerta"] = mensaje;
 
             return RedirectToAction("Ocupados", new { ID = estacionamiento.ID });
         }

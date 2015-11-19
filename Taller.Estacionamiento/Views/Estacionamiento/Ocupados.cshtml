@@ -65,6 +65,16 @@
 
 @Html.Partial("_DespacharVehiculo", new Taller.Estacionamiento.Models.Espacio() { Vehiculo = new Taller.Estacionamiento.Models.Vehiculo() })
 
+@{
+    if (TempData["alerta"] != null)
+    {
+        <text>
+            <script type="text/javascript">
+                alert('@TempData["alerta"]');
+            </script>
+        </text>
+    }
+}
 @section ViewsScripts {
     <script type="text/javascript">
         $("#dynamic-table").dataTable({

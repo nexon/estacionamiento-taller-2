@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label for="Nombre">Patente</label>
-                        @Html.TextBoxFor(model => model.Vehiculo.Patente, new { @id = "patente", @class = "form-control", @placeholder = "La patente del vehiculo" })
+                        @Html.TextBoxFor(model => model.Vehiculo.Patente, new { @id = "patente", @class = "form-control", @placeholder = "La patente del vehiculo", @required=true })
                     </div>
                     <input type="submit" class="btn btn-primary" value="Estacionar" />
                 }
