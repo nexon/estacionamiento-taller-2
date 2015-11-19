@@ -120,7 +120,7 @@ namespace Taller.Estacionamiento.Models
             throw new NotImplementedException();
         }
 
-        public void Estacionamientos()
+        public List<Estacionamiento> Estacionamientos()
         {
             var estacionamientos = new List<Estacionamiento>();
             try
@@ -145,6 +145,7 @@ namespace Taller.Estacionamiento.Models
             {
                 Logger.SalidaMetodo("Usuario.Estacionamientos", this.ToString());
             }
+            return estacionamientos;
         }
     }
 }
