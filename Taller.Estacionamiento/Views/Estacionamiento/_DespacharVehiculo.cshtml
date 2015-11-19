@@ -18,11 +18,11 @@
                     </div>
                     <div class="form-group">
                         <label for="Nombre">Espacio</label>
-                        @Html.TextBoxFor(model => model.Codigo, new { @id = "codigo", @class = "form-control" })
+                        @Html.TextBoxFor(model => model.Codigo, new { @id = "codigo", @class = "form-control", @readonly = true })
                     </div>
                     <div class="form-group">
                         <label for="Nombre">Patente</label>
-                        @Html.TextBoxFor(model => model.Vehiculo.Patente, new { @id = "patente", @class = "form-control"})
+                        @Html.TextBoxFor(model => model.Vehiculo.Patente, new { @id = "patente", @class = "form-control", @readonly = true })
                     </div>
                     <input type="submit" class="btn btn-primary" value="Despachar" />
                 }

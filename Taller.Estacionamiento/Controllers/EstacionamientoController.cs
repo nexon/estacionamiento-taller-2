@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Taller.Estacionamiento.Models;
+using Taller.Estacionamiento.Utils;
 
 namespace Taller.Estacionamiento.Controllers
 {
@@ -397,6 +398,10 @@ namespace Taller.Estacionamiento.Controllers
                 monto = cant_minutos * estacionamiento.TarifaMinuto;
 
             estacionamiento.DespacharVehiculo(espacio);
+            var mensaje = "El pago para el espacio: " + espacio.Codigo + " es: " + monto;
+            
+            HttpContext.Session.Add("ERROR_MESSAGE", mensaje);
+
             return RedirectToAction("Ocupados", new { ID = estacionamiento.ID });
         }
 
