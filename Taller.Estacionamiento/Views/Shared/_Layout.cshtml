@@ -53,6 +53,35 @@
                     <ul class="nav ace-nav">
                         <li class="green">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+                                <span class="badge badge-success">Estacionamientos</span>
+                            </a>
+
+                            <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+
+                                <li class="dropdown-header">
+                                    <i class="ace-icon fa fa-envelope-o"></i>
+                                    3 Disponibles
+                                </li>
+                                <li class="dropdown-content">
+                                    <ul class="dropdown-menu dropdown-navbar">
+                                        @foreach (var estac in SessionManager.UsuarioAutenticado().Estacionamientos())
+                                        {
+                                            <li>
+                                                <a href="/Cuenta/SeleccionarEstacionamiento/@estac.ID" class="clearfix">
+                                                    <span class="msg-title">
+                                                        @estac.Nombre
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="green">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <i class="ace-icon fa fa-sign-in"></i>
                                 <span class="badge badge-grey">4</span>
                             </a>
@@ -266,21 +295,21 @@
                                 <b class="arrow"></b>
                             </li>
                             <li class="">
-                                <a href="@Url.Action("Administrar", "Estacionamiento", new { ID = @SessionManager.EstacionamientoSeleccionado().ID }))">
+                                <a href="@Url.Action("Administrar", "Estacionamiento", new { ID = @SessionManager.EstacionamientoSeleccionado().ID })">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Administrar
                                 </a>
                                 <b class="arrow"></b>
                             </li>
                             <li class="">
-                                <a href="@Url.Action("Tarifas", "Estacionamiento", new { ID = @SessionManager.EstacionamientoSeleccionado().ID }))">
+                                <a href="@Url.Action("Tarifas", "Estacionamiento", new { ID = @SessionManager.EstacionamientoSeleccionado().ID })">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Tarifas
                                 </a>
                                 <b class="arrow"></b>
                             </li>
                             <li class="">
-                                <a href="@Url.Action("Personal", "Estacionamiento", new { ID = @SessionManager.EstacionamientoSeleccionado().ID }))">
+                                <a href="@Url.Action("Personal", "Estacionamiento", new { ID = @SessionManager.EstacionamientoSeleccionado().ID })">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Personal
                                 </a>
