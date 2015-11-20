@@ -852,6 +852,7 @@
     <Content Include="Views\Estacionamiento\EliminarSlot.cshtml" />
     <Content Include="Views\Estacionamiento\EstacionamientoEditar.cshtml" />
     <Content Include="Views\Estacionamiento\_ConfirmarReserva.cshtml" />
+    <Content Include="Views\Cuenta\Perfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

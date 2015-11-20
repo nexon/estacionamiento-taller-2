@@ -27,7 +27,17 @@ namespace Taller.Estacionamiento.Controllers
             }
             return RedirectToAction("Index", "PublicHome");
         }
-
+        [HttpGet]
+        public ActionResult Perfil()
+        {
+            Usuario user = SessionManager.UsuarioAutenticado();
+            SessionManager.ModificarUsuarioAutenticado(user);
+            if (user != null)
+            {
+                return View(user);
+            }
+            return RedirectToAction("Index", "Home");
+        }
         public ActionResult Salir()
         {
             return View();
