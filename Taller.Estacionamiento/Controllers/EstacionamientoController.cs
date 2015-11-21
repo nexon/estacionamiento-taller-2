@@ -62,12 +62,18 @@ namespace Taller.Estacionamiento.Controllers
 
         public ActionResult Administrar(int id)
         {
+
+            string mensaje = TempData["mensajeCrearSlot"] as string;
+            if (String.IsNullOrEmpty(mensaje))
+            {
+                mensaje = "";
+            }
             var estacionamiento = new Models.Estacionamiento();
             if (estacionamiento.Seleccionar(id))
             {
                 List<Espacio> listaEspacios = estacionamiento.Todos();
                 ViewData["idEstacionamiento"] = id;
-
+                ViewData["mensajeCrearSlot"] = mensaje;
                 if (listaEspacios.Count == 0)
                 {
 
@@ -89,21 +95,51 @@ namespace Taller.Estacionamiento.Controllers
         {
 
             var estacionamiento = new Models.Estacionamiento();
-            estacionamiento.Seleccionar(id);
-            estacionamiento.AgregarEspacio(espacio);
-            return RedirectToAction("Administrar", new { id = id });
+            string mensaje = "";
+            if(estacionamiento.Seleccionar(id))
+            {
+                if (espacio.Codigo != null)
+                {
+                    if (!estacionamiento.SeleccionarEspacio(id, espacio))
+                    {
+                        estacionamiento.AgregarEspacio(espacio);
+                        return RedirectToAction("Administrar", new { id = id });
+                    }
+                    else
+                    {
+                        mensaje = "El Código del espacio ya está utilizado";
+                        TempData["mensajeCrearSlot"] = mensaje;
+                        return RedirectToAction("Administrar", new { id = id });
+                    }
+                }
+                else
+                {
+                    mensaje = "El Código del espacio no puede ser vacío";
+                    TempData["mensajeCrearSlot"] = mensaje;
+                    return RedirectToAction("Administrar", new { id = id });
+                }
+            }
+            else
+            {
+                mensaje = "El Estacionamiento no existe";
+                TempData["mensajeCrearSlot"] = mensaje;
+                return RedirectToAction("Administrar", new { id = id });
+            }
+         
         }
 
         public ActionResult EditarSlot(int id)
         {
             Espacio espacio = new Espacio();
             ViewData["idEstacionamiento"] = id;
+
             return PartialView(espacio);
         }
 
         [HttpPost]
         public ActionResult EditarSlot(Models.Espacio espacio, int id)
         {
+            
             var estacionamiento = new Models.Estacionamiento();
 
             if (estacionamiento.Seleccionar(id))
@@ -112,29 +148,6 @@ namespace Taller.Estacionamiento.Controllers
                 Espacio espacioSeleccionado = new Espacio();
                 espacioSeleccionado = listaespacio.FirstOrDefault(x => x.Codigo == espacio.Codigo);
 
-
-                if (espacioSeleccionado != null)
-                {
-                    //actualizar atributos
-                    espacioSeleccionado.Estado = espacio.Estado;
-                    if (espacio.Estado.Equals(EstadoEspacio.Ocupado))
-                    {
-                        estacionamiento.EstacionarVehiculo(espacio);
-                    }
-                    if (espacio.Estado.Equals(EstadoEspacio.Reservado))
-                    {
-                        estacionamiento.EstacionarVehiculo(espacio);
-                    }
-                    if (espacio.Estado.Equals(EstadoEspacio.Disponible))
-                    {
-                        estacionamiento.DespacharVehiculo(espacio);
-                    }
-                    if (espacio.Estado.Equals(EstadoEspacio.NoDisponible))
-                    {
-                        estacionamiento.EstacionarVehiculo(espacio);
-                    }
-
-                }
             }
             return RedirectToAction("Administrar", new { id = id });
 
