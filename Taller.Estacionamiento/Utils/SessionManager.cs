@@ -14,6 +14,8 @@ namespace Taller.Estacionamiento.Utils
         public static Models.Usuario UsuarioAutenticado()
         {
             var usuario = new Models.Usuario();
+            usuario.Rut = 1;
+            HttpContext.Current.Session.Add("USUARIO_AUTENTIFICADO",usuario);
             if (HttpContext.Current.Session["USUARIO_AUTENTIFICADO"] != null)
             {
                 usuario = (Models.Usuario)HttpContext.Current.Session["USUARIO_AUTENTIFICADO"];
