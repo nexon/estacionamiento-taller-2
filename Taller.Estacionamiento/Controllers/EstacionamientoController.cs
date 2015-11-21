@@ -375,6 +375,12 @@ namespace Taller.Estacionamiento.Controllers
         [HttpPost]
         public ActionResult EstacionarVehiculo(Espacio espacio, int ID)
         {
+            //Valida si el vehiculo existe, si no existe crea un vehiculo con la patente ingresada y con un conductor desconocido
+            if(!espacio.Vehiculo.Validar())
+            {
+                espacio.Vehiculo.Agregar();
+            }
+
             var estacionamiento = new Models.Estacionamiento();
             estacionamiento.Seleccionar(ID);
             espacio.IngresoVehiculo = DateTime.Now;
