@@ -17,7 +17,6 @@ namespace Taller.Estacionamiento.Models
         public int Telefono { get; set; }
         public int TarifaMinuto { get; set; }
         public int TiempoMinimo { get; set; }
-        public int Capacidad { get; set; }
         public DateTime Apertura { get; set; }
         public DateTime Cierre { get; set; }
         public string Direccion { get; set; }
@@ -59,7 +58,6 @@ namespace Taller.Estacionamiento.Models
                     {
                         this.Telefono = -1;
                     }
-                    this.Capacidad = Convert.ToInt32(dr["estacionamiento_Capacidad"]);
                     this.TiempoMinimo = Convert.ToInt32(dr["estacionamiento_TiempoMinimo"]);
                     this.TarifaMinuto = Convert.ToInt32(dr["estacionamiento_TarifaMinuto"]);
                     if (dr["estacionamiento_Apertura"].ToString() != "" && dr["estacionamiento_Apertura"] != null)
@@ -639,7 +637,6 @@ namespace Taller.Estacionamiento.Models
                 var comando = new MySqlCommand() { CommandText = "estacionamiento_crear", CommandType = System.Data.CommandType.StoredProcedure };
                 comando.Parameters.AddWithValue("inNombre", this.Nombre);
                 comando.Parameters.AddWithValue("inDireccion", this.Direccion);
-                comando.Parameters.AddWithValue("inCapacidad", this.Capacidad);
                 comando.Parameters.AddWithValue("inTiempoMinimo", this.TiempoMinimo);
                 comando.Parameters.AddWithValue("inTarifaMinuto", this.TarifaMinuto);
                 comando.Parameters.AddWithValue("inApertura", this.Apertura);
@@ -669,7 +666,6 @@ namespace Taller.Estacionamiento.Models
                 comando.Parameters.AddWithValue("inDireccion", this.Direccion);
                 comando.Parameters.AddWithValue("inEmail", this.Email);
                 comando.Parameters.AddWithValue("inTelefono", this.Telefono);
-                comando.Parameters.AddWithValue("inCapacidad", this.Capacidad);
                 comando.Parameters.AddWithValue("inTiempoMinimo", this.TiempoMinimo);
                 comando.Parameters.AddWithValue("inTarifaMinuto", this.TarifaMinuto);
                 comando.Parameters.AddWithValue("inApertura", this.Apertura);
