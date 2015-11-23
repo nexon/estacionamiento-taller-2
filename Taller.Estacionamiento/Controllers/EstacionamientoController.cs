@@ -19,7 +19,7 @@ namespace Taller.Estacionamiento.Controllers
         }
         public ActionResult Informacion(int id)
         {
-            string mensaje = TempData["mensajeNombreEditarInformacion"] as string;
+            string mensaje = TempData["mensajeEditarInformacion"] as string;
             if (String.IsNullOrEmpty(mensaje))
             {
                 mensaje = "";
@@ -27,7 +27,7 @@ namespace Taller.Estacionamiento.Controllers
             var est = new Models.Estacionamiento();
             if (est.Seleccionar(id))
             {
-                ViewData["mensajeNombreEditarInformacion"] = mensaje;
+                ViewData["mensajeEditarInformacion"] = mensaje;
                 return View(est);
             }
             return RedirectToAction("Index", "Home");
