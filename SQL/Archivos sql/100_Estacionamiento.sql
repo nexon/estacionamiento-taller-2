@@ -6,7 +6,6 @@ CREATE TABLE estacionamiento
  direccion VARCHAR(45) NOT NULL,
  email VARCHAR(45) NOT NULL,
  telefono INT,
- capacidad INT NOT NULL,
  reputacion FLOAT,
  tiempo_minimo INT NOT NULL,
  tarifa_minuto INT NOT NULL,

@@ -65,6 +65,16 @@
 
 @Html.Partial("_DespacharVehiculo", new Taller.Estacionamiento.Models.Espacio() { Vehiculo = new Taller.Estacionamiento.Models.Vehiculo() })
 
+@{
+    if (TempData["alerta"] != null)
+    {
+        <text>
+            <script type="text/javascript">
+                alert('@TempData["alerta"]');
+            </script>
+        </text>
+    }
+}
 @section ViewsScripts {
     <script type="text/javascript">
         $("#dynamic-table").dataTable({
@@ -103,6 +113,7 @@
             var id = document.getElementById("ID");
             var nombre = document.getElementById("nombre");
             var codigo = document.getElementById("codigo");
+            var labelCodigo = document.getElementById("labelCodigo");
             var patente = document.getElementById("patente");
             var ingreso = document.getElementById("ingreso");
 
@@ -111,6 +122,7 @@
             codigo.value = data_codigo;
             patente.value = data_patente;
             ingreso.value = data_ingreso;
+            labelCodigo = data_codigo;
 
         });
     </script>
