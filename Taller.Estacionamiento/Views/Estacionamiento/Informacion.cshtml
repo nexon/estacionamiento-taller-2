@@ -42,8 +42,14 @@
                 <div class="profile-info-name"> Correo </div>
 
                 <div class="profile-info-value">
-                    <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
                     <span>@Model.Email</span>
+                </div>
+            </div>
+            <div class="profile-info-row">
+                <div class="profile-info-name"> Capacidad </div>
+
+                <div class="profile-info-value">
+                    <span>@Model.Todos().Count</span>
                 </div>
             </div>
             @if (Model.tieneHorario())
@@ -118,11 +124,11 @@
 </div>
 
 <div>
-    <!-- PartialView PersonalCrear -start -->
+    <!-- PartialView EstacionamientoEditar -start -->
     @{
         Html.RenderAction("EstacionamientoEditar", "Estacionamiento", new { id = Model.ID });
     }
-    <!-- PartialView PersonalCrear -end -->
+    <!-- PartialView EstacionamientoEditar -end -->
 </div>
 
 @section ViewsScripts {
