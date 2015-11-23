@@ -18,9 +18,15 @@ namespace Taller.Estacionamiento.Controllers
         }
         public ActionResult Informacion(int id)
         {
+            string mensaje = TempData["mensajeNombreEditarInformacion"] as string;
+            if (String.IsNullOrEmpty(mensaje))
+            {
+                mensaje = "";
+            }
             var est = new Models.Estacionamiento();
             if (est.Seleccionar(id))
             {
+                ViewData["mensajeNombreEditarInformacion"] = mensaje;
                 return View(est);
             }
             return RedirectToAction("Index", "Home");
@@ -36,11 +42,32 @@ namespace Taller.Estacionamiento.Controllers
         [HttpPost]
         public ActionResult EstacionamientoEditar(Models.Estacionamiento estacionamiento, String apertura, String cierre)
         {
+            bool mostrarMensajeRequeridos = false;
+            string mensaje = "Los siguientes campos son requeridos:";
+            if(estacionamiento.Nombre == null){
+                mostrarMensajeRequeridos = true;
+                mensaje += " nombre,";
+            }
+            if (estacionamiento.Direccion == null)
+            {
+                mostrarMensajeRequeridos = true;
+                mensaje += " dirección,";
+            }
+            if (estacionamiento.Email == null)
+            {
+                mostrarMensajeRequeridos = true;
+                mensaje += " email,";
+            }
+            if(mostrarMensajeRequeridos){
+                mensaje = mensaje.Substring(0, mensaje.Length-1);
+                TempData["mensajeEditarInformacion"] = mensaje;
+                return RedirectToAction("Informacion", new { ID = estacionamiento.ID });
+            }
             string auxiliar = apertura + ":00";
             estacionamiento.Apertura = DateTime.Parse(auxiliar);
             auxiliar = cierre + ":00";
             estacionamiento.Cierre = DateTime.Parse(auxiliar);
-            estacionamiento.Modificar();
+            estacionamiento.Modificar(); 
             return RedirectToAction("Informacion", new { ID = estacionamiento.ID });
         }
         public ActionResult Ocupados(int ID)
