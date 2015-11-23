@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Taller.Estacionamiento.Models;
+using Taller.Estacionamiento.Utils;
 
 namespace Taller.Estacionamiento.Controllers
 {
@@ -45,7 +46,8 @@ namespace Taller.Estacionamiento.Controllers
         }
         public ActionResult Ocupados(int ID)
         {
-            var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = ID };
+            var estacionamiento = new Estacionamiento.Models.Estacionamiento();
+            estacionamiento.Seleccionar(ID);
             return View(estacionamiento);
         }
         public ActionResult Reservados(int ID)
@@ -373,6 +375,12 @@ namespace Taller.Estacionamiento.Controllers
         [HttpPost]
         public ActionResult EstacionarVehiculo(Espacio espacio, int ID)
         {
+            //Valida si el vehiculo existe, si no existe crea un vehiculo con la patente ingresada y con un conductor desconocido
+            if(!espacio.Vehiculo.Validar())
+            {
+                espacio.Vehiculo.Agregar();
+            }
+
             var estacionamiento = new Models.Estacionamiento();
             estacionamiento.Seleccionar(ID);
             espacio.IngresoVehiculo = DateTime.Now;
@@ -397,6 +405,10 @@ namespace Taller.Estacionamiento.Controllers
                 monto = cant_minutos * estacionamiento.TarifaMinuto;
 
             estacionamiento.DespacharVehiculo(espacio);
+            var mensaje = "El pago para el espacio: " + espacio.Codigo + " es: " + monto;
+
+            TempData["alerta"] = mensaje;
+
             return RedirectToAction("Ocupados", new { ID = estacionamiento.ID });
         }
 
