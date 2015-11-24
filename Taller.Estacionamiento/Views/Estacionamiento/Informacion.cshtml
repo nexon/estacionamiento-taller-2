@@ -47,10 +47,19 @@
                 </div>
             </div>
             <div class="profile-info-row">
-                <div class="profile-info-name"> Capacidad </div>
+                <div class="profile-info-name"> Tiempo Minimo </div>
 
                 <div class="profile-info-value">
-                    <span>@Model.Todos().Count</span>
+                    <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
+                    <span>@Model.TiempoMinimo</span>
+                </div>
+            </div>
+            <div class="profile-info-row">
+                <div class="profile-info-name"> Valor minuto </div>
+
+                <div class="profile-info-value">
+                    <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
+                    <span>@Model.TarifaMinuto</span>
                 </div>
             </div>
             @if (Model.tieneHorario())

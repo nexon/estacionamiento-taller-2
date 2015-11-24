@@ -833,7 +833,6 @@
     <Content Include="Views\Estacionamiento\Personal.cshtml" />
     <Content Include="Views\Estacionamiento\Promociones.cshtml" />
     <Content Include="Views\Estacionamiento\Reservados.cshtml" />
-    <Content Include="Views\Estacionamiento\Tarifas.cshtml" />
     <Content Include="Views\Estacionamiento\EditarInformacion.cshtml" />
     <Content Include="Views\Estacionamiento\AgregarSlot.cshtml" />
     <Content Include="Views\Estacionamiento\Tarjetero.cshtml" />
