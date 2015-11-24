@@ -12,17 +12,17 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="form-group">
-                                @Html.TextBoxFor(model => model.Nombre, new { @class = "col-sm-9", placeholder = "Nombre" })
+                                @Html.TextBoxFor(model => model.Nombre, new { @class = "col-sm-9", placeholder = "Nombre", @required = true })
 
-                                @Html.TextBoxFor(model => model.Rut, new { @class = "col-sm-9", placeholder = "Rut", Value= "" })
+                                @Html.TextBoxFor(model => model.Rut, new { @class = "col-sm-9", placeholder = "Rut", Value= "", @required = true  })
 
-                                @Html.TextBoxFor(model => model.Email, new { @class = "col-sm-9", placeholder = "Email" })
+                                @Html.TextBoxFor(model => model.Email, new { @class = "col-sm-9", placeholder = "Email" , @required = true })
 
                                 @Html.TextBoxFor(model => model.Telefono, new { @class = "col-sm-9", placeholder = "Teléfono", Value= ""})
 
-                                @Html.TextBox("nuevaPass", null, new { @class = "col-sm-9", id = "txtNewPass1", type = "password", placeholder = "Contraseña" })
+                                @Html.TextBox("nuevaPass", null, new { @class = "col-sm-9", id = "txtNewPass1", type = "password", placeholder = "Contraseña", @required = true })
                                 <span class="control-label text-center error" id="error-pass2" style="display:none">Contraseñas no son iguales</span>
-                                @Html.TextBox("nuevaPass2", null, new { @class = "col-sm-9", id = "txtNewPass2", type = "password", onChange = "verifyNewPass()", placeholder = "Repetir Contraseña" })
+                                @Html.TextBox("nuevaPass2", null, new { @class = "col-sm-9", id = "txtNewPass2", type = "password", onChange = "verifyNewPass()", placeholder = "Repetir Contraseña", @required = true })
                             </div>
                         </div>
                     </div>
