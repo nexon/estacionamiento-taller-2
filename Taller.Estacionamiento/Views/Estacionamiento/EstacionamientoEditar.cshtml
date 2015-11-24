@@ -20,7 +20,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nombre </label>
                                 <div class="col-sm-9">
-                                    @Html.TextBoxFor(model => model.Nombre)
+                                    @Html.TextBoxFor(model => model.Nombre, new { type = "text" })
                                 </div>
                             </div>
                             <div class="form-group">
@@ -34,7 +34,7 @@
                                             </span>
                                         </div>
 
-                                        @Html.TextBoxFor(model => model.Telefono, new { type = "number" })
+                                        @Html.TextBoxFor(model => model.Telefono, new { type = "number", min = 0})
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                                                 <i class="ace-icon fa fa-envelope"></i>
                                             </span>
                                         </div>
-                                        @Html.TextBoxFor(model => model.Email)
+                                        @Html.TextBoxFor(model => model.Email, new { type = "email"})
                                     </div>
                                 </div>
                             </div>

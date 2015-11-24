@@ -1,0 +1,115 @@
+﻿@model Taller.Estacionamiento.Models.Usuario
+@{
+    ViewBag.Title = "Editar";
+}
+
+<!-- /section:basics/content.breadcrumbs -->
+<!-- /section:settings.box -->
+<div class="page-header">
+    <h1>
+        @Model.Nombre
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Perfil
+        </small>
+    </h1>
+
+</div><!-- /.page-header -->
+
+<div class="row">
+    @using (Html.BeginForm("Editar", "Cuenta", FormMethod.Post))
+    {
+        <div class="col-xs-offset-2 col-sm-offset-2 col-xs-5 col-sm-5">
+            <h3 class="blue">
+                <span class="middle">@Model.Nombre</span>
+            </h3>
+
+            <div class="profile-user-info">
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Nombre </div>
+
+                    <div class="profile-info-value">
+                        <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
+                        <span>@Html.TextBoxFor(model => model.Nombre)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Correo </div>
+
+                    <div class="profile-info-value">
+                        <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
+                        <span>@Html.TextBoxFor(model => model.Email)</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Contraseña Actual </div>
+
+                    <div class="profile-info-value">
+                        <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
+                        <span>
+                            @Html.TextBoxFor(model => model.Contraseña, new { id = "txtOldPass", type = "password", Value = "" })
+                            <a class="fa fa-ban red" id="error-Oldpass" style="display:none"></a>
+                        </span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Contraseña Nueva </div>
+
+                    <div class="profile-info-value">
+                        <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
+                        <span>
+                            @Html.TextBox("passNueva1", null, new { id = "txtNewPass1", type = "password", onChange = "verifyNewPass()" })
+                            <a class="fa fa-ban red" id="error-pass1" style="display:none"></a>
+                        </span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Repetir Contraseña </div>
+
+                    <div class="profile-info-value">
+                        <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
+                        <span>
+                            @Html.TextBox("passNueva2", null, new { id = "txtNewPass2", type = "password", onChange = "verifyNewPass()" })
+                            <a class="fa fa-ban red" id="error-pass2" style="display:none"></a>
+                        </span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Telefono </div>
+
+                    <div class="profile-info-value">
+                        <span>
+                            @Html.TextBoxFor(model => model.Telefono)
+                    </span>
+                </div>
+            </div>
+            <div class="profile-info-row">
+                <div class="profile-info-name"> Rut </div>
+
+                <div class="profile-info-value">
+                    <span>@Html.TextBoxFor(model => model.Rut)</span>
+                </div>
+            </div>
+            <div class="profile-info-row">
+
+                <div class="profile-info-name"> </div>
+                <div class="profile-info-value">
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <br />
+        <div class="">
+            <div class="col-md-offset-2 col-md-9">
+                <button class="btn btn-info" type="submit" id="editButton">
+                    <i class="ace-icon fa fa-pencil bigger-110"></i>
+                    Editar
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+@section ViewsScripts {
+}
