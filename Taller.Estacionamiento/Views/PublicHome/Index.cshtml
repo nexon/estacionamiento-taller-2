@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "";
+    List<string> mensajes = TempData["mensajeRegistro"] as List<string>;
 }
 
 
@@ -73,7 +74,18 @@
         </section>
 
         <div class="bottom-header">
+        @if (mensajes != null && mensajes.Any())
+        {
+            <div class="alert alert-danger align-center">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @foreach(string mensaje in mensajes)
+                {
+                   <p>@mensaje</p>
+                }
+            </div>
+        }
             <div class="container">
+
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="container-fluid">
                         <!-- Brand and toggle get grouped for better mobile display -->

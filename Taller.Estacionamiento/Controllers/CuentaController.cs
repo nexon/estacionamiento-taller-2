@@ -98,12 +98,31 @@ namespace Taller.Estacionamiento.Controllers
         [HttpPost]
         public ActionResult Registro(Usuario user, string nuevaPass, string nuevaPass2)
         {
+            Usuario test = new Usuario();
+            RegexUtilities util = new RegexUtilities();
+            List<string> mensajes = new List<string>();
+            if (test.Seleccionar(user.Rut))
+            {
+                mensajes.Add("Rut " + user.Rut + " ya está en uso.");
+            }
+            if(test.Seleccionar(user.Email))
+            {
+                mensajes.Add("Email " + user.Email + " ya está en uso.");
+            }
+            if (!string.IsNullOrEmpty(test.Email) && !util.IsValidEmail(test.Email))
+            {
+                mensajes.Add("Email no tiene el formato correcto.");
+            }
             if (!nuevaPass.Equals(nuevaPass2))
             {
-                return RedirectToAction("Index", "PublicHome");
+                mensajes.Add("Las contraseñas no son iguales.");
             }
-            user.Contraseña = Codificar.getHashSha256(nuevaPass);
-            user.Agregar();
+            if (!mensajes.Any())
+            {
+                user.Contraseña = Codificar.getHashSha256(nuevaPass);
+                user.Agregar();
+            }
+            TempData["mensajeRegistro"] = mensajes;
             return RedirectToAction("Index", "PublicHome");
         }
         public ActionResult SeleccionarEstacionamiento()

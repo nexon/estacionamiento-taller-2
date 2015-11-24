@@ -92,7 +92,40 @@ namespace Taller.Estacionamiento.Models
             }
             return true;
         }
-        
+        public bool Seleccionar(int rut)
+        {
+            try
+            {
+                Logger.EntradaMetodo("Usuario.Seleccionar_Rut", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Usuario_Seleccionar_Rut", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inRut", rut);
+                var data = Data.Obtener(comando);
+                DataTable dt = data.Tables[0];
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow dr = dt.Rows[0];
+                    this.Rut = Convert.ToInt32(dr["rut"]);
+                    this.Nombre = Convert.ToString(dr["nombre"]);
+                    this.Email = Convert.ToString(dr["email"]);
+                    this.Contraseña = Convert.ToString(dr["contrasenia"]);
+                    this.Telefono = Convert.ToInt32(dr["telefono"]);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Usuario.Seleccionar_Rut", this.ToString());
+            }
+            return true;
+        }
         public virtual void Modificar()
         {
             try
