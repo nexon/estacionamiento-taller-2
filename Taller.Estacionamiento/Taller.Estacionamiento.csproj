@@ -787,7 +787,6 @@
     <Content Include="Scripts\pace.js" />
     <Content Include="Scripts\personal\personal-vista.js" />
     <Content Include="Scripts\personal\personal.js" />
-    <Content Include="Scripts\personal\slot-vista.js" />
     <Content Include="Scripts\prettify.js" />
     <Content Include="Scripts\publicHome\bootstrap.min.js" />
     <Content Include="Scripts\publicHome\jquery.bxslider.js" />

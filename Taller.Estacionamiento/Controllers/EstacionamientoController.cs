@@ -88,9 +88,9 @@ namespace Taller.Estacionamiento.Controllers
             return View(estacionamiento);
         }
 
+        [HttpGet]
         public ActionResult Administrar(int id)
         {
-
             string mensaje = TempData["mensajeCrearSlot"] as string;
             if (String.IsNullOrEmpty(mensaje))
             {
@@ -107,6 +107,7 @@ namespace Taller.Estacionamiento.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
         public PartialViewResult AgregarSlot(int id)
         {
             Espacio nuevoespacio = new Espacio();
@@ -117,7 +118,6 @@ namespace Taller.Estacionamiento.Controllers
         [HttpPost]
         public ActionResult AgregarSlot(int id, Espacio espacio)
         {
-
             var estacionamiento = new Models.Estacionamiento();
             string mensaje = "";
            
@@ -152,8 +152,9 @@ namespace Taller.Estacionamiento.Controllers
             }
          
         }
-
-        public ActionResult EliminarSlot(int id)
+        
+        [HttpGet]
+        public PartialViewResult EliminarSlot(int id)
         {
             Espacio espacio = new Espacio();
             ViewData["idEstacionamiento"] = id;
@@ -178,6 +179,7 @@ namespace Taller.Estacionamiento.Controllers
             }
             return RedirectToAction("Administrar", new { id = id });
         }
+
         [HttpGet]
         public ActionResult Tarifas(int ID)
         {
