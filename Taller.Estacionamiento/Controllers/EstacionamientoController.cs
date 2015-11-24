@@ -12,7 +12,6 @@ namespace Taller.Estacionamiento.Controllers
     {
         //
         // GET: /Estacionamiento/
-
         public ActionResult Index()
         {
             return View();
@@ -76,11 +75,7 @@ namespace Taller.Estacionamiento.Controllers
                 List<Espacio> listaEspacios = estacionamiento.Todos();
                 ViewData["idEstacionamiento"] = id;
                 ViewData["mensajeCrearSlot"] = mensaje;
-                if (listaEspacios.Count == 0)
-                {
-
-                }
-                return View(listaEspacios);
+                 return View(listaEspacios);
             }
             return RedirectToAction("Index", "Home");
         }
@@ -98,6 +93,7 @@ namespace Taller.Estacionamiento.Controllers
 
             var estacionamiento = new Models.Estacionamiento();
             string mensaje = "";
+           
             if(estacionamiento.Seleccionar(id))
             {
                 if (espacio.Codigo != null)
@@ -130,30 +126,6 @@ namespace Taller.Estacionamiento.Controllers
          
         }
 
-        public ActionResult EditarSlot(int id)
-        {
-            Espacio espacio = new Espacio();
-            ViewData["idEstacionamiento"] = id;
-
-            return PartialView(espacio);
-        }
-
-        [HttpPost]
-        public ActionResult EditarSlot(Models.Espacio espacio, int id)
-        {
-            
-            var estacionamiento = new Models.Estacionamiento();
-
-            if (estacionamiento.Seleccionar(id))
-            {
-                List<Espacio> listaespacio = estacionamiento.Todos();
-                Espacio espacioSeleccionado = new Espacio();
-                espacioSeleccionado = listaespacio.FirstOrDefault(x => x.Codigo == espacio.Codigo);
-
-            }
-            return RedirectToAction("Administrar", new { id = id });
-
-        }
         public ActionResult EliminarSlot(int id)
         {
             Espacio espacio = new Espacio();

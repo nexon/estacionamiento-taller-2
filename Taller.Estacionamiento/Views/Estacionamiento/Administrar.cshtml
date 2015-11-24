@@ -16,12 +16,9 @@
             </small>
         </h1>
     </div>
-    <ul>
-        <li>@ViewData["mensajeCrearSlot"]</li>
-    </ul>
-
-    
-
+   
+    @ViewData["mensajeCrearSlot"]
+   
     <div class="row">
         <div class="col-xs-12">
             <button class="btn btn-info pull-right" style="margin-bottom:5px" type="button" data-toggle="modal" data-target="#modalAgregar">
@@ -73,12 +70,6 @@
                             <td>
                                 <div class="slot-editar-eliminar">
                                     <div class="action-buttons">
-                                        <a class="green" href="#" data-toggle="modal" data-codigo="@item.Codigo" data-estado="@item.Estado" data-target="#modalEditar">
-                                            <span class="label label-success">
-                                                <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                                Editar
-                                            </span>
-                                        </a>
                                         <a class="red" href="#" data-toggle="modal" data-codigo="@item.Codigo" data-estado="@item.Estado" data-target="#modalEliminar">
                                             <span class="label label-danger">
                                                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
@@ -96,20 +87,12 @@
         </div>
    </div>
 </div>
-
 <div>
     <!-- PartialView AgregarSlot -start -->
     @{
         Html.RenderAction("AgregarSlot", "Estacionamiento", new { id = @ViewData["idEstacionamiento"] });
     }
     <!-- PartialView AgregarSlot -end -->
-</div>
-<div>
-    <!-- PartialView EditarSlot -start -->
-    @{
-        Html.RenderAction("EditarSlot", "Estacionamiento", new { id = @ViewData["idEstacionamiento"] });
-    }
-    <!-- PartialView EditarSlot -end -->
 </div>
 <div>
     <!-- PartialView EliminarSlot -start -->
