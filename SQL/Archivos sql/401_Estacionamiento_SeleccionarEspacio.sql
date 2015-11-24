@@ -6,7 +6,6 @@ CREATE PROCEDURE Estacionamiento_SeleccionarEspacio (
 )
 BEGIN
 	SELECT
-		id_espacio         as Espacio_Codigo,
 		codigo             as inCodigo,
 		id_estacionamiento as inID
 	FROM
