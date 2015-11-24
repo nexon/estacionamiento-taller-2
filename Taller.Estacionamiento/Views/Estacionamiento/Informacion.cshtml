@@ -15,6 +15,7 @@
     </h1>
 
 </div><!-- /.page-header -->
+@ViewData["mensajeEditarInformacion"]
 
 <div class="row">
     <div class="col-xs-offset-2 col-sm-offset-2 col-xs-5 col-sm-5">
@@ -42,7 +43,6 @@
                 <div class="profile-info-name"> Correo </div>
 
                 <div class="profile-info-value">
-                    <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
                     <span>@Model.Email</span>
                 </div>
             </div>
@@ -134,11 +134,11 @@
 </div>
 
 <div>
-    <!-- PartialView PersonalCrear -start -->
+    <!-- PartialView EstacionamientoEditar -start -->
     @{
         Html.RenderAction("EstacionamientoEditar", "Estacionamiento", new { id = Model.ID });
     }
-    <!-- PartialView PersonalCrear -end -->
+    <!-- PartialView EstacionamientoEditar -end -->
 </div>
 
 @section ViewsScripts {
