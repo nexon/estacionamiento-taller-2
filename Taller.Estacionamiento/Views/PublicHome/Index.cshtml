@@ -90,6 +90,7 @@
                                 <li><a href="@Url.Action("Empresa", "PublicHome")">Nuestra Empresa</a></li>
                                 <li><a href="@Url.Action("Contacto", "PublicHome")">Contacto</a></li>
                                 <li style="cursor:pointer"><a data-toggle="modal" data-target="#login">Login</a></li>
+                                <li style="cursor:pointer"><a data-toggle="modal" data-target="#registro">Registrarse</a></li>
                             </ul>
                         </div>
                         <!-- /.navbar-collapse -->
@@ -138,7 +139,8 @@
         </div>
     </div>
     <!--Modal login End-->
-
+    <!--Modal Registro-->
+    @Html.Partial("~/Views/Cuenta/_Registro.cshtml",new Taller.Estacionamiento.Models.Usuario())
 
 
 

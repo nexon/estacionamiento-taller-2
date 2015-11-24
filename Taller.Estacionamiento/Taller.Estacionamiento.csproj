@@ -115,6 +115,7 @@
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\Vehiculo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Codificar.cs" />
     <Compile Include="Utils\Data.cs" />
     <Compile Include="Utils\Logger.cs" />
     <Compile Include="Utils\SessionManager.cs" />
@@ -852,6 +853,9 @@
     <Content Include="Views\Estacionamiento\EliminarSlot.cshtml" />
     <Content Include="Views\Estacionamiento\EstacionamientoEditar.cshtml" />
     <Content Include="Views\Estacionamiento\_ConfirmarReserva.cshtml" />
+    <Content Include="Views\Cuenta\Perfil.cshtml" />
+    <Content Include="Views\Cuenta\Editar.cshtml" />
+    <Content Include="Views\Cuenta\_Registro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

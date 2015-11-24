@@ -4,7 +4,7 @@
  (
  	inRut INT,
  	inNombre VARCHAR(45),
- 	inContrasenia VARCHAR(45),
+ 	inContrasenia VARCHAR(64),
  	inEmail VARCHAR(45),
  	inTelefono INT
  )
