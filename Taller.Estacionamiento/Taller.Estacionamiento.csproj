@@ -118,6 +118,7 @@
     <Compile Include="Utils\Codificar.cs" />
     <Compile Include="Utils\Data.cs" />
     <Compile Include="Utils\Logger.cs" />
+    <Compile Include="Utils\RegexUtilities.cs" />
     <Compile Include="Utils\SessionManager.cs" />
   </ItemGroup>
   <ItemGroup>
