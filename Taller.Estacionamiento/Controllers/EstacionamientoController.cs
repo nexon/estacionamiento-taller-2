@@ -42,24 +42,38 @@ namespace Taller.Estacionamiento.Controllers
         [HttpPost]
         public ActionResult EstacionamientoEditar(Models.Estacionamiento estacionamiento, String apertura, String cierre)
         {
-            bool mostrarMensajeRequeridos = false;
-            string mensaje = "Los siguientes campos son requeridos:";
+            RegexUtilities ru = new RegexUtilities();
+            string mensaje = "";
             if(estacionamiento.Nombre == null){
-                mostrarMensajeRequeridos = true;
-                mensaje += " nombre,";
+                mensaje += "El nombre es requerido.";
             }
             if (estacionamiento.Direccion == null)
             {
-                mostrarMensajeRequeridos = true;
-                mensaje += " dirección,";
+                mensaje += " \n La dirección es requerida.";
             }
             if (estacionamiento.Email == null)
             {
-                mostrarMensajeRequeridos = true;
-                mensaje += " email,";
+                mensaje += "\n El email es requerido.";
             }
-            if(mostrarMensajeRequeridos){
-                mensaje = mensaje.Substring(0, mensaje.Length-1);
+            else if(!ru.IsValidEmail(estacionamiento.Email)){
+                mensaje = "\n El email no es válido.";
+            }
+            if(estacionamiento.TiempoMinimo == null){
+                mensaje += " \n El tiempo mínimo es requerido.";
+            }
+            else if (estacionamiento.TiempoMinimo < 1)
+            {
+                mensaje += " \n El tiempo mínimo debe ser igual o mayor a 1.";
+            }
+            if (estacionamiento.TarifaMinuto == null)
+            {
+                mensaje += " \n La tarifa mínima es requerida.";
+            }
+            else if (estacionamiento.TiempoMinimo < 1)
+            {
+                mensaje += " \n La tarifa mínima debe ser igual o mayor a 1.";
+            }
+            if(!mensaje.Equals("")){
                 TempData["mensajeEditarInformacion"] = mensaje;
                 return RedirectToAction("Informacion", new { ID = estacionamiento.ID });
             }
