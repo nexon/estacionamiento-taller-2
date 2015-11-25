@@ -94,14 +94,15 @@ namespace Taller.Estacionamiento.Controllers
         {
             return View();
         }
-        [HttpPost]
+        
         public ActionResult SeleccionarEstacionamiento(int ID)
         {
             if (SessionManager.UsuarioAutenticado() != null)
             {
-                var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = ID };
+                var estacionamiento = new Estacionamiento.Models.Estacionamiento();
+                estacionamiento.Seleccionar(ID);
                 SessionManager.ModificarEstacionamientoSeleccionado(estacionamiento);
-            }           
+            }
             return RedirectToAction("Index", "Home");
         }
         [HttpPost]
@@ -141,10 +142,6 @@ namespace Taller.Estacionamiento.Controllers
             }
             TempData["mensajeIndex"] = mensajes;
             return RedirectToAction("Index", "PublicHome");
-        }
-        public ActionResult SeleccionarEstacionamiento()
-        {
-            return View();
         }
     }
 }
