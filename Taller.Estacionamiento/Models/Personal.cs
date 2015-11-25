@@ -168,6 +168,34 @@ namespace Taller.Estacionamiento.Models
             return erolNameList;
         }
 
+        public List<Estacionamiento> Estacionamientos()
+        {
+            var estacionamientos = new List<Estacionamiento>();
+            try
+            {
+                Logger.EntradaMetodo("Personal.Estacionamientos", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Estacionamientos_Personal", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inID_Personal", this.ID);
+                var data = Data.Obtener(comando);
+                foreach (DataRow dr in data.Tables[0].Rows)
+                {
+                    Estacionamiento estacionamiento = new Estacionamiento();
+
+                    estacionamiento.Seleccionar(Convert.ToInt32(dr["id_estacionamiento"]));
+                    estacionamientos.Add(estacionamiento);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Usuario.Estacionamientos", this.ToString());
+            }
+            return estacionamientos;
+        }
+
     }
 
 }
