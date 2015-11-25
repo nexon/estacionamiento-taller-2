@@ -53,6 +53,25 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-3"> Tarifa minima </label>
+
+                                <div class="col-xs-10 col-sm-5">
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.TiempoMinimo)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-3"> Valor minuto </label>
+
+                                <div class="col-xs-10 col-sm-5">
+                                    <div class="input-group">
+
+                                        @Html.TextBoxFor(model => model.TarifaMinuto)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-4"> Horario apertura </label>
                                 <div class="col-xs-10 col-sm-5">
                                     <div class="input-group">
