@@ -4,12 +4,14 @@ CREATE PROCEDURE registro_personal_todos(
 ) 
 BEGIN
   SELECT
+	rp.id_registro_personal,
 	u.nombre, 
     u.rut,
     rp.fecha_ingreso,
     rp.fecha_salida
   FROM 
 	(SELECT
+		r.id_registro_personal,
 		r.fecha_ingreso,
         r.fecha_salida,
         r.id_estacionamiento,
