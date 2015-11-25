@@ -856,6 +856,7 @@
     <Content Include="Views\Cuenta\Perfil.cshtml" />
     <Content Include="Views\Cuenta\Editar.cshtml" />
     <Content Include="Views\Cuenta\_Registro.cshtml" />
+    <Content Include="Views\Estacionamiento\_SalidaPersonal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

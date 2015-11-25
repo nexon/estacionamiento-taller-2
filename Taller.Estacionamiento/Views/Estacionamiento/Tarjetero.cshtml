@@ -42,7 +42,7 @@
                             @if (@registro.Ingreso != null && @registro.Salida == null)
                             {
                                 <div class="action-buttons">
-                                    <a class="red" href="#" data-toggle="modal" data-target="#modalSalida">
+                                    <a data-toggle="modal" data-target="#modalSalida" data-registroId="@registro.ID" class="red registrarSalida" href="#">
                                         <span class="label label-danger">
                                             <i class="ace-icon fa fa-sign-out bigger-120"></i>
                                             Salida
@@ -73,47 +73,15 @@
                                         Estacionamiento = @Model.Estacionamiento
     })
 }
-<div class="modal fade" id="modalSalida" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Registrar Salida</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Salida</label>
-                                <div class="col-sm-9">
-                                    <div class="form-group">
-                                        <div class='input-group date' id='datetimepickerSalida'>
-                                            <input type='text' class="form-control" required />
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm" data-dismiss="modal">
-                    <i class="ace-icon fa fa-arrow-left bigger-110"></i>
-                    Cancelar
-                </button>
-                <button type="button" class="btn btn-sm btn-success">
-                    <i class="ace-icon fa fa-check bigger-110"></i>
-                    Aceptar
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+
+@Html.Partial(
+            "_SalidaPersonal",
+            new Taller.Estacionamiento.Models.RegistroPersonal()
+            {
+                Personal = new Taller.Estacionamiento.Models.Personal(),
+                Estacionamiento = @Model.Estacionamiento
+            }
+)
 
 @section ViewsScripts {
     <script type="text/javascript">
@@ -165,6 +133,17 @@
                 format: "DD/MM/YYYY HH:mm",
                 useCurrent: new Date()
             })
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).on("click", ".registrarSalida", function () {
+            var data_id = $(this).data('registroid');
+            console.log(data_id);
+            var id = document.getElementById("idRegistroPersonal");
+            console.log(id);
+            id.value = data_id;
+            console.log("Entre");
         });
     </script>
 }

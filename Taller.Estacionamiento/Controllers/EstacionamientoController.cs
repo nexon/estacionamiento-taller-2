@@ -400,6 +400,13 @@ namespace Taller.Estacionamiento.Controllers
         }
 
         [HttpPost]
+        public ActionResult SalidaPersonal(RegistroPersonal rp)
+        {
+            rp.Estacionamiento.Tarjetero.RegistrarSalida(rp);
+            return RedirectToAction("Tarjetero", rp.Estacionamiento);
+        }
+
+        [HttpPost]
         public ActionResult EstacionarVehiculo(Espacio espacio, int ID)
         {
             //Valida si el vehiculo existe, si no existe crea un vehiculo con la patente ingresada y con un conductor desconocido

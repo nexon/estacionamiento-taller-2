@@ -1,34 +1,31 @@
 ﻿@model Taller.Estacionamiento.Models.RegistroPersonal
-@{
-    var personalList = ViewData["PersonaSelectList"] as IEnumerable<SelectListItem>;
-}
-<div class="modal fade" id="modalEntrada" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+<div class="modal fade" id="modalSalida" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
-        @using (Html.BeginForm("IngresoPersonal", "Estacionamiento", FormMethod.Post))
+        @using (Html.BeginForm("SalidaPersonal", "Estacionamiento", FormMethod.Post))
         {
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Registrar Ingreso</h4>
+                    <h4 class="modal-title">Registrar Salida</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-xs-12">
                             @Html.HiddenFor(model => model.Estacionamiento.ID)
+                            @Html.HiddenFor(model => model.ID, new { @id = "idRegistroPersonal" })
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Personal, new { @class = "col-sm-3 control-label no-padding-right" })
-                                <div class="col-sm-9">
-                                    @Html.DropDownListFor(model => model.Personal.ID, personalList)
-                                </div>
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ingreso</label>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Salida</label>
+
                                 <div class="col-sm-9">
                                     <div class="form-group">
-                                        @Html.TextBoxFor(model => model.Ingreso,
+                                        @Html.TextBoxFor(model => model.Salida,
                                             new
                                             {
                                                 @class = "form-control date",
-                                                id = "datetimepickerEntrada",
-                                                type = "text", @required = true
+                                                id = "datetimepickerSalida",
+                                                type = "text",
+                                                @required = true
                                             })
                                         <!-- calendario ejemplo... no se agregar bien el botón
                                         <div class='input-group date' id='datetimepickerEntrada'>
@@ -41,6 +38,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -58,4 +56,3 @@
         }
     </div>
 </div>
-

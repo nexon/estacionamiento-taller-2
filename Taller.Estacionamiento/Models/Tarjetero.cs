@@ -38,9 +38,25 @@ namespace Taller.Estacionamiento.Models
             }
             return true;
         }
-        public bool RegistrarSalida(RegistroPersonal personal)
+        public bool RegistrarSalida(RegistroPersonal registro_personal)
         {
-            throw new NotImplementedException();   
+            try
+            {
+                Logger.EntradaMetodo("Tarjetero.RegistrarSalida", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "registro_personal_salida", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inIdRegistroPersonal", registro_personal.ID);
+                comando.Parameters.AddWithValue("inSalida", registro_personal.Salida);
+                Data.Ejecutar(comando);
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Tarjetero.RegistrarSalida", this.ToString());
+            }
+            return true;
         }
         public List<Personal> PersonalTrabajando()
         {
@@ -87,6 +103,7 @@ namespace Taller.Estacionamiento.Models
                     personal.Rut = Convert.ToInt32(row["rut"]);
 
                     RegistroPersonal rp = new RegistroPersonal();
+                    rp.ID = Convert.ToInt32(row["id_registro_personal"]);
                     rp.Personal = personal;
                     
                     if(row["fecha_ingreso"].ToString() != ""){
