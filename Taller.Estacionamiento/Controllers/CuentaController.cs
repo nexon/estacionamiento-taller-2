@@ -13,6 +13,8 @@ namespace Taller.Estacionamiento.Controllers
         [HttpPost]
         public ActionResult Ingresar(Usuario user)
         {
+            RegexUtilities util = new RegexUtilities();
+            List<string> mensajes = new List<string>();
             string contraseña = Codificar.getHashSha256(user.Contraseña);
             if (ModelState.IsValid)
             {
@@ -23,6 +25,12 @@ namespace Taller.Estacionamiento.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
+            if (!util.IsValidEmail(user.Email))
+            {
+                mensajes.Add("Email no tiene el formato correcto.");
+            }
+            mensajes.Add("Usuario o contraseña incorrectos.");
+            TempData["mensajeIndex"] = mensajes;
             return RedirectToAction("Index", "PublicHome");
         }
         [HttpGet]
@@ -69,6 +77,7 @@ namespace Taller.Estacionamiento.Controllers
                     usuarioEditado.Contraseña = Codificar.getHashSha256(passNueva1);//cambiar a SHA256
                 }
             }
+            
             if (validaciones.Any())
             {
                 return View(usuarioLogueado);// + viewbag con errores a mostrar
@@ -98,12 +107,39 @@ namespace Taller.Estacionamiento.Controllers
         [HttpPost]
         public ActionResult Registro(Usuario user, string nuevaPass, string nuevaPass2)
         {
+            Usuario test = new Usuario();
+            RegexUtilities util = new RegexUtilities();
+            List<string> mensajes = new List<string>();
+            if (test.Seleccionar(user.Rut))
+            {
+                mensajes.Add("Rut " + user.Rut + " ya está en uso.");
+            }
+            if(test.Seleccionar(user.Email))
+            {
+                mensajes.Add("Email " + user.Email + " ya está en uso.");
+            }
+            if (!string.IsNullOrEmpty(user.Email) && !util.IsValidEmail(user.Email))
+            {
+                mensajes.Add("Email no tiene el formato correcto.");
+            }
             if (!nuevaPass.Equals(nuevaPass2))
             {
-                return RedirectToAction("Index", "PublicHome");
+                mensajes.Add("Las contraseñas no son iguales.");
             }
-            user.Contraseña = Codificar.getHashSha256(nuevaPass);
-            user.Agregar();
+            if (user.Telefono != 0 && user.Telefono.ToString().Count() < 6)
+            {
+                mensajes.Add("Número de teléfono muy corto");
+            }
+            if (user.Rut != 0 && user.Rut.ToString().Count() < 6)
+            {
+                mensajes.Add("Rut muy corto");
+            }
+            if (!mensajes.Any())
+            {
+                user.Contraseña = Codificar.getHashSha256(nuevaPass);
+                user.Agregar();
+            }
+            TempData["mensajeIndex"] = mensajes;
             return RedirectToAction("Index", "PublicHome");
         }
         public ActionResult SeleccionarEstacionamiento()

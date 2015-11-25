@@ -180,27 +180,6 @@ namespace Taller.Estacionamiento.Controllers
             return RedirectToAction("Administrar", new { id = id });
         }
 
-        [HttpGet]
-        public ActionResult Tarifas(int ID)
-        {
-            var estacionamiento = new Models.Estacionamiento();
-            estacionamiento.Seleccionar(ID);
-
-            return View(estacionamiento);
-        }
-        [HttpPost]
-        public ActionResult Tarifas(Models.Estacionamiento estacionamiento)
-        {
-            var dbEstacionamiento = new Models.Estacionamiento();
-            dbEstacionamiento.Seleccionar(estacionamiento.ID);
-            dbEstacionamiento.TarifaMinuto = estacionamiento.TarifaMinuto;
-            dbEstacionamiento.TiempoMinimo = estacionamiento.TiempoMinimo;
-            dbEstacionamiento.Modificar();
-
-            return RedirectToAction("Index", "Home");
-        }
-        
-
         public ActionResult Personal(int id)
         {
             string mensaje = TempData["mensajeCrearPersonal"] as string;

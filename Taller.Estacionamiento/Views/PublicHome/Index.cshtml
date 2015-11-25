@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "";
+    List<string> mensajes = TempData["mensajeIndex"] as List<string>;
 }
 
 
@@ -73,7 +74,18 @@
         </section>
 
         <div class="bottom-header">
+        @if (mensajes != null && mensajes.Any())
+        {
+            <div class="alert alert-danger align-center">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @foreach(string mensaje in mensajes)
+                {
+                   <p>@mensaje</p>
+                }
+            </div>
+        }
             <div class="container">
+
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="container-fluid">
                         <!-- Brand and toggle get grouped for better mobile display -->
@@ -117,11 +129,11 @@
                     <form class="form col-md-12 center-block">
 
                         <div class="form-group">
-                            @Html.TextBoxFor(u => u.Email, new { @placeholder = "Email" })
+                            @Html.TextBoxFor(u => u.Email, new { @placeholder = "Email", @required = true })
                             @Html.ValidationMessageFor(u => u.Email)
                         </div>
                         <div class="form-group">
-                            @Html.TextBoxFor(u => u.Contraseña, new { @placeholder = "Contraseña", @type="password" })
+                            @Html.TextBoxFor(u => u.Contraseña, new { @placeholder = "Contraseña", @type = "password", @required = true })
                             @Html.ValidationMessageFor(u => u.Contraseña)
                         </div>
 
