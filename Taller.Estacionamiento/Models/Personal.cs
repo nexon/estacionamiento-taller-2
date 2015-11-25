@@ -104,6 +104,38 @@ namespace Taller.Estacionamiento.Models
             return false;
         }
 
+        public bool Seleccionar(Usuario usuario)
+        {
+            try
+            {
+                Logger.EntradaMetodo("Personal.Seleccionar", this.ToString());
+
+                var comando = new MySqlCommand() { CommandText = "Personal_SeleccionarPorRut", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inRut", usuario.Rut);
+                var data = Data.Obtener(comando);
+                DataTable dt = data.Tables[0];
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow dr = dt.Rows[0];
+                    this.ID = Convert.ToInt32(dr["id_personal"]);
+                    this.Rut = Convert.ToInt32(dr["rut"]);
+                    this.Nombre = Convert.ToString(dr["nombre"]);
+                    this.Email = Convert.ToString(dr["email"]);
+                    this.Contraseña = Convert.ToString(dr["contrasenia"]);
+                    this.Telefono = Convert.ToInt32(dr["telefono"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Personal.Seleccionar", this.ToString());
+            }
+            return false;
+        }
+
         /// <summary>
         /// Se retorna el id del Personal,
         /// asociado a un Usuario especifico.

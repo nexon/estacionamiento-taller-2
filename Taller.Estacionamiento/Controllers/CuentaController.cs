@@ -20,9 +20,18 @@ namespace Taller.Estacionamiento.Controllers
             {
                 if (user.IniciarSesion(user.Email, contraseña))
                 {
-                    SessionManager.ModificarUsuarioAutenticado(user);
+                    Personal personal = new Personal();
+                    personal.Seleccionar(user);
+                    if (personal.Estacionamientos().Any())
+                    {
+                        SessionManager.ModificarUsuarioAutenticado(user);
+                        return RedirectToAction("Index", "Home");
+                    }
                     //redirect to another view
-                    return RedirectToAction("Index", "Home");
+                    else
+                    {
+                        mensajes.Add("El usuario no tiene estacionamientos asociados");
+                    }        
                 }
             }
             if (!util.IsValidEmail(user.Email))
