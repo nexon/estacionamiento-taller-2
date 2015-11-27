@@ -31,14 +31,17 @@ namespace Taller.Estacionamiento.Controllers
                     else
                     {
                         mensajes.Add("El usuario no tiene estacionamientos asociados");
-                    }        
+                    }
+                }
+                else
+                {
+                    mensajes.Add("Usuario o contraseña incorrectos.");                    
                 }
             }
             if (!util.IsValidEmail(user.Email))
             {
                 mensajes.Add("Email no tiene el formato correcto.");
             }
-            mensajes.Add("Usuario o contraseña incorrectos.");
             TempData["mensajeIndex"] = mensajes;
             return RedirectToAction("Index", "PublicHome");
         }
@@ -101,7 +104,8 @@ namespace Taller.Estacionamiento.Controllers
         }
         public ActionResult Salir()
         {
-            return View();
+            SessionManager.ModificarUsuarioAutenticado(null);
+            return RedirectToAction("Index", "PublicHome");
         }
         
         public ActionResult SeleccionarEstacionamiento(int ID)
@@ -146,8 +150,11 @@ namespace Taller.Estacionamiento.Controllers
             }
             if (!mensajes.Any())
             {
+                mensajes.Add("Cuenta creada con éxito.");
+                TempData["successMensaje"] = mensajes;
                 user.Contraseña = Codificar.getHashSha256(nuevaPass);
                 user.Agregar();
+                return RedirectToAction("Index", "PublicHome");
             }
             TempData["mensajeIndex"] = mensajes;
             return RedirectToAction("Index", "PublicHome");
