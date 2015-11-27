@@ -1,12 +1,12 @@
 /* Se crean los estacionamientos con datos de prueba y se guarda el ID en el cual se insertaron */
 INSERT INTO Estacionamiento (nombre, direccion, email, telefono, tiempo_minimo, tarifa_minuto, apertura, cierre, coordenadaLatitud, coordenadaLongitud)
-			VALUES("Estacionamiento 1",  "Calle de test #1" ,"estacionamiento1@email.cl", 12345678, 15, 300, "2015-00-00 10:00:00", "2015-00-00 19:00:00", -34.976727, -71.234773)$
+			VALUES("Estacionamiento 1",  "Calle de test #1" ,"estacionamiento1@email.cl", 12345678, 15, 300, "2015-11-11 10:00:00", "2015-11-11 19:00:00", -34.976727, -71.234773)$
 set @ID1 = last_insert_id()$
 INSERT INTO Estacionamiento (nombre, direccion, email, telefono, tiempo_minimo, tarifa_minuto, apertura, cierre, coordenadaLatitud, coordenadaLongitud)
-			VALUES("Estacionamiento 2",  "Calle de test #2" ,"estacionamiento2@email.cl", 23456789, 10, 350, "2015-00-00 11:00:00", "2015-00-00 21:00:00", -34.977948, -71.241025)$
+			VALUES("Estacionamiento 2",  "Calle de test #2" ,"estacionamiento2@email.cl", 23456789, 10, 350, "2015-11-11 11:00:00", "2015-11-11 21:00:00", -34.977948, -71.241025)$
 set @ID2 = last_insert_id()$
 INSERT INTO Estacionamiento (nombre, direccion, email, telefono, tiempo_minimo, tarifa_minuto, apertura, cierre, coordenadaLatitud, coordenadaLongitud)
-			VALUES("Estacionamiento 3",  "Calle de test #3" ,"estacionamiento3@email.cl", 34567890, 20, 200, "2015-00-00 10:30:00", "2015-00-00 20:30:00", -34.989780, -71.244480)$
+			VALUES("Estacionamiento 3",  "Calle de test #3" ,"estacionamiento3@email.cl", 34567890, 20, 200, "2015-11-11 10:30:00", "2015-11-11 20:30:00", -34.989780, -71.244480)$
 set @ID3 = last_insert_id()$
 /* rut de los usuarios a ingresar */
 set @rut1 = 14844371$
