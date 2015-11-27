@@ -1,0 +1,27 @@
+
+.modal-dialog {
+    width: 400px;
+}
+.modal-footer {
+    height: 70px;
+    margin: 0;
+}
+.modal-footer .btn {
+    font-weight: bold;
+}
+
+input[type="text"],input[type="password"] {
+  width: 100%;
+  background: #E3E6E8;
+  border: none;
+  height: 30px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  color: #2B2D2E;
+}
+
+input[type="text"] {
+  width: 100.0%;
+}

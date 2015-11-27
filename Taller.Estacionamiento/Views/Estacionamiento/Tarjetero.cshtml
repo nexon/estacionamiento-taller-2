@@ -1,0 +1,149 @@
+﻿@model Taller.Estacionamiento.Models.Tarjetero
+@{
+    ViewBag.Title = "Tarjetero";
+    var personalList = ViewData["PersonaSelectList"] as IEnumerable<SelectListItem>;
+}
+
+@section ViewsCCS {
+    <link rel="stylesheet" href=@Url.Content("~/Content/css/bootstrap-datetimepicker.css") />
+}
+
+<div class="page-header">
+    <h1>
+        Estacionamiento
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Tarjetero
+        </small>
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Rut</th>
+                    <th>Ingreso</th>
+                    <th>Salida</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var registro in Model.RegistrosPersonal())
+                {
+                    <tr>
+                        <td>@registro.Personal.Nombre</td>
+                        <td>@registro.Personal.Rut</td>
+                        <td>@registro.Ingreso</td>
+                        <td>@registro.Salida</td>
+                        <td>
+                            @if (@registro.Ingreso != null && @registro.Salida == null)
+                            {
+                                <div class="action-buttons">
+                                    <a data-toggle="modal" data-target="#modalSalida" data-registroId="@registro.ID" class="red registrarSalida" href="#">
+                                        <span class="label label-danger">
+                                            <i class="ace-icon fa fa-sign-out bigger-120"></i>
+                                            Salida
+                                        </span>
+                                    </a>
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+&nbsp;
+@if(@personalList.Count()>0)
+{ 
+    <div class="row">
+        <div class="col-xs-12">
+            <button class="btn btn-success" data-toggle="modal" data-target="#modalEntrada">
+                <i class="ace-icon fa fa-sign-in bigger-120"></i>
+                Entrada
+            </button>
+        </div>
+    </div>
+    @Html.Partial("_IngresoPersonal", new Taller.Estacionamiento.Models.RegistroPersonal(){
+                                        Personal = new Taller.Estacionamiento.Models.Personal(),
+                                        Estacionamiento = @Model.Estacionamiento
+    })
+}
+
+@Html.Partial(
+            "_SalidaPersonal",
+            new Taller.Estacionamiento.Models.RegistroPersonal()
+            {
+                Personal = new Taller.Estacionamiento.Models.Personal(),
+                Estacionamiento = @Model.Estacionamiento
+            }
+)
+
+@section ViewsScripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#dynamic-table").dataTable({
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript" src=@Url.Content("~/Scripts/date-time/moment.js")></script>
+    <script type="text/javascript" src=@Url.Content("~/Scripts/date-time/bootstrap-datetimepicker.js")></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#datetimepickerEntrada').datetimepicker({
+                format: "DD/MM/YYYY HH:mm",
+                useCurrent: new Date()
+            })
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#datetimepickerSalida').datetimepicker({
+                format: "DD/MM/YYYY HH:mm",
+                useCurrent: new Date()
+            })
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).on("click", ".registrarSalida", function () {
+            var data_id = $(this).data('registroid');
+            console.log(data_id);
+            var id = document.getElementById("idRegistroPersonal");
+            console.log(id);
+            id.value = data_id;
+            console.log("Entre");
+        });
+    </script>
+}

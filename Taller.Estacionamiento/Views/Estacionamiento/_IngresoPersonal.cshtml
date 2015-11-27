@@ -1,0 +1,61 @@
+﻿@model Taller.Estacionamiento.Models.RegistroPersonal
+@{
+    var personalList = ViewData["PersonaSelectList"] as IEnumerable<SelectListItem>;
+}
+<div class="modal fade" id="modalEntrada" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        @using (Html.BeginForm("IngresoPersonal", "Estacionamiento", FormMethod.Post))
+        {
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Registrar Ingreso</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @Html.HiddenFor(model => model.Estacionamiento.ID)
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Personal, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.DropDownListFor(model => model.Personal.ID, personalList)
+                                </div>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ingreso</label>
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.Ingreso,
+                                            new
+                                            {
+                                                @class = "form-control date",
+                                                id = "datetimepickerEntrada",
+                                                type = "text", @required = true
+                                            })
+                                        <!-- calendario ejemplo... no se agregar bien el botón
+                                        <div class='input-group date' id='datetimepickerEntrada'>
+                                            <input type='text' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                        -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm" data-dismiss="modal">
+                        <i class="ace-icon fa fa-arrow-left bigger-110"></i>
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-sm btn-success">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Aceptar
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

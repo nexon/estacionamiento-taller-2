@@ -1,0 +1,35 @@
+﻿@model Taller.Estacionamiento.Models.Espacio
+
+<div id="DespacharVehiculoModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Despachar un vehiculo</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("DespacharVehiculo", "Estacionamiento", FormMethod.Post))
+                {
+                    <input type="hidden" id="ID" name="ID" class="form-control" />
+                    @Html.HiddenFor(model => model.IngresoVehiculo, new { @id = "ingreso" })
+                    <div class="form-group">
+                        <label for="Nombre">Estacionamiento</label>
+                        <input type="text" id="nombre" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="Nombre">Espacio</label>
+                        @Html.TextBoxFor(model => model.Codigo, new { @id = "codigo", @class = "form-control", @readonly = true })
+                    </div>
+                    <div class="form-group">
+                        <label for="Nombre">Patente</label>
+                        @Html.TextBoxFor(model => model.Vehiculo.Patente, new { @id = "patente", @class = "form-control", @readonly = true })
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Despachar" />
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

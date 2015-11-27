@@ -1,0 +1,170 @@
+﻿@model Taller.Estacionamiento.Models.Estacionamiento
+
+<div class="modal fade" id="modalInformacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <!-- form start-->
+        @using (Html.BeginForm("EstacionamientoEditar", "Estacionamiento", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.HiddenFor(model => model.ID)
+            @Html.HiddenFor(model => model.TiempoMinimo)
+            @Html.HiddenFor(model => model.TarifaMinuto)
+            
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Editar Información de @Model.Nombre</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nombre </label>
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.Nombre, new { type = "text", @required = true })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-2"> Telefono </label>
+
+                                <div class="col-xs-10 col-sm-5">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span>
+                                                <i class="ace-icon fa fa-phone"></i>
+                                            </span>
+                                        </div>
+
+                                        @Html.TextBoxFor(model => model.Telefono, new { type = "number", min = 0})
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-3"> Correo </label>
+
+                                <div class="col-xs-10 col-sm-5">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span>
+                                                <i class="ace-icon fa fa-envelope"></i>
+                                            </span>
+                                        </div>
+                                        @Html.TextBoxFor(model => model.Email, new { type = "email", @required = true })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-3"> Tarifa minima </label>
+
+                                <div class="col-xs-10 col-sm-5">
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.TiempoMinimo, new { type = "number", min = 1 })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-3"> Valor minuto </label>
+
+                                <div class="col-xs-10 col-sm-5">
+                                    <div class="input-group">
+
+                                        @Html.TextBoxFor(model => model.TarifaMinuto, new { type = "number", min = 1 })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-4"> Horario apertura </label>
+                                <div class="col-xs-10 col-sm-5">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span>
+                                                <i class="ace-icon fa fa-clock-o"></i>
+                                            </span>
+                                        </div>
+                                        <select name="apertura">
+                                            @foreach (var apertura in Model.horariosPosibles())
+                                            {
+                                                if (apertura == Model.horaApertura())
+                                                {
+                                                    <option value="@apertura" selected>@apertura</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@apertura">@apertura</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-5"> horario cierre </label>
+                                <div class="col-xs-10 col-sm-5">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span>
+                                                <i class="ace-icon fa fa-clock-o"></i>
+                                            </span>
+                                        </div>
+                                        <select name="cierre">
+                                            @foreach (var cierre in Model.horariosPosibles())
+                                            {
+                                                if (cierre == Model.horaCierre())
+                                                {
+                                                    <option value="@cierre" selected>@cierre</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@cierre">@cierre</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Dirección </label>
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.Direccion, new { type = "text", @required = true })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-6"> Ubicación </label>
+                                <div class="col-lg-5">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span>
+                                                <i class="nav-search-icon fa"> Latitud </i>
+                                            </span>
+                                        </div>
+                                        @Html.EditorFor(model => model.CoordenadaLatitud)
+                                    </div>
+                                    <br />
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span>
+                                                <i class="nav-search-icon fa"> Longitud </i>
+                                            </span>
+                                        </div>
+                                        @Html.EditorFor(model => model.CoordenadaLongitud)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+   
+                <div class="modal-footer" id="boton-personal-crear">
+                    <button type="button" class="btn btn-sm" data-dismiss="modal">
+                        <i class="ace-icon fa fa-arrow-left bigger-110"></i>
+                        Cancelar
+                    </button>
+                    <button type="submit" value="Submit" class="btn btn-sm btn-success">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Aceptar
+                    </button>
+                </div>
+            </div>
+        }
+        <!-- form end-->
+    </div>
+</div>

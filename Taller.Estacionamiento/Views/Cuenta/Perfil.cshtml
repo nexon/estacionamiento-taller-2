@@ -1,0 +1,49 @@
+﻿@model Taller.Estacionamiento.Models.Usuario
+@{
+    ViewBag.Title = "Perfil";
+}
+
+<!-- /section:basics/content.breadcrumbs -->
+<!-- /section:settings.box -->
+<div class="page-header">
+    <h1>
+        @Model.Nombre
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Perfil
+        </small>
+    </h1>
+
+</div><!-- /.page-header -->
+
+<div class="row">
+    <div class="col-xs-offset-2 col-sm-offset-2 col-xs-5 col-sm-5">
+        <h3 class="blue">
+            <span class="middle">@Model.Nombre</span>
+        </h3>
+
+        <div class="profile-user-info">
+            <div class="profile-info-row">
+                <div class="profile-info-name"> Correo </div>
+                <div class="profile-info-value">@Model.Email</div>
+            </div>
+            <div class="profile-info-row">
+                <div class="profile-info-name"> Rut </div>
+                <div class="profile-info-value">@Model.Rut</div>
+            </div>
+            <div class="profile-info-row">
+                <div class="profile-info-name"> Telefono </div>
+                <div class="profile-info-value">@Model.Telefono</div>
+            </div>
+         </div>
+    </div>
+        <br />
+        <div class="">
+            <div class="col-md-offset-2 col-md-9">
+                <a href="@Url.Action("Editar","Cuenta")" class="button btn btn-info ace-icon fa fa-pencil bigger-110">Editar</a>
+            </div>
+        </div>
+</div>
+
+@section ViewsScripts {
+}
