@@ -2,7 +2,8 @@
 @{
     ViewBag.Title = "Index";
     Layout = "";
-    List<string> mensajes = TempData["mensajeIndex"] as List<string>;
+    List<string> mensajes_error = TempData["mensajeIndex"] as List<string>;
+    List<string> mensajes_success = TempData["successMensaje"] as List<string>;
 }
 
 
@@ -74,13 +75,23 @@
         </section>
 
         <div class="bottom-header">
-        @if (mensajes != null && mensajes.Any())
+        @if (mensajes_error != null && mensajes_error.Any())
         {
             <div class="alert alert-danger align-center">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                @foreach(string mensaje in mensajes)
+                @foreach(string mensaje in mensajes_error)
                 {
                    <p>@mensaje</p>
+                }
+            </div>
+        }
+        @if (mensajes_success != null && mensajes_success.Any())
+        {
+            <div class="alert alert-success align-center">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @foreach (string mensaje in mensajes_success)
+                {
+                    <p>@mensaje</p>
                 }
             </div>
         }
