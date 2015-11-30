@@ -159,9 +159,9 @@ namespace Taller.Estacionamiento.Controllers
             {
                 mensajes.Add("Número de teléfono muy corto");
             }
-            if (user.Rut != 0 && user.Rut.ToString().Count() < 6)
+            if (user.Rut.ToString().Count() < 6)
             {
-                mensajes.Add("Rut muy corto");
+                mensajes.Add("Rut inválido");
             }
             if (!mensajes.Any())
             {
