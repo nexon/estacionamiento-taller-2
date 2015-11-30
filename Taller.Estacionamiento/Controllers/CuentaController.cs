@@ -22,9 +22,11 @@ namespace Taller.Estacionamiento.Controllers
                 {
                     Personal personal = new Personal();
                     personal.Seleccionar(user);
-                    if (personal.Estacionamientos().Any())
+                    List<Models.Estacionamiento> estacionamientos = personal.EstacionamientoAsociados();
+                    if (estacionamientos.Any())
                     {
                         SessionManager.ModificarUsuarioAutenticado(user);
+                        SessionManager.ModificarEstacionamientoSeleccionado(estacionamientos[0]);
                         return RedirectToAction("Index", "Home");
                     }
                     //redirect to another view
@@ -108,9 +110,22 @@ namespace Taller.Estacionamiento.Controllers
         {
             if (SessionManager.UsuarioAutenticado() != null)
             {
+                Personal personal = new Personal();
+                personal.Seleccionar(SessionManager.UsuarioAutenticado());
+                List<Models.Estacionamiento> estacionamientos = personal.EstacionamientoAsociados();
                 var estacionamiento = new Estacionamiento.Models.Estacionamiento();
                 estacionamiento.Seleccionar(ID);
-                SessionManager.ModificarEstacionamientoSeleccionado(estacionamiento);
+                bool existe = false;
+                foreach(var esta in estacionamientos){
+                    if(esta.ID == estacionamiento.ID)
+                    {
+                        existe = true;
+                    }
+                }
+                if (existe)
+                {
+                    SessionManager.ModificarEstacionamientoSeleccionado(estacionamiento);
+                }
             }
             return RedirectToAction("Index", "Home");
         }
