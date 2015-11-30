@@ -13,16 +13,38 @@ namespace Taller.Estacionamiento.Controllers
         [HttpPost]
         public ActionResult Ingresar(Usuario user)
         {
+            RegexUtilities util = new RegexUtilities();
+            List<string> mensajes = new List<string>();
             string contraseña = Codificar.getHashSha256(user.Contraseña);
             if (ModelState.IsValid)
             {
                 if (user.IniciarSesion(user.Email, contraseña))
                 {
-                    SessionManager.ModificarUsuarioAutenticado(user);
+                    Personal personal = new Personal();
+                    personal.Seleccionar(user);
+                    List<Models.Estacionamiento> estacionamientos = personal.EstacionamientoAsociados();
+                    if (estacionamientos.Any())
+                    {
+                        SessionManager.ModificarUsuarioAutenticado(user);
+                        SessionManager.ModificarEstacionamientoSeleccionado(estacionamientos[0]);
+                        return RedirectToAction("Index", "Home");
+                    }
                     //redirect to another view
-                    return RedirectToAction("Index", "Home");
+                    else
+                    {
+                        mensajes.Add("El usuario no tiene estacionamientos asociados");
+                    }
+                }
+                else
+                {
+                    mensajes.Add("Usuario o contraseña incorrectos.");                    
                 }
             }
+            if (!util.IsValidEmail(user.Email))
+            {
+                mensajes.Add("Email no tiene el formato correcto.");
+            }
+            TempData["mensajeIndex"] = mensajes;
             return RedirectToAction("Index", "PublicHome");
         }
         [HttpGet]
@@ -69,6 +91,7 @@ namespace Taller.Estacionamiento.Controllers
                     usuarioEditado.Contraseña = Codificar.getHashSha256(passNueva1);//cambiar a SHA256
                 }
             }
+            
             if (validaciones.Any())
             {
                 return View(usuarioLogueado);// + viewbag con errores a mostrar
@@ -83,32 +106,73 @@ namespace Taller.Estacionamiento.Controllers
         }
         public ActionResult Salir()
         {
-            return View();
+            SessionManager.ModificarUsuarioAutenticado(null);
+            return RedirectToAction("Index", "PublicHome");
         }
-        [HttpPost]
+        
         public ActionResult SeleccionarEstacionamiento(int ID)
         {
             if (SessionManager.UsuarioAutenticado() != null)
             {
-                var estacionamiento = new Estacionamiento.Models.Estacionamiento { ID = ID };
-                SessionManager.ModificarEstacionamientoSeleccionado(estacionamiento);
-            }           
+                Personal personal = new Personal();
+                personal.Seleccionar(SessionManager.UsuarioAutenticado());
+                List<Models.Estacionamiento> estacionamientos = personal.EstacionamientoAsociados();
+                var estacionamiento = new Estacionamiento.Models.Estacionamiento();
+                estacionamiento.Seleccionar(ID);
+                bool existe = false;
+                foreach(var esta in estacionamientos){
+                    if(esta.ID == estacionamiento.ID)
+                    {
+                        existe = true;
+                    }
+                }
+                if (existe)
+                {
+                    SessionManager.ModificarEstacionamientoSeleccionado(estacionamiento);
+                }
+            }
             return RedirectToAction("Index", "Home");
         }
         [HttpPost]
         public ActionResult Registro(Usuario user, string nuevaPass, string nuevaPass2)
         {
+            Usuario test = new Usuario();
+            RegexUtilities util = new RegexUtilities();
+            List<string> mensajes = new List<string>();
+            if (test.Seleccionar(user.Rut))
+            {
+                mensajes.Add("Rut " + user.Rut + " ya está en uso.");
+            }
+            if(test.Seleccionar(user.Email))
+            {
+                mensajes.Add("Email " + user.Email + " ya está en uso.");
+            }
+            if (!string.IsNullOrEmpty(user.Email) && !util.IsValidEmail(user.Email))
+            {
+                mensajes.Add("Email no tiene el formato correcto.");
+            }
             if (!nuevaPass.Equals(nuevaPass2))
             {
+                mensajes.Add("Las contraseñas no son iguales.");
+            }
+            if (user.Telefono != 0 && user.Telefono.ToString().Count() < 6)
+            {
+                mensajes.Add("Número de teléfono muy corto");
+            }
+            if (user.Rut != 0 && user.Rut.ToString().Count() < 6)
+            {
+                mensajes.Add("Rut muy corto");
+            }
+            if (!mensajes.Any())
+            {
+                mensajes.Add("Cuenta creada con éxito.");
+                TempData["successMensaje"] = mensajes;
+                user.Contraseña = Codificar.getHashSha256(nuevaPass);
+                user.Agregar();
                 return RedirectToAction("Index", "PublicHome");
             }
-            user.Contraseña = Codificar.getHashSha256(nuevaPass);
-            user.Agregar();
+            TempData["mensajeIndex"] = mensajes;
             return RedirectToAction("Index", "PublicHome");
-        }
-        public ActionResult SeleccionarEstacionamiento()
-        {
-            return View();
         }
     }
 }

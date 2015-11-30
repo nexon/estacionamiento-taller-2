@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "Index";
     Layout = "";
+    List<string> mensajes_error = TempData["mensajeIndex"] as List<string>;
+    List<string> mensajes_success = TempData["successMensaje"] as List<string>;
 }
 
 
@@ -18,7 +20,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="images/favicon.ico">
-    <title>Parking-Matic</title>
+    <title>NaviPark</title>
     <!-- Bootstrap core CSS -->
     <link href=@Url.Content("~/Content/publicHome/css/bootstrap.min.css") rel="stylesheet">
 
@@ -73,13 +75,34 @@
         </section>
 
         <div class="bottom-header">
+        @if (mensajes_error != null && mensajes_error.Any())
+        {
+            <div class="alert alert-danger align-center">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @foreach(string mensaje in mensajes_error)
+                {
+                   <p>@mensaje</p>
+                }
+            </div>
+        }
+        @if (mensajes_success != null && mensajes_success.Any())
+        {
+            <div class="alert alert-success align-center">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @foreach (string mensaje in mensajes_success)
+                {
+                    <p>@mensaje</p>
+                }
+            </div>
+        }
             <div class="container">
+
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="container-fluid">
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                            <a class="navbar-brand" href="index-2.html"><span class="logo"><span class="primary_text">Parking-Matic</span> <span class="secondary_text">Estacionamientos</span></span></a>
+                            <a class="navbar-brand" href="index-2.html"><span class="logo"><img src="@Url.Content("~/Content/publicHome/images/naviparklogo.png")" /></span></a>
                         </div>
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -117,11 +140,11 @@
                     <form class="form col-md-12 center-block">
 
                         <div class="form-group">
-                            @Html.TextBoxFor(u => u.Email, new { @placeholder = "Email" })
+                            @Html.TextBoxFor(u => u.Email, new { @placeholder = "Email", @required = true })
                             @Html.ValidationMessageFor(u => u.Email)
                         </div>
                         <div class="form-group">
-                            @Html.TextBoxFor(u => u.Contraseña, new { @placeholder = "Contraseña", @type="password" })
+                            @Html.TextBoxFor(u => u.Contraseña, new { @placeholder = "Contraseña", @type = "password", @required = true })
                             @Html.ValidationMessageFor(u => u.Contraseña)
                         </div>
 

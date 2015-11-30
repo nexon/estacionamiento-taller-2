@@ -15,7 +15,30 @@ namespace Taller.Estacionamiento.Models
 
         public List<Estacionamiento> EstacionamientoAsociados()
         {
-            throw new NotImplementedException();
+            var estacionamientos = new List<Estacionamiento>();
+            try
+            {
+                Logger.EntradaMetodo("Personal.EstacionamientoAsociados", this.ToString());
+                var comando = new MySqlCommand() { CommandText = "Estacionamientos_Personal", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inID_Personal", this.ID);
+                var data = Data.Obtener(comando);
+                foreach (DataRow dr in data.Tables[0].Rows)
+                {
+                    Estacionamiento estacionamiento = new Estacionamiento();
+
+                    estacionamiento.Seleccionar(Convert.ToInt32(dr["id_estacionamiento"]));
+                    estacionamientos.Add(estacionamiento);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Usuario.EstacionamientoAsociados", this.ToString());
+            }
+            return estacionamientos;
         }
 
 
@@ -85,6 +108,38 @@ namespace Taller.Estacionamiento.Models
                 if (dt.Rows.Count > 0)
                 {
                     DataRow dr = dt.Rows[0]; 
+                    this.ID = Convert.ToInt32(dr["id_personal"]);
+                    this.Rut = Convert.ToInt32(dr["rut"]);
+                    this.Nombre = Convert.ToString(dr["nombre"]);
+                    this.Email = Convert.ToString(dr["email"]);
+                    this.Contraseña = Convert.ToString(dr["contrasenia"]);
+                    this.Telefono = Convert.ToInt32(dr["telefono"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Excepcion(ex);
+            }
+            finally
+            {
+                Logger.SalidaMetodo("Personal.Seleccionar", this.ToString());
+            }
+            return false;
+        }
+
+        public bool Seleccionar(Usuario usuario)
+        {
+            try
+            {
+                Logger.EntradaMetodo("Personal.Seleccionar", this.ToString());
+
+                var comando = new MySqlCommand() { CommandText = "Personal_SeleccionarPorRut", CommandType = System.Data.CommandType.StoredProcedure };
+                comando.Parameters.AddWithValue("inRut", usuario.Rut);
+                var data = Data.Obtener(comando);
+                DataTable dt = data.Tables[0];
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow dr = dt.Rows[0];
                     this.ID = Convert.ToInt32(dr["id_personal"]);
                     this.Rut = Convert.ToInt32(dr["rut"]);
                     this.Nombre = Convert.ToString(dr["nombre"]);

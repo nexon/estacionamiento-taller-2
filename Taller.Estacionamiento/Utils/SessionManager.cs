@@ -49,7 +49,7 @@ namespace Taller.Estacionamiento.Utils
         public static Models.Estacionamiento EstacionamientoSeleccionado()
         {
             var estacionamiento = new Models.Estacionamiento();
-            HttpContext.Current.Session.Add("ESTACIONAMIENTO_ID", 1);
+                        
             if (HttpContext.Current.Session["ESTACIONAMIENTO_ID"] != null)
             {
                 if(!estacionamiento.Seleccionar(Convert.ToInt32(HttpContext.Current.Session["ESTACIONAMIENTO_ID"])))
@@ -80,6 +80,20 @@ namespace Taller.Estacionamiento.Utils
                 HttpContext.Current.Session.Remove("ESTACIONAMIENTO_ID");
             }
             
+        }
+
+        public static List<Models.Estacionamiento> Estacionamientos()
+        {
+            var estacionamientos = new List<Models.Estacionamiento>();
+            var usu = UsuarioAutenticado();
+            if (usu != null)
+            {
+                Models.Personal personal = new Models.Personal();
+                personal.Seleccionar(UsuarioAutenticado());
+                estacionamientos = personal.EstacionamientoAsociados();
+            }
+
+            return estacionamientos;
         }
     }
 }
