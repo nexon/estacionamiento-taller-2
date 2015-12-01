@@ -9,7 +9,6 @@ CREATE PROCEDURE usuario_modificar(
 BEGIN
 	UPDATE usuario
 	SET
-		rut = inRut,
 		nombre = inNombre,
         contrasenia = inContrasenia,
         email = inEmail,

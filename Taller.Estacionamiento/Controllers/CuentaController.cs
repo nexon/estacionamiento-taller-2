@@ -76,6 +76,7 @@ namespace Taller.Estacionamiento.Controllers
             Usuario usuarioLogueado = SessionManager.UsuarioAutenticado();
             usuarioEditado.Contraseña = contraseñaActual;
             usuarioEditado.Contraseña= Codificar.getHashSha256(usuarioEditado.Contraseña);
+            usuarioEditado.Rut = usuarioLogueado.Rut;
             if (string.IsNullOrEmpty(usuarioEditado.Contraseña) ||
                 !usuarioLogueado.Contraseña.Equals(usuarioEditado.Contraseña))
             {

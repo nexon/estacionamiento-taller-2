@@ -8,7 +8,7 @@ function verificarForm() {
     verificarPass();
     confirmarPass();
     verificarTelefono();
-    verificarRut();
+    //verificarRut();
 }
 
 function verificarEmail(email)
