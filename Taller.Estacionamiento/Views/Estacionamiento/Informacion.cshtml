@@ -142,8 +142,9 @@
 </div>
 
 @section ViewsScripts {
-    <script type="text/javascript" src="../Scripts/ol.js"></script>
-    <script type="text/javascript" src="../Scripts/informacion/informacion.js"></script>
+    <script type="text/javascript" src=@Url.Content("~/Scripts/ol.js")></script>
+    <script type="text/javascript" src=@Url.Content("~/Scripts/informacion/informacion.js")></script>
+    
     <script>
         var lat = '@Model.CoordenadaLatitud'
         var long = '@Model.CoordenadaLongitud'

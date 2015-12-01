@@ -379,14 +379,30 @@ namespace Taller.Estacionamiento.Controllers
         [HttpPost]
         public ActionResult IngresoPersonal(RegistroPersonal rp)
         {
-            rp.Estacionamiento.Tarjetero.RegistarIngreso(rp);
+            DateTime datavalue;
+            if (DateTime.TryParse(Convert.ToString(rp.Ingreso), out datavalue))
+            {
+                rp.Estacionamiento.Tarjetero.RegistarIngreso(rp);
+            }
+            else
+            {
+                TempData["mensajeFecha"] = "La fecha no es válida";
+            }
             return RedirectToAction("Tarjetero", rp.Estacionamiento);
         }
 
         [HttpPost]
         public ActionResult SalidaPersonal(RegistroPersonal rp)
         {
-            rp.Estacionamiento.Tarjetero.RegistrarSalida(rp);
+            DateTime datavalue;
+            if (DateTime.TryParse(Convert.ToString(rp.Salida), out datavalue))
+            {
+                rp.Estacionamiento.Tarjetero.RegistrarSalida(rp);
+            }
+            else
+            {
+                TempData["mensajeFecha"] = "La fecha no es válida";
+            }
             return RedirectToAction("Tarjetero", rp.Estacionamiento);
         }
 
