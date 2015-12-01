@@ -70,10 +70,11 @@ namespace Taller.Estacionamiento.Controllers
         }
 
         [HttpPost]
-        public ActionResult Editar(Usuario usuarioEditado, string passNueva1, string passNueva2)
+        public ActionResult Editar(Usuario usuarioEditado, string contraseñaActual, string passNueva1, string passNueva2)
         {
             List<string> validaciones = new List<string>();
             Usuario usuarioLogueado = SessionManager.UsuarioAutenticado();
+            usuarioEditado.Contraseña = contraseñaActual;
             usuarioEditado.Contraseña= Codificar.getHashSha256(usuarioEditado.Contraseña);
             if (string.IsNullOrEmpty(usuarioEditado.Contraseña) ||
                 !usuarioLogueado.Contraseña.Equals(usuarioEditado.Contraseña))
@@ -173,6 +174,34 @@ namespace Taller.Estacionamiento.Controllers
             }
             TempData["mensajeIndex"] = mensajes;
             return RedirectToAction("Index", "PublicHome");
+        }
+
+        [HttpPost]
+        public ActionResult ExisteEmail(string email)
+        {
+            Usuario usuarioLogueado = SessionManager.UsuarioAutenticado();
+            usuarioLogueado.GetType();
+
+            if(usuarioLogueado.Email != email && new Usuario().Seleccionar(email) )
+            {
+                return Json(new { existe = true });
+            }
+
+            return Json(new { existe = false});
+        }
+
+        [HttpPost]
+        public ActionResult VerificarContraseña(string contraseña)
+        {
+            if (contraseña == null)
+            {
+                return Json( new { valida = false });
+            }
+            string email = SessionManager.UsuarioAutenticado().Email;
+            contraseña = Codificar.getHashSha256(contraseña);
+
+            return Json(new { valida = new Usuario().IniciarSesion(email, contraseña) });
+
         }
     }
 }

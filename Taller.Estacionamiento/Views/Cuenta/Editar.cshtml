@@ -1,4 +1,5 @@
-﻿@model Taller.Estacionamiento.Models.Usuario
+﻿@using Taller.Estacionamiento.Utils
+@model Taller.Estacionamiento.Models.Usuario
 @{
     ViewBag.Title = "Editar";
 }
@@ -17,7 +18,7 @@
 </div><!-- /.page-header -->
 
 <div class="row">
-    @using (Html.BeginForm("Editar", "Cuenta", FormMethod.Post))
+    @using (Html.BeginForm("Editar", "Cuenta", FormMethod.Post, new { id = "editarCuenta"}))
     {
         <div class="col-xs-offset-2 col-sm-offset-2 col-xs-5 col-sm-5">
             <h3 class="blue">
@@ -25,69 +26,65 @@
             </h3>
 
             <div class="profile-user-info">
-                <div class="profile-info-row">
+                <div id="Nombre-form-group"  class="profile-info-row form-group">
                     <div class="profile-info-name"> Nombre </div>
 
                     <div class="profile-info-value">
                         <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
-                        <span>@Html.TextBoxFor(model => model.Nombre)</span>
+                        <span>@Html.TextBoxFor(model => model.Nombre, new { placeholder = "Nombre", onchange = "verificarNombre()" })</span>
+                        <div id="Nombre-Error" class="help-block"></div>
                     </div>
                 </div>
-                <div class="profile-info-row">
+                <div id="Email-form-group" class="profile-info-row form-group">
                     <div class="profile-info-name"> Correo </div>
 
                     <div class="profile-info-value">
                         <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
-                        <span>@Html.TextBoxFor(model => model.Email)</span>
+                        <span>@Html.TextBoxFor(model => model.Email, new { placeholder = "Email", @required = true, onchange = "verificarEmail()" })</span>
+                        <div id="Email-Error" class="help-block"></div>
+                        
                     </div>
                 </div>
-                <div class="profile-info-row">
+                <div id="Actual-Pass-form-group" class="profile-info-row form-group">
                     <div class="profile-info-name"> Contraseña Actual </div>
 
                     <div class="profile-info-value">
                         <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
-                        <span>
-                            @Html.TextBoxFor(model => model.Contraseña, new { id = "txtOldPass", type = "password", Value = "" })
-                            <a class="fa fa-ban red" id="error-Oldpass" style="display:none"></a>
-                        </span>
+                        <span>@Html.TextBox("contraseñaActual", null, new { id = "contraseñaActual", type = "password", placeholder = "Contraseña", @required = true })</span>
+                        <div id="Actual-Pass-Error" class="help-block"></div>
                     </div>
                 </div>
-                <div class="profile-info-row">
+                <div id="Pass1-form-group" class="profile-info-row form-group">
                     <div class="profile-info-name"> Contraseña Nueva </div>
 
                     <div class="profile-info-value">
                         <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
-                        <span>
-                            @Html.TextBox("passNueva1", null, new { id = "txtNewPass1", type = "password", onChange = "verifyNewPass()" })
-                            <a class="fa fa-ban red" id="error-pass1" style="display:none"></a>
-                        </span>
+                        <span>@Html.TextBox("passNueva1", null, new { id = "passNueva1", type = "password", onChange = "confirmarPass()" })</span>
                     </div>
                 </div>
-                <div class="profile-info-row">
+                <div  id="Pass2-form-group" class="profile-info-row form-group">
                     <div class="profile-info-name"> Repetir Contraseña </div>
 
                     <div class="profile-info-value">
                         <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
-                        <span>
-                            @Html.TextBox("passNueva2", null, new { id = "txtNewPass2", type = "password", onChange = "verifyNewPass()" })
-                            <a class="fa fa-ban red" id="error-pass2" style="display:none"></a>
-                        </span>
+                        <span>@Html.TextBox("passNueva2", null, new { id = "passNueva2", type = "password", onChange = "confirmarPass()" })</span>
+                        <div id="Pass-Error" class="help-block"></div>
                     </div>
                 </div>
-                <div class="profile-info-row">
+                <div id="Telefono-form-group" class="profile-info-row form-group" >
                     <div class="profile-info-name"> Telefono </div>
 
                     <div class="profile-info-value">
-                        <span>
-                            @Html.TextBoxFor(model => model.Telefono)
-                    </span>
+                        <span>@Html.TextBoxFor(model => model.Telefono, new { placeholder = "Teléfono", onchange = "verificarTelefono()" })</span>
+                        <div id="Telefono-Error" class="help-block"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="profile-info-row">
+            <div id="Rut-form-group"class="profile-info-row form-group">
                 <div class="profile-info-name"> Rut </div>
 
                 <div class="profile-info-value">
-                    <span>@Html.TextBoxFor(model => model.Rut)</span>
+                    <span>@Html.TextBoxFor(model => model.Rut, new { placeholder = "Rut", onchange = "verificarRut()" })</span>
+                    <div id="Rut-Error" class="help-block"></div>
                 </div>
             </div>
             <div class="profile-info-row">
@@ -99,17 +96,21 @@
         </div>
     </div>
 
-        <br />
-        <div class="">
-            <div class="col-md-offset-2 col-md-9">
-                <button class="btn btn-info" type="submit" id="editButton">
-                    <i class="ace-icon fa fa-pencil bigger-110"></i>
-                    Editar
-                </button>
-            </div>
-        </div>
+        
+    @Html.TextBox("usuarioLogeadoEmail", @SessionManager.UsuarioAutenticado().Email, new { id = "usuarioLogeadoEmail", @value = "sdfsdf", Style = "display: none" })
+        
     }
+    <br />
+    <div class="">
+        <div class="col-md-offset-2 col-md-9">
+            <button class="btn btn-info" id="editButton" onclick="submitForm()">
+                <i class="ace-icon fa fa-pencil bigger-110"></i>
+                Editar
+            </button>
+        </div>
+    </div>
 </div>
 
 @section ViewsScripts {
+    <script type="text/javascript" src="../Scripts/Cuenta/Cuenta.js"></script>
 }
