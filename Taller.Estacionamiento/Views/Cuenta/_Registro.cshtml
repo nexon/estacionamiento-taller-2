@@ -15,7 +15,8 @@
                             <div class="form-group">
                                 @Html.TextBoxFor(model => model.Nombre, new { @class = "col-sm-9", placeholder = "Nombre", @required = true })
 
-                                @Html.TextBoxFor(model => model.Rut, new { @class = "col-sm-9", @id = "#RutBox", placeholder = "Rut", onChange = "validarRut()", Value = "", @required = true })
+                                @Html.TextBoxFor(model => model.Rut, new { @class = "col-sm-9", @id = "#RutBox", placeholder = "Rut",
+                                            onChange = "validarRut()", Value = "", @required = true, title="Rut no debe contener dígito verificador." })
                                 
                                 @Html.TextBoxFor(model => model.Email, new { @class = "col-sm-9", placeholder = "Email", @required = true })
 
@@ -42,13 +43,14 @@
         }
     </div>
 </div>
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
         function validarRut()
         {
             var rut_box = document.getElementById("#RutBox");
             var register_button = document.getElementById("registerButton");
-            if (!Number(rut_box.value) > 0)
+            if (!(Number(rut_box.value) > 0))
             {
                 rut_box.value = rut_box.value.replace(/\D/g, '');
             }
@@ -67,5 +69,7 @@
                 label.style.display = "none";
             }           
         }
-        
+        $(function() {
+            $( document ).tooltip();
+        });
 </script>
