@@ -1,5 +1,5 @@
 ﻿@model Taller.Estacionamiento.Models.Estacionamiento
-
+@using Taller.Estacionamiento.Models;
 @{
     ViewBag.Title = "Ocupados";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -36,7 +36,7 @@
             </thead>
 
             <tbody>
-                @foreach (var ocupado in Model.Ocupados())
+                @foreach (Espacio ocupado in Model.Ocupados())
                 {
                     <tr>
                         <td>
@@ -45,9 +45,29 @@
                         <td>
                             @ocupado.Vehiculo.Patente
                         </td>
-                        <td>Por Hacer</td>
-                        <td>Por Hacer</td>
-                        <td>Por Hacer</td>
+                        <td>@{
+
+                            Conductor conductor = ocupado.Vehiculo.Conductor;
+
+                        } @conductor.Nombre</td>
+                        <td>@{
+                            DateTime inicio = @ocupado.IngresoVehiculo;
+                            DateTime fin = DateTime.Now;
+                            int minutos = Convert.ToInt32(fin.Subtract(inicio).TotalMinutes);
+                        }
+                        @minutos minutos
+                        </td>
+                        <td>@{
+                            int tarifaMinuto = Model.TarifaMinuto;
+                            int tiempoMin = Model.TiempoMinimo;
+                            int tCobro = minutos;
+                            if (minutos < tiempoMin)
+                            {
+                                tCobro = tiempoMin;
+                            }
+                            int total = tCobro * tarifaMinuto;
+                        }
+                        @total</td>
                         <td>
                             <a data-toggle="modal" data-id="@Model.ID" data-nombre="@Model.Nombre" data-codigo="@ocupado.Codigo" data-patente="@ocupado.Vehiculo.Patente" data-ingreso="@ocupado.IngresoVehiculo" class="open-DespacharVehiculoModal" href="#DespacharVehiculoModal">
                                 <span class="btn btn-xs btn-danger boton_salida">
