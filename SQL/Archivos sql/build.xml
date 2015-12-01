@@ -16,6 +16,7 @@
       <antcall target="CreateView"/>
       <antcall target="CreateFuntion"/>
       <antcall target="CreateProcedure"/>
+      <antcall target="CreateData"/>
   </target>
   <target name="CreateSc">
     <sql
@@ -76,6 +77,19 @@
       <path>
         <fileset dir=".">
           <include name="3*.sql"/>
+        </fileset>
+      </path>
+    </sql>
+  </target>
+  <target name="CreateData">
+    <sql
+      driver="${sql.driver}" url="${sql.url}${db_name}" userid="${sql.user}"
+      password="${sql.pass}" autocommit= "true"
+      classpath= "mysql-connector-java-5.1.33-bin.jar"
+      delimiter="$$" >
+      <path>
+        <fileset dir=".">
+          <include name="9*.sql"/>
         </fileset>
       </path>
     </sql>

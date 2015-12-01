@@ -78,7 +78,7 @@
                                                             <i class="btn btn-xs no-hover btn-pink fa fa-arrow-circle-right"></i>
                                                             @estac.Nombre
                                                         </span>
-                                                        <span class='pull - right badge badge-info @selected'>Activo</span>
+                                                        <span class='pull-right badge badge-info @selected'>Activo</span>
                                                     </div>
                                                 </a>
                                             </li>
@@ -209,7 +209,7 @@
                                 <img class="nav-user-photo" src="~/Content/avatars/user.jpg" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Bienvenido,</small>
-                                    Jason
+                                    @SessionManager.UsuarioAutenticado().Nombre;
                                 </span>
                                 <i class="ace-icon fa fa-caret-down"></i>
                             </a>
@@ -229,7 +229,7 @@
 
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="#">
+                                    <a href="@Url.Action("Salir","Cuenta")">
                                         <i class="ace-icon fa fa-power-off"></i>
                                         Salir
                                     </a>

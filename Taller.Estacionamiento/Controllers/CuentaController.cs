@@ -22,23 +22,28 @@ namespace Taller.Estacionamiento.Controllers
                 {
                     Personal personal = new Personal();
                     personal.Seleccionar(user);
-                    if (personal.Estacionamientos().Any())
+                    List<Models.Estacionamiento> estacionamientos = personal.EstacionamientoAsociados();
+                    if (estacionamientos.Any())
                     {
                         SessionManager.ModificarUsuarioAutenticado(user);
+                        SessionManager.ModificarEstacionamientoSeleccionado(estacionamientos[0]);
                         return RedirectToAction("Index", "Home");
                     }
                     //redirect to another view
                     else
                     {
                         mensajes.Add("El usuario no tiene estacionamientos asociados");
-                    }        
+                    }
+                }
+                else
+                {
+                    mensajes.Add("Usuario o contraseña incorrectos.");                    
                 }
             }
             if (!util.IsValidEmail(user.Email))
             {
                 mensajes.Add("Email no tiene el formato correcto.");
             }
-            mensajes.Add("Usuario o contraseña incorrectos.");
             TempData["mensajeIndex"] = mensajes;
             return RedirectToAction("Index", "PublicHome");
         }
@@ -101,16 +106,30 @@ namespace Taller.Estacionamiento.Controllers
         }
         public ActionResult Salir()
         {
-            return View();
+            SessionManager.ModificarUsuarioAutenticado(null);
+            return RedirectToAction("Index", "PublicHome");
         }
         
         public ActionResult SeleccionarEstacionamiento(int ID)
         {
             if (SessionManager.UsuarioAutenticado() != null)
             {
+                Personal personal = new Personal();
+                personal.Seleccionar(SessionManager.UsuarioAutenticado());
+                List<Models.Estacionamiento> estacionamientos = personal.EstacionamientoAsociados();
                 var estacionamiento = new Estacionamiento.Models.Estacionamiento();
                 estacionamiento.Seleccionar(ID);
-                SessionManager.ModificarEstacionamientoSeleccionado(estacionamiento);
+                bool existe = false;
+                foreach(var esta in estacionamientos){
+                    if(esta.ID == estacionamiento.ID)
+                    {
+                        existe = true;
+                    }
+                }
+                if (existe)
+                {
+                    SessionManager.ModificarEstacionamientoSeleccionado(estacionamiento);
+                }
             }
             return RedirectToAction("Index", "Home");
         }
@@ -146,8 +165,11 @@ namespace Taller.Estacionamiento.Controllers
             }
             if (!mensajes.Any())
             {
+                mensajes.Add("Cuenta creada con éxito.");
+                TempData["successMensaje"] = mensajes;
                 user.Contraseña = Codificar.getHashSha256(nuevaPass);
                 user.Agregar();
+                return RedirectToAction("Index", "PublicHome");
             }
             TempData["mensajeIndex"] = mensajes;
             return RedirectToAction("Index", "PublicHome");

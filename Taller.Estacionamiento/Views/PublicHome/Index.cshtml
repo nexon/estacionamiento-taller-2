@@ -2,7 +2,8 @@
 @{
     ViewBag.Title = "Index";
     Layout = "";
-    List<string> mensajes = TempData["mensajeIndex"] as List<string>;
+    List<string> mensajes_error = TempData["mensajeIndex"] as List<string>;
+    List<string> mensajes_success = TempData["successMensaje"] as List<string>;
 }
 
 
@@ -19,7 +20,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="images/favicon.ico">
-    <title>Parking-Matic</title>
+    <title>NaviPark</title>
     <!-- Bootstrap core CSS -->
     <link href=@Url.Content("~/Content/publicHome/css/bootstrap.min.css") rel="stylesheet">
 
@@ -74,13 +75,23 @@
         </section>
 
         <div class="bottom-header">
-        @if (mensajes != null && mensajes.Any())
+        @if (mensajes_error != null && mensajes_error.Any())
         {
             <div class="alert alert-danger align-center">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                @foreach(string mensaje in mensajes)
+                @foreach(string mensaje in mensajes_error)
                 {
                    <p>@mensaje</p>
+                }
+            </div>
+        }
+        @if (mensajes_success != null && mensajes_success.Any())
+        {
+            <div class="alert alert-success align-center">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @foreach (string mensaje in mensajes_success)
+                {
+                    <p>@mensaje</p>
                 }
             </div>
         }
@@ -91,7 +102,7 @@
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                            <a class="navbar-brand" href="index-2.html"><span class="logo"><span class="primary_text">Parking-Matic</span> <span class="secondary_text">Estacionamientos</span></span></a>
+                            <a class="navbar-brand" href="index-2.html"><span class="logo"><img src="@Url.Content("~/Content/publicHome/images/naviparklogo.png")" /></span></a>
                         </div>
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
