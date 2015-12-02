@@ -607,13 +607,14 @@ namespace Taller.Estacionamiento.Models
         }
 
 
-        public void EliminarEspacio(Espacio espacio)
+        public void EliminarEspacio(Espacio espacio,int id)
         {
             try
             {
                 Logger.EntradaMetodo("Estacionamiento.EliminarEspacio(Espacio espacio)", this.ToString());
                 var comando = new MySqlCommand() { CommandText = "Espacio_Eliminar", CommandType = System.Data.CommandType.StoredProcedure };
                 comando.Parameters.AddWithValue("inCodigo", espacio.Codigo);
+                comando.Parameters.AddWithValue("inID", this.ID);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
