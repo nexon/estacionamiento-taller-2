@@ -32,7 +32,7 @@ namespace Taller.Estacionamiento.Controllers
                     //redirect to another view
                     else
                     {
-                        mensajes.Add("El usuario no tiene estacionamientos asociados");
+                        mensajes.Add("Su cuenta de usuario no tiene estacionamientos asociados");
                     }
                 }
                 else
@@ -159,9 +159,13 @@ namespace Taller.Estacionamiento.Controllers
             {
                 mensajes.Add("Número de teléfono muy corto");
             }
-            if (user.Rut != 0 && user.Rut.ToString().Count() < 6)
+            if (user.Rut.ToString().Count() < 6 || user.Rut < 0)//debe tener 6 dígitos y no ser negativo
             {
-                mensajes.Add("Rut muy corto");
+                mensajes.Add("Rut inválido");
+            }
+            if (user.Nombre.Count() < 3)
+            {
+                mensajes.Add("Nombre demasiado corto");
             }
             if (!mensajes.Any())
             {
