@@ -48,44 +48,32 @@ namespace Taller.Estacionamiento.Controllers
         {
             RegexUtilities ru = new RegexUtilities();
             string mensaje = "";
-            if(estacionamiento.Nombre == null){
-                mensaje += "El nombre es requerido.";
-            }
-            if (estacionamiento.Direccion == null)
-            {
-                mensaje += " \n La dirección es requerida.";
-            }
-            if (estacionamiento.Email == null)
-            {
-                mensaje += "\n El email es requerido.";
-            }
-            else if(!ru.IsValidEmail(estacionamiento.Email)){
-                mensaje = "\n El email no es válido.";
-            }
-            if(estacionamiento.TiempoMinimo == null){
-                mensaje += " \n El tiempo mínimo es requerido.";
-            }
-            else if (estacionamiento.TiempoMinimo < 1)
-            {
-                mensaje += " \n El tiempo mínimo debe ser igual o mayor a 1.";
-            }
-            if (estacionamiento.TarifaMinuto == null)
-            {
-                mensaje += " \n La tarifa mínima es requerida.";
-            }
-            else if (estacionamiento.TiempoMinimo < 1)
-            {
-                mensaje += " \n La tarifa mínima debe ser igual o mayor a 1.";
-            }
-            if(!mensaje.Equals("")){
-                TempData["mensajeEditarInformacion"] = mensaje;
-                return RedirectToAction("Informacion", new { ID = estacionamiento.ID });
+            if(!ru.IsValidEmail(estacionamiento.Email)){
+                mensaje = "\n El email ingresado no es válido.";
             }
             string auxiliar = apertura + ":00";
             estacionamiento.Apertura = DateTime.Parse(auxiliar);
             auxiliar = cierre + ":00";
             estacionamiento.Cierre = DateTime.Parse(auxiliar);
-            estacionamiento.Modificar(); 
+            var comparacion = DateTime.Compare(estacionamiento.Apertura, estacionamiento.Cierre);
+            // <0 Apertura < Cierre
+            // 0  Apertura = Cierre
+            // >0 Apertura > Cierre
+            if(comparacion > 0){
+                mensaje = mensaje + "La hora de Cierre es menor que la hora de Apertura";
+            }
+            if(comparacion == 0){
+                mensaje = mensaje + "La hora de Apertura es igual a la hora de Cierre";
+            }
+            if (!mensaje.Equals(""))
+            {
+                TempData["mensajeEditarInformacion"] = mensaje;
+                return RedirectToAction("Informacion", new { ID = estacionamiento.ID });
+            }
+            if (comparacion < 0)
+            {
+                estacionamiento.Modificar(); 
+            }
             return RedirectToAction("Informacion", new { ID = estacionamiento.ID });
         }
         public ActionResult Ocupados(int ID)

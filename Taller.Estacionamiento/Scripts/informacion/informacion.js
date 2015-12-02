@@ -17,12 +17,12 @@ function load_time_picker(timePicker) {
 }
 
 function load_map(lat, long) {
-
+    
     var view = new ol.View({
-        center: [lat, long],
+        center: ol.proj.fromLonLat([long,lat]),
         zoom: 14
     });
-
+    
     var map = new ol.Map({
         layers: [
 			new ol.layer.Tile({
