@@ -485,6 +485,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\chosen.jquery.js" />
+    <Content Include="Scripts\Cuenta\Cuenta.js" />
     <Content Include="Scripts\dataTables\extensions\ColVis\js\dataTables.colVis.js" />
     <Content Include="Scripts\dataTables\extensions\TableTools\js\dataTables.tableTools.js" />
     <Content Include="Scripts\dataTables\extensions\TableTools\swf\copy_csv_xls.swf" />
