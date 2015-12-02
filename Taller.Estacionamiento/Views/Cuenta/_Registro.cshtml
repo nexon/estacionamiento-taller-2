@@ -1,7 +1,8 @@
 ﻿@model Taller.Estacionamiento.Models.Usuario
+
 <div class="modal fade" id="registro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
-        @using (Html.BeginForm("Registro", "Cuenta", FormMethod.Post))
+        @using (Html.BeginForm("Registro", "Cuenta", FormMethod.Post, new {id="#RegisterForm" }))
         {
             <div class="modal-content">
                 <div class="modal-header">
@@ -14,15 +15,16 @@
                             <div class="form-group">
                                 @Html.TextBoxFor(model => model.Nombre, new { @class = "col-sm-9", placeholder = "Nombre", @required = true })
 
-                                @Html.TextBoxFor(model => model.Rut, new { @class = "col-sm-9", placeholder = "Rut", Value= "", @required = true  })
+                                @Html.TextBoxFor(model => model.Rut, new { @class = "col-sm-9", @id = "#RutBox", placeholder = "Rut",
+                                            onChange = "validarRut()", Value = "", @required = true, title="Rut no debe contener dígito verificador." })
+                                
+                                @Html.TextBoxFor(model => model.Email, new { @class = "col-sm-9", placeholder = "Email", @required = true })
 
-                                @Html.TextBoxFor(model => model.Email, new { @class = "col-sm-9", placeholder = "Email" , @required = true })
+                                @Html.TextBoxFor(model => model.Telefono, new { @class = "col-sm-9", placeholder = "Teléfono", Value = "" })
 
-                                @Html.TextBoxFor(model => model.Telefono, new { @class = "col-sm-9", placeholder = "Teléfono", Value= ""})
-
-                                @Html.TextBox("nuevaPass", null, new { @class = "col-sm-9", id = "txtNewPass1", type = "password", placeholder = "Contraseña", @required = true })
-                                <span class="control-label text-center error" id="error-pass2" style="display:none">Contraseñas no son iguales</span>
-                                @Html.TextBox("nuevaPass2", null, new { @class = "col-sm-9", id = "txtNewPass2", type = "password", onChange = "verifyNewPass()", placeholder = "Repetir Contraseña", @required = true })
+                                <span class="control-label text-center error" id="error-pass" style="display:none">Contraseñas no son iguales</span>
+                                @Html.TextBox("nuevaPass", null, new { @class = "col-sm-9", id = "#pass1", type = "password", onChange = "validarPass()", placeholder = "Contraseña", @required = true })
+                                @Html.TextBox("nuevaPass2", null, new { @class = "col-sm-9", id = "#pass2", type = "password", onChange = "validarPass()", placeholder = "Repetir Contraseña", @required = true })
                             </div>
                         </div>
                     </div>
@@ -41,3 +43,33 @@
         }
     </div>
 </div>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+        function validarRut()
+        {
+            var rut_box = document.getElementById("#RutBox");
+            var register_button = document.getElementById("registerButton");
+            if (!(Number(rut_box.value) > 0))
+            {
+                rut_box.value = rut_box.value.replace(/\D/g, '');
+            }
+        }
+        function validarPass()
+        {
+            var pass1 = document.getElementById("#pass1").value;
+            var pass2 = document.getElementById("#pass2").value;
+            var label = document.getElementById("error-pass");
+            var button = document.getElementById("registerButton");
+            if (pass2 != "" &&pass1.localeCompare(pass2) != 0) {
+                label.style.display = "inline";
+                button.disabled = true;
+            } else {
+                button.disabled = false;
+                label.style.display = "none";
+            }           
+        }
+        $(function() {
+            $( document ).tooltip();
+        });
+</script>

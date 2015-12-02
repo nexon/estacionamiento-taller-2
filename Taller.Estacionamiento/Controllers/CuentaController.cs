@@ -22,23 +22,28 @@ namespace Taller.Estacionamiento.Controllers
                 {
                     Personal personal = new Personal();
                     personal.Seleccionar(user);
-                    if (personal.Estacionamientos().Any())
+                    List<Models.Estacionamiento> estacionamientos = personal.EstacionamientoAsociados();
+                    if (estacionamientos.Any())
                     {
                         SessionManager.ModificarUsuarioAutenticado(user);
+                        SessionManager.ModificarEstacionamientoSeleccionado(estacionamientos[0]);
                         return RedirectToAction("Index", "Home");
                     }
                     //redirect to another view
                     else
                     {
-                        mensajes.Add("El usuario no tiene estacionamientos asociados");
-                    }        
+                        mensajes.Add("Su cuenta de usuario no tiene estacionamientos asociados");
+                    }
+                }
+                else
+                {
+                    mensajes.Add("Usuario o contraseña incorrectos.");                    
                 }
             }
             if (!util.IsValidEmail(user.Email))
             {
                 mensajes.Add("Email no tiene el formato correcto.");
             }
-            mensajes.Add("Usuario o contraseña incorrectos.");
             TempData["mensajeIndex"] = mensajes;
             return RedirectToAction("Index", "PublicHome");
         }
@@ -65,11 +70,13 @@ namespace Taller.Estacionamiento.Controllers
         }
 
         [HttpPost]
-        public ActionResult Editar(Usuario usuarioEditado, string passNueva1, string passNueva2)
+        public ActionResult Editar(Usuario usuarioEditado, string contraseñaActual, string passNueva1, string passNueva2)
         {
             List<string> validaciones = new List<string>();
             Usuario usuarioLogueado = SessionManager.UsuarioAutenticado();
+            usuarioEditado.Contraseña = contraseñaActual;
             usuarioEditado.Contraseña= Codificar.getHashSha256(usuarioEditado.Contraseña);
+            usuarioEditado.Rut = usuarioLogueado.Rut;
             if (string.IsNullOrEmpty(usuarioEditado.Contraseña) ||
                 !usuarioLogueado.Contraseña.Equals(usuarioEditado.Contraseña))
             {
@@ -101,16 +108,30 @@ namespace Taller.Estacionamiento.Controllers
         }
         public ActionResult Salir()
         {
-            return View();
+            SessionManager.ModificarUsuarioAutenticado(null);
+            return RedirectToAction("Index", "PublicHome");
         }
         
         public ActionResult SeleccionarEstacionamiento(int ID)
         {
             if (SessionManager.UsuarioAutenticado() != null)
             {
+                Personal personal = new Personal();
+                personal.Seleccionar(SessionManager.UsuarioAutenticado());
+                List<Models.Estacionamiento> estacionamientos = personal.EstacionamientoAsociados();
                 var estacionamiento = new Estacionamiento.Models.Estacionamiento();
                 estacionamiento.Seleccionar(ID);
-                SessionManager.ModificarEstacionamientoSeleccionado(estacionamiento);
+                bool existe = false;
+                foreach(var esta in estacionamientos){
+                    if(esta.ID == estacionamiento.ID)
+                    {
+                        existe = true;
+                    }
+                }
+                if (existe)
+                {
+                    SessionManager.ModificarEstacionamientoSeleccionado(estacionamiento);
+                }
             }
             return RedirectToAction("Index", "Home");
         }
@@ -140,17 +161,52 @@ namespace Taller.Estacionamiento.Controllers
             {
                 mensajes.Add("Número de teléfono muy corto");
             }
-            if (user.Rut != 0 && user.Rut.ToString().Count() < 6)
+            if (user.Rut.ToString().Count() < 6 || user.Rut < 0)//debe tener 6 dígitos y no ser negativo
             {
-                mensajes.Add("Rut muy corto");
+                mensajes.Add("Rut inválido");
+            }
+            if (user.Nombre.Count() < 3)
+            {
+                mensajes.Add("Nombre demasiado corto");
             }
             if (!mensajes.Any())
             {
+                mensajes.Add("Cuenta creada con éxito.");
+                TempData["successMensaje"] = mensajes;
                 user.Contraseña = Codificar.getHashSha256(nuevaPass);
                 user.Agregar();
+                return RedirectToAction("Index", "PublicHome");
             }
             TempData["mensajeIndex"] = mensajes;
             return RedirectToAction("Index", "PublicHome");
+        }
+
+        [HttpPost]
+        public ActionResult ExisteEmail(string email)
+        {
+            Usuario usuarioLogueado = SessionManager.UsuarioAutenticado();
+            usuarioLogueado.GetType();
+
+            if(usuarioLogueado.Email != email && new Usuario().Seleccionar(email) )
+            {
+                return Json(new { existe = true });
+            }
+
+            return Json(new { existe = false});
+        }
+
+        [HttpPost]
+        public ActionResult VerificarContraseña(string contraseña)
+        {
+            if (contraseña == null)
+            {
+                return Json( new { valida = false });
+            }
+            string email = SessionManager.UsuarioAutenticado().Email;
+            contraseña = Codificar.getHashSha256(contraseña);
+
+            return Json(new { valida = new Usuario().IniciarSesion(email, contraseña) });
+
         }
     }
 }

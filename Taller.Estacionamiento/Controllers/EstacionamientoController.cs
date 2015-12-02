@@ -14,7 +14,11 @@ namespace Taller.Estacionamiento.Controllers
         // GET: /Estacionamiento/
         public ActionResult Index()
         {
-            return View();
+            if (SessionManager.UsuarioAutenticado()!=null)
+            {
+                return View();
+            }
+            return RedirectToAction("Index", "PublicHome");
         }
         public ActionResult Informacion(int id)
         {
