@@ -2,7 +2,7 @@ DROP PROCEDURE IF EXISTS Espacio_Eliminar $$
 CREATE PROCEDURE Espacio_Eliminar
 (
 	inCodigo VARCHAR(15),
-	inID bigint
+	inID INT
 )
 BEGIN
 DELETE from registro
