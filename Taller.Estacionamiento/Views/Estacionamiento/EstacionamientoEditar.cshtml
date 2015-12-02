@@ -6,9 +6,6 @@
         @using (Html.BeginForm("EstacionamientoEditar", "Estacionamiento", FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.HiddenFor(model => model.ID)
-            @Html.HiddenFor(model => model.TiempoMinimo)
-            @Html.HiddenFor(model => model.TarifaMinuto)
-            
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -57,17 +54,17 @@
 
                                 <div class="col-xs-10 col-sm-5">
                                     <div class="input-group">
-                                        @Html.TextBoxFor(model => model.TiempoMinimo, new { type = "number", min = 1 , @required=true})
+                                        @Html.TextBoxFor(model => model.TiempoMinimo, new { type = "number",min=1, @required=true})
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-3"> Tarifa minuto </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-3"> Tarifa minutos </label>
 
                                 <div class="col-xs-10 col-sm-5">
                                     <div class="input-group">
 
-                                        @Html.TextBoxFor(model => model.TarifaMinuto, new { type = "number", min = 1, @required=true})
+                                        @Html.TextBoxFor(model => model.TarifaMinuto, new { type = "number", min = 1, @required = true })
                                     </div>
                                 </div>
                             </div>
@@ -136,7 +133,7 @@
                                                 <i class="nav-search-icon fa"> Latitud </i>
                                             </span>
                                         </div>
-                                        @Html.TextBoxFor(model => model.CoordenadaLatitud, new { type = "text",@required=true})
+                                        @Html.TextBoxFor(model => model.CoordenadaLatitud, new { type = "text", placeholder = "Ej: -35,000897", pattern = "^-?([1-8]?[1-9]|[1-9]0)\\,{1}\\d{1,6}", @required = true })
                                     </div>
                                     <br />
                                     <div class="input-group">
@@ -145,7 +142,7 @@
                                                 <i class="nav-search-icon fa"> Longitud </i>
                                             </span>
                                         </div>
-                                        @Html.TextBoxFor(model => model.CoordenadaLongitud, new { type = "text", @required = true })
+                                        @Html.TextBoxFor(model => model.CoordenadaLongitud, new { type = "text", placeholder = "Ej: -71.232712", pattern = "^-?([1]?[1-7][1-9]|[1]?[1-8][0]|[1-9]?[0-9])\\,{1}\\d{1,6}", @required = true })
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +155,7 @@
                         <i class="ace-icon fa fa-arrow-left bigger-110"></i>
                         Cancelar
                     </button>
-                    <button type="submit" value="Submit" class="btn btn-sm btn-success">
+                    <button type="submit"  class="btn btn-sm btn-success">
                         <i class="ace-icon fa fa-check bigger-110"></i>
                         Aceptar
                     </button>

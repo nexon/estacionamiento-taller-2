@@ -51,15 +51,29 @@ namespace Taller.Estacionamiento.Controllers
             if(!ru.IsValidEmail(estacionamiento.Email)){
                 mensaje = "\n El email ingresado no es válido.";
             }
-            if(!mensaje.Equals("")){
-                TempData["mensajeEditarInformacion"] = mensaje;
-                return RedirectToAction("Informacion", new { ID = estacionamiento.ID });
-            }
             string auxiliar = apertura + ":00";
             estacionamiento.Apertura = DateTime.Parse(auxiliar);
             auxiliar = cierre + ":00";
             estacionamiento.Cierre = DateTime.Parse(auxiliar);
-            estacionamiento.Modificar(); 
+            var comparacion = DateTime.Compare(estacionamiento.Apertura, estacionamiento.Cierre);
+            // <0 Apertura < Cierre
+            // 0  Apertura = Cierre
+            // >0 Apertura > Cierre
+            if(comparacion > 0){
+                mensaje = mensaje + "La hora de Cierre es menor que la hora de Apertura";
+            }
+            if(comparacion == 0){
+                mensaje = mensaje + "La hora de Apertura es igual a la hora de Cierre";
+            }
+            if (!mensaje.Equals(""))
+            {
+                TempData["mensajeEditarInformacion"] = mensaje;
+                return RedirectToAction("Informacion", new { ID = estacionamiento.ID });
+            }
+            if (comparacion < 0)
+            {
+                estacionamiento.Modificar(); 
+            }
             return RedirectToAction("Informacion", new { ID = estacionamiento.ID });
         }
         public ActionResult Ocupados(int ID)

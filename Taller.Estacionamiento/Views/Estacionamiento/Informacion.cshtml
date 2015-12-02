@@ -15,7 +15,20 @@
     </h1>
 
 </div><!-- /.page-header -->
-@ViewData["mensajeEditarInformacion"]
+@if (TempData["mensajeEditarInformacion"] != null)
+{
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="ace-icon fa fa-times"></i>
+        </button>
+        <strong>
+            <i class="ace-icon fa fa-times"></i>
+            Error
+        </strong>
+        @TempData["mensajeEditarInformacion"]
+        <br />
+    </div>
+}
 
 <div class="row">
     <div class="col-xs-offset-2 col-sm-offset-2 col-xs-5 col-sm-5">
@@ -145,10 +158,21 @@
     <script type="text/javascript" src="@Url.Content("../../Scripts/ol.js")"></script>
     <script type="text/javascript" src="@Url.Content("../../Scripts/informacion/informacion.js")"></script>
     <script>
-        var lat = parseFloat('@Model.CoordenadaLatitud');
-        var long = parseFloat('@Model.CoordenadaLongitud');
+        var latitud, longitud;
+        if ('@Model.CoordenadaLatitud'.indexOf(",") != -1) {
+            latitud = parseFloat('@Model.CoordenadaLatitud'.replace(',', '.'));
+        }
+        else {
+            latitud = parseFloat('@Model.CoordenadaLatitud');
+        }
+        if ('@Model.CoordenadaLongitud'.indexOf(",") != -1) {
+            longitud = parseFloat('@Model.CoordenadaLongitud'.replace(',', '.'));
+        }
+        else {
+            longitud = parseFloat('@Model.CoordenadaLongitud');
+        }
         $(document).ready(function () {
-            load_map(lat, long);
+            load_map(latitud, longitud);
         });
     </script>
 }
