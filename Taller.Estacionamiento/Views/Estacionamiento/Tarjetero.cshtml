@@ -56,7 +56,7 @@
                             @if (@registro.Ingreso != null && @registro.Salida == null)
                             {
                                 <div class="action-buttons">
-                                    <a data-toggle="modal" data-target="#modalSalida" data-registroId="@registro.ID" class="red registrarSalida" href="#">
+                                    <a data-toggle="modal" data-target="#modalSalida" data-registroId="@registro.ID" data-ingreso="@registro.Ingreso" class="red registrarSalida" href="#">
                                         <span class="label label-danger">
                                             <i class="ace-icon fa fa-sign-out bigger-120"></i>
                                             Salida
@@ -155,6 +155,10 @@
             var data_id = $(this).data('registroid');
             var id = document.getElementById("idRegistroPersonal");
             id.value = data_id;
+
+            var data_fi = $(this).data('ingreso');
+            var fi = document.getElementById("FechaIngreso");
+            fi.value = data_fi;
         });
     </script>
 }

@@ -395,13 +395,29 @@ namespace Taller.Estacionamiento.Controllers
         public ActionResult SalidaPersonal(RegistroPersonal rp)
         {
             DateTime datavalue;
+            string mensaje = "";
             if (DateTime.TryParse(Convert.ToString(rp.Salida), out datavalue))
             {
-                rp.Estacionamiento.Tarjetero.RegistrarSalida(rp);
+                var comparacion = DateTime.Compare((DateTime)rp.Ingreso, (DateTime)rp.Salida);
+                // <0 Ingreso < Salida
+                // 0  Ingreso = Salida
+                // >0 Ingreso > Salida
+                if(comparacion > 0){
+                    mensaje = "La fecha de Salida es menor que la fecha de Ingreso";
+                }
+                if(comparacion == 0){
+                    mensaje = "La Fecha de Salida es igual que la fecha de Ingreso";
+                }
+                if(comparacion < 0){
+                    rp.Estacionamiento.Tarjetero.RegistrarSalida(rp);
+                }
             }
             else
             {
-                TempData["mensajeFecha"] = "La fecha no es válida";
+                mensaje = "La fecha no es válida";
+            }
+            if(!mensaje.Equals("")){
+                TempData["mensajeFecha"] = mensaje;
             }
             return RedirectToAction("Tarjetero", rp.Estacionamiento);
         }
