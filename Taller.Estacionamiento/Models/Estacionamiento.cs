@@ -379,9 +379,14 @@ namespace Taller.Estacionamiento.Models
 
                     if (reserva.Expiracion != null)
                         reserva.Concretada = true;
-                    espacio.Vehiculo = vehiculo;
-                    espacio.Reserva = reserva;
 
+                    Conductor conductor = new Conductor();
+                    conductor.Seleccionar(Convert.ToInt32(dr["id_usuario"]));
+                    vehiculo.Conductor = conductor;
+
+                    espacio.Vehiculo = vehiculo;
+                    
+                    espacio.Reserva = reserva;
                     ocupados.Add(espacio);
                 }
             }
@@ -607,13 +612,14 @@ namespace Taller.Estacionamiento.Models
         }
 
 
-        public void EliminarEspacio(Espacio espacio)
+        public void EliminarEspacio(Espacio espacio,int id)
         {
             try
             {
                 Logger.EntradaMetodo("Estacionamiento.EliminarEspacio(Espacio espacio)", this.ToString());
                 var comando = new MySqlCommand() { CommandText = "Espacio_Eliminar", CommandType = System.Data.CommandType.StoredProcedure };
                 comando.Parameters.AddWithValue("inCodigo", espacio.Codigo);
+                comando.Parameters.AddWithValue("inID", this.ID);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)

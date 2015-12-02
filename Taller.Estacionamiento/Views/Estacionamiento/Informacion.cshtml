@@ -142,13 +142,13 @@
 </div>
 
 @section ViewsScripts {
-    <script type="text/javascript" src="../Scripts/ol.js"></script>
-    <script type="text/javascript" src="../Scripts/informacion/informacion.js"></script>
+    <script type="text/javascript" src="@Url.Content("../../Scripts/ol.js")"></script>
+    <script type="text/javascript" src="@Url.Content("../../Scripts/informacion/informacion.js")"></script>
     <script>
-        var lat = '@Model.CoordenadaLatitud'
-        var long = '@Model.CoordenadaLongitud'
+        var lat = parseFloat('@Model.CoordenadaLatitud');
+        var long = parseFloat('@Model.CoordenadaLongitud');
         $(document).ready(function () {
-            load_map(parseFloat(lat), parseFloat(long));
+            load_map(lat, long);
         });
     </script>
 }
