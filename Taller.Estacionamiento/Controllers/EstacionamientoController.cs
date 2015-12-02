@@ -192,7 +192,7 @@ namespace Taller.Estacionamiento.Controllers
 
                 if (espacios != null)
                 {
-                    estacionamiento.EliminarEspacio(espacio);
+                    estacionamiento.EliminarEspacio(espacio,id);
                 }
             }
             return RedirectToAction("Administrar", new { id = id });
