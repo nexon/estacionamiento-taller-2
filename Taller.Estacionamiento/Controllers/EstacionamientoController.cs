@@ -48,34 +48,8 @@ namespace Taller.Estacionamiento.Controllers
         {
             RegexUtilities ru = new RegexUtilities();
             string mensaje = "";
-            if(estacionamiento.Nombre == null){
-                mensaje += "El nombre es requerido.";
-            }
-            if (estacionamiento.Direccion == null)
-            {
-                mensaje += " \n La dirección es requerida.";
-            }
-            if (estacionamiento.Email == null)
-            {
-                mensaje += "\n El email es requerido.";
-            }
-            else if(!ru.IsValidEmail(estacionamiento.Email)){
-                mensaje = "\n El email no es válido.";
-            }
-            if(estacionamiento.TiempoMinimo == null){
-                mensaje += " \n El tiempo mínimo es requerido.";
-            }
-            else if (estacionamiento.TiempoMinimo < 1)
-            {
-                mensaje += " \n El tiempo mínimo debe ser igual o mayor a 1.";
-            }
-            if (estacionamiento.TarifaMinuto == null)
-            {
-                mensaje += " \n La tarifa mínima es requerida.";
-            }
-            else if (estacionamiento.TiempoMinimo < 1)
-            {
-                mensaje += " \n La tarifa mínima debe ser igual o mayor a 1.";
+            if(!ru.IsValidEmail(estacionamiento.Email)){
+                mensaje = "\n El email ingresado no es válido.";
             }
             if(!mensaje.Equals("")){
                 TempData["mensajeEditarInformacion"] = mensaje;

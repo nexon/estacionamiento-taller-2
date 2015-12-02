@@ -40,14 +40,14 @@
             </div>
 
             <div class="profile-info-row">
-                <div class="profile-info-name"> Correo </div>
+                <div class="profile-info-name"> Email </div>
 
                 <div class="profile-info-value">
                     <span>@Model.Email</span>
                 </div>
             </div>
             <div class="profile-info-row">
-                <div class="profile-info-name"> Tiempo Minimo </div>
+                <div class="profile-info-name"> Tiempo Mínimo </div>
 
                 <div class="profile-info-value">
                     <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="profile-info-row">
-                <div class="profile-info-name"> Valor minuto </div>
+                <div class="profile-info-name"> Tarifa minuto </div>
 
                 <div class="profile-info-value">
                     <!-- <i class="fa fa-map-marker light-orange bigger-110"></i> -->
@@ -65,7 +65,7 @@
             @if (Model.tieneHorario())
             {
                 <div class="profile-info-row">
-                    <div class="profile-info-name"> Apertura </div>
+                    <div class="profile-info-name"> Hora Apertura </div>
 
                     <div class="profile-info-value">
                         <span>@Model.horaApertura() </span>
@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="profile-info-row">
-                    <div class="profile-info-name"> Cierre </div>
+                    <div class="profile-info-name"> Hora Cierre </div>
 
                     <div class="profile-info-value">
                         <span>@Model.horaCierre()</span>
@@ -83,7 +83,7 @@
             else
             {
                 <div class="profile-info-row">
-                    <div class="profile-info-name"> Apertura </div>
+                    <div class="profile-info-name"> Hora Apertura </div>
 
                     <div class="profile-info-value">
                         <span><b>No Disponible</b></span>
@@ -91,7 +91,7 @@
                 </div>
 
                 <div class="profile-info-row">
-                    <div class="profile-info-name"> Cierre </div>
+                    <div class="profile-info-name"> Hora Cierre </div>
 
                     <div class="profile-info-value">
                         <span><b>No Disponible</b></span>
@@ -100,7 +100,7 @@
             }
 
             <div class="profile-info-row">
-                <div class="profile-info-name"> Ubicación </div>
+                <div class="profile-info-name"> Dirección </div>
 
                 <div class="profile-info-value">
                     <span>@Model.Direccion</span>

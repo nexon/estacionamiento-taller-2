@@ -34,7 +34,7 @@
                                             </span>
                                         </div>
 
-                                        @Html.TextBoxFor(model => model.Telefono, new { type = "number", min = 0})
+                                        @Html.TextBoxFor(model => model.Telefono, new { type = "text", pattern = "[4-9]{1}[0-9]{7}", placeholder="Ejemplo: 81234567" })
                                     </div>
                                 </div>
                             </div>
@@ -53,21 +53,21 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-3"> Tarifa minima </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-3"> Tiempo mínimo </label>
 
                                 <div class="col-xs-10 col-sm-5">
                                     <div class="input-group">
-                                        @Html.TextBoxFor(model => model.TiempoMinimo, new { type = "number", min = 1 })
+                                        @Html.TextBoxFor(model => model.TiempoMinimo, new { type = "number", min = 1 , @required=true})
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-3"> Valor minuto </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-3"> Tarifa minuto </label>
 
                                 <div class="col-xs-10 col-sm-5">
                                     <div class="input-group">
 
-                                        @Html.TextBoxFor(model => model.TarifaMinuto, new { type = "number", min = 1 })
+                                        @Html.TextBoxFor(model => model.TarifaMinuto, new { type = "number", min = 1, @required=true})
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-5"> horario cierre </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-mask-5"> Horario cierre </label>
                                 <div class="col-xs-10 col-sm-5">
                                     <div class="input-group">
                                         <div class="input-group-addon">
@@ -136,7 +136,7 @@
                                                 <i class="nav-search-icon fa"> Latitud </i>
                                             </span>
                                         </div>
-                                        @Html.EditorFor(model => model.CoordenadaLatitud)
+                                        @Html.TextBoxFor(model => model.CoordenadaLatitud, new { type = "text",@required=true})
                                     </div>
                                     <br />
                                     <div class="input-group">
@@ -145,7 +145,7 @@
                                                 <i class="nav-search-icon fa"> Longitud </i>
                                             </span>
                                         </div>
-                                        @Html.EditorFor(model => model.CoordenadaLongitud)
+                                        @Html.TextBoxFor(model => model.CoordenadaLongitud, new { type = "text", @required = true })
                                     </div>
                                 </div>
                             </div>
