@@ -1,7 +1,7 @@
 DROP PROCEDURE IF EXISTS Vehiculo_Agregar $$
 	CREATE PROCEDURE Vehiculo_Agregar(
 	    inPatente varchar(15),
-	    IN inIDCOnductor int
+	    inRut int
 	)
 	BEGIN
 		INSERT INTO Vehiculo
@@ -12,7 +12,7 @@ DROP PROCEDURE IF EXISTS Vehiculo_Agregar $$
 		VALUES
 			(
 				inPatente,
-				inIDCOnductor
+				(SELECT id_conductor FROM Conductor WHERE inRut = id_usuario)
 			);
 	END
 $$

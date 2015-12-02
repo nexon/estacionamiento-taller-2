@@ -57,9 +57,9 @@ namespace Taller.Estacionamiento.Models
                 var comando = new MySqlCommand() { CommandText = "Vehiculo_Agregar", CommandType = System.Data.CommandType.StoredProcedure };
                 comando.Parameters.AddWithValue("inPatente", this.Patente);
                 if(this.Conductor == null)
-                    comando.Parameters.AddWithValue("inIDCOnductor", -1);
+                    comando.Parameters.AddWithValue("inRut", -1);
                 else
-                    comando.Parameters.AddWithValue("inIDCOnductor", this.Conductor.Rut);
+                    comando.Parameters.AddWithValue("inRut", this.Conductor.Rut);
                 Data.Ejecutar(comando);
             }
             catch (Exception ex)
