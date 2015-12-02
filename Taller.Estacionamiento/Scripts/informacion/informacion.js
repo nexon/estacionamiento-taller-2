@@ -38,29 +38,33 @@ function load_map(lat, long) {
         view: view
     });
 
-    // var geolocation = new ol.Geolocation({
-    // 	tracking: true,
-    //   projection: view.getProjection()
-    // });
+     var geolocation = new ol.Geolocation({
+     	tracking: false,
+       projection: view.getProjection()
+     });
 
-    // var accuracyFeature = new ol.Feature();
-    // geolocation.on('change:accuracyGeometry', function() {
-    //   accuracyFeature.setGeometry(geolocation.getAccuracyGeometry());
-    // });
+     var accuracyFeature = new ol.Feature();
+     geolocation.on('change:accuracyGeometry', function() {
+       accuracyFeature.setGeometry(geolocation.getAccuracyGeometry());
+     });
 
-    // var positionFeature = new ol.Feature();
-    // positionFeature.setStyle(new ol.style.Style({
-    //   image: new ol.style.Circle({
-    //     radius: 6,
-    //     fill: new ol.style.Fill({
-    //       color: '#3399CC'
-    //     }),
-    //     stroke: new ol.style.Stroke({
-    //       color: '#fff',
-    //       width: 2
-    //     })
-    //   })
-    // }));
+     var positionFeature = new ol.Feature();
+     positionFeature.setStyle(new ol.style.Style({
+       image: new ol.style.Circle({
+         radius: 6,
+         fill: new ol.style.Fill({
+           color: '#3399CC'
+         }),
+         stroke: new ol.style.Stroke({
+           color: '#fff',
+           width: 2
+         })
+       })
+     }));
+
+     var iconFeature = new ol.Feature({
+         geometry: new ol.geom.Point([lat, long])
+     });
 
     // geolocation.on('change:position', function() {
     // 	if (geolocation.getTracking()) {
@@ -75,9 +79,7 @@ function load_map(lat, long) {
     // 	};
     // });
 
-    var iconFeature = new ol.Feature({
-        geometry: new ol.geom.Point([lat, long])
-    });
+
 
     var iconStyle = new ol.style.Style({
         image: new ol.style.Icon(/** @type {olx.style.IconOptions} */({
@@ -94,16 +96,16 @@ function load_map(lat, long) {
     var featuresOverlay = new ol.layer.Vector({
         map: map,
         source: new ol.source.Vector({
-            // features: [accuracyFeature, positionFeature, iconFeature],
-            features: [iconFeature],
+            features: [accuracyFeature, positionFeature, iconFeature],
+            //features: [iconFeature],
         })
     });
 
-    // map.on('singleclick', function  (evt) {
-    // 	console.log(evt.coordinate);
-    // 	$("#form-field-6").val(evt.coordinate);
-    // 	iconFeature.setGeometry(new ol.geom.Point(evt.coordinate));
-    // })
+     map.on('singleclick', function  (evt) {
+     	console.log(evt.coordinate);
+     	$("#form-field-6").val(evt.coordinate);
+     	iconFeature.setGeometry(new ol.geom.Point(evt.coordinate));
+     })
 
     // map.on('click', function(evt) {
     //   var feature = map.forEachFeatureAtPixel(evt.pixel,
